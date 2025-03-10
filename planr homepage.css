@@ -1,86 +1,108 @@
+/* styles.css */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+}
 
-        // Sample event data
-        const events = [
-            {
-                title: "Rock Music Festival",
-                date: "2024-03-15",
-                location: "Central Park",
-                category: "music",
-                description: "Annual rock music festival featuring top international artists.",
-                image: "https://source.unsplash.com/random/800x600?music"
-            },
-            {
-                title: "Marathon 2024",
-                date: "2024-04-01",
-                location: "City Stadium",
-                category: "sports",
-                description: "City marathon open to all fitness levels. Register now!",
-                image: "https://source.unsplash.com/random/800x600?sports"
-            },
-            {
-                title: "Modern Art Exhibition",
-                date: "2024-03-20",
-                location: "Art Museum",
-                category: "art",
-                description: "Contemporary art showcase from emerging artists.",
-                image: "https://source.unsplash.com/random/800x600?art"
-            },
-            {
-                title: "Tech Conference",
-                date: "2024-05-10",
-                location: "Convention Center",
-                category: "tech",
-                description: "Annual technology conference with industry leaders.",
-                image: "https://source.unsplash.com/random/800x600?tech"
-            }
-        ];
+body {
+    background-color: #f5f5f5;
+}
 
-        // DOM elements
-        const eventsContainer = document.getElementById('eventsContainer');
-        const filterBtns = document.querySelectorAll('.filter-btn');
-        const searchInput = document.getElementById('searchInput');
+header {
+    background-color: #2c3e50;
+    color: white;
+    padding: 1rem;
+    text-align: center;
+}
 
-        // Initial render
-        renderEvents(events);
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
 
-        // Filter functionality
-        filterBtns.forEach(btn => {
-            btn.addEventListener('click', () => {
-                // Remove active class from all buttons
-                filterBtns.forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
-                
-                const filter = btn.dataset.filter;
-                const filteredEvents = filter === 'all' 
-                    ? events 
-                    : events.filter(event => event.category === filter);
-                
-                renderEvents(filteredEvents);
-            });
-        });
+.filters {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+}
 
-        // Search functionality
-        searchInput.addEventListener('input', (e) => {
-            const searchTerm = e.target.value.toLowerCase();
-            const filteredEvents = events.filter(event => 
-                event.title.toLowerCase().includes(searchTerm) ||
-                event.description.toLowerCase().includes(searchTerm)
-            );
-            renderEvents(filteredEvents);
-        });
+.filter-btn {
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #3498db;
+    color: white;
+    transition: background-color 0.3s;
+}
 
-        // Render events
-        function renderEvents(eventsArray) {
-            eventsContainer.innerHTML = eventsArray.map(event => `
-                <div class="event-card">
-                    <img src="${event.image}" class="event-image" alt="${event.title}">
-                    <div class="event-content">
-                        <div class="event-date">${new Date(event.date).toLocaleDateString()}</div>
-                        <h3 class="event-title">${event.title}</h3>
-                        <p class="event-description">${event.description}</p>
-                        <div class="event-location">📍 ${event.location}</div>
-                    </div>
-                </div>
-            `).join('');
-        }
-    
+.filter-btn.active {
+    background-color: #2980b9;
+}
+
+.events-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.event-card {
+    background-color: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    transition: transform 0.3s;
+}
+
+.event-card:hover {
+    transform: translateY(-5px);
+}
+
+.event-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.event-content {
+    padding: 1.5rem;
+}
+
+.event-date {
+    color: #e74c3c;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+.event-title {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+}
+
+.event-description {
+    color: #666;
+    margin-bottom: 1rem;
+}
+
+.event-location {
+    color: #888;
+    font-size: 0.9rem;
+}
+
+.search-bar {
+    width: 100%;
+    padding: 1rem;
+    margin: 2rem 0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 1rem;
+    }
+}
