@@ -106,3 +106,36 @@ header {
         padding: 1rem;
     }
 }
+.event-card {
+    background-color: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+    position: relative;
+}
+
+.event-card:hover {
+    transform: translateY(-5px);
+}
+
+/* RGB Glow Effect on Image */
+.event-card:hover .event-image {
+    animation: rgbGlow 1.5s infinite alternate;
+}
+
+/* Keyframes for RGB Glow */
+@keyframes rgbGlow {
+    0% {
+        box-shadow: 0 0 10px red, 0 0 20px blue, 0 0 30px green;
+    }
+    33% {
+        box-shadow: 0 0 10px blue, 0 0 20px green, 0 0 30px red;
+    }
+    66% {
+        box-shadow: 0 0 10px green, 0 0 20px red, 0 0 30px blue;
+    }
+    100% {
+        box-shadow: 0 0 10px red, 0 0 20px blue, 0 0 30px green;
+    }
+}
