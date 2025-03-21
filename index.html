@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Event Feedback</title>
+    <title>Event Feedback Form</title>
     <style>
         * {
             margin: 0;
@@ -16,51 +16,60 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
-            background: linear-gradient(135deg, #00c6ff, #0072ff);
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
         }
         .container {
             background: white;
-            padding: 20px;
-            border-radius: 12px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-            width: 350px;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            width: 400px;
             text-align: center;
         }
         h2 {
-            color: #0072ff;
-            margin-bottom: 15px;
+            color: #1e3c72;
+            margin-bottom: 20px;
         }
-        input, select, textarea, button {
+        label {
+            display: block;
+            text-align: left;
+            margin: 10px 0 5px;
+            font-weight: bold;
+        }
+        input, textarea, button {
             width: 100%;
             padding: 10px;
-            margin: 10px 0;
-            border: none;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
             border-radius: 5px;
             font-size: 16px;
         }
-        input, select, textarea {
-            background: #f0f0f0;
+        input:focus, textarea:focus {
+            border-color: #1e3c72;
+            outline: none;
         }
         button {
-            background: #0072ff;
+            background: #1e3c72;
             color: white;
-            cursor: pointer;
             font-weight: bold;
+            cursor: pointer;
+            border: none;
+            transition: 0.3s;
         }
         button:hover {
-            background: #0056d2;
+            background: #16335a;
         }
         .rating {
             display: flex;
             justify-content: center;
-            gap: 5px;
-            margin: 10px 0;
+            gap: 8px;
+            margin: 15px 0;
         }
         .star {
-            font-size: 20px;
+            font-size: 24px;
             cursor: pointer;
             color: #ccc;
-            transition: 0.3s;
+            transition: color 0.3s;
         }
         .star:hover, .star.active {
             color: gold;
@@ -71,30 +80,48 @@
 
 <div class="container">
     <h2>Event Feedback</h2>
-    <form>
-        <input type="text" placeholder="Event Name" required>
+    <form id="feedbackForm">
         
-        <div class="rating">
-            <span class="star" onclick="rate(1)">★</span>
-            <span class="star" onclick="rate(2)">★</span>
-            <span class="star" onclick="rate(3)">★</span>
-            <span class="star" onclick="rate(4)">★</span>
-            <span class="star" onclick="rate(5)">★</span>
-        </div>
 
-        <textarea placeholder="Your Feedback" rows="3"></textarea>
-        <input type="email" placeholder="Your Email (Optional)">
-        <button type="submit">Submit</button>
+        <label>Rate the Event</label>
+        <div class="rating">
+            <span class="star" onclick="rate(1)">&#9733;</span>
+            <span class="star" onclick="rate(2)">&#9733;</span>
+            <span class="star" onclick="rate(3)">&#9733;</span>
+            <span class="star" onclick="rate(4)">&#9733;</span>
+            <span class="star" onclick="rate(5)">&#9733;</span>
+        </div>
+        <input type="hidden" id="ratingValue" value="0" required>
+
+        <label for="feedback">Your Feedback</label>
+        <textarea id="feedback" placeholder="Share your experience" rows="4" required></textarea>
+        
+        <label for="email">Your Email (Optional)</label>
+        <input type="email" id="email" placeholder="Enter your email">
+        
+        <button type="submit">Submit Feedback</button>
     </form>
 </div>
 
 <script>
     function rate(rating) {
         let stars = document.querySelectorAll('.star');
+        document.getElementById('ratingValue').value = rating;
         stars.forEach((star, index) => {
             star.classList.toggle('active', index < rating);
         });
     }
+
+    document.getElementById("feedbackForm").addEventListener("submit", function(event) {
+        event.preventDefault();
+        let rating = document.getElementById("ratingValue").value;
+        if (rating == 0) {
+            alert("Please select a rating before submitting.");
+            return;
+        }
+        alert("Thank you for your feedback!");
+        this.reset();
+    });
 </script>
 
 </body>
