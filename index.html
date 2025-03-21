@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Feedback</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(135deg, #00c6ff, #0072ff);
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            width: 350px;
+            text-align: center;
+        }
+        h2 {
+            color: #0072ff;
+            margin-bottom: 15px;
+        }
+        input, select, textarea, button {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        input, select, textarea {
+            background: #f0f0f0;
+        }
+        button {
+            background: #0072ff;
+            color: white;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        button:hover {
+            background: #0056d2;
+        }
+        .rating {
+            display: flex;
+            justify-content: center;
+            gap: 5px;
+            margin: 10px 0;
+        }
+        .star {
+            font-size: 20px;
+            cursor: pointer;
+            color: #ccc;
+            transition: 0.3s;
+        }
+        .star:hover, .star.active {
+            color: gold;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Event Feedback</h2>
+    <form>
+        <input type="text" placeholder="Event Name" required>
+        
+        <div class="rating">
+            <span class="star" onclick="rate(1)">★</span>
+            <span class="star" onclick="rate(2)">★</span>
+            <span class="star" onclick="rate(3)">★</span>
+            <span class="star" onclick="rate(4)">★</span>
+            <span class="star" onclick="rate(5)">★</span>
+        </div>
+
+        <textarea placeholder="Your Feedback" rows="3"></textarea>
+        <input type="email" placeholder="Your Email (Optional)">
+        <button type="submit">Submit</button>
+    </form>
+</div>
+
+<script>
+    function rate(rating) {
+        let stars = document.querySelectorAll('.star');
+        stars.forEach((star, index) => {
+            star.classList.toggle('active', index < rating);
+        });
+    }
+</script>
+
+</body>
+</html>
