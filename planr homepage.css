@@ -60,6 +60,9 @@ header {
 
 .event-card:hover {
     transform: translateY(-5px);
+    box-shadow: 0 0 15px rgba(255, 0, 0, 0.6), 
+                0 0 25px rgba(0, 255, 0, 0.6), 
+                0 0 35px rgba(0, 0, 255, 0.6);
 }
 
 .event-image {
