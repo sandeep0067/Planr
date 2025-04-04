@@ -99,8 +99,14 @@ header {
     margin: 2rem 0;
     border: 1px solid #ddd;
     border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease-in-out;
 }
 
+.search-bar:focus {
+    border-color: #3498db;
+    box-shadow: 0 0 10px rgba(52, 152, 219, 0.5);
+}
 @media (max-width: 768px) {
     .events-grid {
         grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
@@ -117,6 +123,9 @@ header {
 
 .event-card:hover {
     transform: translateY(-5px);
+    box-shadow: 0 0 15px rgba(255, 0, 0, 0.6), 
+                0 0 25px rgba(0, 255, 0, 0.6), 
+                0 0 35px rgba(0, 0, 255, 0.6);
 }
 
 /* RGB Glow Effect on Image */
