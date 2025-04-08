@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Planr - Signup</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      font-family: Arial, sans-serif;
+      background: #f0f5ff;
+      margin: 0;
+      padding: 20px;
+    }
+    .container {
+      max-width: 1000px;
+      margin: auto;
+      display: flex;
+      justify-content: space-between;
+      padding: 40px;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+    }
+    .form-section, .social-section {
+      width: 48%;
+    }
+    h1 {
+      color: #002d72;
+      text-align: center;
+    }
+    input[type="text"], input[type="email"], input[type="password"] {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      margin-bottom: 20px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+    .captcha-container {
+      display: flex;
+      align-items: center;
+    }
+    .captcha-image {
+      background: #f4f4f4;
+      color: red;
+      font-weight: bold;
+      padding: 10px;
+      margin-right: 10px;
+      font-family: monospace;
+      border-radius: 5px;
+    }
+    .checkbox {
+      margin-bottom: 20px;
+    }
+    button {
+      width: 100%;
+      background: linear-gradient(to right, #5f2c82, #49a09d);
+      border: none;
+      padding: 12px;
+      color: white;
+      font-size: 16px;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    .social-section button {
+      width: 100%;
+      margin-bottom: 15px;
+      padding: 10px;
+      font-size: 16px;
+      border-radius: 6px;
+      border: none;
+      cursor: pointer;
+    }
+    .fb { background: #3b5998; color: white; }
+    .google { background: #db4437; color: white; }
+    .linkedin { background: #0077b5; color: white; }
+    .or-divider {
+      text-align: center;
+      margin: 30px 0;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+<h1>Let's create your free account!</h1>
+<p style="text-align: center; color: #666;">
+  ✅ Easy & Fast ✅ No credit card required ✅ Cancel anytime <br>
+  <a href="#" style="color: #0044cc;">Get started with EventGlint</a>
+</p>
+
+<div class="container">
+  <!-- Left: Account Form -->
+  <div class="form-section">
+    <h3>Create an account</h3>
+    <input type="text" placeholder="First Name" />
+    <input type="text" placeholder="Last Name" />
+    <input type="email" placeholder="Email ID" />
+    <input type="password" placeholder="Password" />
+    <div class="captcha-container">
+      <div class="captcha-image">ytILzb</div>
+      <input type="text" placeholder="Captcha" />
+    </div>
+    <div class="checkbox">
+      <input type="checkbox" /> By continuing, you agree to Planr
+      <a href="#">Terms of Use</a> and <a href="#">Privacy Policy</a>.
+    </div>
+    <button>SUBMIT</button>
+  </div>
+
+  <!-- Right: Social Signup -->
+  <div class="social-section">
+    <h3>Social Sign Up</h3>
+    <button class="fb">Sign Up with Facebook</button>
+    <button class="google">Sign Up with Google</button>
+    <button class="linkedin">Sign Up with LinkedIn</button>
+    <div class="checkbox">
+      <input type="checkbox" /> By continuing, you agree to Planr
+      <a href="#">Terms of Use</a> and <a href="#">Privacy Policy</a>.
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
