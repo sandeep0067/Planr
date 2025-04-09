@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laugh Factory - Book Stand-Up Comedy Shows</title>
+    <link rel="stylesheet" href="standup.css">
+    <script src="standup.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <nav class="navbar">
+                <div class="logo">
+                    <a href="#">Laugh Factory</a>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="#shows">Shows</a></li>
+                    <li><a href="#artists">Comedians</a></li>
+                    <li><a href="#venues">Venues</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+                <div class="auth-buttons">
+                    <button class="btn btn-login">Login</button>
+                    <button class="btn btn-signup">Sign Up</button>
+                </div>
+                <div class="hamburger">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Book Tickets for the Hottest Stand-Up Shows</h1>
+                <p>Laugh your heart out with the best comedians in town. Secure your seats now!</p>
+                <div class="search-bar">
+                    <input type="text" placeholder="Search for shows, comedians, or venues...">
+                    <button class="btn btn-search"><i class="fas fa-search"></i> Search</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="shows" class="shows-section">
+        <div class="container">
+            <h2 class="section-title">Upcoming Shows</h2>
+            <div class="filter-controls">
+                <div class="filter-group">
+                    <label for="date-filter">Date:</label>
+                    <select id="date-filter">
+                        <option value="all">All Dates</option>
+                        <option value="today">Today</option>
+                        <option value="week">This Week</option>
+                        <option value="month">This Month</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="venue-filter">Venue:</label>
+                    <select id="venue-filter">
+                        <option value="all">All Venues</option>
+                        <option value="comedy-club">The Comedy Club</option>
+                        <option value="laugh-house">Laugh House</option>
+                        <option value="funny-bone">Funny Bone</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="price-filter">Price:</label>
+                    <select id="price-filter">
+                        <option value="all">All Prices</option>
+                        <option value="free">Free</option>
+                        <option value="under-20">Under $20</option>
+                        <option value="20-50">$20 - $50</option>
+                        <option value="over-50">Over $50</option>
+                    </select>
+                </div>
+            </div>
+            <div class="shows-grid" id="shows-container">
+                <!-- Shows will be dynamically loaded here -->
+            </div>
+            <div class="load-more">
+                <button class="btn btn-load-more">Load More Shows</button>
+            </div>
+        </div>
+    </section>
+
+    <section id="artists" class="artists-section">
+        <div class="container">
+            <h2 class="section-title">Featured Comedians</h2>
+            <div class="artists-grid" id="artists-container">
+                <!-- Artists will be dynamically loaded here -->
+            </div>
+        </div>
+    </section>
+
+    <section id="venues" class="venues-section">
+        <div class="container">
+            <h2 class="section-title">Popular Venues</h2>
+            <div class="venues-grid" id="venues-container">
+                <!-- Venues will be dynamically loaded here -->
+            </div>
+        </div>
+    </section>
+
+    <section class="newsletter">
+        <div class="container">
+            <div class="newsletter-content">
+                <h2>Stay Updated on New Shows</h2>
+                <p>Subscribe to our newsletter and never miss a laugh!</p>
+                <form id="newsletter-form">
+                    <input type="email" placeholder="Enter your email" required>
+                    <button type="submit" class="btn btn-subscribe">Subscribe</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section about">
+                    <h3>Laugh Factory</h3>
+                    <p>Your premier destination for stand-up comedy shows. Book tickets for the best comedians in the industry.</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section links">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#shows">Shows</a></li>
+                        <li><a href="#artists">Comedians</a></li>
+                        <li><a href="#venues">Venues</a></li>
+                        <li><a href="#">Terms & Conditions</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section contact">
+                    <h3>Contact Us</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> 123 Comedy Street, Laughter City</p>
+                    <p><i class="fas fa-phone"></i> +1 (555) 123-4567</p>
+                    <p><i class="fas fa-envelope"></i> info@laughfactory.com</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 Laugh Factory. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <div class="modal" id="booking-modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2 id="modal-title">Book Tickets</h2>
+            <div class="modal-body" id="modal-body">
+                <!-- Modal content will be dynamically loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
