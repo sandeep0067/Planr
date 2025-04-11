@@ -124,11 +124,13 @@
             <div class="row justify-content-center">
                 <div class="col-md-8">
                     <div class="input-group">
-                        <input type="text" class="form-control form-control-lg" placeholder="Search events...">
-                        <button class="btn btn-primary btn-lg" type="button">
+                        <input type="text" id="search-input" class="form-control form-control-lg" placeholder="Search events...">
+                        <button id="search-btn" class="btn btn-primary btn-lg" type="button">
                             <i class="bi bi-search"></i>
                         </button>
                     </div>
+                    <!-- Add this dropdown container for search results -->
+                    <div id="search-results" class="mt-2"></div>
                 </div>
             </div>
         </div>
@@ -152,7 +154,7 @@
                         <h5 class="card-title text-primary ">Minecraft 3D</h5>
                         <p class="card-text flex-grow-1 text-white-50 ">Four misfits are suddenly pulled through a mysterious portal into a bizarre cubic wonderland that thrives on imagination. To get back home they'll have to master this world while embarking on a quest with an unexpected expert crafter.</p>
                         <div class="mt-auto">
-                            <a href="#" class="btn btn-primary w-100">Book Now</a>
+                            <a href="minecraft.html" class="btn btn-primary w-100">Book Now</a>
                         </div>
                     </div>
                 </div>
@@ -175,12 +177,12 @@
             <!-- Concert Card -->
             <div class="col">
                 <div class="card h-100">
-                    <img src="download (2).jpeg" class="card-img-top" alt="Summer Beats">
+                    <img src="download (4).jpeg" class="card-img-top" alt="Summer Beats">
                     <div class="card-body d-flex flex-column">
-                        <h5 class="card-title text-primary">Im Not Done Yet</h5>
-                        <p class="card-text flex-grow-1 text-white-50">From the liquid courage behind his tweets to the sobering realities of making it in Mumbai, Kapil's pouring his heart out - with a heavy glug of humor.</p>
+                        <h5 class="card-title text-primary">Marco</h5>
+                        <p class="card-text flex-grow-1 text-white-50">The adoptive son of the Adattu family, Marco, sets off on a ruthless quest for vengeance after his brother is brutally murdered, finding only betrayal, loss and unimaginable brutality at every step.</p>
                         <div class="mt-auto">
-                            <a href="#" class="btn btn-primary w-100">Book Now</a>
+                            <a href="marco.html" class="btn btn-primary w-100">Book Now</a>
                         </div>
                     </div>
                 </div>
@@ -194,7 +196,7 @@
                         <h5 class="card-title text-primary">JAAT</h5>
                         <p class="card-text flex-grow-1 text-white-50 ">Jaat is a massive action drama directed by Gopichand Malineni. The film stars Sunny Deol in the crucial role alongside Randeep Hooda, Vineet Kumar, Regina Cassandra, and Saiyami Kher.</p>
                         <div class="mt-auto">
-                            <a href="#" class="btn btn-primary w-100">Book Now</a>
+                            <a href="jaat.html" class="btn btn-primary w-100">Book Now</a>
                         </div>
                     </div>
                 </div>
@@ -278,7 +280,7 @@
             <hr class="my-4 bg-secondary">
             <div class="d-flex flex-column flex-md-row justify-content-between align-items-center">
                 <div class="mb-3 mb-md-0">
-                    © 2025 Planr(By chitkara university sem2 students). All rights reserved. 
+                    © 2025 Planr(By chitkara university sem2 students). All rights reserved(Not True). 
                 </div>
                 <div class="social-icons">
                     <a href="#" class="text-light me-3"><i class="bi bi-facebook"></i></a>
@@ -291,5 +293,6 @@
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="search.js"></script>
 </body>
 </html>
