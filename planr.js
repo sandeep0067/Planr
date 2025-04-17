@@ -21,3 +21,8 @@ function renderEvents(eventsArray) {
         </div>
     `).join('');
 }
+function renderEvents(eventsArray) {
+    const sortedEvents = eventsArray.sort((a, b) => new Date(a.date) - new Date(b.date));
+    // render sortedEvents as above...
+}
+
