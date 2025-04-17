@@ -26,3 +26,21 @@ function renderEvents(eventsArray) {
     // render sortedEvents as above...
 }
 
+    // Dark mode toggle
+    const toggleBtn = document.getElementById('darkModeToggle');
+    const isDarkMode = localStorage.getItem('darkMode') === 'true';
+
+    if (isDarkMode) {
+        document.body.classList.add('dark-mode');
+        toggleBtn.textContent = '☀️ Light Mode';
+    }
+
+    toggleBtn.addEventListener('click', () => {
+        document.body.classList.toggle('dark-mode');
+        const enabled = document.body.classList.contains('dark-mode');
+        toggleBtn.textContent = enabled ? '☀️ Light Mode' : '🌙 Dark Mode';
+        localStorage.setItem('darkMode', enabled);
+    });
+
+
+
