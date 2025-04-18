@@ -3,45 +3,69 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Planr - Signup</title>
+  <title>Planr - Sign Up</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
   <style>
     * {
       box-sizing: border-box;
     }
     body {
-      font-family: Arial, sans-serif;
-      background: #f0f5ff;
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, #eef2f7, #d3e0ea);
       margin: 0;
+      padding: 0;
+    }
+    header, footer {
+      background-color: #002d72;
+      color: white;
+      text-align: center;
+      padding: 15px 0;
+    }
+    header h1, footer p {
+      margin: 0;
+      font-weight: 600;
+    }
+    .intro {
+      text-align: center;
+      color: #444;
       padding: 20px;
+    }
+    .intro a {
+      color: #0044cc;
+      text-decoration: none;
+      font-weight: 600;
     }
     .container {
       max-width: 1000px;
       margin: auto;
       display: flex;
       justify-content: space-between;
+      flex-wrap: wrap;
       padding: 40px;
-      background: #fff;
-      border-radius: 10px;
-      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+      background: #ffffff;
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
     }
     .form-section, .social-section {
-      width: 48%;
+      width: 100%;
+      max-width: 48%;
+      margin-top: 20px;
     }
-    h1 {
+    h3 {
       color: #002d72;
-      text-align: center;
+      margin-bottom: 20px;
     }
     input[type="text"], input[type="email"], input[type="password"] {
       width: 100%;
-      padding: 10px;
-      margin-top: 10px;
-      margin-bottom: 20px;
+      padding: 12px;
+      margin: 10px 0 20px;
       border: 1px solid #ccc;
       border-radius: 6px;
     }
     .captcha-container {
       display: flex;
       align-items: center;
+      margin-bottom: 20px;
     }
     .captcha-image {
       background: #f4f4f4;
@@ -54,43 +78,76 @@
     }
     .checkbox {
       margin-bottom: 20px;
+      font-size: 14px;
+    }
+    .checkbox a {
+      color: #0044cc;
+      text-decoration: none;
     }
     button {
       width: 100%;
       background: linear-gradient(to right, #5f2c82, #49a09d);
       border: none;
-      padding: 12px;
+      padding: 14px;
       color: white;
       font-size: 16px;
+      font-weight: 600;
       border-radius: 6px;
       cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    button:hover {
+      opacity: 0.95;
     }
     .social-section button {
-      width: 100%;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      justify-content: center;
+      padding: 12px;
       margin-bottom: 15px;
-      padding: 10px;
       font-size: 16px;
       border-radius: 6px;
       border: none;
-      cursor: pointer;
+      font-weight: 600;
     }
     .fb { background: #3b5998; color: white; }
     .google { background: #db4437; color: white; }
     .linkedin { background: #0077b5; color: white; }
-    .or-divider {
+
+    .social-section button img {
+      height: 20px;
+      width: 20px;
+    }
+
+    .login-link {
       text-align: center;
-      margin: 30px 0;
-      font-weight: bold;
+      margin-top: 20px;
+      font-size: 14px;
+    }
+    .login-link a {
+      color: #0044cc;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    @media (max-width: 768px) {
+      .form-section, .social-section {
+        width: 100%;
+      }
     }
   </style>
 </head>
 <body>
 
-<h1>Let's create your free account!</h1>
-<p style="text-align: center; color: #666;">
-  ✅ Easy & Fast ✅ No credit card required ✅ Cancel anytime <br>
-  <a href="#" style="color: #0044cc;">Get started with EventGlint</a>
-</p>
+<header>
+  <h1>Planr | Sign Up</h1>
+</header>
+
+<div class="intro">
+  <p>✅ Easy & Fast ✅ No credit card required ✅ Cancel anytime <br>
+  <a href="#">Get started with EventGlint</a></p>
+</div>
 
 <div class="container">
   <!-- Left: Account Form -->
@@ -108,21 +165,33 @@
       <input type="checkbox" /> By continuing, you agree to Planr
       <a href="#">Terms of Use</a> and <a href="#">Privacy Policy</a>.
     </div>
-    <button>SUBMIT</button>
+    <button>Create Account</button>
+    <div class="login-link">
+      Already have an account? <a href="#">Login here</a>
+    </div>
   </div>
 
   <!-- Right: Social Signup -->
   <div class="social-section">
-    <h3>Social Sign Up</h3>
-    <button class="fb">Sign Up with Facebook</button>
-    <button class="google">Sign Up with Google</button>
-    <button class="linkedin">Sign Up with LinkedIn</button>
-    <div class="checkbox">
-      <input type="checkbox" /> By continuing, you agree to Planr
-      <a href="#">Terms of Use</a> and <a href="#">Privacy Policy</a>.
-    </div>
+    <h3>Or sign up with</h3>
+    <button class="google">
+      <img src="https://cdn-icons-png.flaticon.com/512/281/281764.png" alt="Google Logo" />
+      Sign Up with Google
+    </button>
+    <button class="fb">
+      <img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" alt="Facebook Logo" />
+      Sign Up with Facebook
+    </button>
+    <button class="linkedin">
+      <img src="https://cdn-icons-png.flaticon.com/512/174/174857.png" alt="LinkedIn Logo" />
+      Sign Up with LinkedIn
+    </button>
   </div>
 </div>
+
+<footer>
+  <p>&copy; 2025 Planr. All rights reserved.</p>
+</footer>
 
 </body>
 </html>
