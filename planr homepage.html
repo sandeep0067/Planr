@@ -1,125 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EventHub - Find Local Events</title>
-    <link rel="stylesheet" href="planr homepage.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Planr</title>
+  <link rel="stylesheet" href="planr homepage.css" />
 </head>
 <body>
-    <!-- The rest of your HTML remains the same -->
-    <header>
-       
+  <div class="night" id="starContainer"></div>
+
+  <header>
     <h1>Planr</h1>
     <p>Discover upcoming events in your area</p>
-    <button id="darkModeToggle">🌙 Dark Mode</button>
+  </header>
 
-    </header>
-
-    <div class="container">
-        <input type="text" class="search-bar" placeholder="Search events..." id="searchInput">
-
-        <div class="filters">
-            <button class="filter-btn active" data-filter="all">All</button>
-            <button class="filter-btn" data-filter="music">Music</button>
-            <button class="filter-btn" data-filter="sports">Sports</button>
-            <button class="filter-btn" data-filter="art">Art</button>
-            <button class="filter-btn" data-filter="tech">Tech</button>
-        </div>
-
-        <div class="events-grid" id="eventsContainer">
-            <!-- Events will be dynamically inserted here -->
-        </div>
+  <div class="container">
+    <div class="search-box">
+      <input type="text" placeholder="Search events..." />
     </div>
 
-    <!-- JavaScript remains the same -->
-    <script>
-        
-            // Sample event data
-            const events = [
-                {
-                    title: "Rock Music Festival",
-                    date: "2024-03-15",
-                    location: "Central Park",
-                    category: "music",
-                    description: "Annual rock music festival featuring top international artists.",
-                    image: "https://source.unsplash.com/random/800x600?music"
-                },
-                {
-                    title: "Marathon 2024",
-                    date: "2024-04-01",
-                    location: "City Stadium",
-                    category: "sports",
-                    description: "City marathon open to all fitness levels. Register now!",
-                    image: "https://source.unsplash.com/random/800x600?sports"
-                },
-                {
-                    title: "Modern Art Exhibition",
-                    date: "2024-03-20",
-                    location: "Art Museum",
-                    category: "art",
-                    description: "Contemporary art showcase from emerging artists.",
-                    image: "https://source.unsplash.com/random/800x600?art"
-                },
-                {
-                    title: "Tech Conference",
-                    date: "2024-05-10",
-                    location: "Convention Center",
-                    category: "tech",
-                    description: "Annual technology conference with industry leaders.",
-                    image: "https://source.unsplash.com/random/800x600?tech"
-                }
-            ];
-    
-            // DOM elements
-            const eventsContainer = document.getElementById('eventsContainer');
-            const filterBtns = document.querySelectorAll('.filter-btn');
-            const searchInput = document.getElementById('searchInput');
-    
-            // Initial render
-            renderEvents(events);
-    
-            // Filter functionality
-            filterBtns.forEach(btn => {
-                btn.addEventListener('click', () => {
-                    // Remove active class from all buttons
-                    filterBtns.forEach(b => b.classList.remove('active'));
-                    btn.classList.add('active');
-                    
-                    const filter = btn.dataset.filter;
-                    const filteredEvents = filter === 'all' 
-                        ? events 
-                        : events.filter(event => event.category === filter);
-                    
-                    renderEvents(filteredEvents);
-                });
-            });
-    
-            // Search functionality
-            searchInput.addEventListener('input', (e) => {
-                const searchTerm = e.target.value.toLowerCase();
-                const filteredEvents = events.filter(event => 
-                    event.title.toLowerCase().includes(searchTerm) ||
-                    event.description.toLowerCase().includes(searchTerm)
-                );
-                renderEvents(filteredEvents);
-            });
-    
-            // Render events
-            function renderEvents(eventsArray) {
-                eventsContainer.innerHTML = eventsArray.map(event => `
-                    <div class="event-card">
-                        <img src="${event.image}" class="event-image" alt="${event.title}">
-                        <div class="event-content">
-                            <div class="event-date">${new Date(event.date).toLocaleDateString()}</div>
-                            <h3 class="event-title">${event.title}</h3>
-                            <p class="event-description">${event.description}</p>
-                            <div class="event-location">📍 ${event.location}</div>
-                        </div>
-                    </div>
-                `).join('');
-            }
-        
-    </script>
+    <div class="filter-buttons">
+      <button>All</button>
+      <button>Music</button>
+      <button>Sports</button>
+      <button>Art</button>
+      <button>Tech</button>
+    </div>
+
+    <div class="events">
+      <div class="event-card">
+        <img src="https://via.placeholder.com/300x150?text=Rock+Music+Festival" alt="Rock Music Festival">
+        <div class="event-date">15/3/2024</div>
+        <h3>Rock Music Festival</h3>
+        <p>Annual rock music festival featuring top international artists.</p>
+        <div class="event-location">📍 Central Park</div>
+      </div>
+
+      <div class="event-card">
+        <img src="https://via.placeholder.com/300x150?text=Marathon+2024" alt="Marathon 2024">
+        <div class="event-date">1/4/2024</div>
+        <h3>Marathon 2024</h3>
+        <p>City marathon open to all fitness levels. Register now!</p>
+        <div class="event-location">📍 City Stadium</div>
+      </div>
+
+      <div class="event-card">
+        <img src="https://via.placeholder.com/300x150?text=Modern+Art+Exhibition" alt="Modern Art Exhibition">
+        <div class="event-date">20/3/2024</div>
+        <h3>Modern Art Exhibition</h3>
+        <p>Contemporary art showcase from emerging artists.</p>
+        <div class="event-location">📍 Art Museum</div>
+      </div>
+
+      <div class="event-card">
+        <img src="https://via.placeholder.com/300x150?text=Tech+Conference" alt="Tech Conference">
+        <div class="event-date">10/5/2024</div>
+        <h3>Tech Conference</h3>
+        <p>Annual technology conference with industry leaders.</p>
+        <div class="event-location">📍 Convention Center</div>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
 </body>
 </html>
