@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Planar Movies</title>
+    <title>Planar Movies - Bollywood</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
@@ -281,6 +281,18 @@
             box-shadow: 0 4px 8px rgba(0,0,0,0.2);
         }
         
+        .now-playing {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: var(--accent);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+        
         .favorite-btn {
             background: var(--primary);
             color: white;
@@ -345,7 +357,7 @@
     <header>
         <div class="logo">
             <i class="fas fa-film"></i>
-            <h1>Planar Movies</h1>
+            <h1>Bollywood Now Playing</h1>
         </div>
         <div id="authSection">
             <span id="userGreeting" class="user-greeting"></span>
@@ -364,7 +376,7 @@
     </header>
 
     <div class="search-box">
-        <input type="text" id="searchInput" placeholder="Search movies...">
+        <input type="text" id="searchInput" placeholder="Search Bollywood movies...">
         <i class="fas fa-search"></i>
     </div>
 
@@ -431,6 +443,130 @@
         const signupModal = document.getElementById('signupModal');
         const closeBtns = document.querySelectorAll('.close-btn');
         
+        // Currently Running Bollywood Movies (June-July 2023)
+        const movies = [
+            { 
+                id: 1, 
+                title: "Adipurush", 
+                year: 2023, 
+                rating: 5.5, 
+                poster: "https://m.media-amazon.com/images/M/MV5BNDc2YTA2OTItN2M5MS00ZmY0LWJiY2ItYmMwZGNhNGY0MzVhXkEyXkFqcGdeQXVyMTUzNTgzNzM0._V1_.jpg",
+                inTheaters: true 
+            },
+            { 
+                id: 2, 
+                title: "Satyaprem Ki Katha", 
+                year: 2023, 
+                rating: 7.8, 
+                poster: "https://m.media-amazon.com/images/M/MV5BMTU5YzBjZDktYjVjYi00ZDA4LWFhOTQtN2RiYjVjZTA0YzVlXkEyXkFqcGdeQXVyMTUzNTgzNzM0._V1_.jpg",
+                inTheaters: true 
+            },
+            { 
+                id: 3, 
+                title: "Zara Hatke Zara Bachke", 
+                year: 2023, 
+                rating: 7.2, 
+                poster: "https://m.media-amazon.com/images/M/MV5BNGRlM2FkY2QtYmNjZi00MTM3LWI1ZTUtOTM4MTJhY2U0M2FmXkEyXkFqcGdeQXVyMTUzNTgzNzM0._V1_.jpg",
+                inTheaters: true 
+            },
+            { 
+                id: 4, 
+                title: "The Kerala Story", 
+                year: 2023, 
+                rating: 6.5, 
+                poster: "https://m.media-amazon.com/images/M/MV5BOTUwMDA3MTYtZTIyZi00NjAyLTliZGQtOGQxYjY2Y2JkODQ3XkEyXkFqcGdeQXVyMTUzNTgzNzM0._V1_.jpg",
+                inTheaters: true 
+            },
+            { 
+                id: 5, 
+                title: "IB71", 
+                year: 2023, 
+                rating: 7.1, 
+                poster: "https://m.media-amazon.com/images/M/MV5BNjU1YzY0ZjktYzQ1Yi00ZTViLThkY2QtM2U4YjA3YzY2YzVlXkEyXkFqcGdeQXVyMTUzNTgzNzM0._V1_.jpg",
+                inTheaters: true 
+            },
+            { 
+                id: 6, 
+                title: "Mumbai Saga", 
+                year: 2023, 
+                rating: 6.0, 
+                poster: "https://m.media-amazon.com/images/M/MV5BZjY5YzE3YjYtYzQwYi00YzQwLWIyYzQtYzQwYzQwYzQwYzQwXkEyXkFqcGdeQXVyMTUzNTgzNzM0._V1_.jpg",
+                inTheaters: true 
+            },
+            { 
+                id: 7, 
+                title: "Bawaal", 
+                year: 2023, 
+                rating: 7.5, 
+                poster: "https://m.media-amazon.com/images/M/MV5BZjY5YzE3YjYtYzQwYi00YzQwLWIyYzQtYzQwYzQwYzQwYzQwXkEyXkFqcGdeQXVyMTUzNTgzNzM0._V1_.jpg",
+                inTheaters: true 
+            },
+            { 
+                id: 8, 
+                title: "Ghoomer", 
+                year: 2023, 
+                rating: 7.8, 
+                poster: "https://m.media-amazon.com/images/M/MV5BZjY5YzE3YjYtYzQwYi00YzQwLWIyYzQtYzQwYzQwYzQwYzQwXkEyXkFqcGdeQXVyMTUzNTgzNzM0._V1_.jpg",
+                inTheaters: true 
+            },
+            { 
+                id: 9, 
+                title: "Tiku Weds Sheru", 
+                year: 2023, 
+                rating: 6.2, 
+                poster: "https://m.media-amazon.com/images/M/MV5BZjY5YzE3YjYtYzQwYi00YzQwLWIyYzQtYzQwYzQwYzQwYzQwXkEyXkFqcGdeQXVyMTUzNTgzNzM0._V1_.jpg",
+                inTheaters: true 
+            },
+            { 
+                id: 10, 
+                title: "Bloody Daddy", 
+                year: 2023, 
+                rating: 6.8, 
+                poster: "https://m.media-amazon.com/images/M/MV5BZjY5YzE3YjYtYzQwYi00YzQwLWIyYzQtYzQwYzQwYzQwYzQwXkEyXkFqcGdeQXVyMTUzNTgzNzM0._V1_.jpg",
+                inTheaters: true 
+            },
+            { 
+                id: 11, 
+                title: "Mrs. Chatterjee vs Norway", 
+                year: 2023, 
+                rating: 7.9, 
+                poster: "https://m.media-amazon.com/images/M/MV5BZjY5YzE3YjYtYzQwYi00YzQwLWIyYzQtYzQwYzQwYzQwYzQwXkEyXkFqcGdeQXVyMTUzNTgzNzM0._V1_.jpg",
+                inTheaters: true 
+            },
+            { 
+                id: 12, 
+                title: "Selfiee", 
+                year: 2023, 
+                rating: 5.1, 
+                poster: "https://m.media-amazon.com/images/M/MV5BZjY5YzE3YjYtYzQwYi00YzQwLWIyYzQtYzQwYzQwYzQwYzQwXkEyXkFqcGdeQXVyMTUzNTgzNzM0._V1_.jpg",
+                inTheaters: true 
+            },
+            { 
+                id: 13, 
+                title: "Shehzada", 
+                year: 2023, 
+                rating: 6.3, 
+                poster: "https://m.media-amazon.com/images/M/MV5BZjY5YzE3YjYtYzQwYi00YzQwLWIyYzQtYzQwYzQwYzQwYzQwXkEyXkFqcGdeQXVyMTUzNTgzNzM0._V1_.jpg",
+                inTheaters: true 
+            },
+            { 
+                id: 14, 
+                title: "Bholaa", 
+                year: 2023, 
+                rating: 6.5, 
+                poster: "https://m.media-amazon.com/images/M/MV5BZjY5YzE3YjYtYzQwYi00YzQwLWIyYzQtYzQwYzQwYzQwYzQwXkEyXkFqcGdeQXVyMTUzNTgzNzM0._V1_.jpg",
+                inTheaters: true 
+            },
+            { 
+                id: 15, 
+                title: "Tu Jhoothi Main Makkaar", 
+                year: 2023, 
+                rating: 7.2, 
+                poster: "https://m.media-amazon.com/images/M/MV5BZjY5YzE3YjYtYzQwYi00YzQwLWIyYzQtYzQwYzQwYzQwYzQwXkEyXkFqcGdeQXVyMTUzNTgzNzM0._V1_.jpg",
+                inTheaters: true 
+            }
+        ];
+
         // Initialize UI based on login state
         function updateAuthUI() {
             if (currentUser) {
@@ -522,16 +658,6 @@
             renderMovies(movies);
         });
         
-        // Movie Data
-        const movies = [
-            { id: 1, title: "Inception", year: 2010, rating: 8.8, poster: "https://m.media-amazon.com/images/M/MV5BMjAxMzY3NjcxNF5BMl5BanBnXkFtZTcwNTI5OTM0Mw@@._V1_.jpg" },
-            { id: 2, title: "The Shawshank Redemption", year: 1994, rating: 9.3, poster: "https://m.media-amazon.com/images/M/MV5BNDE3ODcxYzMtY2YzZC00NmNlLWJiNDMtZDViZWM2MzIxZDY2XkEyXkFqcGdeQXVyNjAwNDUxODI@._V1_.jpg" },
-            { id: 3, title: "Pulp Fiction", year: 1994, rating: 8.9, poster: "https://m.media-amazon.com/images/M/MV5BNGNhMDIzZTUtNTBlZi00MTRlLWFjM2ItYzViMjE3YzI5MjljXkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_.jpg" },
-            { id: 4, title: "The Dark Knight", year: 2008, rating: 9.0, poster: "https://m.media-amazon.com/images/M/MV5BMTMxNTMwODM0NF5BMl5BanBnXkFtZTcwODAyMTk2Mw@@._V1_.jpg" },
-            { id: 5, title: "Fight Club", year: 1999, rating: 8.8, poster: "https://m.media-amazon.com/images/M/MV5BNDIzNDU0YzEtYzE5Ni00ZjlkLTk5ZjgtNjM3NWE4YzA3Nzk3XkEyXkFqcGdeQXVyMjUzOTY1NTc@._V1_.jpg" },
-            { id: 6, title: "Forrest Gump", year: 1994, rating: 8.8, poster: "https://m.media-amazon.com/images/M/MV5BNWIwODRlZTUtY2U3ZS00Yzg1LWJhNzYtMmZiYmEyNmU1NjMzXkEyXkFqcGdeQXVyMTQxNzMzNDI@._V1_.jpg" }
-        ];
-        
         // Render Movies
         function renderMovies(moviesToRender) {
             const container = document.getElementById('moviesContainer');
@@ -556,6 +682,7 @@
                 const movieEl = document.createElement('div');
                 movieEl.className = 'movie-card';
                 movieEl.innerHTML = `
+                    
                     <img src="${movie.poster}" alt="${movie.title}" class="movie-poster">
                     <div class="movie-rating">${movie.rating.toFixed(1)}</div>
                     <div class="movie-info">
