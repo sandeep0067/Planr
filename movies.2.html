@@ -12,7 +12,15 @@
             --dark: #2d3436;
             --light: #f5f6fa;
             --accent: #fd79a8;
+            --success: #00b894;
         }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
         body {
             font-family: 'Segoe UI', sans-serif;
             background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
@@ -20,35 +28,156 @@
             padding: 0;
             min-height: 100vh;
         }
+        
+        /* Header Styles */
         header {
             background: linear-gradient(to right, var(--dark), var(--primary));
             color: white;
-            padding: 2rem 1rem;
+            padding: 1rem;
             text-align: center;
             box-shadow: 0 4px 12px rgba(0,0,0,0.1);
             position: relative;
-            overflow: hidden;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
-        header::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: linear-gradient(to right, var(--accent), var(--primary-light));
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
-        h1 {
+        
+        .logo h1 {
             margin: 0;
-            font-size: 2.5rem;
+            font-size: 1.8rem;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
         }
+        
+        .auth-buttons {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .auth-btn {
+            padding: 8px 15px;
+            border-radius: 50px;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .login-btn {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+        
+        .signup-btn {
+            background: white;
+            color: var(--primary);
+        }
+        
+        .auth-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 0.3s;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .modal-content {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 400px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            position: relative;
+        }
+        
+        .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #636e72;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--dark);
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+        
+        .form-group input:focus {
+            border-color: var(--primary);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(108, 92, 231, 0.2);
+        }
+        
+        .submit-btn {
+            width: 100%;
+            padding: 12px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .submit-btn:hover {
+            background: #5649c0;
+            transform: translateY(-2px);
+        }
+        
+        /* Rest of your existing styles... */
         .search-box {
             margin: 2rem auto;
             width: 80%;
             max-width: 600px;
             position: relative;
         }
+        
         #searchInput {
             width: 100%;
             padding: 15px 20px;
@@ -58,11 +187,13 @@
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
             transition: all 0.3s;
         }
+        
         #searchInput:focus {
             outline: none;
             box-shadow: 0 5px 20px rgba(108, 92, 231, 0.3);
             transform: scale(1.02);
         }
+        
         .search-box i {
             position: absolute;
             right: 20px;
@@ -70,6 +201,7 @@
             color: var(--primary);
             font-size: 1.2rem;
         }
+        
         .movies-container {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -78,6 +210,7 @@
             max-width: 1400px;
             margin: 0 auto;
         }
+        
         .movie-card {
             background: white;
             border-radius: 15px;
@@ -86,33 +219,40 @@
             transition: all 0.3s ease;
             position: relative;
         }
+        
         .movie-card:hover {
             transform: translateY(-10px);
             box-shadow: 0 15px 30px rgba(0,0,0,0.2);
         }
+        
         .movie-poster {
             width: 100%;
             height: 400px;
             object-fit: cover;
             transition: transform 0.5s;
         }
+        
         .movie-card:hover .movie-poster {
             transform: scale(1.05);
         }
+        
         .movie-info {
             padding: 1.5rem;
             position: relative;
         }
+        
         .movie-title {
             font-weight: 700;
             margin: 0.5rem 0;
             font-size: 1.2rem;
             color: var(--dark);
         }
+        
         .movie-year {
             color: #636e72;
             font-size: 0.9rem;
         }
+        
         .movie-rating {
             position: absolute;
             top: -20px;
@@ -128,6 +268,7 @@
             font-weight: bold;
             box-shadow: 0 4px 8px rgba(0,0,0,0.2);
         }
+        
         .favorite-btn {
             background: var(--primary);
             color: white;
@@ -142,53 +283,221 @@
             transition: all 0.3s;
             font-weight: 600;
         }
+        
         .favorite-btn:hover {
             background: var(--accent);
             transform: scale(1.05);
         }
+        
         .favorite-btn i {
             font-size: 1.1rem;
         }
+        
         .empty-state {
             text-align: center;
             grid-column: 1 / -1;
             padding: 4rem;
             color: #636e72;
         }
+        
         .empty-state i {
             font-size: 5rem;
             color: #dfe6e9;
             margin-bottom: 1rem;
         }
+        
+        .user-greeting {
+            color: white;
+            margin-right: 1rem;
+            font-weight: 600;
+        }
+        
         @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                gap: 1rem;
+                padding: 1rem;
+            }
+            
+            .logo h1 {
+                font-size: 1.5rem;
+            }
+            
             .movies-container {
                 grid-template-columns: 1fr;
                 padding: 1rem;
-            }
-            header {
-                padding: 1.5rem 1rem;
-            }
-            h1 {
-                font-size: 2rem;
             }
         }
     </style>
 </head>
 <body>
     <header>
-        <h1><i class="fas fa-film"></i> Planar Movies</h1>
-        <div class="search-box">
-            <input type="text" id="searchInput" placeholder="Search movies...">
-            <i class="fas fa-search"></i>
+        <div class="logo">
+            <i class="fas fa-film"></i>
+            <h1>Planar Movies</h1>
+        </div>
+        <div id="authSection">
+            <span id="userGreeting" class="user-greeting hidden"></span>
+            <div class="auth-buttons">
+                <button id="loginBtn" class="auth-btn login-btn">
+                    <i class="fas fa-sign-in-alt"></i> Login
+                </button>
+                <button id="signupBtn" class="auth-btn signup-btn">
+                    <i class="fas fa-user-plus"></i> Sign Up
+                </button>
+            </div>
         </div>
     </header>
+
+    <div class="search-box">
+        <input type="text" id="searchInput" placeholder="Search movies...">
+        <i class="fas fa-search"></i>
+    </div>
 
     <div class="movies-container" id="moviesContainer">
         <!-- Movies will load here -->
     </div>
 
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h2>Login</h2>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="loginEmail">Email</label>
+                    <input type="email" id="loginEmail" required>
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword">Password</label>
+                    <input type="password" id="loginPassword" required>
+                </div>
+                <button type="submit" class="submit-btn">Login</button>
+            </form>
+            <p id="loginError" style="color: red; margin-top: 1rem; display: none;"></p>
+        </div>
+    </div>
+
+    <!-- Signup Modal -->
+    <div id="signupModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h2>Sign Up</h2>
+            <form id="signupForm">
+                <div class="form-group">
+                    <label for="signupName">Name</label>
+                    <input type="text" id="signupName" required>
+                </div>
+                <div class="form-group">
+                    <label for="signupEmail">Email</label>
+                    <input type="email" id="signupEmail" required>
+                </div>
+                <div class="form-group">
+                    <label for="signupPassword">Password</label>
+                    <input type="password" id="signupPassword" required>
+                </div>
+                <button type="submit" class="submit-btn">Create Account</button>
+            </form>
+            <p id="signupError" style="color: red; margin-top: 1rem; display: none;"></p>
+        </div>
+    </div>
+
     <script>
-        // Enhanced movie data with ratings
+        // User Authentication System (Frontend-only)
+        let currentUser = JSON.parse(localStorage.getItem('currentUser'));
+        
+        // Initialize UI based on login state
+        function updateAuthUI() {
+            const authSection = document.getElementById('authSection');
+            const greeting = document.getElementById('userGreeting');
+            
+            if (currentUser) {
+                greeting.textContent = `Hi, ${currentUser.name.split(' ')[0]}!`;
+                greeting.classList.remove('hidden');
+                document.getElementById('loginBtn').style.display = 'none';
+                document.getElementById('signupBtn').style.display = 'none';
+            } else {
+                greeting.classList.add('hidden');
+                document.getElementById('loginBtn').style.display = 'flex';
+                document.getElementById('signupBtn').style.display = 'flex';
+            }
+        }
+        
+        // Modal Handling
+        const loginModal = document.getElementById('loginModal');
+        const signupModal = document.getElementById('signupModal');
+        const loginBtn = document.getElementById('loginBtn');
+        const signupBtn = document.getElementById('signupBtn');
+        const closeBtns = document.querySelectorAll('.close-btn');
+        
+        loginBtn.addEventListener('click', () => loginModal.style.display = 'flex');
+        signupBtn.addEventListener('click', () => signupModal.style.display = 'flex');
+        
+        closeBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                loginModal.style.display = 'none';
+                signupModal.style.display = 'none';
+            });
+        });
+        
+        window.addEventListener('click', (e) => {
+            if (e.target === loginModal) loginModal.style.display = 'none';
+            if (e.target === signupModal) signupModal.style.display = 'none';
+        });
+        
+        // Login Form
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+            const users = JSON.parse(localStorage.getItem('users')) || [];
+            
+            const user = users.find(u => u.email === email && u.password === password);
+            
+            if (user) {
+                currentUser = user;
+                localStorage.setItem('currentUser', JSON.stringify(user));
+                loginModal.style.display = 'none';
+                updateAuthUI();
+                document.getElementById('loginError').style.display = 'none';
+            } else {
+                document.getElementById('loginError').textContent = 'Invalid email or password';
+                document.getElementById('loginError').style.display = 'block';
+            }
+        });
+        
+        // Signup Form
+        document.getElementById('signupForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const name = document.getElementById('signupName').value;
+            const email = document.getElementById('signupEmail').value;
+            const password = document.getElementById('signupPassword').value;
+            const users = JSON.parse(localStorage.getItem('users')) || [];
+            
+            if (users.some(u => u.email === email)) {
+                document.getElementById('signupError').textContent = 'Email already exists';
+                document.getElementById('signupError').style.display = 'block';
+                return;
+            }
+            
+            const newUser = { name, email, password };
+            users.push(newUser);
+            localStorage.setItem('users', JSON.stringify(users));
+            currentUser = newUser;
+            localStorage.setItem('currentUser', JSON.stringify(newUser));
+            
+            signupModal.style.display = 'none';
+            updateAuthUI();
+        });
+        
+        // Logout Functionality
+        function logout() {
+            currentUser = null;
+            localStorage.removeItem('currentUser');
+            updateAuthUI();
+        }
+        
+        // Movie Data and Functions (from previous version)
         const movies = [
             { id: 1, title: "Inception", year: 2010, rating: 8.8, poster: "https://m.media-amazon.com/images/M/MV5BMjAxMzY3NjcxNF5BMl5BanBnXkFtZTcwNTI5OTM0Mw@@._V1_.jpg" },
             { id: 2, title: "The Shawshank Redemption", year: 1994, rating: 9.3, poster: "https://m.media-amazon.com/images/M/MV5BNDE3ODcxYzMtY2YzZC00NmNlLWJiNDMtZDViZWM2MzIxZDY2XkEyXkFqcGdeQXVyNjAwNDUxODI@._V1_.jpg" },
@@ -197,17 +506,11 @@
             { id: 5, title: "Fight Club", year: 1999, rating: 8.8, poster: "https://m.media-amazon.com/images/M/MV5BNDIzNDU0YzEtYzE5Ni00ZjlkLTk5ZjgtNjM3NWE4YzA3Nzk3XkEyXkFqcGdeQXVyMjUzOTY1NTc@._V1_.jpg" },
             { id: 6, title: "Forrest Gump", year: 1994, rating: 8.8, poster: "https://m.media-amazon.com/images/M/MV5BNWIwODRlZTUtY2U3ZS00Yzg1LWJhNzYtMmZiYmEyNmU1NjMzXkEyXkFqcGdeQXVyMTQxNzMzNDI@._V1_.jpg" }
         ];
-
-        // Load movies on page load
-        document.addEventListener('DOMContentLoaded', () => {
-            renderMovies(movies);
-        });
-
-        // Render movies with animations
+        
         function renderMovies(moviesToRender) {
             const container = document.getElementById('moviesContainer');
             container.innerHTML = '';
-
+            
             if (moviesToRender.length === 0) {
                 container.innerHTML = `
                     <div class="empty-state">
@@ -218,10 +521,12 @@
                 `;
                 return;
             }
-
+            
             moviesToRender.forEach(movie => {
-                const isFavorite = localStorage.getItem(`fav_${movie.id}`) === 'true';
-
+                const isFavorite = currentUser 
+                    ? JSON.parse(localStorage.getItem(`user_${currentUser.email}_fav_${movie.id}`)) === true
+                    : false;
+                
                 const movieEl = document.createElement('div');
                 movieEl.className = 'movie-card';
                 movieEl.innerHTML = `
@@ -238,30 +543,39 @@
                 `;
                 container.appendChild(movieEl);
             });
-
-            // Add hover effects to buttons
+            
             document.querySelectorAll('.favorite-btn').forEach(btn => {
                 btn.addEventListener('click', function() {
-                    this.innerHTML = `<i class="fas fa-heart"></i> Favorited`;
-                    this.style.background = 'var(--accent)';
-                    toggleFavorite(this);
+                    if (!currentUser) {
+                        alert('Please login to save favorites!');
+                        loginModal.style.display = 'flex';
+                        return;
+                    }
+                    
+                    const movieId = this.getAttribute('data-id');
+                    const isCurrentlyFavorite = JSON.parse(
+                        localStorage.getItem(`user_${currentUser.email}_fav_${movieId}`)
+                    ) === true;
+                    
+                    localStorage.setItem(
+                        `user_${currentUser.email}_fav_${movieId}`,
+                        !isCurrentlyFavorite
+                    );
+                    
+                    this.innerHTML = `
+                        <i class="${!isCurrentlyFavorite ? 'fas' : 'far'} fa-heart"></i>
+                        ${!isCurrentlyFavorite ? 'Favorited' : 'Favorite'}
+                    `;
+                    
+                    // Pulse animation
+                    this.style.transform = 'scale(1.1)';
+                    setTimeout(() => {
+                        this.style.transform = 'scale(1)';
+                    }, 300);
                 });
             });
         }
-
-        // Toggle favorite with animation
-        function toggleFavorite(btn) {
-            const movieId = btn.getAttribute('data-id');
-            const isCurrentlyFavorite = localStorage.getItem(`fav_${movieId}`) === 'true';
-            localStorage.setItem(`fav_${movieId}`, !isCurrentlyFavorite);
-            
-            // Pulse animation
-            btn.style.transform = 'scale(1.1)';
-            setTimeout(() => {
-                btn.style.transform = 'scale(1)';
-            }, 300);
-        }
-
+        
         // Search with debounce
         let searchTimeout;
         document.getElementById('searchInput').addEventListener('input', (e) => {
@@ -275,6 +589,10 @@
                 renderMovies(filteredMovies);
             }, 300);
         });
+        
+        // Initialize
+        updateAuthUI();
+        renderMovies(movies);
     </script>
 </body>
 </html>
