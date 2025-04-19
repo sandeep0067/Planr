@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planar - Feedback Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input, textarea, select {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        .rating {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            margin: 10px 0;
+        }
+        .rating input {
+            display: none;
+        }
+        .rating label {
+            font-size: 24px;
+            color: #ccc;
+            cursor: pointer;
+        }
+        .rating input:checked ~ label {
+            color: #ffc107;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-right: 10px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        #adminPanel {
+            margin-top: 40px;
+            border-top: 1px solid #eee;
+            padding-top: 20px;
+        }
+        .feedback-item {
+            border: 1px solid #ddd;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 4px;
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>Planar Feedback</h1>
+    <p>Help us improve our Event Listing & Ticketing Manager!</p>
+    
+    <form id="feedbackForm">
+        <div class="form-group">
+            <label for="name">Name (optional):</label>
+            <input type="text" id="name" name="name">
+        </div>
+        
+        <div class="form-group">
+            <label for="email">Email (optional):</label>
+            <input type="email" id="email" name="email">
+        </div>
+        
+        <div class="form-group">
+            <label>Rating:</label>
+            <div class="rating">
+                <input type="radio" id="star5" name="rating" value="5">
+                <label for="star5">★</label>
+                <input type="radio" id="star4" name="rating" value="4">
+                <label for="star4">★</label>
+                <input type="radio" id="star3" name="rating" value="3">
+                <label for="star3">★</label>
+                <input type="radio" id="star2" name="rating" value="2">
+                <label for="star2">★</label>
+                <input type="radio" id="star1" name="rating" value="1">
+                <label for="star1">★</label>
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <label for="feedback">Your Feedback:</label>
+            <textarea id="feedback" name="feedback" rows="5" required></textarea>
+        </div>
+        
+        <button type="submit">Submit Feedback</button>
+        <button type="button" id="viewFeedbackBtn">View Feedback (Admin)</button>
+    </form>
+
+    <div id="adminPanel" class="hidden">
+        <h2>Feedback Submissions</h2>
+        <button id="backToFormBtn">Back to Form</button>
+        <div id="feedbackList"></div>
+    </div>
+
+    <script>
+        // Store feedback in localStorage
+        function saveFeedback(feedback) {
+            const savedFeedback = JSON.parse(localStorage.getItem('planarFeedback') || '[]');
+            feedback.date = new Date().toISOString();
+            savedFeedback.push(feedback);
+            localStorage.setItem('planarFeedback', JSON.stringify(savedFeedback));
+        }
+
+        // Load all feedback
+        function loadFeedback() {
+            return JSON.parse(localStorage.getItem('planarFeedback') || '[]');
+        }
+
+        // Display feedback in admin panel
+        function displayFeedback() {
+            const feedbackList = document.getElementById('feedbackList');
+            const feedbacks = loadFeedback();
+            
+            feedbackList.innerHTML = '';
+            
+            if (feedbacks.length === 0) {
+                feedbackList.innerHTML = '<p>No feedback submissions yet.</p>';
+                return;
+            }
+            
+            feedbacks.forEach((fb, index) => {
+                const item = document.createElement('div');
+                item.className = 'feedback-item';
+                item.innerHTML = `
+                    <p><strong>${fb.name || 'Anonymous'}</strong> (${fb.email || 'no email'})</p>
+                    <p>Rating: ${'★'.repeat(fb.rating)}</p>
+                    <p>${fb.feedback}</p>
+                    <small>${new Date(fb.date).toLocaleString()}</small>
+                `;
+                feedbackList.appendChild(item);
+            });
+        }
+
+        // Form submission
+        document.getElementById('feedbackForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const feedback = document.getElementById('feedback').value;
+            if (!feedback.trim()) {
+                alert('Please provide your feedback');
+                return;
+            }
+            
+            const formData = {
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                rating: document.querySelector('input[name="rating"]:checked')?.value || 0,
+                feedback: feedback
+            };
+            
+            saveFeedback(formData);
+            alert('Thank you for your feedback!');
+            this.reset();
+        });
+
+        // Admin panel toggle
+        document.getElementById('viewFeedbackBtn').addEventListener('click', function() {
+            document.getElementById('feedbackForm').classList.add('hidden');
+            document.getElementById('adminPanel').classList.remove('hidden');
+            displayFeedback();
+        });
+
+        document.getElementById('backToFormBtn').addEventListener('click', function() {
+            document.getElementById('adminPanel').classList.add('hidden');
+            document.getElementById('feedbackForm').classList.remove('hidden');
+        });
+    </script>
+</body>
+</html>
