@@ -149,7 +149,7 @@
             color: var(--dark);
         }
         
-        .form-group input {
+        .form-group input, .form-group select {
             width: 100%;
             padding: 12px 15px;
             border: 2px solid #e0e0e0;
@@ -158,7 +158,7 @@
             transition: all 0.3s;
         }
         
-        .form-group input:focus {
+        .form-group input:focus, .form-group select:focus {
             border-color: var(--primary);
             outline: none;
             box-shadow: 0 0 0 3px rgba(108, 92, 231, 0.2);
@@ -291,19 +291,21 @@
             font-weight: bold;
         }
         
-        .favorite-btn {
+        .favorite-btn, .book-btn {
             background: var(--primary);
             color: white;
             border: none;
             padding: 8px 15px;
             border-radius: 50px;
             cursor: pointer;
-            margin-top: 15px;
+            margin-top: 10px;
             display: flex;
             align-items: center;
             gap: 8px;
             transition: all 0.3s;
             font-weight: 600;
+            width: 100%;
+            justify-content: center;
         }
         
         .favorite-btn:hover {
@@ -311,7 +313,16 @@
             transform: scale(1.05);
         }
         
-        .favorite-btn i {
+        .book-btn {
+            background: var(--success);
+        }
+        
+        .book-btn:hover {
+            background: #00997a;
+            transform: scale(1.05);
+        }
+        
+        .favorite-btn i, .book-btn i {
             font-size: 1.1rem;
         }
         
@@ -326,6 +337,31 @@
             font-size: 5rem;
             color: #dfe6e9;
             margin-bottom: 1rem;
+        }
+        
+        /* Booking Modal Styles */
+        .booking-summary {
+            margin-top: 1.5rem;
+            padding: 1rem;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+        
+        .booking-summary h3 {
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+        }
+        
+        .booking-summary p {
+            margin: 0.3rem 0;
+            color: #636e72;
+        }
+        
+        .booking-summary .total {
+            font-weight: bold;
+            color: var(--dark);
+            margin-top: 0.5rem;
+            font-size: 1.1rem;
         }
         
         @media (max-width: 768px) {
@@ -426,6 +462,81 @@
         </div>
     </div>
 
+    <!-- Booking Modal -->
+    <div id="bookingModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h2 id="bookingMovieTitle">Book Tickets</h2>
+            <form id="bookingForm">
+                <input type="hidden" id="bookingMovieId">
+                
+                <div class="form-group">
+                    <label for="bookingDate">Date</label>
+                    <input type="date" id="bookingDate" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="bookingTime">Time</label>
+                    <select id="bookingTime" required>
+                        <option value="">Select a time</option>
+                        <option value="10:00 AM">10:00 AM</option>
+                        <option value="1:00 PM">1:00 PM</option>
+                        <option value="4:00 PM">4:00 PM</option>
+                        <option value="7:00 PM">7:00 PM</option>
+                        <option value="10:00 PM">10:00 PM</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="bookingSeats">Number of Seats</label>
+                    <select id="bookingSeats" required>
+                        <option value="1">1 Seat</option>
+                        <option value="2">2 Seats</option>
+                        <option value="3">3 Seats</option>
+                        <option value="4">4 Seats</option>
+                        <option value="5">5 Seats</option>
+                        <option value="6">6 Seats</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="bookingType">Ticket Type</label>
+                    <select id="bookingType" required>
+                        <option value="standard">Standard - ₹200</option>
+                        <option value="premium">Premium - ₹300</option>
+                        <option value="vip">VIP - ₹500</option>
+                    </select>
+                </div>
+                
+                <div class="booking-summary">
+                    <h3>Order Summary</h3>
+                    <p id="summaryMovie">Movie: </p>
+                    <p id="summaryDateTime">Date & Time: </p>
+                    <p id="summarySeats">Seats: </p>
+                    <p id="summaryType">Ticket Type: </p>
+                    <p class="total" id="summaryTotal">Total: ₹0</p>
+                </div>
+                
+                <button type="submit" class="submit-btn">Confirm Booking</button>
+            </form>
+            <p id="bookingError" style="color: red; margin-top: 1rem; display: none;"></p>
+        </div>
+    </div>
+
+    <!-- Booking Confirmation Modal -->
+    <div id="confirmationModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <div style="text-align: center;">
+                <i class="fas fa-check-circle" style="font-size: 4rem; color: var(--success); margin-bottom: 1rem;"></i>
+                <h2>Booking Confirmed!</h2>
+                <p id="confirmationMessage" style="margin: 1rem 0;"></p>
+                <p>Your tickets have been sent to your email.</p>
+                <button id="confirmationCloseBtn" class="submit-btn" style="margin-top: 1.5rem;">Close</button>
+            </div>
+        </div>
+    </div>
+
     <script>
         // User Authentication System
         let currentUser = JSON.parse(localStorage.getItem('currentUser'));
@@ -439,6 +550,8 @@
         // Modal Elements
         const loginModal = document.getElementById('loginModal');
         const signupModal = document.getElementById('signupModal');
+        const bookingModal = document.getElementById('bookingModal');
+        const confirmationModal = document.getElementById('confirmationModal');
         const closeBtns = document.querySelectorAll('.close-btn');
         
         // Currently Running Bollywood Movies (June-July 2023)
@@ -539,6 +652,13 @@
             },
         ];
 
+        // Ticket prices
+        const ticketPrices = {
+            standard: 200,
+            premium: 300,
+            vip: 500
+        };
+
         // Initialize UI based on login state
         function updateAuthUI() {
             if (currentUser) {
@@ -563,14 +683,23 @@
             btn.addEventListener('click', () => {
                 loginModal.style.display = 'none';
                 signupModal.style.display = 'none';
+                bookingModal.style.display = 'none';
+                confirmationModal.style.display = 'none';
                 document.getElementById('loginError').style.display = 'none';
                 document.getElementById('signupError').style.display = 'none';
+                document.getElementById('bookingError').style.display = 'none';
             });
+        });
+        
+        document.getElementById('confirmationCloseBtn').addEventListener('click', () => {
+            confirmationModal.style.display = 'none';
         });
         
         window.addEventListener('click', (e) => {
             if (e.target === loginModal) loginModal.style.display = 'none';
             if (e.target === signupModal) signupModal.style.display = 'none';
+            if (e.target === bookingModal) bookingModal.style.display = 'none';
+            if (e.target === confirmationModal) confirmationModal.style.display = 'none';
         });
         
         // Login Form
@@ -669,6 +798,10 @@
                             <i class="${isFavorite ? 'fas' : 'far'} fa-heart"></i>
                             ${isFavorite ? 'Favorited' : 'Favorite'}
                         </button>
+                        <button class="book-btn" data-id="${movie.id}" data-title="${movie.title}">
+                            <i class="fas fa-ticket-alt"></i>
+                            Book Tickets
+                        </button>
                     </div>
                 `;
                 container.appendChild(movieEl);
@@ -705,7 +838,127 @@
                     }, 300);
                 });
             });
+            
+            // Add event listeners to book buttons
+            document.querySelectorAll('.book-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    if (!currentUser) {
+                        alert('Please login to book tickets!');
+                        loginModal.style.display = 'flex';
+                        return;
+                    }
+                    
+                    const movieId = this.getAttribute('data-id');
+                    const movieTitle = this.getAttribute('data-title');
+                    
+                    // Set up booking modal
+                    document.getElementById('bookingMovieId').value = movieId;
+                    document.getElementById('bookingMovieTitle').textContent = `Book Tickets: ${movieTitle}`;
+                    document.getElementById('summaryMovie').textContent = `Movie: ${movieTitle}`;
+                    
+                    // Set default date to tomorrow
+                    const tomorrow = new Date();
+                    tomorrow.setDate(tomorrow.getDate() + 1);
+                    const formattedDate = tomorrow.toISOString().split('T')[0];
+                    document.getElementById('bookingDate').value = formattedDate;
+                    document.getElementById('bookingDate').min = formattedDate;
+                    
+                    // Reset other fields
+                    document.getElementById('bookingTime').value = '';
+                    document.getElementById('bookingSeats').value = '1';
+                    document.getElementById('bookingType').value = 'standard';
+                    updateBookingSummary();
+                    
+                    // Show booking modal
+                    bookingModal.style.display = 'flex';
+                });
+            });
         }
+        
+        // Update booking summary
+        function updateBookingSummary() {
+            const date = document.getElementById('bookingDate').value;
+            const time = document.getElementById('bookingTime').value;
+            const seats = document.getElementById('bookingSeats').value;
+            const type = document.getElementById('bookingType').value;
+            
+            if (date && time) {
+                const formattedDate = new Date(date).toLocaleDateString('en-US', { 
+                    weekday: 'short', 
+                    month: 'short', 
+                    day: 'numeric' 
+                });
+                
+                document.getElementById('summaryDateTime').textContent = `Date & Time: ${formattedDate}, ${time}`;
+            }
+            
+            document.getElementById('summarySeats').textContent = `Seats: ${seats}`;
+            document.getElementById('summaryType').textContent = `Ticket Type: ${type.charAt(0).toUpperCase() + type.slice(1)}`;
+            
+            // Calculate total
+            const price = ticketPrices[type] || 200;
+            const total = price * parseInt(seats);
+            document.getElementById('summaryTotal').textContent = `Total: ₹${total}`;
+        }
+        
+        // Booking form event listeners
+        document.getElementById('bookingDate').addEventListener('change', updateBookingSummary);
+        document.getElementById('bookingTime').addEventListener('change', updateBookingSummary);
+        document.getElementById('bookingSeats').addEventListener('change', updateBookingSummary);
+        document.getElementById('bookingType').addEventListener('change', updateBookingSummary);
+        
+        // Booking form submission
+        document.getElementById('bookingForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const movieId = document.getElementById('bookingMovieId').value;
+            const movieTitle = document.getElementById('bookingMovieTitle').textContent.replace('Book Tickets: ', '');
+            const date = document.getElementById('bookingDate').value;
+            const time = document.getElementById('bookingTime').value;
+            const seats = document.getElementById('bookingSeats').value;
+            const type = document.getElementById('bookingType').value;
+            
+            if (!date || !time) {
+                document.getElementById('bookingError').textContent = 'Please select both date and time';
+                document.getElementById('bookingError').style.display = 'block';
+                return;
+            }
+            
+            // Calculate total
+            const price = ticketPrices[type] || 200;
+            const total = price * parseInt(seats);
+            
+            // In a real app, you would send this data to a server
+            // For this demo, we'll just show a confirmation
+            
+            // Save booking to local storage
+            const booking = {
+                movieId,
+                movieTitle,
+                date,
+                time,
+                seats,
+                type,
+                total,
+                bookedAt: new Date().toISOString()
+            };
+            
+            let bookings = JSON.parse(localStorage.getItem(`user_${currentUser.email}_bookings`)) || [];
+            bookings.push(booking);
+            localStorage.setItem(`user_${currentUser.email}_bookings`, JSON.stringify(bookings));
+            
+            // Show confirmation
+            document.getElementById('confirmationMessage').innerHTML = `
+                You've successfully booked ${seats} ${type} ticket(s) for <strong>${movieTitle}</strong><br>
+                on ${new Date(date).toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' })} at ${time}.<br><br>
+                Your total is <strong>₹${total}</strong>.
+            `;
+            
+            bookingModal.style.display = 'none';
+            confirmationModal.style.display = 'flex';
+            document.getElementById('bookingError').style.display = 'none';
+            document.getElementById('bookingForm').reset();
+        });
         
         // Search with debounce
         let searchTimeout;
