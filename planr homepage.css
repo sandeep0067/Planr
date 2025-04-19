@@ -98,6 +98,15 @@ header h1 {
   width: 300px;
   box-shadow: 0 4px 10px rgba(0,0,0,0.3);
   position: relative;
+  overflow: hidden;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.event-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0 15px rgba(255, 0, 0, 0.6),
+              0 0 25px rgba(0, 255, 0, 0.6),
+              0 0 35px rgba(0, 0, 255, 0.6);
 }
 
 .event-card img {
@@ -105,6 +114,25 @@ header h1 {
   height: 150px;
   object-fit: cover;
   border-radius: 8px;
+}
+
+.event-card:hover .event-image {
+  animation: rgbGlow 1.5s infinite alternate;
+}
+
+@keyframes rgbGlow {
+  0% {
+    box-shadow: 0 0 10px red, 0 0 20px blue, 0 0 30px green;
+  }
+  33% {
+    box-shadow: 0 0 10px blue, 0 0 20px green, 0 0 30px red;
+  }
+  66% {
+    box-shadow: 0 0 10px green, 0 0 20px red, 0 0 30px blue;
+  }
+  100% {
+    box-shadow: 0 0 10px red, 0 0 20px blue, 0 0 30px green;
+  }
 }
 
 .event-date {
@@ -119,3 +147,9 @@ header h1 {
   margin-top: 0.5rem;
 }
 
+@media (max-width: 768px) {
+  .events {
+    flex-direction: column;
+    align-items: center;
+  }
+}

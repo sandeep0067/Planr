@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PLANR - Book Tickets</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <style>
+        :root {
+            --dark-bg: #121212;
+            --dark-card: #1e1e1e;
+            --dark-border: #333;
+            --text-light: #e0e0e0;
+            --primary: #0d6efd;
+            --secondary: #6c757d;
+        }
+        
+        body {
+            background-color: var(--dark-bg);
+            color: var(--text-light);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        .navbar-dark {
+            background-color: #000 !important;
+            border-bottom: 1px solid var(--dark-border);
+        }
+        
+        .search-bar {
+            background-color: var(--dark-card);
+            border: 1px solid var(--dark-border);
+        }
+        
+        .nav-tabs .nav-link {
+            color: var(--text-light);
+            border: none;
+        }
+        
+        .nav-tabs .nav-link.active {
+            color: var(--primary);
+            background: transparent;
+            border-bottom: 2px solid var(--primary);
+        }
+        
+        .movie-card {
+            background-color: var(--dark-card);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.3s;
+        }
+        
+        .movie-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .rating-badge {
+            background-color: rgba(13, 110, 253, 0.2);
+            color: var(--primary);
+        }
+        
+        .btn-book {
+            background-color: var(--primary);
+            font-weight: 600;
+            padding: 8px 24px;
+        }
+        
+        .section-title {
+            border-left: 4px solid var(--primary);
+            padding-left: 12px;
+        }
+        
+        footer {
+            background-color: #000;
+            border-top: 1px solid var(--dark-border);
+        }
+        
+        .footer-link {
+            color: var(--secondary);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-link:hover {
+            color: var(--text-light);
+        }
+    </style>
+</head>
+<body>
+    <!-- Top Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark py-3">
+        <div class="container">
+            <a class="navbar-brand fw-bold fs-4" href="homepage1.html">
+                <span class="text-primary">planr</span>.com
+            </a>
+            
+            <div class="d-flex align-items-center">
+                <div class="input-group search-bar rounded-pill me-3" style="width: 300px;">
+                    <input type="text" class="form-control bg-transparent border-0 text-light" 
+                           placeholder="Search for Movies, Events, Plays, Sports...">
+                    <button class="btn btn-outline-secondary border-0" type="button">
+                        <i class="bi bi-search"></i>
+                    </button>
+                </div>
+                
+                <div class="dropdown">
+                    <button class="btn btn-outline-light dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                        <i class="bi bi-person-circle me-1"></i> Sign In
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-dark">
+                        <li><a class="dropdown-item" href="#">Login</a></li>
+                        <li><a class="dropdown-item" href="#">Register</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Navigation Tabs -->
+    <div class="container mb-4">
+        <ul class="nav nav-tabs border-0">
+            <li class="nav-item">
+                <a class="nav-link active" href="#">Movies</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Stream</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Events</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Plays</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Sports</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Activities</a>
+            </li>
+            <li class="nav-item ms-auto">
+                <a class="nav-link text-secondary" href="#">ListYourShow</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-secondary" href="#">Corporates</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-secondary" href="#">Offers</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-secondary" href="#">Gift Cards</a>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Movie Section -->
+    <div class="container">
+        <div class="row mb-4">
+            <div class="col">
+                <h5 class="section-title">Trailers (2)</h5>
+            </div>
+            <div class="col-auto">
+                <a href="#" class="btn btn-sm btn-outline-secondary">In cinemas</a>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <div class="movie-card h-100">
+                    <img src="maxresdefault.jpg" 
+                         class="img-fluid w-100" 
+                         style="height: 450px; object-fit: cover;" 
+                         alt="Jaat Movie Poster">
+                </div>
+            </div>
+            
+            <div class="col-md-8 mb-4">
+                <div class="d-flex align-items-start mb-3">
+                    <h1 class="me-3">Jaat</h1>
+                    <span class="rating-badge rounded-pill px-3 py-1 align-self-center">
+                        <i class="bi bi-star-fill text-warning"></i> 9.2/10 (3K Votes) >
+                    </span>
+                </div>
+                
+                <div class="d-flex flex-wrap gap-2 mb-4">
+                    <span class="badge bg-dark">Hindi</span>
+                    <span class="badge bg-dark">2h 33m</span>
+                    <span class="badge bg-dark">Action</span>
+                    <span class="badge bg-dark">Drama</span>
+                    <span class="badge bg-dark">UA16+</span>
+                    <span class="badge bg-dark">10 Apr, 2025</span>
+                </div>
+                
+                <div class="d-flex gap-3 mb-4">
+                    <button class="btn btn-book">Book tickets</button>
+                    <button class="btn btn-outline-light">
+                        <i class="bi bi-share"></i> Share
+                    </button>
+                </div>
+                
+                <div class="mb-4">
+                    <h4 class="mb-3">About the movie</h4>
+                    <p>Jaat is a massive action drama directed by Gopichand Malineni. The film stars Sunny Deol in the crucial role alongside Randeep Hooda, Vineet Kumar, Regina Cassandra, and Saiyami Kher.</p>
+                </div>
+                
+                <div class="border-top border-secondary pt-3">
+                    <h5 class="mb-3">Cast & Crew</h5>
+                    <div class="d-flex flex-wrap gap-3">
+                        <div class="text-center">
+                            <div class="rounded-circle bg-secondary mb-2" style="width: 60px; height: 60px;"></div>
+                            <small>Sunny Deol</small>
+                        </div>
+                        <div class="text-center">
+                            <div class="rounded-circle bg-secondary mb-2" style="width: 60px; height: 60px;"></div>
+                            <small>Randeep Hooda</small>
+                        </div>
+                        <div class="text-center">
+                            <div class="rounded-circle bg-secondary mb-2" style="width: 60px; height: 60px;"></div>
+                            <small>Regina Cassandra</small>
+                        </div>
+                        <div class="text-center">
+                            <div class="rounded-circle bg-secondary mb-2" style="width: 60px; height: 60px;"></div>
+                            <small>Gopichand Malineni</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 mb-4">
+                    <h5 class="mb-3"><span class="text-primary">planr</span>.com</h5>
+                    <p class="text-secondary">Book tickets for movies, events, plays, sports and activities.</p>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <h6 class="mb-3">Company</h6>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#" class="footer-link">About Us</a></li>
+                        <li class="mb-2"><a href="#" class="footer-link">Contact Us</a></li>
+                        <li class="mb-2"><a href="#" class="footer-link">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <h6 class="mb-3">Help</h6>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#" class="footer-link">FAQs</a></li>
+                        <li class="mb-2"><a href="#" class="footer-link">Terms & Conditions</a></li>
+                        <li class="mb-2"><a href="#" class="footer-link">Sitemap</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <h6 class="mb-3">Connect With Us</h6>
+                    <div class="d-flex gap-3">
+                        <a href="#" class="footer-link"><i class="bi bi-facebook fs-5"></i></a>
+                        <a href="#" class="footer-link"><i class="bi bi-twitter fs-5"></i></a>
+                        <a href="#" class="footer-link"><i class="bi bi-instagram fs-5"></i></a>
+                        <a href="#" class="footer-link"><i class="bi bi-youtube fs-5"></i></a>
+                    </div>
+                </div>
+            </div>
+            <hr class="my-4 border-secondary">
+            <div class="text-center text-secondary">
+                <small>© 2025 PLANR. All Rights Reserved.</small>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

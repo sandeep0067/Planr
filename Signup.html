@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planr - Login/Signup</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #121212;
+            color: #e0e0e0;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            padding: 15px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            color: #f84464;
+            text-decoration: none;
+        }
+
+        .auth-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: calc(100vh - 100px);
+        }
+
+        .auth-box {
+            background: #1e1e1e;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            width: 100%;
+            max-width: 450px;
+            overflow: hidden;
+            border: 1px solid #333;
+        }
+
+        .auth-header {
+            display: flex;
+            border-bottom: 1px solid #333;
+        }
+
+        .auth-tab {
+            flex: 1;
+            text-align: center;
+            padding: 15px;
+            cursor: pointer;
+            font-weight: 600;
+            color: #888;
+            transition: all 0.3s ease;
+        }
+
+        .auth-tab.active {
+            color: #f84464;
+            border-bottom: 2px solid #f84464;
+        }
+
+        .auth-content {
+            padding: 30px;
+        }
+
+        .auth-form {
+            display: none;
+        }
+
+        .auth-form.active {
+            display: block;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #bbb;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            background-color: #2d2d2d;
+            border: 1px solid #444;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            color: #e0e0e0;
+        }
+
+        .form-control:focus {
+            border-color: #f84464;
+            outline: none;
+            background-color: #333;
+        }
+
+        .form-control::placeholder {
+            color: #666;
+        }
+
+        .btn {
+            display: inline-block;
+            background: #f84464;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            width: 100%;
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            background: #e63352;
+            transform: translateY(-1px);
+        }
+
+        .social-login {
+            margin-top: 25px;
+            text-align: center;
+        }
+
+        .social-login p {
+            color: #777;
+            margin-bottom: 15px;
+            position: relative;
+        }
+
+        .social-login p::before,
+        .social-login p::after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            width: 30%;
+            height: 1px;
+            background: #444;
+        }
+
+        .social-login p::before {
+            left: 0;
+        }
+
+        .social-login p::after {
+            right: 0;
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 18px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: #333;
+        }
+
+        .social-icon:hover {
+            transform: translateY(-3px);
+        }
+
+        .instagram:hover {
+            background: #E1306C;
+        }
+
+        .whatsapp:hover {
+            background: #25D366;
+        }
+
+        .google:hover {
+            background: #DB4437;
+        }
+
+        .forgot-password {
+            text-align: right;
+            margin-top: -10px;
+            margin-bottom: 20px;
+        }
+
+        .forgot-password a {
+            color: #777;
+            font-size: 14px;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .forgot-password a:hover {
+            color: #f84464;
+        }
+
+        .terms {
+            font-size: 12px;
+            color: #666;
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .terms a {
+            color: #f84464;
+            text-decoration: none;
+        }
+
+        /* Dark mode toggle switch */
+        .theme-toggle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #333;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            z-index: 100;
+        }
+
+        .theme-toggle i {
+            color: #f84464;
+            font-size: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .auth-box {
+                margin: 20px;
+            }
+
+            .auth-content {
+                padding: 20px;
+            }
+
+            .auth-tab {
+                padding: 12px;
+                font-size: 14px;
+            }
+
+            .form-control {
+                padding: 10px 12px;
+            }
+
+            .btn {
+                padding: 10px 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo {
+                font-size: 24px;
+            }
+
+            .auth-tab {
+                padding: 10px;
+                font-size: 13px;
+            }
+
+            .social-icons {
+                gap: 10px;
+            }
+
+            .social-icon {
+                width: 35px;
+                height: 35px;
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <a href="homepage1.html" class="logo">PLANR</a>
+        </header>
+
+        <div class="auth-container">
+            <div class="auth-box">
+                <div class="auth-header">
+                    <div class="auth-tab active" data-tab="login">Login</div>
+                    <div class="auth-tab" data-tab="signup">Sign Up</div>
+                </div>
+
+                <div class="auth-content">
+                    <!-- Login Form -->
+                    <div class="auth-form active" id="login-form">
+                        <form>
+                            <div class="form-group">
+                                <label for="login-email">Email or Mobile</label>
+                                <input type="text" id="login-email" class="form-control" placeholder="Enter email or mobile number" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="login-password">Password</label>
+                                <input type="password" id="login-password" class="form-control" placeholder="Enter password" required>
+                            </div>
+
+                            <div class="forgot-password">
+                                <a href="#">Forgot Password?</a>
+                            </div>
+
+                            <button type="submit" class="btn">Login</button>
+
+                            <div class="social-login">
+                                <p>or login with</p>
+                                <div class="social-icons">
+                                    <div class="social-icon instagram">
+                                        <i class="fab fa-instagram"></i>
+                                    </div>
+                                    <div class="social-icon whatsapp">
+                                        <i class="fab fa-whatsapp"></i>
+                                    </div>
+                                    <div class="social-icon google">
+                                        <i class="fab fa-google"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- Signup Form -->
+                    <div class="auth-form" id="signup-form">
+                        <form>
+                            <div class="form-group">
+                                <label for="signup-name">Full Name</label>
+                                <input type="text" id="signup-name" class="form-control" placeholder="Enter your full name" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="signup-email">Email</label>
+                                <input type="email" id="signup-email" class="form-control" placeholder="Enter your email" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="signup-mobile">Mobile Number</label>
+                                <input type="tel" id="signup-mobile" class="form-control" placeholder="Enter mobile number" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="signup-password">Password</label>
+                                <input type="password" id="signup-password" class="form-control" placeholder="Create password" required>
+                            </div>
+
+                            <button type="submit" class="btn">Create Account</button>
+
+                            <div class="terms">
+                                By continuing, you agree to our <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="theme-toggle" id="themeToggle">
+        <i class="fas fa-sun"></i>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const tabs = document.querySelectorAll('.auth-tab');
+            const forms = document.querySelectorAll('.auth-form');
+            const themeToggle = document.getElementById('themeToggle');
+            let isDarkMode = true;
+
+            // Tab switching functionality
+            tabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    // Remove active class from all tabs and forms
+                    tabs.forEach(t => t.classList.remove('active'));
+                    forms.forEach(f => f.classList.remove('active'));
+
+                    // Add active class to clicked tab
+                    this.classList.add('active');
+
+                    // Show corresponding form
+                    const tabName = this.getAttribute('data-tab');
+                    document.getElementById(`${tabName}-form`).classList.add('active');
+                });
+            });
+
+            // Form submission handling
+            const loginForm = document.querySelector('#login-form form');
+            const signupForm = document.querySelector('#signup-form form');
+
+            loginForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                // Add your login logic here
+                alert('Login functionality will be implemented here');
+            });
+
+            signupForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                // Add your signup logic here
+                alert('Signup functionality will be implemented here');
+            });
+
+            // Social login button functionality
+            document.querySelector('.instagram').addEventListener('click', function() {
+                // Add Instagram login logic here
+                alert('Instagram login will be implemented here');
+            });
+
+            document.querySelector('.whatsapp').addEventListener('click', function() {
+                // Add WhatsApp login logic here
+                alert('WhatsApp login will be implemented here');
+            });
+
+            document.querySelector('.google').addEventListener('click', function() {
+                // Add Google login logic here
+                alert('Google login will be implemented here');
+            });
+
+            // Theme toggle functionality
+            themeToggle.addEventListener('click', function() {
+                isDarkMode = !isDarkMode;
+                document.body.classList.toggle('light-mode', !isDarkMode);
+                
+                if (isDarkMode) {
+                    themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+                    document.body.style.backgroundColor = '#121212';
+                    document.body.style.color = '#e0e0e0';
+                    document.querySelector('.auth-box').style.backgroundColor = '#1e1e1e';
+                } else {
+                    themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+                    document.body.style.backgroundColor = '#f5f5f5';
+                    document.body.style.color = '#333';
+                    document.querySelector('.auth-box').style.backgroundColor = '#fff';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
