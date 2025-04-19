@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planar Movies</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #6c5ce7;
+            --dark: #2d3436;
+            --light: #f5f6fa;
+        }
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: #f9f9f9;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background: var(--dark);
+            color: white;
+            padding: 1rem;
+            text-align: center;
+        }
+        .search-box {
+            margin: 1rem auto;
+            width: 80%;
+            max-width: 500px;
+        }
+        #searchInput {
+            width: 100%;
+            padding: 10px;
+            border-radius: 25px;
+            border: 2px solid var(--primary);
+        }
+        .movies-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+            padding: 1rem;
+        }
+        .movie-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        .movie-card:hover {
+            transform: translateY(-5px);
+        }
+        .movie-poster {
+            width: 100%;
+            height: 350px;
+            object-fit: cover;
+        }
+        .movie-info {
+            padding: 1rem;
+        }
+        .movie-title {
+            font-weight: bold;
+            margin: 0.5rem 0;
+        }
+        .movie-year {
+            color: #636e72;
+        }
+        .favorite-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        @media (max-width: 600px) {
+            .movies-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1><i class="fas fa-film"></i> Planar Movies</h1>
+        <div class="search-box">
+            <input type="text" id="searchInput" placeholder="Search movies...">
+        </div>
+    </header>
+
+    <div class="movies-container" id="moviesContainer">
+        <!-- Movies will be loaded here -->
+    </div>
+
+    <script>
+        // Sample movie data (replace with your actual data)
+        const movies = [
+            { id: 1, title: "Inception", year: 2010, poster: "https://via.placeholder.com/300x450?text=Inception" },
+            { id: 2, title: "The Shawshank Redemption", year: 1994, poster: "https://via.placeholder.com/300x450?text=Shawshank" },
+            { id: 3, title: "Pulp Fiction", year: 1994, poster: "https://via.placeholder.com/300x450?text=Pulp+Fiction" },
+            { id: 4, title: "The Dark Knight", year: 2008, poster: "https://via.placeholder.com/300x450?text=Dark+Knight" },
+            { id: 5, title: "Fight Club", year: 1999, poster: "https://via.placeholder.com/300x450?text=Fight+Club" },
+            { id: 6, title: "Forrest Gump", year: 1994, poster: "https://via.placeholder.com/300x450?text=Forrest+Gump" }
+        ];
+
+        // Load movies on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            renderMovies(movies);
+        });
+
+        // Render movies to DOM
+        function renderMovies(moviesToRender) {
+            const container = document.getElementById('moviesContainer');
+            container.innerHTML = '';
+
+            moviesToRender.forEach(movie => {
+                const isFavorite = localStorage.getItem(`fav_${movie.id}`) === 'true';
+
+                const movieEl = document.createElement('div');
+                movieEl.className = 'movie-card';
+                movieEl.innerHTML = `
+                    <img src="${movie.poster}" alt="${movie.title}" class="movie-poster">
+                    <div class="movie-info">
+                        <div class="movie-title">${movie.title}</div>
+                        <div class="movie-year">${movie.year}</div>
+                        <button class="favorite-btn" data-id="${movie.id}">
+                            ${isFavorite ? '<i class="fas fa-heart"></i> Favorited' : '<i class="far fa-heart"></i> Favorite'}
+                        </button>
+                    </div>
+                `;
+                container.appendChild(movieEl);
+            });
+
+            // Add event listeners to buttons
+            document.querySelectorAll('.favorite-btn').forEach(btn => {
+                btn.addEventListener('click', toggleFavorite);
+            });
+        }
+
+        // Toggle favorite status
+        function toggleFavorite(e) {
+            const movieId = e.target.getAttribute('data-id');
+            const isCurrentlyFavorite = localStorage.getItem(`fav_${movieId}`) === 'true';
+            
+            localStorage.setItem(`fav_${movieId}`, !isCurrentlyFavorite);
+            renderMovies(movies); // Refresh the view
+        }
+
+        // Search functionality
+        document.getElementById('searchInput').addEventListener('input', (e) => {
+            const searchTerm = e.target.value.toLowerCase();
+            const filteredMovies = movies.filter(movie => 
+                movie.title.toLowerCase().includes(searchTerm) || 
+                movie.year.toString().includes(searchTerm)
+            );
+            renderMovies(filteredMovies);
+        });
+    </script>
+</body>
+</html>
