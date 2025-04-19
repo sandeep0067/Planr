@@ -57,6 +57,7 @@
         .auth-buttons {
             display: flex;
             gap: 10px;
+            align-items: center;
         }
         
         .auth-btn {
@@ -82,9 +83,20 @@
             color: var(--primary);
         }
         
+        .logout-btn {
+            background: var(--accent);
+            color: white;
+        }
+        
         .auth-btn:hover {
             transform: translateY(-2px);
             box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        
+        .user-greeting {
+            color: white;
+            margin-right: 10px;
+            font-weight: 600;
         }
         
         /* Modal Styles */
@@ -170,7 +182,7 @@
             transform: translateY(-2px);
         }
         
-        /* Rest of your existing styles... */
+        /* Movie Grid Styles */
         .search-box {
             margin: 2rem auto;
             width: 80%;
@@ -306,12 +318,6 @@
             margin-bottom: 1rem;
         }
         
-        .user-greeting {
-            color: white;
-            margin-right: 1rem;
-            font-weight: 600;
-        }
-        
         @media (max-width: 768px) {
             header {
                 flex-direction: column;
@@ -321,6 +327,11 @@
             
             .logo h1 {
                 font-size: 1.5rem;
+            }
+            
+            .auth-buttons {
+                width: 100%;
+                justify-content: center;
             }
             
             .movies-container {
@@ -337,13 +348,16 @@
             <h1>Planar Movies</h1>
         </div>
         <div id="authSection">
-            <span id="userGreeting" class="user-greeting hidden"></span>
+            <span id="userGreeting" class="user-greeting"></span>
             <div class="auth-buttons">
                 <button id="loginBtn" class="auth-btn login-btn">
                     <i class="fas fa-sign-in-alt"></i> Login
                 </button>
                 <button id="signupBtn" class="auth-btn signup-btn">
                     <i class="fas fa-user-plus"></i> Sign Up
+                </button>
+                <button id="logoutBtn" class="auth-btn logout-btn">
+                    <i class="fas fa-sign-out-alt"></i> Logout
                 </button>
             </div>
         </div>
@@ -403,33 +417,37 @@
     </div>
 
     <script>
-        // User Authentication System (Frontend-only)
+        // User Authentication System
         let currentUser = JSON.parse(localStorage.getItem('currentUser'));
+        
+        // DOM Elements
+        const loginBtn = document.getElementById('loginBtn');
+        const signupBtn = document.getElementById('signupBtn');
+        const logoutBtn = document.getElementById('logoutBtn');
+        const userGreeting = document.getElementById('userGreeting');
+        
+        // Modal Elements
+        const loginModal = document.getElementById('loginModal');
+        const signupModal = document.getElementById('signupModal');
+        const closeBtns = document.querySelectorAll('.close-btn');
         
         // Initialize UI based on login state
         function updateAuthUI() {
-            const authSection = document.getElementById('authSection');
-            const greeting = document.getElementById('userGreeting');
-            
             if (currentUser) {
-                greeting.textContent = `Hi, ${currentUser.name.split(' ')[0]}!`;
-                greeting.classList.remove('hidden');
-                document.getElementById('loginBtn').style.display = 'none';
-                document.getElementById('signupBtn').style.display = 'none';
+                userGreeting.textContent = `Hi, ${currentUser.name.split(' ')[0]}!`;
+                userGreeting.style.display = 'block';
+                loginBtn.style.display = 'none';
+                signupBtn.style.display = 'none';
+                logoutBtn.style.display = 'flex';
             } else {
-                greeting.classList.add('hidden');
-                document.getElementById('loginBtn').style.display = 'flex';
-                document.getElementById('signupBtn').style.display = 'flex';
+                userGreeting.style.display = 'none';
+                loginBtn.style.display = 'flex';
+                signupBtn.style.display = 'flex';
+                logoutBtn.style.display = 'none';
             }
         }
         
         // Modal Handling
-        const loginModal = document.getElementById('loginModal');
-        const signupModal = document.getElementById('signupModal');
-        const loginBtn = document.getElementById('loginBtn');
-        const signupBtn = document.getElementById('signupBtn');
-        const closeBtns = document.querySelectorAll('.close-btn');
-        
         loginBtn.addEventListener('click', () => loginModal.style.display = 'flex');
         signupBtn.addEventListener('click', () => signupModal.style.display = 'flex');
         
@@ -437,6 +455,8 @@
             btn.addEventListener('click', () => {
                 loginModal.style.display = 'none';
                 signupModal.style.display = 'none';
+                document.getElementById('loginError').style.display = 'none';
+                document.getElementById('signupError').style.display = 'none';
             });
         });
         
@@ -459,7 +479,9 @@
                 localStorage.setItem('currentUser', JSON.stringify(user));
                 loginModal.style.display = 'none';
                 updateAuthUI();
+                renderMovies(movies);
                 document.getElementById('loginError').style.display = 'none';
+                document.getElementById('loginForm').reset();
             } else {
                 document.getElementById('loginError').textContent = 'Invalid email or password';
                 document.getElementById('loginError').style.display = 'block';
@@ -488,16 +510,19 @@
             
             signupModal.style.display = 'none';
             updateAuthUI();
+            renderMovies(movies);
+            document.getElementById('signupForm').reset();
         });
         
         // Logout Functionality
-        function logout() {
+        logoutBtn.addEventListener('click', function() {
             currentUser = null;
             localStorage.removeItem('currentUser');
             updateAuthUI();
-        }
+            renderMovies(movies);
+        });
         
-        // Movie Data and Functions (from previous version)
+        // Movie Data
         const movies = [
             { id: 1, title: "Inception", year: 2010, rating: 8.8, poster: "https://m.media-amazon.com/images/M/MV5BMjAxMzY3NjcxNF5BMl5BanBnXkFtZTcwNTI5OTM0Mw@@._V1_.jpg" },
             { id: 2, title: "The Shawshank Redemption", year: 1994, rating: 9.3, poster: "https://m.media-amazon.com/images/M/MV5BNDE3ODcxYzMtY2YzZC00NmNlLWJiNDMtZDViZWM2MzIxZDY2XkEyXkFqcGdeQXVyNjAwNDUxODI@._V1_.jpg" },
@@ -507,6 +532,7 @@
             { id: 6, title: "Forrest Gump", year: 1994, rating: 8.8, poster: "https://m.media-amazon.com/images/M/MV5BNWIwODRlZTUtY2U3ZS00Yzg1LWJhNzYtMmZiYmEyNmU1NjMzXkEyXkFqcGdeQXVyMTQxNzMzNDI@._V1_.jpg" }
         ];
         
+        // Render Movies
         function renderMovies(moviesToRender) {
             const container = document.getElementById('moviesContainer');
             container.innerHTML = '';
@@ -544,6 +570,7 @@
                 container.appendChild(movieEl);
             });
             
+            // Add event listeners to favorite buttons
             document.querySelectorAll('.favorite-btn').forEach(btn => {
                 btn.addEventListener('click', function() {
                     if (!currentUser) {
