@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Website with Login Popup</title>
+  <style>
+    /* Reset and base styles */
+    * {
+      padding: 0;
+      margin: 0;
+      box-sizing: border-box;
+      font-family: "Poppins", sans-serif;
+    }
+    
+    body {
+      background-color: #f5f5f5;
+      color: #333;
+      font-family: 'Poppins', sans-serif;
+      line-height: 1.6;
+    }
+
+    /* Header styles */
+    header {
+      background-color: #fff;
+      color: #333;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 2rem;
+    }
+
+    nav a {
+      color: #333;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .login-button {
+      background-color: #f84c6c;
+      color: white;
+      border: none;
+      padding: 0.5rem 1.5rem;
+      border-radius: 25px;
+      cursor: pointer;
+      font-weight: 500;
+      transition: all 0.3s ease;
+    }
+
+    .login-button:hover {
+      background-color: #e0365a;
+    }
+
+    /* Main content */
+    main {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+
+    h1 {
+      margin-bottom: 1rem;
+    }
+
+    /* Modal overlay styles */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+
+    .modal-overlay.active {
+      display: flex;
+    }
+
+    /* Login container styles */
+    .login-container {
+      display: flex;
+      width: 800px;
+      height: 500px;
+      background-color: #fff;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      animation: fadeIn 0.3s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    /* Left panel (login form) */
+    .login-panel {
+      flex: 1;
+      padding: 40px;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    /* Right panel (welcome message) */
+    .welcome-panel {
+      flex: 1;
+      background-color: #f84c6c;
+      color: white;
+      padding: 40px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+    
+    .welcome-panel h2 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+    }
+    
+    .welcome-panel p {
+      margin-bottom: 30px;
+      font-size: 1rem;
+    }
+    
+    .signup-btn {
+      background-color: transparent;
+      color: white;
+      border: 2px solid white;
+      padding: 10px 30px;
+      border-radius: 25px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .signup-btn:hover {
+      background-color: rgba(255, 255, 255, 0.2);
+    }
+    
+    /* Login form styles */
+    .login-panel h1 {
+      font-size: 1.8rem;
+      margin-bottom: 30px;
+      color: #333;
+    }
+    
+    .social-login {
+      display: flex;
+      gap: 15px;
+      margin-bottom: 25px;
+    }
+    
+    .social-btn {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border: 1px solid #ddd;
+      background-color: white;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .social-btn:hover {
+      background-color: #f5f5f5;
+    }
+    
+    .divider {
+      display: flex;
+      align-items: center;
+      margin: 20px 0;
+      color: #999;
+      font-size: 0.9rem;
+    }
+    
+    .divider::before,
+    .divider::after {
+      content: "";
+      flex: 1;
+      height: 1px;
+      background-color: #ddd;
+    }
+    
+    .divider::before {
+      margin-right: 10px;
+    }
+    
+    .divider::after {
+      margin-left: 10px;
+    }
+    
+    .form-group {
+      margin-bottom: 20px;
+    }
+    
+    .form-control {
+      width: 100%;
+      padding: 15px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      background-color: #f8f8f8;
+      font-size: 1rem;
+    }
+    
+    .forgot-password {
+      text-align: right;
+      margin: 10px 0 25px;
+    }
+    
+    .forgot-password a {
+      color: #777;
+      text-decoration: none;
+      font-size: 0.9rem;
+    }
+    
+    .forgot-password a:hover {
+      color: #f84c6c;
+    }
+    
+    .signin-btn {
+      width: 100%;
+      padding: 15px;
+      background-color: #f84c6c;
+      color: white;
+      border: none;
+      border-radius: 25px;
+      font-size: 1rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .signin-btn:hover {
+      background-color: #e0365a;
+    }
+    
+    .close-button {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      color: #999;
+      cursor: pointer;
+      z-index: 10;
+    }
+    
+    .close-button:hover {
+      color: #333;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .login-container {
+        flex-direction: column;
+        width: 90%;
+        height: auto;
+      }
+      
+      .welcome-panel {
+        padding: 30px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Website Header -->
+  <header>
+    <div class="logo">Your Website</div>
+    <nav>
+      <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Services</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </nav>
+    <button class="login-button" id="open-login">Sign in</button>
+  </header>
+
+  <!-- Main Content -->
+  <main>
+    <h1>Welcome to Your Website</h1>
+    <p>This is the main content of your website. Click the login button in the header to see the popup login form.</p>
+  </main>
+
+  <!-- Modal Overlay for Login Popup -->
+  <div class="modal-overlay" id="login-modal">
+    <!-- Login container with split panels -->
+    <div class="login-container">
+      <!-- Close button -->
+      <button type="button" class="close-button" id="close-login">&times;</button>
+      
+      <!-- Left panel: Login form -->
+      <div class="login-panel">
+        <h1>Sign in</h1>
+        
+        <!-- Social login options -->
+        <div class="social-login">
+          <button class="social-btn">f</button>
+          <button class="social-btn">G+</button>
+          <button class="social-btn">in</button>
+        </div>
+        
+        <!-- Divider -->
+        <div class="divider">or use your account</div>
+        
+        <!-- Login form -->
+        <form id="login-form">
+          <div class="form-group">
+            <input type="email" class="form-control" placeholder="Email" required>
+          </div>
+          
+          <div class="form-group">
+            <input type="password" class="form-control" placeholder="Password" required>
+          </div>
+          
+          <div class="forgot-password">
+            <a href="#">Forgot your password?</a>
+          </div>
+          
+          <button type="submit" class="signin-btn">SIGN IN</button>
+        </form>
+      </div>
+      
+      <!-- Right panel: Welcome message -->
+      <div class="welcome-panel">
+        <h2>Hello, Friend!</h2>
+        <p>Enter your personal details and start journey with us</p>
+        <button class="signup-btn">SIGN UP</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Get DOM elements
+    const openLoginBtn = document.getElementById('open-login');
+    const closeLoginBtn = document.getElementById('close-login');
+    const loginModal = document.getElementById('login-modal');
+    const loginForm = document.getElementById('login-form');
+
+    // Function to open login modal
+    function openLoginModal() {
+      loginModal.classList.add('active');
+    }
+
+    // Function to close login modal
+    function closeLoginModal() {
+      loginModal.classList.remove('active');
+    }
+
+    // Event listeners
+    openLoginBtn.addEventListener('click', openLoginModal);
+    closeLoginBtn.addEventListener('click', closeLoginModal);
+
+    // Close modal when clicking outside the container
+    loginModal.addEventListener('click', function(event) {
+      if (event.target === loginModal) {
+        closeLoginModal();
+      }
+    });
+
+    // Prevent form submission (for demo purposes)
+    loginForm.addEventListener('submit', function(event) {
+      event.preventDefault();
+      // Here you would normally handle login authentication
+      alert('Login functionality would be implemented here');
+      closeLoginModal();
+    });
+
+    // Close modal with Escape key
+    document.addEventListener('keydown', function(event) {
+      if (event.key === 'Escape' && loginModal.classList.contains('active')) {
+        closeLoginModal();
+      }
+    });
+  </script>
+</body>
+</html>

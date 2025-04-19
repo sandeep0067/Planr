@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planar Movies</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #6c5ce7;
+            --primary-light: #a29bfe;
+            --dark: #2d3436;
+            --light: #f5f6fa;
+            --accent: #fd79a8;
+        }
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+        }
+        header {
+            background: linear-gradient(to right, var(--dark), var(--primary));
+            color: white;
+            padding: 2rem 1rem;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(to right, var(--accent), var(--primary-light));
+        }
+        h1 {
+            margin: 0;
+            font-size: 2.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        .search-box {
+            margin: 2rem auto;
+            width: 80%;
+            max-width: 600px;
+            position: relative;
+        }
+        #searchInput {
+            width: 100%;
+            padding: 15px 20px;
+            border-radius: 50px;
+            border: none;
+            font-size: 1.1rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+        }
+        #searchInput:focus {
+            outline: none;
+            box-shadow: 0 5px 20px rgba(108, 92, 231, 0.3);
+            transform: scale(1.02);
+        }
+        .search-box i {
+            position: absolute;
+            right: 20px;
+            top: 15px;
+            color: var(--primary);
+            font-size: 1.2rem;
+        }
+        .movies-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+            padding: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        .movie-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        .movie-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+        }
+        .movie-poster {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        .movie-card:hover .movie-poster {
+            transform: scale(1.05);
+        }
+        .movie-info {
+            padding: 1.5rem;
+            position: relative;
+        }
+        .movie-title {
+            font-weight: 700;
+            margin: 0.5rem 0;
+            font-size: 1.2rem;
+            color: var(--dark);
+        }
+        .movie-year {
+            color: #636e72;
+            font-size: 0.9rem;
+        }
+        .movie-rating {
+            position: absolute;
+            top: -20px;
+            right: 20px;
+            background: var(--primary);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        .favorite-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 50px;
+            cursor: pointer;
+            margin-top: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s;
+            font-weight: 600;
+        }
+        .favorite-btn:hover {
+            background: var(--accent);
+            transform: scale(1.05);
+        }
+        .favorite-btn i {
+            font-size: 1.1rem;
+        }
+        .empty-state {
+            text-align: center;
+            grid-column: 1 / -1;
+            padding: 4rem;
+            color: #636e72;
+        }
+        .empty-state i {
+            font-size: 5rem;
+            color: #dfe6e9;
+            margin-bottom: 1rem;
+        }
+        @media (max-width: 768px) {
+            .movies-container {
+                grid-template-columns: 1fr;
+                padding: 1rem;
+            }
+            header {
+                padding: 1.5rem 1rem;
+            }
+            h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1><i class="fas fa-film"></i> Planar Movies</h1>
+        <div class="search-box">
+            <input type="text" id="searchInput" placeholder="Search movies...">
+            <i class="fas fa-search"></i>
+        </div>
+    </header>
+
+    <div class="movies-container" id="moviesContainer">
+        <!-- Movies will load here -->
+    </div>
+
+    <script>
+        // Enhanced movie data with ratings
+        const movies = [
+            { id: 1, title: "Inception", year: 2010, rating: 8.8, poster: "https://m.media-amazon.com/images/M/MV5BMjAxMzY3NjcxNF5BMl5BanBnXkFtZTcwNTI5OTM0Mw@@._V1_.jpg" },
+            { id: 2, title: "The Shawshank Redemption", year: 1994, rating: 9.3, poster: "https://m.media-amazon.com/images/M/MV5BNDE3ODcxYzMtY2YzZC00NmNlLWJiNDMtZDViZWM2MzIxZDY2XkEyXkFqcGdeQXVyNjAwNDUxODI@._V1_.jpg" },
+            { id: 3, title: "Pulp Fiction", year: 1994, rating: 8.9, poster: "https://m.media-amazon.com/images/M/MV5BNGNhMDIzZTUtNTBlZi00MTRlLWFjM2ItYzViMjE3YzI5MjljXkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_.jpg" },
+            { id: 4, title: "The Dark Knight", year: 2008, rating: 9.0, poster: "https://m.media-amazon.com/images/M/MV5BMTMxNTMwODM0NF5BMl5BanBnXkFtZTcwODAyMTk2Mw@@._V1_.jpg" },
+            { id: 5, title: "Fight Club", year: 1999, rating: 8.8, poster: "https://m.media-amazon.com/images/M/MV5BNDIzNDU0YzEtYzE5Ni00ZjlkLTk5ZjgtNjM3NWE4YzA3Nzk3XkEyXkFqcGdeQXVyMjUzOTY1NTc@._V1_.jpg" },
+            { id: 6, title: "Forrest Gump", year: 1994, rating: 8.8, poster: "https://m.media-amazon.com/images/M/MV5BNWIwODRlZTUtY2U3ZS00Yzg1LWJhNzYtMmZiYmEyNmU1NjMzXkEyXkFqcGdeQXVyMTQxNzMzNDI@._V1_.jpg" }
+        ];
+
+        // Load movies on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            renderMovies(movies);
+        });
+
+        // Render movies with animations
+        function renderMovies(moviesToRender) {
+            const container = document.getElementById('moviesContainer');
+            container.innerHTML = '';
+
+            if (moviesToRender.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <i class="fas fa-film"></i>
+                        <h3>No movies found</h3>
+                        <p>Try a different search term</p>
+                    </div>
+                `;
+                return;
+            }
+
+            moviesToRender.forEach(movie => {
+                const isFavorite = localStorage.getItem(`fav_${movie.id}`) === 'true';
+
+                const movieEl = document.createElement('div');
+                movieEl.className = 'movie-card';
+                movieEl.innerHTML = `
+                    <img src="${movie.poster}" alt="${movie.title}" class="movie-poster">
+                    <div class="movie-rating">${movie.rating.toFixed(1)}</div>
+                    <div class="movie-info">
+                        <div class="movie-title">${movie.title}</div>
+                        <div class="movie-year">${movie.year}</div>
+                        <button class="favorite-btn" data-id="${movie.id}">
+                            <i class="${isFavorite ? 'fas' : 'far'} fa-heart"></i>
+                            ${isFavorite ? 'Favorited' : 'Favorite'}
+                        </button>
+                    </div>
+                `;
+                container.appendChild(movieEl);
+            });
+
+            // Add hover effects to buttons
+            document.querySelectorAll('.favorite-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    this.innerHTML = `<i class="fas fa-heart"></i> Favorited`;
+                    this.style.background = 'var(--accent)';
+                    toggleFavorite(this);
+                });
+            });
+        }
+
+        // Toggle favorite with animation
+        function toggleFavorite(btn) {
+            const movieId = btn.getAttribute('data-id');
+            const isCurrentlyFavorite = localStorage.getItem(`fav_${movieId}`) === 'true';
+            localStorage.setItem(`fav_${movieId}`, !isCurrentlyFavorite);
+            
+            // Pulse animation
+            btn.style.transform = 'scale(1.1)';
+            setTimeout(() => {
+                btn.style.transform = 'scale(1)';
+            }, 300);
+        }
+
+        // Search with debounce
+        let searchTimeout;
+        document.getElementById('searchInput').addEventListener('input', (e) => {
+            clearTimeout(searchTimeout);
+            searchTimeout = setTimeout(() => {
+                const searchTerm = e.target.value.toLowerCase();
+                const filteredMovies = movies.filter(movie => 
+                    movie.title.toLowerCase().includes(searchTerm) || 
+                    movie.year.toString().includes(searchTerm)
+                );
+                renderMovies(filteredMovies);
+            }, 300);
+        });
+    </script>
+</body>
+</html>
