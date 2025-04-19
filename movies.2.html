@@ -263,22 +263,20 @@
         .movie-year {
             color: #636e72;
             font-size: 0.9rem;
+            font-weight: bold;
         }
         
         .movie-rating {
-            position: absolute;
-            top: -20px;
-            right: 20px;
-            background: var(--primary);
-            color: white;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
+            color: var(--primary);
+            font-weight: bold;
+            margin: 0.5rem 0;
             display: flex;
             align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            gap: 5px;
+        }
+        
+        .movie-rating i {
+            color: #f39c12;
         }
         
         .now-playing {
@@ -357,7 +355,7 @@
     <header>
         <div class="logo">
             <i class="fas fa-film"></i>
-            <h1>Bollywood Now Playing</h1>
+            <h1>Moviezz</h1>
         </div>
         <div id="authSection">
             <span id="userGreeting" class="user-greeting"></span>
@@ -447,124 +445,98 @@
         const movies = [
             { 
                 id: 1, 
-                title: "Adipurush", 
-                year: 2023, 
-                rating: 5.5, 
-                poster: "https://m.media-amazon.com/images/M/MV5BNDc2YTA2OTItN2M5MS00ZmY0LWJiY2ItYmMwZGNhNGY0MzVhXkEyXkFqcGdeQXVyMTUzNTgzNzM0._V1_.jpg",
-                inTheaters: true 
+                title: "Akaal", 
+                year: 2025, 
+                rating: 8.5, 
+                poster: "https://th.bing.com/th/id/OIP.DYu1tC2Eiybn3ffHpnTJqgHaJL?w=154&h=191&c=7&r=0&o=5&dpr=1.1&pid=1.7",
+                category: "Action",
+                trending: true
             },
             { 
                 id: 2, 
-                title: "Satyaprem Ki Katha", 
-                year: 2023, 
-                rating: 7.8, 
-                poster: "https://m.media-amazon.com/images/M/MV5BMTU5YzBjZDktYjVjYi00ZDA4LWFhOTQtN2RiYjVjZTA0YzVlXkEyXkFqcGdeQXVyMTUzNTgzNzM0._V1_.jpg",
-                inTheaters: true 
+                title: "Chhaava", 
+                year: 2025, 
+                rating: 10, 
+                poster: "https://th.bing.com/th/id/OIP.qrMAq5b-z643Gk5KBpJ3ZAHaJP?w=160&h=200&c=7&r=0&o=5&dpr=1.1&pid=1.7",
+                category: "Drama",
+                trending: true
             },
             { 
                 id: 3, 
-                title: "Zara Hatke Zara Bachke", 
-                year: 2023, 
-                rating: 7.2, 
-                poster: "https://m.media-amazon.com/images/M/MV5BNGRlM2FkY2QtYmNjZi00MTM3LWI1ZTUtOTM4MTJhY2U0M2FmXkEyXkFqcGdeQXVyMTUzNTgzNzM0._V1_.jpg",
-                inTheaters: true 
+                title: "Jaat", 
+                year: 2025, 
+                rating: 7.8, 
+                poster: "https://th.bing.com/th/id/OIP.0xeSbwlkgYICEP7Ct2FMrwAAAA?w=204&h=165&c=7&r=0&o=5&dpr=1.1&pid=1.7",
+                category: "Action",
+                trending: true
             },
             { 
                 id: 4, 
-                title: "The Kerala Story", 
-                year: 2023, 
-                rating: 6.5, 
-                poster: "https://m.media-amazon.com/images/M/MV5BOTUwMDA3MTYtZTIyZi00NjAyLTliZGQtOGQxYjY2Y2JkODQ3XkEyXkFqcGdeQXVyMTUzNTgzNzM0._V1_.jpg",
-                inTheaters: true 
+                title: "The Diplomat", 
+                year: 2025, 
+                rating: 7.9, 
+                poster: "https://th.bing.com/th/id/OIP.RJCVBZIkZDDGNxk2h9zZmQHaJQ?w=141&h=180&c=7&r=0&o=5&dpr=1.1&pid=1.7",
+                category: "Thriller",
+                trending: true
             },
+            
+            // New Releases
             { 
                 id: 5, 
-                title: "IB71", 
-                year: 2023, 
-                rating: 7.1, 
-                poster: "https://m.media-amazon.com/images/M/MV5BNjU1YzY0ZjktYzQ1Yi00ZTViLThkY2QtM2U4YjA3YzY2YzVlXkEyXkFqcGdeQXVyMTUzNTgzNzM0._V1_.jpg",
-                inTheaters: true 
+                title: "Deva", 
+                year: 2025, 
+                rating: 8.3, 
+                poster: "https://th.bing.com/th/id/OIP.3yrKyHjOaqn5WnNyE7bVOQHaEK?w=298&h=180&c=7&r=0&o=5&dpr=1.1&pid=1.7",
+                category: "Action",
+                newRelease: true
             },
             { 
                 id: 6, 
-                title: "Mumbai Saga", 
-                year: 2023, 
-                rating: 6.0, 
-                poster: "https://m.media-amazon.com/images/M/MV5BZjY5YzE3YjYtYzQwYi00YzQwLWIyYzQtYzQwYzQwYzQwYzQwXkEyXkFqcGdeQXVyMTUzNTgzNzM0._V1_.jpg",
-                inTheaters: true 
+                title: "Azaad", 
+                year: 2025, 
+                rating: 8.0, 
+                poster: "https://th.bing.com/th/id/OIP.DyPCHC0GElG8vQho1KjUnwAAAA?w=117&h=180&c=7&r=0&o=5&dpr=1.1&pid=1.7",
+                category: "Drama",
+                newRelease: true
             },
             { 
                 id: 7, 
-                title: "Bawaal", 
-                year: 2023, 
+                title: "Game Changer", 
+                year: 2025, 
                 rating: 7.5, 
-                poster: "https://m.media-amazon.com/images/M/MV5BZjY5YzE3YjYtYzQwYi00YzQwLWIyYzQtYzQwYzQwYzQwYzQwXkEyXkFqcGdeQXVyMTUzNTgzNzM0._V1_.jpg",
-                inTheaters: true 
+                poster: "https://th.bing.com/th/id/OIP.upYBc5-oQdh-s1k8Vzec1wHaEK?w=333&h=187&c=7&r=0&o=5&dpr=1.1&pid=1.7",
+                category: "Action",
+                newRelease: true
             },
             { 
                 id: 8, 
-                title: "Ghoomer", 
-                year: 2023, 
-                rating: 7.8, 
-                poster: "https://m.media-amazon.com/images/M/MV5BZjY5YzE3YjYtYzQwYi00YzQwLWIyYzQtYzQwYzQwYzQwYzQwXkEyXkFqcGdeQXVyMTUzNTgzNzM0._V1_.jpg",
-                inTheaters: true 
+                title: "Be Happy", 
+                year: 2025, 
+                rating: 7.2, 
+                poster: "https://th.bing.com/th/id/OIP.2jAnW00x3noW_0KSqyGpPAHaFj?w=195&h=146&c=7&r=0&o=5&dpr=1.1&pid=1.7",
+                category: "Comedy",
+                newRelease: true
             },
+            
+            // Popular Movies
             { 
                 id: 9, 
-                title: "Tiku Weds Sheru", 
-                year: 2023, 
-                rating: 6.2, 
-                poster: "https://m.media-amazon.com/images/M/MV5BZjY5YzE3YjYtYzQwYi00YzQwLWIyYzQtYzQwYzQwYzQwYzQwXkEyXkFqcGdeQXVyMTUzNTgzNzM0._V1_.jpg",
-                inTheaters: true 
+                title: "Kesari Chapter 2", 
+                year: 2025, 
+                rating: 8.5, 
+                poster: "https://th.bing.com/th/id/OIP.H3QSHDe8hF7d2X7p2j-lHgHaD4?w=344&h=180&c=7&r=0&o=5&dpr=1.1&pid=1.7",
+                category: "Action",
+                popular: true
             },
             { 
                 id: 10, 
-                title: "Bloody Daddy", 
-                year: 2023, 
-                rating: 6.8, 
-                poster: "https://m.media-amazon.com/images/M/MV5BZjY5YzE3YjYtYzQwYi00YzQwLWIyYzQtYzQwYzQwYzQwYzQwXkEyXkFqcGdeQXVyMTUzNTgzNzM0._V1_.jpg",
-                inTheaters: true 
-            },
-            { 
-                id: 11, 
-                title: "Mrs. Chatterjee vs Norway", 
-                year: 2023, 
-                rating: 7.9, 
-                poster: "https://m.media-amazon.com/images/M/MV5BZjY5YzE3YjYtYzQwYi00YzQwLWIyYzQtYzQwYzQwYzQwYzQwXkEyXkFqcGdeQXVyMTUzNTgzNzM0._V1_.jpg",
-                inTheaters: true 
-            },
-            { 
-                id: 12, 
-                title: "Selfiee", 
-                year: 2023, 
-                rating: 5.1, 
-                poster: "https://m.media-amazon.com/images/M/MV5BZjY5YzE3YjYtYzQwYi00YzQwLWIyYzQtYzQwYzQwYzQwYzQwXkEyXkFqcGdeQXVyMTUzNTgzNzM0._V1_.jpg",
-                inTheaters: true 
-            },
-            { 
-                id: 13, 
-                title: "Shehzada", 
-                year: 2023, 
-                rating: 6.3, 
-                poster: "https://m.media-amazon.com/images/M/MV5BZjY5YzE3YjYtYzQwYi00YzQwLWIyYzQtYzQwYzQwYzQwYzQwXkEyXkFqcGdeQXVyMTUzNTgzNzM0._V1_.jpg",
-                inTheaters: true 
-            },
-            { 
-                id: 14, 
-                title: "Bholaa", 
-                year: 2023, 
+                title: "Sikandar", 
+                year: 2025, 
                 rating: 6.5, 
-                poster: "https://m.media-amazon.com/images/M/MV5BZjY5YzE3YjYtYzQwYi00YzQwLWIyYzQtYzQwYzQwYzQwYzQwXkEyXkFqcGdeQXVyMTUzNTgzNzM0._V1_.jpg",
-                inTheaters: true 
+                poster: "https://th.bing.com/th/id/OIP.cpHfv7ACUJZK_JRY-IyN0AHaEK?w=307&h=180&c=7&r=0&o=5&dpr=1.1&pid=1.7",
+                category: "Action",
+                popular: true
             },
-            { 
-                id: 15, 
-                title: "Tu Jhoothi Main Makkaar", 
-                year: 2023, 
-                rating: 7.2, 
-                poster: "https://m.media-amazon.com/images/M/MV5BZjY5YzE3YjYtYzQwYi00YzQwLWIyYzQtYzQwYzQwYzQwYzQwXkEyXkFqcGdeQXVyMTUzNTgzNzM0._V1_.jpg",
-                inTheaters: true 
-            }
         ];
 
         // Initialize UI based on login state
@@ -682,12 +654,17 @@
                 const movieEl = document.createElement('div');
                 movieEl.className = 'movie-card';
                 movieEl.innerHTML = `
-                    
                     <img src="${movie.poster}" alt="${movie.title}" class="movie-poster">
-                    <div class="movie-rating">${movie.rating.toFixed(1)}</div>
                     <div class="movie-info">
                         <div class="movie-title">${movie.title}</div>
-                        <div class="movie-year">${movie.year}</div>
+                        <div class="movie-year"><b>Released:</b> ${movie.year}</div>
+                        ${movie.rating > 0 ? 
+                            `<div class="movie-rating">
+                                <i class="fas fa-star"></i>
+                                ${movie.rating.toFixed(1)}/10
+                            </div>` : 
+                            '<div class="movie-rating">Rating: Not available</div>'
+                        }
                         <button class="favorite-btn" data-id="${movie.id}">
                             <i class="${isFavorite ? 'fas' : 'far'} fa-heart"></i>
                             ${isFavorite ? 'Favorited' : 'Favorite'}
