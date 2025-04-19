@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>THE LAUNCH - Where Entertainment Happens</title>
+  <style>
+    /* Base Styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+    }
+    
+    body {
+      background-color: #000;
+      color: #fff;
+      line-height: 1.6;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    
+    /* Header Styles */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 40px;
+      position: relative;
+      z-index: 100;
+    }
+    
+    .nav-links {
+      display: flex;
+      gap: 30px;
+    }
+    
+    .nav-links a {
+      color: #fff;
+      text-decoration: none;
+      text-transform: uppercase;
+      font-size: 14px;
+      letter-spacing: 1px;
+    }
+    
+    .logo {
+      text-align: center;
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      top: 20px;
+    }
+    
+    .logo img {
+      height: 60px;
+    }
+    
+    .logo-text {
+      color: #ff9980;
+      font-size: 34px;
+      font-weight: bold;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+    }
+    
+    .tagline {
+      color: #fff;
+      font-size: 12px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+    }
+    
+    .address {
+      font-size: 14px;
+      text-align: right;
+    }
+    
+    /* Hero Slideshow */
+    .slideshow-container {
+      position: relative;
+      height: 80vh;
+      overflow: hidden;
+    }
+    
+    .slide {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-size: cover;
+      background-position: center;
+      opacity: 0;
+      transition: opacity 1s ease-in-out;
+      display: flex;
+      align-items: center;
+      padding: 0 80px;
+    }
+    
+    .slide.active {
+      opacity: 1;
+    }
+    
+    .slide-content {
+      max-width: 550px;
+    }
+    
+    .slide-title {
+      font-size: 80px;
+      line-height: 0.9;
+      text-transform: uppercase;
+      font-weight: 900;
+      color: #ff9980;
+      margin-bottom: 20px;
+    }
+    
+    .event-details {
+      background-color: #ff9980;
+      padding: 30px;
+      max-width: 300px;
+      margin-left: auto;
+    }
+    
+    .event-date {
+      background-color: #000;
+      color: #fff;
+      padding: 8px 16px;
+      display: inline-block;
+      margin-bottom: 10px;
+      font-weight: bold;
+    }
+    
+    .event-time {
+      background-color: #000;
+      color: #fff;
+      padding: 8px 16px;
+      display: inline-block;
+      margin-bottom: 20px;
+      font-weight: bold;
+    }
+    
+    .ticket-button {
+      display: inline-flex;
+      align-items: center;
+      background-color: transparent;
+      border: 2px solid #000;
+      color: #000;
+      padding: 10px 16px;
+      text-decoration: none;
+      font-weight: bold;
+      text-transform: uppercase;
+      transition: all 0.3s ease;
+    }
+    
+    .ticket-button:hover {
+      background-color: #000;
+      color: #ff9980;
+    }
+    
+    .arrow-icon {
+      margin-right: 10px;
+    }
+    
+    /* Slideshow Navigation */
+    .slideshow-nav {
+      position: absolute;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 10px;
+      z-index: 20;
+    }
+    
+    .slide-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background-color: rgba(255, 255, 255, 0.5);
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    
+    .slide-dot.active {
+      background-color: #fff;
+    }
+    
+    /* Upcoming Section */
+    .upcoming-section {
+      padding: 80px 0;
+      text-align: center;
+    }
+    
+    .section-title {
+      display: inline-block;
+      background-color: #fff;
+      color: #000;
+      padding: 10px 20px;
+      font-size: 24px;
+      text-transform: uppercase;
+      font-weight: bold;
+      margin-bottom: 40px;
+      position: relative;
+    }
+    
+    .section-title::after {
+      content: '';
+      position: absolute;
+      right: -30px;
+      top: 0;
+      width: 30px;
+      height: 100%;
+      background-color: #ff9980;
+    }
+    
+    .events-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 30px;
+      margin-top: 50px;
+    }
+    
+    .event-card {
+      background-color: #111;
+      overflow: hidden;
+      position: relative;
+    }
+    
+    .event-card-image {
+      height: 250px;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .event-card-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+    
+    .event-card:hover .event-card-image img {
+      transform: scale(1.1);
+    }
+    
+    .event-card-content {
+      padding: 20px;
+      text-align: left;
+    }
+    
+    .event-card-title {
+      font-size: 22px;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+    
+    .event-card-info {
+      display: flex;
+      justify-content: space-between;
+      color: #ff9980;
+      margin-bottom: 20px;
+    }
+    
+    /* Social Links */
+    .social-links {
+      position: fixed;
+      left: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      z-index: 100;
+    }
+    
+    .social-links a {
+      color: #fff;
+      font-size: 18px;
+      transition: color 0.3s ease;
+    }
+    
+    .social-links a:hover {
+      color: #ff9980;
+    }
+    
+    /* Footer */
+    footer {
+      padding: 40px 0;
+      text-align: center;
+      border-top: 1px solid #333;
+    }
+    
+    /* Chat Button */
+    .chat-button {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      width: 50px;
+      height: 50px;
+      background-color: #ff9980;
+      color: #000;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 24px;
+      cursor: pointer;
+      z-index: 100;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav class="nav-links">
+      <a href="#">Home</a>
+      <a href="#">Shows</a>
+      <a href="#">Venue</a>
+      <a href="#">Contact</a>
+    </nav>
+    
+    <div class="logo">
+      <div class="logo-text">THE LAUNCH</div>
+      <div class="tagline">Where Entertainment Happens</div>
+    </div>
+    
+    <div class="address">
+      500 Terry Francois St, San Francisco, CA 94158
+    </div>
+  </header>
+  
+  <div class="slideshow-container">
+    <!-- Slide 1: Concert -->
+    <div class="slide active" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('concert.jpg')">
+      <div class="slide-content">
+        <h2 class="slide-title">Alt-Rock<br>Revolution.</h2>
+      </div>
+      <div class="event-details">
+        <div class="event-date">SATURDAY APR. 25</div>
+        <div class="event-time">8:00PM</div>
+        <a href="#" class="ticket-button">
+          <span class="arrow-icon">→</span>
+          Get Tickets
+        </a>
+      </div>
+    </div>
+    
+    <!-- Slide 2: Standup -->
+    <div class="slide" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('xl_oppenheimer-movie-poster_01185382.jpeg')">
+      <div class="slide-content">
+        <h2 class="slide-title">Comedy<br>Night.</h2>
+      </div>
+      <div class="event-details">
+        <div class="event-date">FRIDAY MAY. 2</div>
+        <div class="event-time">9:00PM</div>
+        <a href="#" class="ticket-button">
+          <span class="arrow-icon">→</span>
+          Get Tickets
+        </a>
+      </div>
+    </div>
+    
+    <!-- Slide 3: Movies -->
+    <div class="slide" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('/api/placeholder/1200/800')">
+      <div class="slide-content">
+        <h2 class="slide-title">Film<br>Festival.</h2>
+      </div>
+      <div class="event-details">
+        <div class="event-date">MAY 15-20</div>
+        <div class="event-time">Various Times</div>
+        <a href="#" class="ticket-button">
+          <span class="arrow-icon">→</span>
+          Get Tickets
+        </a>
+      </div>
+    </div>
+    
+    <div class="slideshow-nav">
+      <div class="slide-dot active" onclick="currentSlide(0)"></div>
+      <div class="slide-dot" onclick="currentSlide(1)"></div>
+      <div class="slide-dot" onclick="currentSlide(2)"></div>
+    </div>
+  </div>
+  
+  <div class="upcoming-section">
+    <div class="container">
+      <h2 class="section-title">Upcoming Shows</h2>
+      
+      <div class="events-grid">
+        <!-- Concert Events -->
+        <div class="event-card">
+          <div class="event-card-image">
+            <img src="/api/placeholder/400/250" alt="Concert Event">
+          </div>
+          <div class="event-card-content">
+            <h3 class="event-card-title">The Velvet Sound</h3>
+            <div class="event-card-info">
+              <span>May 10, 2025</span>
+              <span>$35</span>
+            </div>
+            <a href="#" class="ticket-button">
+              <span class="arrow-icon">→</span>
+              Get Tickets
+            </a>
+          </div>
+        </div>
+        
+        <!-- Standup Event -->
+        <div class="event-card">
+          <div class="event-card-image">
+            <img src="/api/placeholder/400/250" alt="Comedy Event">
+          </div>
+          <div class="event-card-content">
+            <h3 class="event-card-title">Late Night Laughs</h3>
+            <div class="event-card-info">
+              <span>May 18, 2025</span>
+              <span>$25</span>
+            </div>
+            <a href="#" class="ticket-button">
+              <span class="arrow-icon">→</span>
+              Get Tickets
+            </a>
+          </div>
+        </div>
+        
+        <!-- Movie Event -->
+        <div class="event-card">
+          <div class="event-card-image">
+            <img src="/api/placeholder/400/250" alt="Movie Event">
+          </div>
+          <div class="event-card-content">
+            <h3 class="event-card-title">Indie Film Premiere</h3>
+            <div class="event-card-info">
+              <span>May 22, 2025</span>
+              <span>$15</span>
+            </div>
+            <a href="#" class="ticket-button">
+              <span class="arrow-icon">→</span>
+              Get Tickets
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="social-links">
+    <a href="#">f</a>
+    <a href="#">t</a>
+    <a href="#">ig</a>
+    <a href="#">yt</a>
+  </div>
+  
+  <div class="chat-button">?</div>
+  
+  <footer>
+    <div class="container">
+      <p>&copy; 2025 THE LAUNCH. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    // Slideshow functionality
+    let slideIndex = 0;
+    const slides = document.querySelectorAll('.slide');
+    const dots = document.querySelectorAll('.slide-dot');
+    let slideTimer;
+    
+    function showSlides() {
+      // Hide all slides
+      slides.forEach(slide => {
+        slide.classList.remove('active');
+      });
+      
+      // Remove active state from all dots
+      dots.forEach(dot => {
+        dot.classList.remove('active');
+      });
+      
+      // Increment slideIndex and reset if needed
+      slideIndex++;
+      if (slideIndex >= slides.length) {
+        slideIndex = 0;
+      }
+      
+      // Show current slide and dot
+      slides[slideIndex].classList.add('active');
+      dots[slideIndex].classList.add('active');
+      
+      // Set timer for next slide
+      slideTimer = setTimeout(showSlides, 5000); // Change slide every 5 seconds
+    }
+    
+    function currentSlide(n) {
+      // Clear the timer
+      clearTimeout(slideTimer);
+      
+      // Hide all slides
+      slides.forEach(slide => {
+        slide.classList.remove('active');
+      });
+      
+      // Remove active state from all dots
+      dots.forEach(dot => {
+        dot.classList.remove('active');
+      });
+      
+      // Set slideIndex to the clicked dot index
+      slideIndex = n;
+      
+      // Show current slide and dot
+      slides[slideIndex].classList.add('active');
+      dots[slideIndex].classList.add('active');
+      
+      // Restart timer
+      slideTimer = setTimeout(showSlides, 5000);
+    }
+    
+    // Start slideshow
+    slideTimer = setTimeout(showSlides, 5000);
+  </script>
+</body>
+</html>
