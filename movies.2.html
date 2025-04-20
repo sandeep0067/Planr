@@ -13,6 +13,7 @@
             --light: #f5f6fa;
             --accent: #fd79a8;
             --success: #00b894;
+            --sidebar-width: 280px;
         }
         
         * {
@@ -27,6 +28,8 @@
             margin: 0;
             padding: 0;
             min-height: 100vh;
+            display: flex;
+            flex-direction: column;
         }
         
         /* Header Styles */
@@ -97,6 +100,94 @@
             color: white;
             margin-right: 10px;
             font-weight: 600;
+        }
+        
+        /* Main Content Layout */
+        .main-container {
+            display: flex;
+            flex: 1;
+        }
+        
+        /* Sidebar Styles */
+        .sidebar {
+            width: var(--sidebar-width);
+            background: white;
+            padding: 1.5rem;
+            box-shadow: 4px 0 10px rgba(0,0,0,0.05);
+            transition: all 0.3s;
+            overflow-y: auto;
+            height: calc(100vh - 60px);
+            position: sticky;
+            top: 60px;
+        }
+        
+        .sidebar-section {
+            margin-bottom: 2rem;
+        }
+        
+        .sidebar-title {
+            font-size: 1.1rem;
+            color: var(--dark);
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--primary-light);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .sidebar-title i {
+            color: var(--primary);
+        }
+        
+        .filter-option {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.8rem;
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 6px;
+            transition: all 0.2s;
+        }
+        
+        .filter-option:hover {
+            background: var(--primary-light);
+            color: white;
+        }
+        
+        .filter-option input {
+            margin-right: 10px;
+            cursor: pointer;
+        }
+        
+        .filter-option.active {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .theater-item {
+            padding: 0.8rem;
+            margin-bottom: 0.8rem;
+            border-radius: 8px;
+            background: #f8f9fa;
+            border-left: 3px solid var(--primary);
+        }
+        
+        .theater-name {
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+            color: var(--dark);
+        }
+        
+        .theater-location {
+            font-size: 0.85rem;
+            color: #636e72;
+        }
+        
+        /* Content Area Styles */
+        .content-area {
+            flex: 1;
+            padding: 1rem;
         }
         
         /* Modal Styles */
@@ -364,6 +455,49 @@
             font-size: 1.1rem;
         }
         
+        /* Toggle Sidebar Button */
+        .sidebar-toggle {
+            display: none;
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background: var(--primary);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            cursor: pointer;
+            z-index: 100;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+        
+        @media (max-width: 1024px) {
+            .sidebar {
+                position: fixed;
+                left: -100%;
+                top: 60px;
+                height: calc(100vh - 60px);
+                z-index: 99;
+                background: white;
+            }
+            
+            .sidebar.active {
+                left: 0;
+            }
+            
+            .sidebar-toggle {
+                display: flex;
+            }
+            
+            .content-area {
+                margin-left: 0;
+            }
+        }
+        
         @media (max-width: 768px) {
             header {
                 flex-direction: column;
@@ -409,13 +543,90 @@
         </div>
     </header>
 
-    <div class="search-box">
-        <input type="text" id="searchInput" placeholder="Search Bollywood movies...">
-        <i class="fas fa-search"></i>
+    <div class="main-container">
+        <!-- Sidebar -->
+        <div class="sidebar" id="sidebar">
+            <div class="sidebar-section">
+                <h3 class="sidebar-title"><i class="fas fa-filter"></i> Filters</h3>
+                <div class="filter-option">
+                    <input type="checkbox" id="filterTrending" checked>
+                    <label for="filterTrending">Trending Now</label>
+                </div>
+                <div class="filter-option">
+                    <input type="checkbox" id="filterNew" checked>
+                    <label for="filterNew">New Releases</label>
+                </div>
+                <div class="filter-option">
+                    <input type="checkbox" id="filterPopular" checked>
+                    <label for="filterPopular">Popular</label>
+                </div>
+            </div>
+            
+            <div class="sidebar-section">
+                <h3 class="sidebar-title"><i class="fas fa-language"></i> Languages</h3>
+                <div class="filter-option">
+                    <input type="checkbox" id="langHindi" checked>
+                    <label for="langHindi">Hindi</label>
+                </div>
+                <div class="filter-option">
+                    <input type="checkbox" id="langEnglish" checked>
+                    <label for="langEnglish">English</label>
+                </div>
+                <div class="filter-option">
+                    <input type="checkbox" id="langPunjabi" checked>
+                    <label for="langPunjabi">Punjabi</label>
+                </div>
+                <div class="filter-option">
+                    <input type="checkbox" id="langTamil" checked>
+                    <label for="langTamil">Tamil</label>
+                </div>
+                <div class="filter-option">
+                    <input type="checkbox" id="langTelugu" checked>
+                    <label for="langTelugu">Telugu</label>
+                </div>
+            </div>
+            
+            <div class="sidebar-section">
+                <h3 class="sidebar-title"><i class="fas fa-map-marker-alt"></i> Theaters Nearby</h3>
+                <div class="theater-item">
+                    <div class="theater-name">PVR Cinemas</div>
+                    <div class="theater-location">Phoenix Marketcity, Mumbai</div>
+                </div>
+                <div class="theater-item">
+                    <div class="theater-name">INOX Megaplex</div>
+                    <div class="theater-location">Inorbit Mall, Malad</div>
+                </div>
+                <div class="theater-item">
+                    <div class="theater-name">Cinepolis</div>
+                    <div class="theater-location">Viviana Mall, Thane</div>
+                </div>
+                <div class="theater-item">
+                    <div class="theater-name">Carnival Cinemas</div>
+                    <div class="theater-location">R City Mall, Ghatkopar</div>
+                </div>
+                <div class="theater-item">
+                    <div class="theater-name">MovieTime Cinemas</div>
+                    <div class="theater-location">Crossroads Mall, Andheri</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content Area -->
+        <div class="content-area">
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="Search Bollywood movies...">
+                <i class="fas fa-search"></i>
+            </div>
+
+            <div class="movies-container" id="moviesContainer">
+                <!-- Movies will load here -->
+            </div>
+        </div>
     </div>
 
-    <div class="movies-container" id="moviesContainer">
-        <!-- Movies will load here -->
+    <!-- Sidebar Toggle Button (Mobile) -->
+    <div class="sidebar-toggle" id="sidebarToggle">
+        <i class="fas fa-bars"></i>
     </div>
 
     <!-- Login Modal -->
@@ -471,6 +682,18 @@
                 <input type="hidden" id="bookingMovieId">
                 
                 <div class="form-group">
+                    <label for="bookingTheater">Theater</label>
+                    <select id="bookingTheater" required>
+                        <option value="">Select a theater</option>
+                        <option value="PVR Cinemas, Phoenix Marketcity">PVR Cinemas - Phoenix Marketcity, Mumbai</option>
+                        <option value="INOX Megaplex, Inorbit Mall">INOX Megaplex - Inorbit Mall, Malad</option>
+                        <option value="Cinepolis, Viviana Mall">Cinepolis - Viviana Mall, Thane</option>
+                        <option value="Carnival Cinemas, R City Mall">Carnival Cinemas - R City Mall, Ghatkopar</option>
+                        <option value="MovieTime Cinemas, Crossroads Mall">MovieTime Cinemas - Crossroads Mall, Andheri</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
                     <label for="bookingDate">Date</label>
                     <input type="date" id="bookingDate" required>
                 </div>
@@ -511,6 +734,7 @@
                 <div class="booking-summary">
                     <h3>Order Summary</h3>
                     <p id="summaryMovie">Movie: </p>
+                    <p id="summaryTheater">Theater: </p>
                     <p id="summaryDateTime">Date & Time: </p>
                     <p id="summarySeats">Seats: </p>
                     <p id="summaryType">Ticket Type: </p>
@@ -546,6 +770,8 @@
         const signupBtn = document.getElementById('signupBtn');
         const logoutBtn = document.getElementById('logoutBtn');
         const userGreeting = document.getElementById('userGreeting');
+        const sidebar = document.getElementById('sidebar');
+        const sidebarToggle = document.getElementById('sidebarToggle');
         
         // Modal Elements
         const loginModal = document.getElementById('loginModal');
@@ -563,7 +789,9 @@
                 rating: 8.5, 
                 poster: "https://th.bing.com/th/id/OIP.DYu1tC2Eiybn3ffHpnTJqgHaJL?w=154&h=191&c=7&r=0&o=5&dpr=1.1&pid=1.7",
                 category: "Action",
-                trending: true
+                language: "Hindi",
+                trending: true,
+                theaters: ["PVR Cinemas, Phoenix Marketcity", "INOX Megaplex, Inorbit Mall"]
             },
             { 
                 id: 2, 
@@ -572,7 +800,9 @@
                 rating: 10, 
                 poster: "https://th.bing.com/th/id/OIP.qrMAq5b-z643Gk5KBpJ3ZAHaJP?w=160&h=200&c=7&r=0&o=5&dpr=1.1&pid=1.7",
                 category: "Drama",
-                trending: true
+                language: "Hindi",
+                trending: true,
+                theaters: ["Cinepolis, Viviana Mall", "Carnival Cinemas, R City Mall"]
             },
             { 
                 id: 3, 
@@ -581,7 +811,9 @@
                 rating: 7.8, 
                 poster: "https://th.bing.com/th/id/OIP.0xeSbwlkgYICEP7Ct2FMrwAAAA?w=204&h=165&c=7&r=0&o=5&dpr=1.1&pid=1.7",
                 category: "Action",
-                trending: true
+                language: "Punjabi",
+                trending: true,
+                theaters: ["MovieTime Cinemas, Crossroads Mall"]
             },
             { 
                 id: 4, 
@@ -590,7 +822,9 @@
                 rating: 7.9, 
                 poster: "https://th.bing.com/th/id/OIP.RJCVBZIkZDDGNxk2h9zZmQHaJQ?w=141&h=180&c=7&r=0&o=5&dpr=1.1&pid=1.7",
                 category: "Thriller",
-                trending: true
+                language: "English",
+                trending: true,
+                theaters: ["PVR Cinemas, Phoenix Marketcity", "INOX Megaplex, Inorbit Mall", "Cinepolis, Viviana Mall"]
             },
             
             // New Releases
@@ -601,7 +835,9 @@
                 rating: 8.3, 
                 poster: "https://th.bing.com/th/id/OIP.3yrKyHjOaqn5WnNyE7bVOQHaEK?w=298&h=180&c=7&r=0&o=5&dpr=1.1&pid=1.7",
                 category: "Action",
-                newRelease: true
+                language: "Hindi",
+                newRelease: true,
+                theaters: ["Carnival Cinemas, R City Mall", "MovieTime Cinemas, Crossroads Mall"]
             },
             { 
                 id: 6, 
@@ -610,7 +846,9 @@
                 rating: 8.0, 
                 poster: "https://th.bing.com/th/id/OIP.DyPCHC0GElG8vQho1KjUnwAAAA?w=117&h=180&c=7&r=0&o=5&dpr=1.1&pid=1.7",
                 category: "Drama",
-                newRelease: true
+                language: "Tamil",
+                newRelease: true,
+                theaters: ["PVR Cinemas, Phoenix Marketcity"]
             },
             { 
                 id: 7, 
@@ -619,7 +857,9 @@
                 rating: 7.5, 
                 poster: "https://th.bing.com/th/id/OIP.upYBc5-oQdh-s1k8Vzec1wHaEK?w=333&h=187&c=7&r=0&o=5&dpr=1.1&pid=1.7",
                 category: "Action",
-                newRelease: true
+                language: "Telugu",
+                newRelease: true,
+                theaters: ["INOX Megaplex, Inorbit Mall", "Cinepolis, Viviana Mall"]
             },
             { 
                 id: 8, 
@@ -628,7 +868,9 @@
                 rating: 7.2, 
                 poster: "https://th.bing.com/th/id/OIP.2jAnW00x3noW_0KSqyGpPAHaFj?w=195&h=146&c=7&r=0&o=5&dpr=1.1&pid=1.7",
                 category: "Comedy",
-                newRelease: true
+                language: "Hindi",
+                newRelease: true,
+                theaters: ["Carnival Cinemas, R City Mall", "MovieTime Cinemas, Crossroads Mall"]
             },
             
             // Popular Movies
@@ -639,7 +881,9 @@
                 rating: 8.5, 
                 poster: "https://th.bing.com/th/id/OIP.H3QSHDe8hF7d2X7p2j-lHgHaD4?w=344&h=180&c=7&r=0&o=5&dpr=1.1&pid=1.7",
                 category: "Action",
-                popular: true
+                language: "Hindi",
+                popular: true,
+                theaters: ["PVR Cinemas, Phoenix Marketcity", "INOX Megaplex, Inorbit Mall", "Cinepolis, Viviana Mall"]
             },
             { 
                 id: 10, 
@@ -648,7 +892,9 @@
                 rating: 6.5, 
                 poster: "https://th.bing.com/th/id/OIP.cpHfv7ACUJZK_JRY-IyN0AHaEK?w=307&h=180&c=7&r=0&o=5&dpr=1.1&pid=1.7",
                 category: "Action",
-                popular: true
+                language: "Hindi",
+                popular: true,
+                theaters: ["Carnival Cinemas, R City Mall", "MovieTime Cinemas, Crossroads Mall"]
             },
         ];
 
@@ -674,6 +920,11 @@
                 logoutBtn.style.display = 'none';
             }
         }
+        
+        // Toggle sidebar on mobile
+        sidebarToggle.addEventListener('click', () => {
+            sidebar.classList.toggle('active');
+        });
         
         // Modal Handling
         loginBtn.addEventListener('click', () => loginModal.style.display = 'flex');
