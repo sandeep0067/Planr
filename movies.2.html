@@ -454,6 +454,37 @@
             margin-top: 0.5rem;
             font-size: 1.1rem;
         }
+
+        /* Payment Options Styles */
+        .payment-options {
+            margin: 1rem 0;
+        }
+        
+        .payment-option {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .payment-option:hover {
+            border-color: var(--primary-light);
+        }
+        
+        .payment-option.selected {
+            border-color: var(--primary);
+            background-color: #f0f0ff;
+        }
+        
+        .payment-option i {
+            margin-right: 10px;
+            font-size: 1.2rem;
+            color: var(--primary);
+        }
         
         /* Toggle Sidebar Button */
         .sidebar-toggle {
@@ -673,7 +704,7 @@
         </div>
     </div>
 
-    <!-- Booking Modal -->
+    <!-- Booking Modal with Payment Options -->
     <div id="bookingModal" class="modal">
         <div class="modal-content">
             <span class="close-btn">&times;</span>
@@ -731,6 +762,22 @@
                     </select>
                 </div>
                 
+                <div class="form-group">
+                    <label>Payment Method</label>
+                    <div class="payment-options">
+                        <div class="payment-option selected" data-method="credit">
+                            <i class="fas fa-credit-card"></i> Credit Card
+                        </div>
+                        <div class="payment-option" data-method="paypal">
+                            <i class="fab fa-paypal"></i> PayPal
+                        </div>
+                        <div class="payment-option" data-method="upi">
+                            <i class="fas fa-mobile-alt"></i> UPI
+                        </div>
+                    </div>
+                    <input type="hidden" id="paymentMethod" value="credit">
+                </div>
+                
                 <div class="booking-summary">
                     <h3>Order Summary</h3>
                     <p id="summaryMovie">Movie: </p>
@@ -738,6 +785,7 @@
                     <p id="summaryDateTime">Date & Time: </p>
                     <p id="summarySeats">Seats: </p>
                     <p id="summaryType">Ticket Type: </p>
+                    <p id="summaryPayment">Payment Method: Credit Card</p>
                     <p class="total" id="summaryTotal">Total: ₹0</p>
                 </div>
                 
@@ -826,8 +874,6 @@
                 trending: true,
                 theaters: ["PVR Cinemas, Phoenix Marketcity", "INOX Megaplex, Inorbit Mall", "Cinepolis, Viviana Mall"]
             },
-            
-            // New Releases
             { 
                 id: 5, 
                 title: "Deva", 
@@ -872,8 +918,6 @@
                 newRelease: true,
                 theaters: ["Carnival Cinemas, R City Mall", "MovieTime Cinemas, Crossroads Mall"]
             },
-            
-            // Popular Movies
             { 
                 id: 9, 
                 title: "Kesari Chapter 2", 
@@ -895,7 +939,7 @@
                 language: "Hindi",
                 popular: true,
                 theaters: ["Carnival Cinemas, R City Mall", "MovieTime Cinemas, Crossroads Mall"]
-            },
+            }
         ];
 
         // Ticket prices
@@ -951,6 +995,19 @@
             if (e.target === signupModal) signupModal.style.display = 'none';
             if (e.target === bookingModal) bookingModal.style.display = 'none';
             if (e.target === confirmationModal) confirmationModal.style.display = 'none';
+        });
+        
+        // Payment Options Selection
+        document.querySelectorAll('.payment-option').forEach(option => {
+            option.addEventListener('click', function() {
+                document.querySelectorAll('.payment-option').forEach(opt => {
+                    opt.classList.remove('selected');
+                });
+                this.classList.add('selected');
+                const method = this.getAttribute('data-method');
+                document.getElementById('paymentMethod').value = method;
+                document.getElementById('summaryPayment').textContent = `Payment Method: ${method.charAt(0).toUpperCase() + method.slice(1)}`;
+            });
         });
         
         // Login Form
@@ -1118,6 +1175,10 @@
                     document.getElementById('bookingTime').value = '';
                     document.getElementById('bookingSeats').value = '1';
                     document.getElementById('bookingType').value = 'standard';
+                    document.getElementById('paymentMethod').value = 'credit';
+                    document.querySelector('.payment-option.selected').classList.remove('selected');
+                    document.querySelector('.payment-option[data-method="credit"]').classList.add('selected');
+                    document.getElementById('summaryPayment').textContent = 'Payment Method: Credit Card';
                     updateBookingSummary();
                     
                     // Show booking modal
@@ -1132,6 +1193,8 @@
             const time = document.getElementById('bookingTime').value;
             const seats = document.getElementById('bookingSeats').value;
             const type = document.getElementById('bookingType').value;
+            const theater = document.getElementById('bookingTheater').value;
+            const paymentMethod = document.getElementById('paymentMethod').value;
             
             if (date && time) {
                 const formattedDate = new Date(date).toLocaleDateString('en-US', { 
@@ -1143,8 +1206,13 @@
                 document.getElementById('summaryDateTime').textContent = `Date & Time: ${formattedDate}, ${time}`;
             }
             
+            if (theater) {
+                document.getElementById('summaryTheater').textContent = `Theater: ${theater}`;
+            }
+            
             document.getElementById('summarySeats').textContent = `Seats: ${seats}`;
             document.getElementById('summaryType').textContent = `Ticket Type: ${type.charAt(0).toUpperCase() + type.slice(1)}`;
+            document.getElementById('summaryPayment').textContent = `Payment Method: ${paymentMethod.charAt(0).toUpperCase() + paymentMethod.slice(1)}`;
             
             // Calculate total
             const price = ticketPrices[type] || 200;
@@ -1157,6 +1225,7 @@
         document.getElementById('bookingTime').addEventListener('change', updateBookingSummary);
         document.getElementById('bookingSeats').addEventListener('change', updateBookingSummary);
         document.getElementById('bookingType').addEventListener('change', updateBookingSummary);
+        document.getElementById('bookingTheater').addEventListener('change', updateBookingSummary);
         
         // Booking form submission
         document.getElementById('bookingForm').addEventListener('submit', function(e) {
@@ -1168,9 +1237,11 @@
             const time = document.getElementById('bookingTime').value;
             const seats = document.getElementById('bookingSeats').value;
             const type = document.getElementById('bookingType').value;
+            const theater = document.getElementById('bookingTheater').value;
+            const paymentMethod = document.getElementById('paymentMethod').value;
             
-            if (!date || !time) {
-                document.getElementById('bookingError').textContent = 'Please select both date and time';
+            if (!date || !time || !theater) {
+                document.getElementById('bookingError').textContent = 'Please fill all required fields';
                 document.getElementById('bookingError').style.display = 'block';
                 return;
             }
@@ -1178,9 +1249,6 @@
             // Calculate total
             const price = ticketPrices[type] || 200;
             const total = price * parseInt(seats);
-            
-            // In a real app, you would send this data to a server
-            // For this demo, we'll just show a confirmation
             
             // Save booking to local storage
             const booking = {
@@ -1190,6 +1258,8 @@
                 time,
                 seats,
                 type,
+                theater,
+                paymentMethod,
                 total,
                 bookedAt: new Date().toISOString()
             };
@@ -1199,9 +1269,17 @@
             localStorage.setItem(`user_${currentUser.email}_bookings`, JSON.stringify(bookings));
             
             // Show confirmation
+            const formattedDate = new Date(date).toLocaleDateString('en-US', { 
+                weekday: 'long', 
+                month: 'long', 
+                day: 'numeric' 
+            });
+            
             document.getElementById('confirmationMessage').innerHTML = `
                 You've successfully booked ${seats} ${type} ticket(s) for <strong>${movieTitle}</strong><br>
-                on ${new Date(date).toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' })} at ${time}.<br><br>
+                on ${formattedDate} at ${time}.<br>
+                Theater: <strong>${theater}</strong><br>
+                Payment method: <strong>${paymentMethod.charAt(0).toUpperCase() + paymentMethod.slice(1)}</strong><br><br>
                 Your total is <strong>₹${total}</strong>.
             `;
             
