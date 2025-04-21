@@ -43,7 +43,7 @@
         }
         
         .navbar-brand {
-            font-size: 1.8rem;
+            font-size: 1.4rem;
             font-weight: 700;
             background: var(--gradient-primary);
             -webkit-background-clip: text;
@@ -118,7 +118,7 @@
         .btn-primary {
             background-image: var(--gradient-primary);
             border: none;
-            padding: 10px 20px;
+            padding: 5px 12px;
             border-radius: 4px;
             font-weight: 500;
             transition: all 0.3s ease;
@@ -540,6 +540,15 @@
             border-radius: 0 4px 4px 0 !important;
         }
         
+        /* Footer separator line styling */
+        .footer-divider {
+            height: 4px;
+            background: var(--primary-accent);
+            width: 80px;
+            margin-bottom: 20px;
+            border-radius: 2px;
+        }
+        
         @media (max-width: 768px) {
             .hero-title {
                 font-size: 2.5rem;
@@ -747,6 +756,7 @@
             <div class="row">
                 <div class="col-lg-4 mb-4">
                     <h3 class="mb-3 fw-bold" style="color: var(--primary-accent)">PLANR</h3>
+                    <div class="footer-divider"></div>
                     <p>Your gateway to unforgettable live experiences. Book tickets for movies, comedy shows, and concerts with ease.</p>
                     <div class="social-icons mt-4">
                         <a href="#" class="text-light me-3"><i class="bi bi-facebook fs-4"></i></a>
@@ -757,6 +767,7 @@
                 </div>
                 <div class="col-lg-2 col-md-4 mb-4">
                     <h5 class="mb-3 fw-bold">Quick Links</h5>
+                    <div class="footer-divider"></div>
                     <ul class="nav flex-column">
                         <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-light">Home</a></li>
                         <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-light">Movies</a></li>
@@ -766,6 +777,7 @@
                 </div>
                 <div class="col-lg-2 col-md-4 mb-4">
                     <h5 class="mb-3 fw-bold">Support</h5>
+                    <div class="footer-divider"></div>
                     <ul class="nav flex-column">
                         <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-light">Contact Us</a></li>
                         <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-light">FAQs</a></li>
@@ -775,10 +787,16 @@
                 </div>
                 <div class="col-lg-4 col-md-4 mb-4">
                     <h5 class="mb-3 fw-bold">Download Our App</h5>
-                    <p>Get the best experience with our mobile app</p>
-                    <div class="d-flex gap-2 mt-3">
-                        <a href="#" class="btn btn-outline-light"><i class="bi bi-apple me-2"></i> App Store</a>
-                        <a href="#" class="btn btn-outline-light"><i class="bi bi-google-play me-2"></i> Google Play</a>
+                    <div class="footer-divider"></div>
+                    <!-- Completing the footer section -->
+                    <p>Get the Planr app for a seamless booking experience on the go.</p>
+                    <div class="app-buttons mt-3">
+                        <a href="#" class="btn btn-outline-light me-2">
+                            <i class="bi bi-apple me-2"></i> App Store
+                        </a>
+                        <a href="#" class="btn btn-outline-light">
+                            <i class="bi bi-google-play me-2"></i> Google Play
+                        </a>
                     </div>
                 </div>
             </div>
@@ -787,101 +805,90 @@
                 <div class="mb-3 mb-md-0">
                     © 2025 Planr. All rights reserved.
                 </div>
+                <div class="social-icons">
+                    <a href="#" class="text-light me-3"><i class="bi bi-facebook"></i></a>
+                    <a href="#" class="text-light me-3"><i class="bi bi-twitter"></i></a>
+                    <a href="#" class="text-light me-3"><i class="bi bi-instagram"></i></a>
+                    <a href="#" class="text-light"><i class="bi bi-youtube"></i></a>
+                </div>
             </div>
         </div>
     </footer>
 
-    <!-- Simple Login Modal (Blue Gradient) -->
-    <div class="modal-overlay" id="login-modal">
+    <!-- Simple Login Modal -->
+    <div class="modal-overlay" id="simple-login-modal">
         <div class="login-popup">
-            <button type="button" class="close-button" id="close-login">&times;</button>
+            <button class="close-button" id="close-simple-login">×</button>
             <h2>Welcome Back!</h2>
-            <p>To keep connected with us please login with your personal info.</p>
-            <button class="sign-in-btn" id="show-full-login">SIGN IN</button>
+            <p>Sign in to access your account and book your next adventure</p>
+            <button class="sign-in-btn" id="open-full-login">Sign In</button>
         </div>
     </div>
 
-    <!-- Full Auth Modal -->
+    <!-- Full Authentication Modal -->
     <div class="modal-overlay" id="auth-modal">
         <div class="auth-container">
-            <!-- Close button -->
-            <button type="button" class="close-button" id="close-auth">&times;</button>
-            
-            <!-- Left panel: Auth forms -->
             <div class="auth-forms">
-                <!-- Login form -->
-                <form class="auth-form login-form" id="login-form">
-                    <h1>Sign in</h1>
-                    
-                    <!-- Social login options -->
+                <!-- Login Form -->
+                <div class="auth-form login-form">
+                    <h1>Login to Your Account</h1>
                     <div class="social-login">
-                        <button type="button" class="social-btn"><i class="bi bi-facebook"></i></button>
-                        <button type="button" class="social-btn"><i class="bi bi-google"></i></button>
-                        <button type="button" class="social-btn"><i class="bi bi-linkedin"></i></button>
+                        <button class="social-btn"><i class="bi bi-google"></i></button>
+                        <button class="social-btn"><i class="bi bi-facebook"></i></button>
+                        <button class="social-btn"><i class="bi bi-twitter"></i></button>
                     </div>
-                    
-                    <!-- Divider -->
-                    <div class="divider">or use your account</div>
-                    
-                    <div class="form-group">
-                        <input type="email" class="form-control" placeholder="Email" required>
-                    </div>
-                    
-                    <div class="form-group">
-                        <input type="password" class="form-control" placeholder="Password" required>
-                    </div>
-                    
-                    <div class="forgot-password">
-                        <a href="#">Forgot your password?</a>
-                    </div>
-                    
-                    <button type="submit" class="auth-btn">SIGN IN</button>
-                </form>
-                
-                <!-- Signup form -->
-                <form class="auth-form signup-form" id="signup-form">
-                    <h1>Create Account</h1>
-                    
-                    <!-- Social signup options -->
-                    <div class="social-login">
-                        <button type="button" class="social-btn"><i class="bi bi-facebook"></i></button>
-                        <button type="button" class="social-btn"><i class="bi bi-google"></i></button>
-                        <button type="button" class="social-btn"><i class="bi bi-linkedin"></i></button>
-                    </div>
-                    
-                    <!-- Divider -->
-                    <div class="divider">or use your email</div>
-                    
-                    <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Name" required>
-                    </div>
-                    
-                    <div class="form-group">
-                        <input type="email" class="form-control" placeholder="Email" required>
-                    </div>
-                    
-                    <div class="form-group">
-                        <input type="password" class="form-control" placeholder="Password" required>
-                    </div>
-                    
-                    <button type="submit" class="auth-btn">SIGN UP</button>
-                </form>
-            </div>
-            
-            <!-- Right panel: Welcome message -->
-            <div class="welcome-panel">
-                <!-- Login welcome content -->
-                <div class="welcome-content login-welcome">
-                    <h2>Hello, Friend!</h2>
-                    <p>Enter your personal details and start your journey with us to experience the best events around you.</p>
-                    <button type="button" class="toggle-auth-btn" id="show-signup">SIGN UP</button>
+                    <div class="divider">or continue with email</div>
+                    <form>
+                        <div class="form-group">
+                            <input type="email" class="form-control" placeholder="Email Address" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="password" class="form-control" placeholder="Password" required>
+                        </div>
+                        <div class="forgot-password">
+                            <a href="#">Forgot password?</a>
+                        </div>
+                        <button type="submit" class="auth-btn">Login</button>
+                    </form>
                 </div>
                 
-                <!-- Signup welcome content -->
+                <!-- Signup Form -->
+                <div class="auth-form signup-form">
+                    <h1>Create an Account</h1>
+                    <div class="social-login">
+                        <button class="social-btn"><i class="bi bi-google"></i></button>
+                        <button class="social-btn"><i class="bi bi-facebook"></i></button>
+                        <button class="social-btn"><i class="bi bi-twitter"></i></button>
+                    </div>
+                    <div class="divider">or register with email</div>
+                    <form>
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Full Name" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" class="form-control" placeholder="Email Address" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="password" class="form-control" placeholder="Password" required>
+                        </div>
+                        <button type="submit" class="auth-btn">Create Account</button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="welcome-panel">
+                <!-- Login Welcome Content -->
+                <div class="welcome-content login-welcome">
+                    <h2>New Here?</h2>
+                    <p>Sign up and discover a great amount of new opportunities!</p>
+                    <button class="toggle-auth-btn" id="show-signup">Sign Up</button>
+                </div>
+                
+                <!-- Signup Welcome Content -->
                 <div class="welcome-content signup-welcome">
-                    <h2>Welcome Back!</h2>
-                    <p>To keep connected with us please login with your personal info.</p>
-                    <button type="button" class="toggle-auth-btn" id="show-login">SIGN IN</button>
+                    <h2>One of Us?</h2>
+                    <p>If you already have an account, just sign in. We've missed you!</p>
+                    <button class="toggle-auth-btn" id="show-login">Sign In</button>
                 </div>
             </div>
         </div>
@@ -889,103 +896,72 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        // Get DOM elements for simple login modal
+        // Simple Login Modal
         const openLoginBtn = document.getElementById('open-login');
-        const closeLoginBtn = document.getElementById('close-login');
-        const loginModal = document.getElementById('login-modal');
-        const showFullLoginBtn = document.getElementById('show-full-login');
-        
-        // Get DOM elements for full auth modal
         const openSignupBtn = document.getElementById('open-signup');
-        const closeAuthBtn = document.getElementById('close-auth');
-        const showLoginBtn = document.getElementById('show-login');
-        const showSignupBtn = document.getElementById('show-signup');
+        const closeSimpleLoginBtn = document.getElementById('close-simple-login');
+        const simpleLoginModal = document.getElementById('simple-login-modal');
+        const openFullLoginBtn = document.getElementById('open-full-login');
+        
+        // Full Auth Modal
         const authModal = document.getElementById('auth-modal');
+        const showSignupBtn = document.getElementById('show-signup');
+        const showLoginBtn = document.getElementById('show-login');
         const authContainer = document.querySelector('.auth-container');
-        const loginForm = document.getElementById('login-form');
-        const signupForm = document.getElementById('signup-form');
-
-        // Function to open simple login modal
-        function openLoginModal() {
-            loginModal.classList.add('active');
-        }
-
-        // Function to close simple login modal
-        function closeLoginModal() {
-            loginModal.classList.remove('active');
+        
+        // Open simple login modal
+        if (openLoginBtn) {
+            openLoginBtn.addEventListener('click', () => {
+                simpleLoginModal.classList.add('active');
+            });
         }
         
-        // Function to open full auth modal in login mode
-        function openAuthLoginModal() {
-            closeLoginModal();
-            authModal.classList.add('active');
-            authContainer.classList.remove('show-signup');
+        // Open signup directly
+        if (openSignupBtn) {
+            openSignupBtn.addEventListener('click', () => {
+                authModal.classList.add('active');
+                authContainer.classList.add('show-signup');
+            });
         }
-
-        // Function to open auth modal in signup mode
-        function openSignupModal() {
-            authModal.classList.add('active');
-            authContainer.classList.add('show-signup');
-        }
-
-        // Function to close auth modal
-        function closeAuthModal() {
-            authModal.classList.remove('active');
-        }
-
-        // Function to toggle between login and signup
-        function toggleAuthMode() {
-            authContainer.classList.toggle('show-signup');
-        }
-
-        // Event listeners for simple login modal
-        openLoginBtn.addEventListener('click', openLoginModal);
-        closeLoginBtn.addEventListener('click', closeLoginModal);
-        showFullLoginBtn.addEventListener('click', openAuthLoginModal);
         
-        // Event listeners for full auth modal
-        openSignupBtn.addEventListener('click', openSignupModal);
-        closeAuthBtn.addEventListener('click', closeAuthModal);
-        showLoginBtn.addEventListener('click', toggleAuthMode);
-        showSignupBtn.addEventListener('click', toggleAuthMode);
-
-        // Close modals when clicking outside the container
-        loginModal.addEventListener('click', function(event) {
-            if (event.target === loginModal) {
-                closeLoginModal();
+        // Close simple login modal
+        if (closeSimpleLoginBtn) {
+            closeSimpleLoginBtn.addEventListener('click', () => {
+                simpleLoginModal.classList.remove('active');
+            });
+        }
+        
+        // Open full auth modal from simple login
+        if (openFullLoginBtn) {
+            openFullLoginBtn.addEventListener('click', () => {
+                simpleLoginModal.classList.remove('active');
+                authModal.classList.add('active');
+            });
+        }
+        
+        // Toggle between login and signup
+        if (showSignupBtn) {
+            showSignupBtn.addEventListener('click', () => {
+                authContainer.classList.add('show-signup');
+            });
+        }
+        
+        if (showLoginBtn) {
+            showLoginBtn.addEventListener('click', () => {
+                authContainer.classList.remove('show-signup');
+            });
+        }
+        
+        // Close auth modal when clicking outside
+        window.addEventListener('click', (e) => {
+            if (e.target === simpleLoginModal) {
+                simpleLoginModal.classList.remove('active');
             }
-        });
-        
-        authModal.addEventListener('click', function(event) {
-            if (event.target === authModal) {
-                closeAuthModal();
-            }
-        });
-
-        // Prevent form submission (for demo purposes)
-        loginForm.addEventListener('submit', function(event) {
-            event.preventDefault();
-            // Here you would normally handle login authentication
-            alert('Login successful!');
-            closeAuthModal();
-        });
-
-        signupForm.addEventListener('submit', function(event) {
-            event.preventDefault();
-            // Here you would normally handle signup process
-            alert('Account created successfully!');
-            closeAuthModal();
-        });
-
-        // Close modals with Escape key
-        document.addEventListener('keydown', function(event) {
-            if (event.key === 'Escape') {
-                if (loginModal.classList.contains('active')) {
-                    closeLoginModal();
-                }
-                if (authModal.classList.contains('active')) {
-                    closeAuthModal();
-                }
+            if (e.target === authModal) {
+                authModal.classList.remove('active');
+                setTimeout(() => {
+                    authContainer.classList.remove('show-signup');
+                }, 300);
             }
         });
     </script>
