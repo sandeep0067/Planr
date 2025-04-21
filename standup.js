@@ -278,8 +278,146 @@
         });
     }
     document.addEventListener('DOMContentLoaded', function() {
-        // ... (all your previous code remains the same)
-    
-        // Initialize the application
-        init();
-    }); // <-- This closing was missing
+            const showsData = [
+                {
+                    id: 1,
+                    title: "Vipul Goyal: Engineer of Laughs",
+                    artist: "Vipul Goyal",
+                    date: "2023-12-15",
+                    time: "20:00",
+                    venue: "The Comedy Club, Mumbai",
+                    venueId: "comedy-club",
+                    price: 1200,
+                    image: "https://www.hindustantimes.com/ht-img/img/2023/08/04/1600x900/vipul_goyal_1691139559313_1691139559527.jpg",
+                    description: "IITian-turned-comedian delivers sharp observational humor about Indian middle-class life"
+                },
+                {
+                    id: 2,
+                    title: "Anubhav Singh Bassi: Cheers!",
+                    artist: "Anubhav Singh Bassi",
+                    date: "2023-12-17",
+                    time: "19:30",
+                    venue: "Laugh Factory, Delhi",
+                    venueId: "laugh-house",
+                    price: 1500,
+                    image: "https://mumbaitheatreguide.com/wp-content/uploads/2022/12/Anubhav-Singh-Bassi-Live-Show.jpg",
+                    description: "Bassi's viral storytelling about college life and UPSC struggles"
+                },
+                {
+                    id: 3,
+                    title: "Ashish Solanki: Has Mat",
+                    artist: "Ashish Solanki",
+                    date: "2023-12-20",
+                    time: "21:00",
+                    venue: "Funny Bone, Bangalore",
+                    venueId: "funny-bone",
+                    price: 1000,
+                    image: "https://i0.wp.com/www.thehumorfeed.com/wp-content/uploads/2022/07/Ashish-Solanki-1.jpg",
+                    description: "Dark humor and sarcastic takes on Indian society and relationships"
+                },
+                {
+                    id: 4,
+                    title: "Ravi Gupta: Corporate Dhamaal",
+                    artist: "Ravi Gupta",
+                    date: "2023-12-22",
+                    time: "22:30",
+                    venue: "The Comedy Club, Mumbai",
+                    venueId: "comedy-club",
+                    price: 900,
+                    image: "https://komedylive.com/wp-content/uploads/2023/03/Ravi-Gupta-Show-1024x683.jpg",
+                    description: "Hilarious takes on IT corporate culture and Delhi family dynamics"
+                },
+                {
+                    id: 5,
+                    title: "Zakir Khan: Haq Se Single",
+                    artist: "Zakir Khan",
+                    date: "2023-12-23",
+                    time: "20:00",
+                    venue: "Laugh Factory, Delhi",
+                    venueId: "laugh-house",
+                    price: 2000,
+                    image: "https://static.toiimg.com/photo/msid-101604537,width-96,height-65.cms",
+                    description: "India's beloved 'sakht launda' with his signature romantic humor"
+                },
+                {
+                    id: 6,
+                    title: "Rahul Dua: Lockdown Diaries",
+                    artist: "Rahul Dua",
+                    date: "2023-12-27",
+                    time: "19:00",
+                    venue: "Funny Bone, Bangalore",
+                    venueId: "funny-bone",
+                    price: 1100,
+                    image: "https://assets.telegraphindia.com/telegraph/2022/Oct/1666947133_rahul-dua.jpg",
+                    description: "Millennial humor about work-from-home and Punjabi family life"
+                },
+                {
+                    id: 7,
+                    title: "Gaurav Kapoor: Papa Kehte Hain",
+                    artist: "Gaurav Kapoor",
+                    date: "2023-12-29",
+                    time: "21:30",
+                    venue: "The Comedy Club, Mumbai",
+                    venueId: "comedy-club",
+                    price: 1300,
+                    image: "https://assets.telegraphindia.com/telegraph/2022/Oct/1666947133_gaurav-kapoor.jpg",
+                    description: "Relatable humor about Indian parents and dating struggles"
+                }
+            ];
+        
+            // Updated artists data with stage photos
+            const artistsData = [
+                {
+                    id: 1,
+                    name: "Vipul Goyal",
+                    genre: "Observational Comedy",
+                    shows: 12,
+                    image: "https://www.hindustantimes.com/ht-img/img/2023/08/04/1600x900/vipul_goyal_1691139559313_1691139559527.jpg"
+                },
+                {
+                    id: 2,
+                    name: "Anubhav Singh Bassi",
+                    genre: "Storytelling Comedy",
+                    shows: 8,
+                    image: "https://mumbaitheatreguide.com/wp-content/uploads/2022/12/Anubhav-Singh-Bassi-Live-Show.jpg"
+                },
+                {
+                    id: 3,
+                    name: "Ashish Solanki",
+                    genre: "Dark Humor",
+                    shows: 15,
+                    image: "https://i0.wp.com/www.thehumorfeed.com/wp-content/uploads/2022/07/Ashish-Solanki-1.jpg"
+                },
+                {
+                    id: 4,
+                    name: "Ravi Gupta",
+                    genre: "Corporate Comedy",
+                    shows: 10,
+                    image: "https://komedylive.com/wp-content/uploads/2023/03/Ravi-Gupta-Show-1024x683.jpg"
+                },
+                {
+                    id: 5,
+                    name: "Zakir Khan",
+                    genre: "Romantic Comedy",
+                    shows: 18,
+                    image: "https://static.toiimg.com/photo/msid-101604537,width-96,height-65.cms"
+                },
+                {
+                    id: 6,
+                    name: "Rahul Dua",
+                    genre: "Millennial Humor",
+                    shows: 10,
+                    image: "https://assets.telegraphindia.com/telegraph/2022/Oct/1666947133_rahul-dua.jpg"
+                },
+                {
+                    id: 7,
+                    name: "Gaurav Kapoor",
+                    genre: "Family Comedy",
+                    shows: 14,
+                    image: "https://assets.telegraphindia.com/telegraph/2022/Oct/1666947133_gaurav-kapoor.jpg"
+                }
+            ];
+        
+           
+            init();
+        });
