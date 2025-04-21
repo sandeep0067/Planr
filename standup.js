@@ -443,7 +443,97 @@ function loadShows() {
     });
   }
   loadShows(); // Call this when the page loads
+
+  // Handle booking button clicks
+document.addEventListener('click', (e) => {
+    if (e.target.classList.contains('btn-book')) {
+      const showId = e.target.dataset.id;
+      const show = mockData.shows.find(s => s.id == showId);
+      openBookingModal(show);
+    }
+  });
+  
+  function openBookingModal(show) {
+    document.getElementById('modal-title').textContent = `Book: ${show.title}`;
+    document.getElementById('modal-body').innerHTML = `
+      <div class="booking-summary">
+        <div class="booking-summary-item">
+          <span>Date:</span>
+          <span>${show.date}</span>
+        </div>
+        <div class="booking-summary-item">
+          <span>Venue:</span>
+          <span>${show.venue}</span>
+        </div>
+        <div class="booking-summary-item">
+          <span>Price:</span>
+          <span>$${show.price}</span>
+        </div>
+      </div>
+      <form class="booking-form">
+        <!-- Add form fields here -->
+      </form>
+    `;
+    document.getElementById('booking-modal').classList.add('show');
+  }
+  document.querySelector('.hamburger').addEventListener('click', () => {
+    const navLinks = document.querySelector('.nav-links');
+    navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+  });
+  document.getElementById('newsletter-form').addEventListener('submit', (e) => {
+    e.preventDefault();
+    const email = e.target.querySelector('input').value;
+    alert(`Thanks for subscribing with ${email}! We'll keep you updated.`);
+    e.target.reset();
+  });
+  // 1. Mock Data
+const mockData = {
+    shows: [
+      {
+        id: 1,
+        title: "Laugh Out Loud Night",
+        date: "2023-12-15",
+        venue: "The Comedy Club",
+        price: 35,
+        image: "https://images.unsplash.com/photo-1551818255-e6e10975bc17?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80"
+      }
+    ]
+  };
+  
+  // 2. Load Shows + "Book Now" Buttons
+  function loadShows() {
+    const showsContainer = document.getElementById('shows-container');
+    showsContainer.innerHTML = ''; // Clear existing content
+    mockData.shows.forEach(show => {
+      showsContainer.innerHTML += `
+        <div class="show-card">
+          <div class="show-card-img">
+            <img src="${show.image}" alt="${show.title}">
+          </div>
+          <div class="show-card-content">
+            <h3 class="show-card-title">${show.title}</h3>
+            <p class="show-card-venue"><i class="fas fa-map-marker-alt"></i> ${show.venue}</p>
+            <div class="show-card-footer">
+              <span class="show-card-price">$${show.price}</span>
+              <button class="btn btn-primary btn-book" data-id="${show.id}">Book Now</button>
+            </div>
+          </div>
+        </div>
+      `;
+    });
+  }
+  
+  // 3. Handle "Book Now" Clicks
+  document.addEventListener('click', (e) => {
+    if (e.target.classList.contains('btn-book')) {
+      const showId = e.target.dataset.id;
+      const show = mockData.shows.find(s => s.id == showId);
+      alert(`Booking ${show.title} for $${show.price}!`); // Replace with modal later
+    }
+  });
+  
+  // Initialize when page loads
+  window.addEventListener('DOMContentLoaded', loadShows);
         
-           
             init();
         });
