@@ -417,6 +417,32 @@
                     image: "https://assets.telegraphindia.com/telegraph/2022/Oct/1666947133_gaurav-kapoor.jpg"
                 }
             ];
+            // Load shows into the grid
+function loadShows() {
+    const showsContainer = document.getElementById('shows-container');
+    mockData.shows.forEach(show => {
+      showsContainer.innerHTML += `
+        <div class="show-card">
+          <div class="show-card-img">
+            <img src="${show.image}" alt="${show.title}">
+          </div>
+          <div class="show-card-content">
+            <p class="show-card-date">${show.date} • ${show.time}</p>
+            <h3 class="show-card-title">${show.title}</h3>
+            <p class="show-card-artist">${show.artist}</p>
+            <div class="show-card-venue">
+              <i class="fas fa-map-marker-alt"></i> ${show.venue}
+            </div>
+            <div class="show-card-footer">
+              <span class="show-card-price">$${show.price}</span>
+              <button class="btn btn-primary btn-book" data-id="${show.id}">Book Now</button>
+            </div>
+          </div>
+        </div>
+      `;
+    });
+  }
+  loadShows(); // Call this when the page loads
         
            
             init();
