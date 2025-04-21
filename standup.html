@@ -3,168 +3,843 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Laugh Factory - Book Stand-Up Comedy Shows</title>
-    <link rel="stylesheet" href="standup.css">
-    <script src="standup.js"></script>
+    <title>Laugh Lounge - Standup Comedy Shows</title>
+    <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+    --primary-color: #ff6b6b;
+    --secondary-color: #794afa;
+    --secondary-dark-color: #4531a8;
+    --white-color: #fff;
+    --light-gray-color: #f5f5f5;
+    --gray-color: #ccc;
+    --dark-color: #1a1a1a;
+    --darker-color: #121212;
+    --black-color: #000;
+    --success-color: #28a745;
+}
+
+/* Dark theme colors */
+[data-theme="dark"] {
+    --white-color: #121212;
+    --light-gray-color: #1a1a1a;
+    --gray-color: #333;
+    --dark-color: #f5f5f5;
+    --darker-color: #fff;
+    --black-color: #f5f5f5;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--white-color);
+    color: var(--dark-color);
+    line-height: 1.6;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Header Styles */
+header {
+    background-color: var(--darker-color);
+    color: var(--white-color);
+    padding: 20px 0;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--primary-color);
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+}
+
+nav ul li {
+    margin-left: 30px;
+}
+
+nav ul li a {
+    color: var(--white-color);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+nav ul li a:hover {
+    color: var(--primary-color);
+}
+
+.theme-toggle {
+    background: none;
+    border: none;
+    color: var(--white-color);
+    font-size: 1.2rem;
+    cursor: pointer;
+    margin-left: 20px;
+}
+
+/* Hero Section */
+.hero {
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1501281668745-f7f57925c3b4?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') no-repeat center center/cover;
+    height: 80vh;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    color: var(--white-color);
+    margin-top: 70px;
+}
+
+.hero h2 {
+    font-size: 3rem;
+    margin-bottom: 20px;
+}
+
+.hero p {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+}
+
+/* Button Styles */
+.btn {
+    display: inline-block;
+    background-color: var(--primary-color);
+    color: var(--white-color);
+    padding: 12px 30px;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s;
+    border: none;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background-color: #ff5252;
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Shows Section */
+.shows {
+    padding: 80px 0;
+    background-color: var(--light-gray-color);
+}
+
+.shows h2, .artists h2, .newsletter h2 {
+    text-align: center;
+    margin-bottom: 50px;
+    font-size: 2.5rem;
+    color: var(--dark-color);
+}
+
+.show-filters {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+}
+
+.filter-btn {
+    background: none;
+    border: 2px solid var(--primary-color);
+    color: var(--primary-color);
+    padding: 8px 20px;
+    margin: 0 10px;
+    border-radius: 30px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s;
+}
+
+.filter-btn:hover, .filter-btn.active {
+    background-color: var(--primary-color);
+    color: var(--white-color);
+}
+
+.show-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.show-card {
+    background-color: var(--white-color);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.show-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+}
+
+.show-img {
+    height: 200px;
+    overflow: hidden;
+}
+
+.show-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s;
+}
+
+.show-card:hover .show-img img {
+    transform: scale(1.1);
+}
+
+.show-info {
+    padding: 20px;
+}
+
+.show-info h3 {
+    margin-bottom: 10px;
+    color: var(--dark-color);
+}
+
+.show-date {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    color: var(--secondary-color);
+    font-weight: 600;
+}
+
+.show-date i {
+    margin-right: 8px;
+}
+
+.show-price {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.price {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--primary-color);
+}
+
+.book-btn {
+    background-color: var(--secondary-color);
+    color: var(--white-color);
+    padding: 8px 20px;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s;
+    border: none;
+    cursor: pointer;
+}
+
+.book-btn:hover {
+    background-color: var(--secondary-dark-color);
+}
+
+/* Artists Section */
+.artists {
+    padding: 80px 0;
+    background-color: var(--white-color);
+}
+
+.artist-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 30px;
+}
+
+.artist-card {
+    text-align: center;
+    background-color: var(--light-gray-color);
+    padding: 30px 20px;
+    border-radius: 10px;
+    transition: transform 0.3s;
+}
+
+.artist-card:hover {
+    transform: translateY(-10px);
+}
+
+.artist-card img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 20px;
+    border: 5px solid var(--primary-color);
+}
+
+.artist-card h3 {
+    margin-bottom: 10px;
+    color: var(--dark-color);
+}
+
+.artist-card p {
+    color: var(--gray-color);
+}
+
+/* Newsletter Section */
+.newsletter {
+    padding: 60px 0;
+    background-color: var(--secondary-color);
+    color: var(--white-color);
+    text-align: center;
+}
+
+.newsletter h2 {
+    color: var(--white-color);
+}
+
+.newsletter form {
+    display: flex;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.newsletter input {
+    flex: 1;
+    padding: 15px;
+    border: none;
+    border-radius: 30px 0 0 30px;
+    font-size: 1rem;
+}
+
+.newsletter button {
+    border-radius: 0 30px 30px 0;
+    padding: 15px 30px;
+}
+
+/* Footer Styles */
+footer {
+    background-color: var(--darker-color);
+    color: var(--white-color);
+    padding: 60px 0 0;
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 40px;
+    margin-bottom: 40px;
+}
+
+.footer-section h3 {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    color: var(--primary-color);
+}
+
+.footer-section ul {
+    list-style: none;
+}
+
+.footer-section ul li {
+    margin-bottom: 10px;
+}
+
+.footer-section ul li a {
+    color: var(--white-color);
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.footer-section ul li a:hover {
+    color: var(--primary-color);
+}
+
+.footer-bottom {
+    text-align: center;
+    padding: 20px 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Modal Styles */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 2000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    overflow: auto;
+}
+
+.modal-content {
+    background-color: var(--white-color);
+    margin: 10% auto;
+    padding: 30px;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 500px;
+    box-shadow: 0 5px 30px rgba(0, 0, 0, 0.3);
+    position: relative;
+    animation: modalopen 0.5s;
+}
+
+@keyframes modalopen {
+    from {
+        opacity: 0;
+        transform: translateY(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.close-modal {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 1.5rem;
+    color: var(--gray-color);
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.close-modal:hover {
+    color: var(--dark-color);
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: var(--dark-color);
+}
+
+.form-group input, .form-group select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid var(--gray-color);
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    header .container {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    nav ul {
+        margin-top: 20px;
+        justify-content: center;
+    }
+
+    nav ul li {
+        margin: 0 10px;
+    }
+
+    .hero h2 {
+        font-size: 2.2rem;
+    }
+
+    .show-filters {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .filter-btn {
+        margin: 5px 0;
+    }
+
+    .newsletter form {
+        flex-direction: column;
+    }
+
+    .newsletter input {
+        border-radius: 30px;
+        margin-bottom: 10px;
+    }
+
+    .newsletter button {
+        border-radius: 30px;
+        width: 100%;
+    }
+}
+    </style>
 </head>
 <body>
-    <header class="header">
+    <header>
         <div class="container">
-            <nav class="navbar">
-                <div class="logo">
-                    <a href="#">Laugh Factory</a>
-                </div>
-                <ul class="nav-links">
+            <h1 class="logo">Laugh Lounge</h1>
+            <nav>
+                <ul>
                     <li><a href="#shows">Shows</a></li>
                     <li><a href="#artists">Comedians</a></li>
-                    <li><a href="#venues">Venues</a></li>
                     <li><a href="#about">About</a></li>
                     <li><a href="#contact">Contact</a></li>
                 </ul>
-                <div class="auth-buttons">
-                    <button class="btn btn-login">Login</button>
-                    <button class="btn btn-signup">Sign Up</button>
-                </div>
-                <div class="hamburger">
-                    <i class="fas fa-bars"></i>
-                </div>
             </nav>
+            <button id="theme-toggle" class="theme-toggle">
+                <i class="fas fa-moon"></i>
+            </button>
         </div>
     </header>
 
     <section class="hero">
         <div class="container">
-            <div class="hero-content">
-                <h1>Book Tickets for the Hottest Stand-Up Shows</h1>
-                <p>Laugh your heart out with the best comedians in town. Secure your seats now!</p>
-                <div class="search-bar">
-                    <input type="text" placeholder="Search for shows, comedians, or venues...">
-                    <button class="btn btn-search"><i class="fas fa-search"></i> Search</button>
-                </div>
+            <h2>Your Night of Non-Stop Laughter</h2>
+            <p>Book tickets for the hottest standup comedy shows in town</p>
+            <a href="#shows" class="btn">View Upcoming Shows</a>
+        </div>
+    </section>
+
+    <section id="shows" class="shows">
+        <div class="container">
+            <h2>Upcoming Shows</h2>
+            <div class="show-filters">
+                <button class="filter-btn active" data-filter="all">All Shows</button>
+                <button class="filter-btn" data-filter="weekend">Weekend Specials</button>
+                <button class="filter-btn" data-filter="openmic">Open Mic</button>
+            </div>
+            <div class="show-grid" id="show-container">
+                <!-- Shows will be loaded dynamically with JavaScript -->
             </div>
         </div>
     </section>
 
-    <section id="shows" class="shows-section">
+    <section id="artists" class="artists">
         <div class="container">
-            <h2 class="section-title">Upcoming Shows</h2>
-            <div class="filter-controls">
-                <div class="filter-group">
-                    <label for="date-filter">Date:</label>
-                    <select id="date-filter">
-                        <option value="all">All Dates</option>
-                        <option value="today">Today</option>
-                        <option value="week">This Week</option>
-                        <option value="month">This Month</option>
-                    </select>
+            <h2>Featured Comedians</h2>
+            <div class="artist-grid">
+                <div class="artist-card">
+                    <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Comedian">
+                    <h3>Dave Laughalot</h3>
+                    <p>Observational humor with a twist</p>
                 </div>
-                <div class="filter-group">
-                    <label for="venue-filter">Venue:</label>
-                    <select id="venue-filter">
-                        <option value="all">All Venues</option>
-                        <option value="comedy-club">The Comedy Club</option>
-                        <option value="laugh-house">Laugh House</option>
-                        <option value="funny-bone">Funny Bone</option>
-                    </select>
+                <div class="artist-card">
+                    <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Comedian">
+                    <h3>Sarah Giggle</h3>
+                    <p>Satirical takes on modern life</p>
                 </div>
-                <div class="filter-group">
-                    <label for="price-filter">Price:</label>
-                    <select id="price-filter">
-                        <option value="all">All Prices</option>
-                        <option value="free">Free</option>
-                        <option value="under-20">Under $20</option>
-                        <option value="20-50">$20 - $50</option>
-                        <option value="over-50">Over $50</option>
-                    </select>
+                <div class="artist-card">
+                    <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="Comedian">
+                    <h3>Mike Chuckles</h3>
+                    <p>Dark humor specialist</p>
                 </div>
-            </div>
-            <div class="shows-grid" id="shows-container">
-                <!-- Shows will be dynamically loaded here -->
-            </div>
-            <div class="load-more">
-                <button class="btn btn-load-more">Load More Shows</button>
-            </div>
-        </div>
-    </section>
-
-    <section id="artists" class="artists-section">
-        <div class="container">
-            <h2 class="section-title">Featured Comedians</h2>
-            <div class="artists-grid" id="artists-container">
-                <!-- Artists will be dynamically loaded here -->
-            </div>
-        </div>
-    </section>
-
-    <section id="venues" class="venues-section">
-        <div class="container">
-            <h2 class="section-title">Popular Venues</h2>
-            <div class="venues-grid" id="venues-container">
-                <!-- Venues will be dynamically loaded here -->
             </div>
         </div>
     </section>
 
     <section class="newsletter">
         <div class="container">
-            <div class="newsletter-content">
-                <h2>Stay Updated on New Shows</h2>
-                <p>Subscribe to our newsletter and never miss a laugh!</p>
-                <form id="newsletter-form">
-                    <input type="email" placeholder="Enter your email" required>
-                    <button type="submit" class="btn btn-subscribe">Subscribe</button>
-                </form>
-            </div>
+            <h2>Get Notified About New Shows</h2>
+            <form id="newsletter-form">
+                <input type="email" placeholder="Your email address" required>
+                <button type="submit" class="btn">Subscribe</button>
+            </form>
         </div>
     </section>
 
-    <footer class="footer">
+    <footer id="contact">
         <div class="container">
             <div class="footer-content">
-                <div class="footer-section about">
-                    <h3>Laugh Factory</h3>
-                    <p>Your premier destination for stand-up comedy shows. Book tickets for the best comedians in the industry.</p>
-                    <div class="social-icons">
-                        <a href="#"><i class="fab fa-facebook"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-youtube"></i></a>
-                    </div>
+                <div class="footer-section">
+                    <h3>Laugh Lounge</h3>
+                    <p>The premier destination for standup comedy shows in the city.</p>
                 </div>
-                <div class="footer-section links">
+                <div class="footer-section">
                     <h3>Quick Links</h3>
                     <ul>
                         <li><a href="#shows">Shows</a></li>
                         <li><a href="#artists">Comedians</a></li>
-                        <li><a href="#venues">Venues</a></li>
-                        <li><a href="#">Terms & Conditions</a></li>
-                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#about">About Us</a></li>
                     </ul>
                 </div>
-                <div class="footer-section contact">
-                    <h3>Contact Us</h3>
-                    <p><i class="fas fa-map-marker-alt"></i> 123 Comedy Street, Laughter City</p>
-                    <p><i class="fas fa-phone"></i> +1 (555) 123-4567</p>
-                    <p><i class="fas fa-envelope"></i> info@laughfactory.com</p>
+                <div class="footer-section">
+                    <h3>Contact</h3>
+                    <p>123 Comedy Street<br>Laughville, LV 12345</p>
+                    <p>info@laughlounge.com</p>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2023 Laugh Factory. All rights reserved.</p>
+                <p>&copy; 2023 Laugh Lounge. All rights reserved.</p>
             </div>
         </div>
     </footer>
 
-    <div class="modal" id="booking-modal">
+    <!-- Booking Modal -->
+    <div id="booking-modal" class="modal">
         <div class="modal-content">
             <span class="close-modal">&times;</span>
             <h2 id="modal-title">Book Tickets</h2>
-            <div class="modal-body" id="modal-body">
-                <!-- Modal content will be dynamically loaded here -->
-            </div>
+            <form id="booking-form">
+                <div class="form-group">
+                    <label for="ticket-qty">Number of Tickets:</label>
+                    <select id="ticket-qty" required>
+                        <option value="" disabled selected>Select quantity</option>
+                        <option value="1">1 Ticket</option>
+                        <option value="2">2 Tickets</option>
+                        <option value="3">3 Tickets</option>
+                        <option value="4">4 Tickets</option>
+                        <option value="5">5 Tickets</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="name">Full Name:</label>
+                    <input type="text" id="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" required>
+                </div>
+                <button type="submit" class="btn">Complete Booking</button>
+            </form>
         </div>
     </div>
 
     <script src="script.js"></script>
+    <script>
+        // Sample show data
+const showsData = [
+    {
+        id: 1,
+        title: "Weekend Comedy Special",
+        comedian: "Dave Laughalot",
+        date: "2023-12-15",
+        time: "20:00",
+        venue: "Laugh Lounge Main Stage",
+        price: 25,
+        image: "https://images.unsplash.com/photo-1551818255-e6e10975bc17?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+        category: "weekend"
+    },
+    {
+        id: 2,
+        title: "Midweek Madness",
+        comedian: "Sarah Giggle",
+        date: "2023-12-13",
+        time: "19:30",
+        venue: "Laugh Lounge Side Stage",
+        price: 15,
+        image: "https://images.unsplash.com/photo-1549576490-b0b4831ef60a?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+        category: "openmic"
+    },
+    {
+        id: 3,
+        title: "Friday Night Laughs",
+        comedian: "Mike Chuckles",
+        date: "2023-12-16",
+        time: "21:00",
+        venue: "Laugh Lounge Main Stage",
+        price: 30,
+        image: "https://images.unsplash.com/photo-1547153760-18fc86324498?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+        category: "weekend"
+    },
+    {
+        id: 4,
+        title: "New Talent Showcase",
+        comedian: "Various Artists",
+        date: "2023-12-14",
+        time: "20:00",
+        venue: "Laugh Lounge Side Stage",
+        price: 10,
+        image: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+        category: "openmic"
+    },
+    {
+        id: 5,
+        title: "Saturday Night Live Comedy",
+        comedian: "Headliner Special",
+        date: "2023-12-17",
+        time: "20:30",
+        venue: "Laugh Lounge Main Stage",
+        price: 35,
+        image: "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+        category: "weekend"
+    },
+    {
+        id: 6,
+        title: "Comedy Open Mic Night",
+        comedian: "Upcoming Comedians",
+        date: "2023-12-12",
+        time: "19:00",
+        venue: "Laugh Lounge Side Stage",
+        price: 5,
+        image: "https://images.unsplash.com/photo-1501281668745-f7f57925c3b4?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+        category: "openmic"
+    }
+];
+
+// DOM Elements
+const showContainer = document.getElementById('show-container');
+const filterButtons = document.querySelectorAll('.filter-btn');
+const themeToggle = document.getElementById('theme-toggle');
+const bookingModal = document.getElementById('booking-modal');
+const closeModal = document.querySelector('.close-modal');
+const bookingForm = document.getElementById('booking-form');
+const newsletterForm = document.getElementById('newsletter-form');
+
+// Current selected show for booking
+let currentShow = null;
+
+// Initialize the page
+document.addEventListener('DOMContentLoaded', () => {
+    loadShows('all');
+    setupEventListeners();
+    
+    // Check for saved theme preference
+    const savedTheme = localStorage.getItem('theme') || 'dark';
+    document.documentElement.setAttribute('data-theme', savedTheme);
+    updateThemeIcon(savedTheme);
+});
+
+// Load shows based on filter
+function loadShows(filter) {
+    showContainer.innerHTML = '';
+    
+    const filteredShows = filter === 'all' 
+        ? showsData 
+        : showsData.filter(show => show.category === filter);
+    
+    filteredShows.forEach(show => {
+        const showCard = document.createElement('div');
+        showCard.className = 'show-card';
+        showCard.innerHTML = `
+            <div class="show-img">
+                <img src="${show.image}" alt="${show.title}">
+            </div>
+            <div class="show-info">
+                <h3>${show.title}</h3>
+                <p>Featuring ${show.comedian}</p>
+                <div class="show-date">
+                    <i class="fas fa-calendar-alt"></i>
+                    <span>${formatDate(show.date)} at ${show.time}</span>
+                </div>
+                <p>${show.venue}</p>
+                <div class="show-price">
+                    <span class="price">$${show.price}</span>
+                    <button class="book-btn" data-id="${show.id}">Book Now</button>
+                </div>
+            </div>
+        `;
+        showContainer.appendChild(showCard);
+    });
+    
+    // Add event listeners to book buttons
+    document.querySelectorAll('.book-btn').forEach(button => {
+        button.addEventListener('click', (e) => {
+            const showId = parseInt(e.target.getAttribute('data-id'));
+            currentShow = showsData.find(show => show.id === showId);
+            document.getElementById('modal-title').textContent = `Book Tickets: ${currentShow.title}`;
+            bookingModal.style.display = 'block';
+        });
+    });
+}
+
+// Format date for display
+function formatDate(dateString) {
+    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+    return new Date(dateString).toLocaleDateString('en-US', options);
+}
+
+// Setup event listeners
+function setupEventListeners() {
+    // Filter buttons
+    filterButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            filterButtons.forEach(btn => btn.classList.remove('active'));
+            button.classList.add('active');
+            loadShows(button.dataset.filter);
+        });
+    });
+    
+    // Theme toggle
+    themeToggle.addEventListener('click', toggleTheme);
+    
+    // Modal close
+    closeModal.addEventListener('click', () => {
+        bookingModal.style.display = 'none';
+    });
+    
+    // Close modal when clicking outside
+    window.addEventListener('click', (e) => {
+        if (e.target === bookingModal) {
+            bookingModal.style.display = 'none';
+        }
+    });
+    
+    // Booking form submission
+    bookingForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const name = document.getElementById('name').value;
+        const email = document.getElementById('email').value;
+        const tickets = document.getElementById('ticket-qty').value;
+        
+        // In a real app, you would send this data to a server
+        alert(`Booking confirmed for ${tickets} ticket(s) to ${currentShow.title}!\nA confirmation has been sent to ${email}.`);
+        
+        // Reset form and close modal
+        bookingForm.reset();
+        bookingModal.style.display = 'none';
+        currentShow = null;
+    });
+    
+    // Newsletter form submission
+    newsletterForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const email = e.target.querySelector('input').value;
+        
+        // In a real app, you would send this to a server
+        alert(`Thank you for subscribing with ${email}! You'll be notified about upcoming shows.`);
+        newsletterForm.reset();
+    });
+}
+
+// Toggle between light and dark theme
+function toggleTheme() {
+    const currentTheme = document.documentElement.getAttribute('data-theme');
+    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+    
+    document.documentElement.setAttribute('data-theme', newTheme);
+    localStorage.setItem('theme', newTheme);
+    updateThemeIcon(newTheme);
+}
+
+// Update theme toggle icon
+function updateThemeIcon(theme) {
+    const icon = themeToggle.querySelector('i');
+    icon.className = theme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+}
+    </script>
 </body>
 </html>
