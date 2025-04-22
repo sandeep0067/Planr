@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Planr - Ticket Booking</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -700,14 +701,14 @@
         
         .auth-form h1 {
             font-size: 1.8rem;
-            margin-bottom: px;
+            margin-bottom: 5px;
             color: var(--text-light);
         }
         
         .social-login {
             display: flex;
             gap: 15px;
-            margin-bottom: px;
+            margin-bottom: 0px;
         }
         
         .social-btn {
@@ -920,9 +921,18 @@
                         <a class="nav-link" href="concertpage.html">Concerts</a>
                     </li>
                 </ul>
-                <div class="d-flex">
+                <div class="d-flex align-items-center" id="auth-buttons">
                     <button class="btn btn-outline-light me-2" id="open-login">Login</button>
                     <button class="btn btn-primary" id="open-signup">Sign Up</button>
+                </div>
+                <div class="dropdown d-none" id="profile-section">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                        <img src="" alt="Profile" id="profile-pic" class="rounded-circle" style="width: 32px; height: 32px;">
+                        <span id="profile-name" class="ms-2"></span>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li><a class="dropdown-item" href="#" id="logout">Logout</a></li>
+                    </ul>
                 </div>
             </div>
         </div>
@@ -1481,5 +1491,96 @@
         // Call once on page load
         updateCountdown();
     </script>
+    <script>
+        // Add this to the script section
+        let currentUser = null;
+        
+        // Initialize Google Sign-In
+        function initializeGoogleSignIn() {
+            google.accounts.id.initialize({
+                client_id: 'YOUR_GOOGLE_CLIENT_ID.apps.googleusercontent.com',
+                callback: handleGoogleResponse
+            });
+            
+            google.accounts.id.renderButton(
+                document.getElementById('google-login'),
+                { theme: 'outline', size: 'large' }
+            );
+        }
+        
+        function handleGoogleResponse(response) {
+            // Here you would typically verify the credential with your backend
+            const user = {
+                name: 'John Doe', // Get from Google API
+                email: 'john@example.com',
+                picture: 'https://example.com/profile.jpg'
+            };
+            handleLogin(user);
+        }
+        
+        // Social login handlers
+        document.querySelectorAll('.social-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const provider = e.currentTarget.querySelector('i').className.split('-')[1];
+                // Simulated login - replace with actual OAuth flow
+                const user = {
+                    name: 'Test User',
+                    email: 'test@example.com',
+                    picture: `https://source.unsplash.com/random/100x100/?${provider}`
+                };
+                handleLogin(user);
+            });
+        });
+        
+        // Handle login
+        function handleLogin(user) {
+            currentUser = user;
+            localStorage.setItem('currentUser', JSON.stringify(user));
+            updateAuthUI();
+        }
+        
+        // Handle logout
+        document.getElementById('logout').addEventListener('click', () => {
+            localStorage.removeItem('currentUser');
+            currentUser = null;
+            updateAuthUI();
+        });
+        
+        // Update UI based on auth state
+        function updateAuthUI() {
+            const authButtons = document.getElementById('auth-buttons');
+            const profileSection = document.getElementById('profile-section');
+            
+            if (currentUser) {
+                authButtons.classList.add('d-none');
+                profileSection.classList.remove('d-none');
+                document.getElementById('profile-name').textContent = currentUser.name;
+                document.getElementById('profile-pic').src = currentUser.picture;
+            } else {
+                authButtons.classList.remove('d-none');
+                profileSection.classList.add('d-none');
+            }
+        }
+        
+        // Check for existing session on page load
+        window.addEventListener('load', () => {
+            const storedUser = localStorage.getItem('currentUser');
+            if (storedUser) {
+                currentUser = JSON.parse(storedUser);
+                updateAuthUI();
+            }
+            initializeGoogleSignIn();
+        });
+        
+        // Modify the existing auth modal code to close on successful login
+        function handleLogin(user) {
+            currentUser = user;
+            localStorage.setItem('currentUser', JSON.stringify(user));
+            updateAuthUI();
+            document.querySelectorAll('.modal-overlay.active').forEach(modal => {
+                modal.classList.remove('active');
+            });
+        }
+        </script>
 </body>
 </html>
