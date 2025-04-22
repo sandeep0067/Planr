@@ -1,0 +1,1376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laugh Factory India | Book Standup Comedy Shows</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Reset and Base Styles */
+        :root {
+            --primary: #ff6b6b;
+            --secondary: #794afa;
+            --secondary-dark: #4531a8;
+            --white: #ffffff;
+            --gray: #f8f9fa;
+            --gray-dark: #e9ecef;
+            --black: #212529;
+            --success: #20c997;
+            --warning: #ff922b;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: var(--gray);
+            color: var(--black);
+            line-height: 1.6;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        /* Typography */
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+        }
+
+        h1 {
+            font-size: 3rem;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+        }
+
+        h3 {
+            font-size: 2rem;
+        }
+
+        p {
+            margin-bottom: 1rem;
+        }
+
+        /* Utility Classes */
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 1.8rem;
+            border-radius: 50px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+            outline: none;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: var(--white);
+        }
+
+        .btn-primary:hover {
+            background-color: #ff5252;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(255, 107, 107, 0.3);
+        }
+
+        .btn-secondary {
+            background-color: var(--secondary);
+            color: var(--white);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--secondary-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(121, 74, 250, 0.3);
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .section-padding {
+            padding: 5rem 0;
+        }
+
+        .section-title {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 3rem;
+        }
+
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background-color: var(--primary);
+            border-radius: 2px;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: var(--white);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--secondary);
+        }
+
+        .logo span {
+            color: var(--primary);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1505373877841-8d25f7d46678?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80') no-repeat center center/cover;
+            height: 100vh;
+            color: var(--white);
+            display: flex;
+            align-items: center;
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            animation: fadeInDown 1s ease;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero-btns {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            animation: fadeIn 1.5s ease;
+        }
+
+        /* Featured Comedians Section */
+        .featured-comedians {
+            background-color: var(--white);
+        }
+
+        .comedians-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .comedian-card {
+            background-color: var(--white);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .comedian-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .comedian-img {
+            height: 300px;
+            overflow: hidden;
+        }
+
+        .comedian-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .comedian-card:hover .comedian-img img {
+            transform: scale(1.1);
+        }
+
+        .comedian-info {
+            padding: 1.5rem;
+        }
+
+        .comedian-info h3 {
+            margin-bottom: 0.5rem;
+        }
+
+        .comedian-info p {
+            color: #666;
+            margin-bottom: 1rem;
+        }
+
+        .rating {
+            color: var(--warning);
+            margin-bottom: 1rem;
+        }
+
+        /* Shows Section */
+        .shows {
+            background-color: var(--gray);
+        }
+
+        .shows-filter {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .filter-btn {
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            background-color: var(--white);
+            border: 1px solid var(--gray-dark);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .filter-btn.active, .filter-btn:hover {
+            background-color: var(--secondary);
+            color: var(--white);
+            border-color: var(--secondary);
+        }
+
+        .shows-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .show-card {
+            background-color: var(--white);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .show-img {
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .show-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .show-details {
+            padding: 1.5rem;
+        }
+
+        .show-date {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--secondary);
+            margin-bottom: 0.5rem;
+        }
+
+        .show-location {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #666;
+            margin-bottom: 1rem;
+        }
+
+        .show-price {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 1.5rem;
+        }
+
+        .price {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--secondary);
+        }
+
+        /* Testimonials Section */
+        .testimonials {
+            background-color: var(--white);
+        }
+
+        .testimonials-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .testimonial-card {
+            background-color: var(--gray);
+            padding: 2rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .testimonial-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .testimonial-img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-right: 1rem;
+        }
+
+        .testimonial-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .testimonial-rating {
+            color: var(--warning);
+            margin-bottom: 0.5rem;
+        }
+
+        /* Newsletter Section */
+        .newsletter {
+            background: linear-gradient(135deg, var(--secondary), var(--secondary-dark));
+            color: var(--white);
+            text-align: center;
+        }
+
+        .newsletter-form {
+            max-width: 600px;
+            margin: 0 auto;
+            display: flex;
+            gap: 1rem;
+        }
+
+        .newsletter-form input {
+            flex: 1;
+            padding: 1rem;
+            border-radius: 50px;
+            border: none;
+            outline: none;
+            font-size: 1rem;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--black);
+            color: var(--white);
+            padding: 4rem 0 2rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-column h3 {
+            position: relative;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+        }
+
+        .footer-column h3:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background-color: var(--primary);
+        }
+
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-links a {
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background-color: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Booking Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 2000;
+            overflow-y: auto;
+        }
+
+        .modal-content {
+            background-color: var(--white);
+            max-width: 800px;
+            margin: 3rem auto;
+            border-radius: 10px;
+            overflow: hidden;
+            animation: modalFadeIn 0.5s ease;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem;
+            background-color: var(--secondary);
+            color: var(--white);
+        }
+
+        .close-modal {
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .close-modal:hover {
+            transform: rotate(90deg);
+        }
+
+        .modal-body {
+            padding: 2rem;
+        }
+
+        .booking-form .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .booking-form label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .booking-form input,
+        .booking-form select,
+        .booking-form textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid var(--gray-dark);
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        .booking-form textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .form-row .form-group {
+            flex: 1;
+        }
+
+        .modal-footer {
+            padding: 1.5rem;
+            text-align: right;
+            border-top: 1px solid var(--gray-dark);
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes modalFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            h2 {
+                font-size: 2rem;
+            }
+            
+            .hero h1 {
+                font-size: 3rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 80px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 80px);
+                background-color: var(--white);
+                flex-direction: column;
+                align-items: center;
+                padding: 2rem 0;
+                transition: left 0.3s ease;
+            }
+
+            .nav-links.active {
+                left: 0;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .hero-btns {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .newsletter-form {
+                flex-direction: column;
+            }
+
+            .form-row {
+                flex-direction: column;
+                gap: 0;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .section-padding {
+                padding: 3rem 0;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            h2 {
+                font-size: 1.8rem;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .shows-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <a href="#" class="logo">Laugh<span>Factory</span></a>
+                <ul class="nav-links">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#comedians">Comedians</a></li>
+                    <li><a href="#shows">Shows</a></li>
+                    <li><a href="#testimonials">Reviews</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+                <div class="mobile-menu-btn">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-content">
+                <h1>India's Finest Standup Comedy Shows</h1>
+                <p>Book tickets for the hottest standup comedy shows featuring India's top comedians. Laugh your heart out with our curated selection of hilarious performances.</p>
+                <div class="hero-btns">
+                    <a href="#shows" class="btn btn-primary">Book Tickets</a>
+                    <a href="#comedians" class="btn btn-secondary">View Comedians</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Comedians Section -->
+    <section class="featured-comedians section-padding" id="comedians">
+        <div class="container">
+            <h2 class="section-title text-center">Featured Comedians</h2>
+            <p class="text-center">Discover India's most talented standup comedians who will leave you in splits</p>
+            
+            <div class="comedians-grid">
+                <!-- Comedian 1 -->
+                <div class="comedian-card">
+                    <div class="comedian-img">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Zakir Khan">
+                    </div>
+                    <div class="comedian-info">
+                        <h3>Zakir Khan</h3>
+                        <p>Known for his "sakht launda" persona</p>
+                        <div class="rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                            <span>4.5</span>
+                        </div>
+                        <a href="#" class="btn btn-primary book-btn" data-comedian="Zakir Khan">Book Show</a>
+                    </div>
+                </div>
+                
+                <!-- Comedian 2 -->
+                <div class="comedian-card">
+                    <div class="comedian-img">
+                        <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Vir Das">
+                    </div>
+                    <div class="comedian-info">
+                        <h3>Vir Das</h3>
+                        <p>Internationally acclaimed comedian</p>
+                        <div class="rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="far fa-star"></i>
+                            <span>4.0</span>
+                        </div>
+                        <a href="#" class="btn btn-primary book-btn" data-comedian="Vir Das">Book Show</a>
+                    </div>
+                </div>
+                
+                <!-- Comedian 3 -->
+                <div class="comedian-card">
+                    <div class="comedian-img">
+                        <img src="https://images.unsplash.com/photo-1542178243-bc20204b769f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Biswa Kalyan Rath">
+                    </div>
+                    <div class="comedian-info">
+                        <h3>Biswa Kalyan Rath</h3>
+                        <p>Engineer turned comedian</p>
+                        <div class="rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <span>5.0</span>
+                        </div>
+                        <a href="#" class="btn btn-primary book-btn" data-comedian="Biswa Kalyan Rath">Book Show</a>
+                    </div>
+                </div>
+                
+                <!-- Comedian 4 -->
+                <div class="comedian-card">
+                    <div class="comedian-img">
+                        <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Kaneez Surka">
+                    </div>
+                    <div class="comedian-info">
+                        <h3>Kaneez Surka</h3>
+                        <p>Queen of improv comedy</p>
+                        <div class="rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                            <span>4.5</span>
+                        </div>
+                        <a href="#" class="btn btn-primary book-btn" data-comedian="Kaneez Surka">Book Show</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Shows Section -->
+    <section class="shows section-padding" id="shows">
+        <div class="container">
+            <h2 class="section-title text-center">Upcoming Shows</h2>
+            <p class="text-center">Book your tickets for these hilarious shows happening near you</p>
+            
+            <div class="shows-filter">
+                <button class="filter-btn active" data-filter="all">All Shows</button>
+                <button class="filter-btn" data-filter="delhi">Delhi</button>
+                <button class="filter-btn" data-filter="mumbai">Mumbai</button>
+                <button class="filter-btn" data-filter="bangalore">Bangalore</button>
+            </div>
+            
+            <div class="shows-grid">
+                <!-- Show 1 -->
+                <div class="show-card" data-location="delhi">
+                    <div class="show-img">
+                        <img src="https://images.unsplash.com/photo-1501281668745-f7f57925c3b4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Comedy Night">
+                    </div>
+                    <div class="show-details">
+                        <h3>Laugh Riot Delhi</h3>
+                        <div class="show-date">
+                            <i class="far fa-calendar-alt"></i>
+                            <span>June 15, 2023 | 8:00 PM</span>
+                        </div>
+                        <div class="show-location">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Kingdom of Dreams, Gurugram</span>
+                        </div>
+                        <p>An evening of non-stop laughter with Zakir Khan, Kaneez Surka and special guests.</p>
+                        <div class="show-price">
+                            <span class="price">₹799 onwards</span>
+                            <a href="#" class="btn btn-secondary book-btn" data-show="Laugh Riot Delhi">Book Now</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Show 2 -->
+                <div class="show-card" data-location="mumbai">
+                    <div class="show-img">
+                        <img src="https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6a3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Standup Special">
+                    </div>
+                    <div class="show-details">
+                        <h3>Vir Das: Mumbai Special</h3>
+                        <div class="show-date">
+                            <i class="far fa-calendar-alt"></i>
+                            <span>June 18, 2023 | 7:30 PM</span>
+                        </div>
+                        <div class="show-location">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Jamshed Bhabha Theatre, Mumbai</span>
+                        </div>
+                        <p>Vir Das brings his internationally acclaimed comedy special to his home city.</p>
+                        <div class="show-price">
+                            <span class="price">₹1,299 onwards</span>
+                            <a href="#" class="btn btn-secondary book-btn" data-show="Vir Das: Mumbai Special">Book Now</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Show 3 -->
+                <div class="show-card" data-location="bangalore">
+                    <div class="show-img">
+                        <img src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Comedy Festival">
+                    </div>
+                    <div class="show-details">
+                        <h3>Bangalore Comedy Festival</h3>
+                        <div class="show-date">
+                            <i class="far fa-calendar-alt"></i>
+                            <span>June 22-25, 2023 | 6:00 PM</span>
+                        </div>
+                        <div class="show-location">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Palace Grounds, Bangalore</span>
+                        </div>
+                        <p>4 days of unlimited laughter with all the top Indian comedians at one place.</p>
+                        <div class="show-price">
+                            <span class="price">₹2,499 onwards</span>
+                            <a href="#" class="btn btn-secondary book-btn" data-show="Bangalore Comedy Festival">Book Now</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Show 4 -->
+                <div class="show-card" data-location="delhi">
+                    <div class="show-img">
+                        <img src="https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Comedy Club">
+                    </div>
+                    <div class="show-details">
+                        <h3>Weekend Comedy Club</h3>
+                        <div class="show-date">
+                            <i class="far fa-calendar-alt"></i>
+                            <span>Every Saturday | 9:00 PM</span>
+                        </div>
+                        <div class="show-location">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Hauz Khas Social, Delhi</span>
+                        </div>
+                        <p>Weekly standup comedy show featuring new and established comedians.</p>
+                        <div class="show-price">
+                            <span class="price">₹499 onwards</span>
+                            <a href="#" class="btn btn-secondary book-btn" data-show="Weekend Comedy Club">Book Now</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Show 5 -->
+                <div class="show-card" data-location="mumbai">
+                    <div class="show-img">
+                        <img src="https://images.unsplash.com/photo-1540039155733-5bb30b53aa14?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Comedy Night">
+                    </div>
+                    <div class="show-details">
+                        <h3>Biswa's Solo Special</h3>
+                        <div class="show-date">
+                            <i class="far fa-calendar-alt"></i>
+                            <span>June 28, 2023 | 8:30 PM</span>
+                        </div>
+                        <div class="show-location">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>NCPA, Mumbai</span>
+                        </div>
+                        <p>Biswa Kalyan Rath presents his new solo special "Sushi vs Vada Pav".</p>
+                        <div class="show-price">
+                            <span class="price">₹999 onwards</span>
+                            <a href="#" class="btn btn-secondary book-btn" data-show="Biswa's Solo Special">Book Now</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Show 6 -->
+                <div class="show-card" data-location="bangalore">
+                    <div class="show-img">
+                        <img src="https://images.unsplash.com/photo-1472653431158-6364773b2a56?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Open Mic">
+                    </div>
+                    <div class="show-details">
+                        <h3>Comedy Open Mic Night</h3>
+                        <div class="show-date">
+                            <i class="far fa-calendar-alt"></i>
+                            <span>Every Thursday | 7:00 PM</span>
+                        </div>
+                        <div class="show-location">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>The Humming Tree, Bangalore</span>
+                        </div>
+                        <p>Discover fresh comedy talent at our weekly open mic night.</p>
+                        <div class="show-price">
+                            <span class="price">₹299 onwards</span>
+                            <a href="#" class="btn btn-secondary book-btn" data-show="Comedy Open Mic Night">Book Now</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials section-padding" id="testimonials">
+        <div class="container">
+            <h2 class="section-title text-center">What People Say</h2>
+            <p class="text-center">Don't just take our word for it - hear from our happy customers</p>
+            
+            <div class="testimonials-container">
+                <!-- Testimonial 1 -->
+                <div class="testimonial-card">
+                    <div class="testimonial-header">
+                        <div class="testimonial-img">
+                            <img src="https://randomuser.me/api/portraits/women/32.jpg" alt="Priya Sharma">
+                        </div>
+                        <div>
+                            <h4>Priya Sharma</h4>
+                            <div class="testimonial-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p>"I attended Zakir Khan's show in Delhi and it was absolutely hilarious! The booking process was so smooth and the seats were great. Will definitely book through LaughFactory again!"</p>
+                </div>
+                
+                <!-- Testimonial 2 -->
+                <div class="testimonial-card">
+                    <div class="testimonial-header">
+                        <div class="testimonial-img">
+                            <img src="https://randomuser.me/api/portraits/men/45.jpg" alt="Rahul Mehta">
+                        </div>
+                        <div>
+                            <h4>Rahul Mehta</h4>
+                            <div class="testimonial-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p>"The Bangalore Comedy Festival was worth every penny! So many great comedians in one place. The app notifications kept me updated about timing changes. Great service!"</p>
+                </div>
+                
+                <!-- Testimonial 3 -->
+                <div class="testimonial-card">
+                    <div class="testimonial-header">
+                        <div class="testimonial-img">
+                            <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Ananya Patel">
+                        </div>
+                        <div>
+                            <h4>Ananya Patel</h4>
+                            <div class="testimonial-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p>"I've been to 3 shows booked through LaughFactory and each experience has been flawless. The customer support helped me quickly when I had a query about my tickets. Highly recommend!"</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="newsletter section-padding">
+        <div class="container">
+            <h2 class="text-center">Stay Updated</h2>
+            <p class="text-center">Subscribe to our newsletter for show announcements, early bird discounts and more!</p>
+            
+            <form class="newsletter-form">
+                <input type="email" placeholder="Enter your email address" required>
+                <button type="submit" class="btn btn-primary">Subscribe</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>LaughFactory</h3>
+                    <p>India's premier platform for booking standup comedy shows featuring the best Indian comedians.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#comedians">Comedians</a></li>
+                        <li><a href="#shows">Shows</a></li>
+                        <li><a href="#testimonials">Reviews</a></li>
+                        <li><a href="#">About Us</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Support</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">FAQs</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms & Conditions</a></li>
+                        <li><a href="#">Refund Policy</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Contact Info</h3>
+                    <ul class="footer-links">
+                        <li><i class="fas fa-map-marker-alt"></i> 123 Comedy Street, Mumbai, India</li>
+                        <li><i class="fas fa-phone"></i> +91 9876543210</li>
+                        <li><i class="fas fa-envelope"></i> info@laughfactory.in</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2023 LaughFactory India. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Booking Modal -->
+    <div class="modal" id="bookingModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modalTitle">Book Tickets</h3>
+                <span class="close-modal">&times;</span>
+            </div>
+            <div class="modal-body">
+                <form class="booking-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="showName">Show Name</label>
+                            <input type="text" id="showName" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label for="showDate">Show Date</label>
+                            <input type="text" id="showDate" readonly>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="name">Full Name</label>
+                            <input type="text" id="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="tickets">Number of Tickets</label>
+                            <select id="tickets" required>
+                                <option value="">Select</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="seating">Seating Preference</label>
+                        <select id="seating" required>
+                            <option value="">Select</option>
+                            <option value="front">Front Row</option>
+                            <option value="middle">Middle Section</option>
+                            <option value="back">Back Section</option>
+                            <option value="none">No Preference</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="special">Special Requirements</label>
+                        <textarea id="special" placeholder="Any special requirements or notes..."></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary close-modal-btn">Cancel</button>
+                <button class="btn btn-primary confirm-booking">Confirm Booking</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Confirmation Modal -->
+    <div class="modal" id="confirmationModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Booking Confirmed!</h3>
+                <span class="close-modal">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="text-center">
+                    <i class="fas fa-check-circle" style="font-size: 5rem; color: var(--success); margin-bottom: 1rem;"></i>
+                    <h4>Thank you for your booking!</h4>
+                    <p id="confirmationMessage">Your tickets have been booked successfully. A confirmation has been sent to your email.</p>
+                    <p>Your booking ID: <strong id="bookingId">LF2023XXXX</strong></p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary close-modal-btn">Done</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const navLinks = document.querySelector('.nav-links');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            mobileMenuBtn.innerHTML = navLinks.classList.contains('active') ? 
+                '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+        });
+        
+        // Close mobile menu when clicking a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+            });
+        });
+        
+        // Show Filter
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const showCards = document.querySelectorAll('.show-card');
+        
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Remove active class from all buttons
+                filterBtns.forEach(btn => btn.classList.remove('active'));
+                // Add active class to clicked button
+                btn.classList.add('active');
+                
+                const filter = btn.dataset.filter;
+                
+                showCards.forEach(card => {
+                    if (filter === 'all' || card.dataset.location === filter) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+        
+        // Booking Modal
+        const bookingModal = document.getElementById('bookingModal');
+        const confirmationModal = document.getElementById('confirmationModal');
+        const bookBtns = document.querySelectorAll('.book-btn');
+        const closeModalBtns = document.querySelectorAll('.close-modal, .close-modal-btn');
+        const showNameInput = document.getElementById('showName');
+        const showDateInput = document.getElementById('showDate');
+        const confirmBookingBtn = document.querySelector('.confirm-booking');
+        const bookingForm = document.querySelector('.booking-form');
+        
+        // Open booking modal
+        bookBtns.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                
+                // Set show name in modal
+                const showName = btn.dataset.show || btn.dataset.comedian;
+                showNameInput.value = showName;
+                
+                // For show cards, get the date as well
+                if (btn.dataset.show) {
+                    const showCard = btn.closest('.show-card');
+                    const showDate = showCard.querySelector('.show-date span').textContent;
+                    showDateInput.value = showDate;
+                } else {
+                    showDateInput.value = 'Date to be selected';
+                }
+                
+                bookingModal.style.display = 'block';
+                document.body.style.overflow = 'hidden';
+            });
+        });
+        
+        // Close modals
+        closeModalBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                bookingModal.style.display = 'none';
+                confirmationModal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            });
+        });
+        
+        // Close modal when clicking outside
+        window.addEventListener('click', (e) => {
+            if (e.target === bookingModal) {
+                bookingModal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+            if (e.target === confirmationModal) {
+                confirmationModal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+        });
+        
+        // Form submission
+        confirmBookingBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            
+            // Simple validation
+            let isValid = true;
+            const inputs = bookingForm.querySelectorAll('input, select');
+            
+            inputs.forEach(input => {
+                if (input.required && !input.value) {
+                    input.style.borderColor = 'red';
+                    isValid = false;
+                } else {
+                    input.style.borderColor = '';
+                }
+            });
+            
+            if (isValid) {
+                // Generate random booking ID
+                const bookingId = 'LF' + new Date().getFullYear() + Math.floor(1000 + Math.random() * 9000);
+                document.getElementById('bookingId').textContent = bookingId;
+                
+                // Set confirmation message
+                const confirmationMessage = `Your tickets for ${showNameInput.value} have been booked successfully. A confirmation has been sent to your email.`;
+                document.getElementById('confirmationMessage').textContent = confirmationMessage;
+                
+                // Show confirmation modal
+                bookingModal.style.display = 'none';
+                confirmationModal.style.display = 'block';
+                
+                // Reset form
+                bookingForm.reset();
+            }
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Generate random booking ID for demo purposes
+        function generateBookingId() {
+            const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+            const numbers = '0123456789';
+            let id = 'LF';
+            
+            for (let i = 0; i < 2; i++) {
+                id += letters.charAt(Math.floor(Math.random() * letters.length));
+            }
+            
+            for (let i = 0; i < 4; i++) {
+                id += numbers.charAt(Math.floor(Math.random() * numbers.length));
+            }
+            
+            return id;
+        }
+    </script>
+</body>
+</html>
