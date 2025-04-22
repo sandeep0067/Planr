@@ -498,38 +498,41 @@
         .login-popup {
             background: var(--gradient-login);
             color: white;
-            width: 450px;
-            padding: 40px;
+            width: 90%;
+            max-width: 450px;
+            padding: 40px 20px;
             border-radius: 12px;
             text-align: center;
             position: relative;
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
             animation: fadeIn 0.3s ease;
+            margin: auto;
         }
         
         .login-popup h2 {
-            font-size: 2.5rem;
+            font-size: 2rem;
             margin-bottom: 20px;
             font-weight: 600;
         }
         
         .login-popup p {
             margin-bottom: 30px;
-            font-size: 1.1rem;
+            font-size: 1rem;
             opacity: 0.9;
         }
         
         .sign-in-btn {
-            background-color: white;
-            color: #0d6efd;
-            border: none;
-            padding: 12px 35px;
-            border-radius: 30px;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            background: var(--gradient-login);
+            color: white;
+            width: 90%;
+            max-width: 450px;
+            padding: 40px 20px;
+            border-radius: 12px;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            animation: fadeIn 0.3s ease;
+            margin: auto;
         }
         
         .sign-in-btn:hover {
@@ -885,9 +888,15 @@
             }
             
             .login-popup {
-                width: 90%;
-                max-width: 400px;
-                padding: 30px;
+                padding: 30px 15px;
+            }
+
+            .login-popup h2 {
+                font-size: 1.5rem;
+            }
+
+            .login-popup p {
+                font-size: 0.95rem;
             }
             
             .slide.prev, .slide.next {
@@ -911,13 +920,13 @@
                         <a class="nav-link active" href="#">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Movies</a>
+                        <a class="nav-link" href="movies.2.html">Movies</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Comedy</a>
+                        <a class="nav-link" href="standup.html">Comedy</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Concerts</a>
+                        <a class="nav-link" href="concertpage.html">Concerts</a>
                     </li>
                 </ul>
                 <div class="d-flex">
@@ -946,9 +955,9 @@
         </div>
         
         <!-- Slide 2: Comedy -->
-        <div class="slide" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://www.nbc.com/sites/nbcblog/files/styles/scale_862/public/2023/05/the-voice-recaps-todd-tilghman.jpg')">
+        <div class="slide" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://i.pinimg.com/736x/c1/e7/83/c1e783c507b7755031519f6299f5f96b.jpg')">
             <div class="slide-content">
-                <h2 class="slide-title">Comedy<br>Night.</h2>
+                <h2 class="slide-title">Music<br>Night.</h2>
             </div>
             <div class="event-details">
                 <div class="event-date">FRIDAY MAY. 2</div>
@@ -1008,12 +1017,12 @@
             <!-- Movie Card -->
             <div class="col">
                 <div class="card h-100">
-                    <img src="https://source.unsplash.com/random/600x900/?minecraft" class="card-img-top" alt="Minecraft 3D">
+                    <img src="Images\heres-all-the-new-movie-posters-that-were-released-v0-qrjiokeggsle1.webp" class="card-img-top" alt="Minecraft 3D">
                     <div class="card-body d-flex flex-column">
                         <h5 class="card-title fw-bold" style="color: var(--primary-accent)">Minecraft 3D</h5>
                         <p class="card-text flex-grow-1 text-white-50">Four misfits are suddenly pulled through a mysterious portal into a bizarre cubic wonderland that thrives on imagination.</p>
                         <div class="mt-auto">
-                            <a href="#" class="btn btn-primary w-100 book-now-btn">Book Now</a>
+                            <a href="minecraft.html" class="btn btn-primary w-100 book-now-btn">Book Now</a>
                         </div>
                     </div>
                 </div>
@@ -1022,7 +1031,7 @@
             <!-- Comedy Card -->
             <div class="col">
                 <div class="card h-100">
-                    <img src="https://source.unsplash.com/random/600x900/?travis-scott" class="card-img-top" alt="Travis Scott">
+                    <img src="Images\download (1).jpeg" class="card-img-top" alt="Travis Scott">
                     <div class="card-body d-flex flex-column">
                         <h5 class="card-title fw-bold" style="color: var(--primary-accent)">Travis Scott India Tour</h5>
                         <p class="card-text flex-grow-1 text-white-50">An evening with top comedians from around the country. Prepare for non-stop laughter!</p>
@@ -1073,7 +1082,7 @@
                       <i class="bi bi-film fs-1 mb-3 category-icon" style="color: var(--primary-accent)"></i>
                       <h3 class="card-title fw-bold" style="color: var(--primary-accent)">Movies</h3>
                       <p class="card-text text-white-50">Blockbusters, indies, and classics</p>
-                      <a href="#" class="btn btn-outline-light mt-3 explore-btn">Explore</a>
+                      <a href="movies.2.html" class="btn btn-outline-light mt-3 explore-btn">Explore</a>
                   </div>
               </div>
           </div>
@@ -1083,7 +1092,7 @@
                       <i class="bi bi-mic fs-1 mb-3 category-icon" style="color: var(--primary-accent)"></i>
                       <h3 class="card-title fw-bold" style="color: var(--primary-accent)">Comedy</h3>
                       <p class="card-text text-white-50">Stand-up specials and live shows</p>
-                      <a href="#" class="btn btn-outline-light mt-3 explore-btn">Explore</a>
+                      <a href="standup.html" class="btn btn-outline-light mt-3 explore-btn">Explore</a>
                   </div>
               </div>
           </div>
@@ -1093,7 +1102,7 @@
                       <i class="bi bi-music-note-list fs-1 mb-3 category-icon" style="color: var(--primary-accent)"></i>
                       <h3 class="card-title fw-bold" style="color: var(--primary-accent)">Concerts</h3>
                       <p class="card-text text-white-50">Live music experiences</p>
-                      <a href="#" class="btn btn-outline-light mt-3 explore-btn">Explore</a>
+                      <a href="concertpage.html" class="btn btn-outline-light mt-3 explore-btn">Explore</a>
                   </div>
               </div>
           </div>
