@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Concerts in Chandigarh | ListYourShow</title>
+    <title>Concerts in Chandigarh | PLANR</title>
     <link rel="icon" type="image/jpg" href="./Images/concertfavicon.jpg">
     <style>
         * {
@@ -17,6 +17,85 @@
             background-color: #121212;
             color: #e0e0e0;
             line-height: 1.6;
+        }
+        
+        /* New Navigation Bar Styles */
+        .navbar {
+            background-color: #1a1a1a;
+            padding: 15px 0;
+            border-bottom: 1px solid #333;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #bb86fc;
+            text-decoration: none;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 25px;
+        }
+        
+        .nav-links a {
+            color: #e0e0e0;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+        
+        .nav-links a:hover {
+            color: #bb86fc;
+        }
+        
+        .nav-links a.active {
+            color: #bb86fc;
+        }
+        
+        .nav-links a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: #bb86fc;
+        }
+        
+        .search-bar {
+            display: flex;
+            align-items: center;
+            background: #2d2d2d;
+            border-radius: 20px;
+            padding: 8px 15px;
+            width: 250px;
+        }
+        
+        .search-bar input {
+            background: transparent;
+            border: none;
+            color: #e0e0e0;
+            width: 100%;
+            outline: none;
+        }
+        
+        .search-bar i {
+            color: #a0a0a0;
+            margin-right: 10px;
         }
         
         .container {
@@ -194,6 +273,20 @@
         }
         
         @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .nav-links {
+                width: 100%;
+                justify-content: space-around;
+            }
+            
+            .search-bar {
+                width: 100%;
+            }
+            
             .container {
                 flex-direction: column;
             }
@@ -211,10 +304,26 @@
     </style>
 </head>
 <body>
+    <!-- New Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">PLANR</a>
+            
+            <div class="nav-links">
+                <a href="#" class="active">Concerts</a>
+                <a href="#">Movies</a>
+                <a href="#">Comedy</a>
+            </div>
+            
+            <div class="search-bar">
+                <i>🔍</i>
+                <input type="text" placeholder="Search events...">
+            </div>
+        </div>
+    </nav>
+    
     <div class="container">
         <aside class="filters">
-            <h2 style="color: #ffffff; margin-bottom: 20px;">Filters</h2>
-            
             <div class="filter-section">
                 <h3>Date</h3>
                 <ul class="filter-options">
