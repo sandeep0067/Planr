@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -145,6 +144,8 @@
             box-shadow: 0 10px 25px rgba(0,0,0,0.4);
             position: relative;
             color: var(--text-light);
+            max-height: 90vh;
+            overflow-y: auto;
         }
         
         .close-btn {
@@ -427,6 +428,27 @@
         }
         
         /* Responsive Styles */
+        /* Large tablets and small laptops (992px and below) */
+        @media (max-width: 992px) {
+            .movies-container {
+                grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+                gap: 1.5rem;
+            }
+            
+            .movie-poster {
+                height: 350px;
+            }
+            
+            .movie-info {
+                padding: 1.2rem;
+            }
+            
+            .movie-title {
+                font-size: 1.1rem;
+            }
+        }
+        
+        /* Tablets (768px and below) */
         @media (max-width: 768px) {
             header {
                 padding: 0.8rem;
@@ -468,8 +490,8 @@
             }
             
             .movies-container {
-                grid-template-columns: 1fr;
-                padding: 0;
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+                gap: 1.2rem;
             }
             
             .movie-card {
@@ -477,18 +499,150 @@
             }
             
             .movie-poster {
-                height: 350px;
+                height: 300px;
+            }
+            
+            .movie-info {
+                padding: 1rem;
+            }
+            
+            .modal-content {
+                padding: 1.5rem;
+                width: 85%;
+            }
+            
+            .search-box {
+                margin: 1.5rem auto;
             }
         }
         
-        @media (max-width: 480px) {
-            .modal-content {
-                padding: 1.5rem;
-                width: 95%;
+        /* Large smartphones (576px and below) */
+        @media (max-width: 576px) {
+            .movies-container {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+                padding: 0.5rem;
             }
             
             .movie-poster {
-                height: 300px;
+                height: 350px;
+            }
+            
+            .logo h1 {
+                font-size: 1.3rem;
+            }
+            
+            .search-box {
+                margin: 1rem auto;
+            }
+            
+            #searchInput {
+                padding: 12px 15px;
+                font-size: 1rem;
+            }
+            
+            .search-box i {
+                top: 12px;
+                right: 15px;
+            }
+            
+            .modal-content {
+                padding: 1.2rem;
+                width: 90%;
+            }
+            
+            .form-group input, 
+            .form-group select,
+            .submit-btn {
+                padding: 10px 12px;
+            }
+            
+            .booking-summary {
+                padding: 0.8rem;
+                font-size: 0.9rem;
+            }
+        }
+        
+        /* Small smartphones (400px and below) */
+        @media (max-width: 400px) {
+            .logo h1 {
+                font-size: 1.2rem;
+            }
+            
+            .movie-poster {
+                height: 280px;
+            }
+            
+            .movie-info {
+                padding: 0.8rem;
+            }
+            
+            .movie-title {
+                font-size: 1rem;
+            }
+            
+            .movie-year, .movie-rating {
+                font-size: 0.85rem;
+            }
+            
+            .favorite-btn, .book-btn {
+                padding: 6px 12px;
+                font-size: 0.9rem;
+            }
+            
+            .modal-content {
+                padding: 1rem;
+                width: 95%;
+            }
+            
+            .auth-btn {
+                width: 45px;
+                height: 45px;
+                font-size: 0.9rem;
+            }
+        }
+        
+        /* Extra small devices (320px and below) */
+        @media (max-width: 320px) {
+            .logo h1 {
+                font-size: 1.1rem;
+            }
+            
+            .movie-poster {
+                height: 250px;
+            }
+            
+            .movie-info {
+                padding: 0.7rem;
+            }
+            
+            .favorite-btn, .book-btn {
+                font-size: 0.85rem;
+            }
+            
+            .modal-content {
+                padding: 0.8rem;
+            }
+        }
+        
+        /* Landscape orientation for mobile devices */
+        @media (max-height: 500px) and (orientation: landscape) {
+            .modal-content {
+                max-height: 80vh;
+                overflow-y: auto;
+            }
+            
+            .movie-poster {
+                height: 200px;
+            }
+            
+            .movies-container {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            }
+            
+            .auth-buttons {
+                bottom: 10px;
+                right: 10px;
             }
         }
     </style>
