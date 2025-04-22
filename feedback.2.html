@@ -3,174 +3,254 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Planr - Event Feedback</title>
+    <title>Planr - Feedback</title>
     <style>
         :root {
             --primary: #6c5ce7;
             --secondary: #a29bfe;
-            --dark: #2d3436;
-            --light: #f5f6fa;
+            --accent: #fd79a8;
+            --light: #f8f9fa;
+            --dark: #343a40;
         }
-
+        
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-
+        
         body {
-            background-color: #f9f9f9;
-            color: var(--dark);
-            line-height: 1.6;
-            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             padding: 20px;
         }
-
+        
         .container {
-            max-width: 600px;
-            margin: 0 auto;
-            padding: 30px;
-            background: white;
+            background-color: white;
             border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 500px;
+            padding: 30px;
+            animation: fadeIn 0.5s ease;
         }
-
-        header {
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .logo {
             text-align: center;
-            margin-bottom: 30px;
+            margin-bottom: 25px;
         }
-
-        header h1 {
-            font-size: 2rem;
+        
+        .logo h1 {
             color: var(--primary);
-            margin-bottom: 10px;
+            font-size: 2.5rem;
+            font-weight: 700;
+            letter-spacing: 1px;
         }
-
-        header p {
-            color: #666;
+        
+        .logo p {
+            color: var(--dark);
+            font-size: 1rem;
+            margin-top: 5px;
         }
-
-        .planr-logo {
-            font-weight: bold;
-            color: var(--primary);
-        }
-
+        
         .form-group {
             margin-bottom: 20px;
         }
-
+        
         label {
             display: block;
             margin-bottom: 8px;
-            font-weight: 500;
             color: var(--dark);
+            font-weight: 500;
         }
-
-        input[type="text"],
-        input[type="email"],
-        textarea,
-        select {
+        
+        input, textarea, select {
             width: 100%;
-            padding: 12px;
-            border: 1px solid #ddd;
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
             border-radius: 8px;
-            font-size: 16px;
+            font-size: 1rem;
+            transition: all 0.3s;
         }
-
-        .rating-options {
+        
+        input:focus, textarea:focus, select:focus {
+            border-color: var(--primary);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(108, 92, 231, 0.2);
+        }
+        
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+        
+        .rating {
             display: flex;
             justify-content: space-between;
-            margin-top: 10px;
+            margin: 15px 0;
         }
-
-        .rating-options label {
-            cursor: pointer;
-            font-size: 24px;
-            color: #ddd;
-        }
-
-        .rating-options input[type="radio"] {
+        
+        .rating input {
             display: none;
         }
-
-        .rating-options input[type="radio"]:checked + span {
-            color: #ffc107;
+        
+        .rating label {
+            font-size: 2rem;
+            color: #ccc;
+            cursor: pointer;
+            transition: all 0.3s;
         }
-
-        .submit-btn {
-            width: 100%;
-            padding: 14px;
+        
+        .rating input:checked ~ label,
+        .rating label:hover,
+        .rating label:hover ~ label {
+            color: var(--accent);
+        }
+        
+        button {
             background-color: var(--primary);
             color: white;
             border: none;
+            padding: 12px 25px;
             border-radius: 8px;
-            font-size: 16px;
-            font-weight: 500;
+            font-size: 1rem;
+            font-weight: 600;
             cursor: pointer;
+            width: 100%;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
-
-        .submit-btn:hover {
-            background-color: #5649d1;
+        
+        button:hover {
+            background-color: #5649c0;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(108, 92, 231, 0.4);
         }
-
-        @media (max-width: 600px) {
-            .container {
-                padding: 20px;
-            }
-            
-            header h1 {
-                font-size: 1.5rem;
-            }
+        
+        #thankYouMessage {
+            text-align: center;
+            padding: 20px;
+            display: none;
+        }
+        
+        #thankYouMessage h2 {
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+        
+        #thankYouMessage p {
+            color: var(--dark);
+            margin-bottom: 20px;
+        }
+        
+        .emoji {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            animation: bounce 1s infinite alternate;
+        }
+        
+        @keyframes bounce {
+            from { transform: translateY(0); }
+            to { transform: translateY(-10px); }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <header>
-            <h1><span class="planr-logo">Planr</span> Feedback</h1>
-            <p>Help us improve your event planning experience</p>
-        </header>
+        <div class="logo">
+            <h1>Planr</h1>
+            <p>Your Event Planning Partner</p>
+        </div>
         
-        <form id="feedbackForm" action="#" method="post">
+        <form id="feedbackForm">
             <div class="form-group">
                 <label for="name">Your Name</label>
-                <input type="text" id="name" name="name" placeholder="John Doe" required>
+                <input type="text" id="name" placeholder="Enter your name" required>
             </div>
             
             <div class="form-group">
                 <label for="email">Email Address</label>
-                <input type="email" id="email" name="email" placeholder="john@example.com" required>
+                <input type="email" id="email" placeholder="Enter your email" required>
             </div>
             
             <div class="form-group">
-                <label>How would you rate your experience?</label>
-                <div class="rating-options">
-                    <label><input type="radio" name="rating" value="5" required><span>★★★★★</span></label>
-                    <label><input type="radio" name="rating" value="4"><span>★★★★</span></label>
-                    <label><input type="radio" name="rating" value="3"><span>★★★</span></label>
-                    <label><input type="radio" name="rating" value="2"><span>★★</span></label>
-                    <label><input type="radio" name="rating" value="1"><span>★</span></label>
+                <label>How would you rate your experience with Planr?</label>
+                <div class="rating">
+                    <input type="radio" id="star5" name="rating" value="5">
+                    <label for="star5">★</label>
+                    <input type="radio" id="star4" name="rating" value="4">
+                    <label for="star4">★</label>
+                    <input type="radio" id="star3" name="rating" value="3">
+                    <label for="star3">★</label>
+                    <input type="radio" id="star2" name="rating" value="2">
+                    <label for="star2">★</label>
+                    <input type="radio" id="star1" name="rating" value="1">
+                    <label for="star1">★</label>
                 </div>
             </div>
             
             <div class="form-group">
-                <label for="feedback">Your Feedback</label>
-                <textarea id="feedback" name="feedback" rows="5" placeholder="What did you like or what can we improve?" required></textarea>
-            </div>
-            
-            <div class="form-group">
-                <label for="events">Which event did you attend?</label>
-                <select id="events" name="events" required>
-                    <option value="">Select an event</option>
-                    <option value="concert">Summer Music Festival</option>
-                    <option value="conference">Tech Innovators Conference</option>
-                    <option value="workshop">Creative Writing Workshop</option>
-                    <option value="other">Other</option>
+                <label for="feedbackType">Feedback Type</label>
+                <select id="feedbackType" required>
+                    <option value="" disabled selected>Select feedback type</option>
+                    <option value="suggestion">Suggestion</option>
+                    
+                    <option value="compliment">Compliment</option>
+                    <option value="complaint">Complaint</option>
                 </select>
             </div>
             
-            <button type="submit" class="submit-btn">Submit Feedback</button>
+            <div class="form-group">
+                <label for="message">Your Feedback</label>
+                <textarea id="message" placeholder="Tell us about your experience..." required></textarea>
+            </div>
+            
+            <button type="submit">Submit Feedback</button>
         </form>
+        
+        <div id="thankYouMessage">
+            <div class="emoji">🎉</div>
+            <h2>Thank You!</h2>
+            <p>Your feedback has been received. We appreciate you helping us improve Planr!</p>
+            <button onclick="resetForm()">Submit Another Feedback</button>
+        </div>
     </div>
+
+    <script>
+        document.getElementById('feedbackForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // In a real app, you would send this data to a server
+            const formData = {
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                rating: document.querySelector('input[name="rating"]:checked')?.value || 'Not rated',
+                feedbackType: document.getElementById('feedbackType').value,
+                message: document.getElementById('message').value
+            };
+            
+            console.log('Feedback submitted:', formData);
+            
+            // Show thank you message
+            document.getElementById('feedbackForm').style.display = 'none';
+            document.getElementById('thankYouMessage').style.display = 'block';
+        });
+        
+        function resetForm() {
+            document.getElementById('feedbackForm').reset();
+            document.getElementById('feedbackForm').style.display = 'block';
+            document.getElementById('thankYouMessage').style.display = 'none';
+        }
+    </script>
 </body>
 </html>
