@@ -7,50 +7,431 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        
         :root {
-            --dark-bg: #121212;
-            --dark-card: #1e1e1e;
-            --dark-border: #333;
-            --text-light: #e0e0e0;
-            --primary-accent: #0d6efd;
-            --login-bg: #181622;
-            --login-pink: #f84c6c;
+            --dark-bg: #0f0f13;
+            --dark-card: #1a1a22;
+            --dark-border: #2a2a35;
+            --text-light: #f0f0f5;
+            --primary-accent: #4d7cfe;
+            --primary-accent-hover: #3a69eb;
+            
+            /* Enhanced Gradient Variables */
+            --gradient-primary: linear-gradient(135deg, #4d7cfe, #6d5dfc);
+            --gradient-primary-hover: linear-gradient(135deg, #3a69eb, #5c4ce9);
+            --gradient-hero: linear-gradient(rgba(0, 0, 0, 0.7), rgba(77, 124, 254, 0.1));
+            --gradient-card-hover: linear-gradient(135deg, rgba(77, 124, 254, 0.05), rgba(109, 93, 252, 0.1));
+            --gradient-login: linear-gradient(135deg, #4d7cfe, #6d5dfc);
         }
+        
+        * {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
         body {
             background-color: var(--dark-bg);
             color: var(--text-light);
+            line-height: 1.6;
         }
+        
+        .container {
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header Styles */
         .navbar {
-            background-color: #000 !important;
-            border-bottom: 1px solid var(--dark-border);
+            background-color: rgba(15, 15, 19, 0.7) !important;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 12px 0;
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            transition: all 0.3s ease;
         }
-        .hero-section {
-            background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('https://source.unsplash.com/random/1200x600/?cinema');
+        
+        .navbar-brand {
+            font-size: 1.4rem;
+            font-weight: 700;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: 1px;
+        }
+        
+        /* Navigation hover effects */
+        .nav-link {
+            position: relative;
+            padding: 8px 16px;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: var(--primary-accent);
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        .nav-link:hover::after {
+            width: 80%;
+        }
+        
+        /* Hero Slideshow - Enhanced with Sliding Effect */
+        .slideshow-container {
+            position: relative;
+            height: 100vh;
+            perspective: 1000px;
+            overflow: hidden;
+            margin-top: 0;
+        }
+        
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             background-size: cover;
             background-position: center;
-            padding: 120px 0;
-            margin-bottom: 40px;
+            transform-style: preserve-3d;
+            transition: transform 1.2s cubic-bezier(0.77, 0, 0.175, 1), 
+                        opacity 1.2s ease,
+                        z-index 0.01s 0.6s;
+            transform: translateX(100%) scale(0.9);
+            opacity: 0;
+            z-index: 1;
+            display: flex;
+            align-items: center;
+            padding: 0 80px;
         }
-        .card {
-            background-color: var(--dark-card);
-            border: 1px solid var(--dark-border);
-            transition: transform 0.3s, box-shadow 0.3s;
+
+        .slide.active {
+            transform: translateX(0) scale(1);
+            opacity: 1;
+            z-index: 3;
+            transition-delay: 0s;
+        }
+
+        .slide.prev {
+            transform: translateX(-100%) scale(0.9);
+            opacity: 0.5;
+            z-index: 2;
+        }
+
+        .slide.next {
+            transform: translateX(100%) scale(0.9);
+            opacity: 0.5;
+            z-index: 2;
+        }
+        
+        .slide-content {
+            max-width: 550px;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1) 0.3s;
+        }
+        
+        .slide.active .slide-content {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .slide-title {
+            font-size: 90px;
+            line-height: 0.9;
+            text-transform: uppercase;
+            font-weight: 900;
+            background: linear-gradient(135deg, #fff, #a0b8ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+            text-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+            letter-spacing: -2px;
+        }
+        
+        .event-details {
+            background: rgba(77, 124, 254, 0.85);
+            backdrop-filter: blur(8px);
+            padding: 30px;
+            max-width: 300px;
+            margin-left: auto;
+            transform: translateX(100px);
+            opacity: 0;
+            transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1) 0.5s;
+            border: 1px solid rgba(255,255,255,0.2);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+            border-radius: 12px;
+        }
+        
+        .slide.active .event-details {
+            transform: translateX(0);
+            opacity: 1;
+        }
+        
+        .event-date {
+            background-color: #000;
+            color: #fff;
+            padding: 8px 16px;
+            display: inline-block;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        
+        .event-time {
+            background-color: #000;
+            color: #fff;
+            padding: 8px 16px;
+            display: inline-block;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+        
+        .ticket-button {
+            display: inline-flex;
+            align-items: center;
+            background-color: transparent;
+            border: 2px solid #000;
+            color: #000;
+            padding: 10px 16px;
+            text-decoration: none;
+            font-weight: bold;
+            text-transform: uppercase;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .ticket-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
             height: 100%;
+            background-color: #000;
+            transition: all 0.3s ease;
+            z-index: -1;
         }
+        
+        .ticket-button:hover {
+            color: var(--primary-accent);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .ticket-button:hover::before {
+            left: 0;
+        }
+        
+        .arrow-icon {
+            margin-right: 10px;
+            transition: transform 0.3s ease;
+        }
+        
+        .ticket-button:hover .arrow-icon {
+            transform: translateX(3px);
+        }
+        
+        /* Slideshow Navigation - Enhanced */
+        .slideshow-nav {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 15px;
+            z-index: 20;
+        }
+        
+        .slide-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .slide-dot::after {
+            content: '';
+            position: absolute;
+            top: -4px;
+            left: -4px;
+            right: -4px;
+            bottom: -4px;
+            border-radius: 50%;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            opacity: 0;
+            transform: scale(0.8);
+            transition: all 0.3s ease;
+        }
+        
+        .slide-dot:hover {
+            background-color: rgba(255, 255, 255, 0.8);
+        }
+        
+        .slide-dot.active {
+            background-color: #fff;
+        }
+        
+        .slide-dot.active::after {
+            opacity: 1;
+            transform: scale(1);
+        }
+        
+        /* Slide Controls */
+        .slide-controls {
+            position: absolute;
+            width: 100%;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            justify-content: space-between;
+            padding: 0 30px;
+            z-index: 30;
+        }
+        
+        .slide-control {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+            color: #fff;
+            font-size: 20px;
+            transform: perspective(800px) rotateY(15deg);
+        }
+        
+        .slide-control:hover {
+            background-color: var(--primary-accent);
+            color: #000;
+            transform: perspective(800px) rotateY(0deg);
+        }
+        
+        /* Slide Progress Indicator */
+        .slide-progress {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 200px;
+            height: 3px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 3px;
+            overflow: hidden;
+            z-index: 25;
+        }
+
+        .progress-bar {
+            height: 100%;
+            width: 0;
+            background: var(--primary-accent);
+            border-radius: 3px;
+            transition: width 5s linear;
+        }
+        
+        /* Enhanced Card Hover Effect */
+        .card {
+            background-color: rgba(26, 26, 34, 0.8);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+                        box-shadow 0.4s ease;
+            height: 100%;
+            border-radius: 12px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--gradient-card-hover);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 1;
+            pointer-events: none;
+        }
+        
+        .card:hover::before {
+            opacity: 1;
+        }
+        
         .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+            transform: translateY(-10px);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.4);
         }
+        
+        .card-body {
+            position: relative;
+            z-index: 2;
+        }
+        
         .card-img-top {
             height: 300px;
             object-fit: cover;
             border-bottom: 1px solid var(--dark-border);
         }
+        
         .btn-primary {
-            background-color: var(--primary-accent);
-            border-color: var(--primary-accent);
+            background-image: var(--gradient-primary);
+            border: none;
+            padding: 5px 12px;
+            border-radius: 4px;
+            font-weight: 500;
+            transition: all 0.3s ease;
         }
-        .carousel-control-prev, .carousel-control-next {
+        
+        .btn-primary:hover {
+            background-image: var(--gradient-primary-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(13, 110, 253, 0.3);
+        }
+        
+        .btn-outline-light {
+            border-radius: 4px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-outline-light:hover {
+            transform: translateY(-2px);
+        }
+        
+        /* Special styles for non-login buttons */
+        .book-now-btn {
+            border-radius: 25px;
+        }
+        
+        .explore-btn {
+            border-radius: 25px;
+        }
+        
+        .carousel-control-prev, 
+        .carousel-control-next {
             width: 40px;
             height: 40px;
             background-color: rgba(0,0,0,0.5);
@@ -58,187 +439,461 @@
             top: 50%;
             transform: translateY(-50%);
         }
+        
         footer {
             background-color: #000;
             border-top: 1px solid var(--dark-border);
-            padding: 40px 0;
-            margin-top: 60px;
+            padding: 60px 0 40px;
+            margin-top: 80px;
         }
-        @media (max-width: 768px) {
-            .hero-section {
-                padding: 80px 0;
-            }
-            .card-img-top {
-                height: 250px;
-            }
+        
+        .category-icon {
+            transform: perspective(800px) rotateY(15deg);
+            transition: transform 0.5s ease;
         }
-
-        /* LOGIN SLIDE-IN PANEL STYLES */
-        .modal-overlay-login {
+        
+        .card:hover .category-icon {
+            transform: perspective(800px) rotateY(0deg) scale(1.2);
+        }
+        
+        .search-container {
+            position: relative;
+            z-index: 10;
+        }
+        
+        .hero-title {
+            font-size: 4rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 25px;
+            text-shadow: 0 0 15px rgba(13, 110, 253, 0.7);
+        }
+        
+        .hero-subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 40px;
+            font-weight: 300;
+        }
+        
+        /* Simple Login Modal Styles (Blue Gradient) */
+        .modal-overlay {
             position: fixed;
-            inset: 0;
-            background: rgba(0,0,0,0.42);
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
             display: none;
-            z-index: 2000;
-            transition: background 0.3s;
+            justify-content: center;
+            align-items: center;
+            z-index: 1050;
+            backdrop-filter: blur(3px);
         }
-        .modal-overlay-login.active {
-            display: block;
-            animation: fadeInOverlay 0.3s;
+        
+        .modal-overlay.active {
+            display: flex;
         }
-        @keyframes fadeInOverlay {
-            from {background: rgba(0,0,0,0);}
-            to   {background: rgba(0,0,0,0.42);}
+        
+        .login-popup {
+            background: var(--gradient-login);
+            color: white;
+            width: 450px;
+            padding: 40px;
+            border-radius: 12px;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            animation: fadeIn 0.3s ease;
         }
-        .login-sidebar {
+        
+        .login-popup h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+        
+        .login-popup p {
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        .sign-in-btn {
+            background-color: white;
+            color: #0d6efd;
+            border: none;
+            padding: 12px 35px;
+            border-radius: 30px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .sign-in-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .close-button {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: white;
+            opacity: 0.7;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .close-button:hover {
+            opacity: 1;
+            transform: rotate(90deg);
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* Full Login Form Styles */
+        .auth-container {
+            display: flex;
+            width: 800px;
+            height: 500px;
+            background-color: var(--dark-card);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+            animation: fadeIn 0.3s ease;
+            position: relative;
+        }
+        
+        .auth-forms {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            background: linear-gradient(135deg, #1e1e1e, #252525);
+            color: var(--text-light);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .auth-form {
+            padding: 40px;
             position: absolute;
             top: 0;
-            right: 0;
-            width: 400px;
-            max-width: 100vw;
-            height: 100vh;
-            background: var(--login-bg);
-            box-shadow: -6px 0 24px rgba(0,0,0,0.13);
+            left: 0;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.5s ease;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .login-form {
+            transform: translateX(0);
+        }
+        
+        .signup-form {
+            transform: translateX(100%);
+        }
+        
+        .auth-container.show-signup .login-form {
+            transform: translateX(-100%);
+        }
+        
+        .auth-container.show-signup .signup-form {
+            transform: translateX(0);
+        }
+        
+        .welcome-panel {
+            flex: 1;
+            background: var(--gradient-login);
+            color: white;
+            padding: 40px;
             display: flex;
             flex-direction: column;
             justify-content: center;
-            padding: 0;
-            transform: translateX(100%);
-            transition: transform 0.3s;
-            border-radius: 15px 0 0 15px;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
         }
-        .modal-overlay-login.active .login-sidebar {
-            transform: translateX(0);
-            animation: slideInSidebar 0.33s cubic-bezier(.33,1.02,.33,1);
+        
+        .welcome-panel::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://source.unsplash.com/random/600x900/?concert') center/cover;
+            opacity: 0.2;
         }
-        @keyframes slideInSidebar {
-            from {transform: translateX(100%);}
-            to   {transform: translateX(0);}
+        
+        .welcome-content {
+            position: relative;
+            z-index: 1;
+            transition: transform 0.5s ease, opacity 0.5s ease;
         }
-        .login-container {
+        
+        .welcome-content.login-welcome {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .welcome-content.signup-welcome {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             display: flex;
             flex-direction: column;
-            height: 100%;
-            padding: 44px 32px 32px 32px;
-            gap: 24px;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transform: translateY(20px);
         }
-        .login-panel, .welcome-panel {
-            width: 100%;
+        
+        .auth-container.show-signup .welcome-content.login-welcome {
+            opacity: 0;
+            transform: translateY(-20px);
         }
-        .login-panel h1 {
-            font-size: 1.75rem;
-            margin-bottom: 1.2rem;
-            color: #fff;
-            text-align: left;
+        
+        .auth-container.show-signup .welcome-content.signup-welcome {
+            opacity: 1;
+            transform: translateY(0);
         }
+        
+        .welcome-panel h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+        
+        .welcome-panel p {
+            margin-bottom: 30px;
+            font-size: 1rem;
+        }
+        
+        .toggle-auth-btn {
+            background-color: transparent;
+            color: white;
+            border: 2px solid white;
+            padding: 12px 30px;
+            border-radius: 30px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .toggle-auth-btn:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(255, 255, 255, 0.2);
+        }
+        
+        .auth-form h1 {
+            font-size: 1.8rem;
+            margin-bottom: 30px;
+            color: var(--text-light);
+        }
+        
         .social-login {
             display: flex;
-            gap: 14px;
-            margin-bottom: 1.1rem;
+            gap: 15px;
+            margin-bottom: 25px;
         }
+        
         .social-btn {
-            width: 38px; height: 38px;
-            border-radius: 50%; border: 1px solid #444; background: #232040;
-            display: flex; justify-content: center; align-items: center;
-            font-weight: bold; font-size: 1.13rem; color: #eee;
-            cursor: pointer; transition: 0.2s;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+            color: var(--text-light);
+            font-size: 18px;
+            cursor: pointer;
         }
-        .social-btn:hover { background: #30306e; }
+        
+        .social-btn:hover {
+            transform: translateY(-3px);
+            background: linear-gradient(135deg, rgba(13, 110, 253, 0.1), rgba(13, 110, 253, 0.2));
+        }
+        
         .divider {
-            text-align: center;
+            display: flex;
+            align-items: center;
+            margin: 20px 0;
             color: #999;
-            margin: 1.15rem 0 1.4rem 0;
-            font-size: 0.98rem;
-            text-transform: uppercase;
+            font-size: 0.9rem;
         }
-        .form-group { margin-bottom: 13px; }
+        
+        .divider::before,
+        .divider::after {
+            content: "";
+            flex: 1;
+            height: 1px;
+            background-color: var(--dark-border);
+        }
+        
+        .divider::before {
+            margin-right: 10px;
+        }
+        
+        .divider::after {
+            margin-left: 10px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
         .form-control {
             width: 100%;
-            padding: 13px;
-            border: 1px solid #30305B;
-            border-radius: 6px;
-            background: #232040;
-            color: var(--text-light);
+            padding: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.05);
             font-size: 1rem;
+            color: var(--text-light);
+            transition: all 0.3s ease;
         }
+        
         .form-control:focus {
             outline: none;
-            border-color: var(--login-pink);
-            box-shadow: 0 0 0 2px #f84c6c33;
-            background: #262248;
+            border-color: var(--primary-accent);
+            box-shadow: 0 0 0 3px rgba(13, 110, 253, 0.2);
+            background: rgba(255, 255, 255, 0.1);
         }
+        
         .forgot-password {
             text-align: right;
-            margin: 10px 0 24px;
+            margin: 10px 0 25px;
         }
+        
         .forgot-password a {
-            color: #bbb;
+            color: #999;
             text-decoration: none;
-            font-size: 0.93rem;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
         }
-        .forgot-password a:hover { color: var(--login-pink); }
-        .signin-btn {
-            width: 100%; padding: 13px;
-            background: linear-gradient(90deg, #f84c6c, #f84ca6);
+        
+        .forgot-password a:hover {
+            color: var(--primary-accent);
+        }
+        
+        .auth-btn {
+            width: 100%;
+            padding: 15px;
+            background-image: var(--gradient-primary);
             color: white;
             border: none;
-            border-radius: 25px;
+            border-radius: 30px;
             font-size: 1rem;
             font-weight: 500;
             cursor: pointer;
-            transition: 0.3s;
+            transition: all 0.3s ease;
         }
-        .signin-btn:hover { background: #f84c6c; }
-        .welcome-panel {
-            background: #f84c6c;
-            color: white;
-            text-align: center;
-            border-radius: 12px;
-            margin-top: 29px;
-            padding: 23px 10px 13px 10px;
+        
+        .auth-btn:hover {
+            background-image: var(--gradient-primary-hover);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(13, 110, 253, 0.3);
         }
-        .welcome-panel h2 {
-            font-size: 2rem;
-            margin-bottom: 0.7rem;
+        
+        /* Newsletter input styling */
+        .newsletter-input {
+            border-radius: 4px 0 0 4px !important;
+            border-right: none;
+            background-color: rgba(255, 255, 255, 0.05);
         }
-        .welcome-panel p {
-            font-size: 1rem;
-            margin-bottom: 1.0rem;
+        
+        .newsletter-btn {
+            border-radius: 0 4px 4px 0 !important;
         }
-        .signup-btn {
-            border: 2px solid white;
-            background: transparent;
-            color: white;
-            border-radius: 25px;
-            font-weight: 500;
-            padding: 10px 35px;
-            transition: 0.3s;
-            cursor: pointer;
-            font-size: 1rem;
+        
+        /* Footer separator line styling */
+        .footer-divider {
+            height: 4px;
+            background: var(--primary-accent);
+            width: 80px;
+            margin-bottom: 20px;
+            border-radius: 2px;
         }
-        .signup-btn:hover { background: rgba(255,255,255,0.13); }
-        .close-button {
-            position: absolute;
-            top: 20px;
-            right: 23px;
-            font-size: 2.1rem;
-            background: none;
-            color: #aaa;
-            border: none;
-            z-index: 10;
-            cursor: pointer;
-            transition: color 0.2s;
-        }
-        .close-button:hover { color: #f84c6c; }
-        @media (max-width:500px) {
-            .login-sidebar {
-                width: 100vw;
-                max-width: 100vw;
-                right: 0;
-                border-radius: 0;
+        
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
             }
-            .login-container { padding: 23px 8px 8px 8px; }
-            .welcome-panel { margin-top: 18px;}
+            
+            .slideshow-container {
+                height: 100vh;
+            }
+            
+            .slide-title {
+                font-size: 50px;
+                letter-spacing: -1px;
+            }
+            
+            .slide {
+                padding: 0 20px;
+                flex-direction: column;
+                justify-content: center;
+                align-items: flex-start;
+            }
+            
+            .event-details {
+                margin: 20px 0 0 0;
+                width: 100%;
+                max-width: none;
+            }
+            
+            .slide-controls {
+                padding: 0 15px;
+            }
+            
+            .slide-control {
+                width: 40px;
+                height: 40px;
+                font-size: 16px;
+            }
+            
+            .card-img-top {
+                height: 250px;
+            }
+            
+            .auth-container {
+                flex-direction: column;
+                width: 90%;
+                height: auto;
+                max-height: 90vh;
+                overflow-y: auto;
+            }
+            
+            .welcome-panel {
+                padding: 30px;
+            }
+            
+            .login-popup {
+                width: 90%;
+                max-width: 400px;
+                padding: 30px;
+            }
+            
+            .slide.prev, .slide.next {
+                transform: translateX(-50%);
+                opacity: 0;
+            }
         }
     </style>
 </head>
@@ -246,7 +901,7 @@
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark">
         <div class="container">
-            <a class="navbar-brand fw-bold" href="#">PLANR</a>
+            <a class="navbar-brand" href="#">PLANR</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -266,139 +921,217 @@
                     </li>
                 </ul>
                 <div class="d-flex">
-                    <button class="btn btn-outline-light me-2 btn-primary" id="open-login">Login / Sign Up</button>
+                    <button class="btn btn-outline-light me-2" id="open-login">Login</button>
+                    <button class="btn btn-primary" id="open-signup">Sign Up</button>
                 </div>
             </div>
         </div>
     </nav>
-    <!-- Hero Section -->
-    <section class="hero-section text-center">
-        <div class="container">
-            <h1 class="display-4 fw-bold mb-4">FEELL IT IN</h1>
-            <p class="lead fs-4 mb-5">Book tickets for unforgettable experiences</p>
-            <div class="row justify-content-center">
-                <div class="col-md-8">
-                    <div class="input-group">
-                        <input type="text" id="search-input" class="form-control form-control-lg" placeholder="Search events...">
-                        <button id="search-btn" class="btn btn-primary btn-lg" type="button">
-                            <i class="bi bi-search"></i>
-                        </button>
-                    </div>
-                    <!-- Add this dropdown container for search results -->
-                    <div id="search-results" class="mt-2"></div>
-                </div>
+
+    <!-- Hero Slideshow Section -->
+    <div class="slideshow-container">
+        <!-- Slide 1: Concert -->
+        <div class="slide active" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://wallpaperaccess.com/full/2183063.jpg')">
+            <div class="slide-content">
+                <h2 class="slide-title">Alt-Rock<br>Revolution.</h2>
+            </div>
+            <div class="event-details">
+                <div class="event-date">SATURDAY APR. 25</div>
+                <div class="event-time">8:00PM</div>
+                <a href="#" class="ticket-button">
+                    <span class="arrow-icon">→</span>
+                    Get Tickets
+                </a>
             </div>
         </div>
-    </section>
+        
+        <!-- Slide 2: Comedy -->
+        <div class="slide" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://www.nbc.com/sites/nbcblog/files/styles/scale_862/public/2023/05/the-voice-recaps-todd-tilghman.jpg')">
+            <div class="slide-content">
+                <h2 class="slide-title">Comedy<br>Night.</h2>
+            </div>
+            <div class="event-details">
+                <div class="event-date">FRIDAY MAY. 2</div>
+                <div class="event-time">9:00PM</div>
+                <a href="#" class="ticket-button">
+                    <span class="arrow-icon">→</span>
+                    Get Tickets
+                </a>
+            </div>
+        </div>
+        
+        <!-- Slide 3: Movies -->
+        <div class="slide" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://static01.nyt.com/images/2023/05/16/multimedia/16cannes-promo-230pm-pwvg/16cannes-promo-230pm-pwvg-videoSixteenByNine3000.jpg')">
+            <div class="slide-content">
+                <h2 class="slide-title">Film<br>Festival.</h2>
+            </div>
+            <div class="event-details">
+                <div class="event-date">MAY 15-20</div>
+                <div class="event-time">Various Times</div>
+                <a href="#" class="ticket-button">
+                    <span class="arrow-icon">→</span>
+                    Get Tickets
+                </a>
+            </div>
+        </div>
+        
+        <div class="slide-controls">
+            <div class="slide-control prev" onclick="prevSlide()">
+                <i class="bi bi-chevron-left"></i>
+            </div>
+            <div class="slide-control next" onclick="nextSlide()">
+                <i class="bi bi-chevron-right"></i>
+            </div>
+        </div>
+        
+        <div class="slideshow-nav">
+            <div class="slide-dot active" onclick="currentSlide(0)"></div>
+            <div class="slide-dot" onclick="currentSlide(1)"></div>
+            <div class="slide-dot" onclick="currentSlide(2)"></div>
+        </div>
+        
+        <div class="slide-progress">
+            <div class="progress-bar" id="slideProgressBar"></div>
+        </div>
+    </div>
+
     <!-- Trending Movies -->
-    <section class="container mb-5">
+    <section class="container mb-5 mt-5">
         <div class="d-flex justify-content-between align-items-center mb-4">
-            <h2>Trending Now</h2>
+            <h2 class="fw-bold">Trending Now</h2>
             <a href="#" class="btn btn-outline-light">
                 View All <i class="bi bi-chevron-right"></i>
             </a>
         </div>
+        
         <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
             <!-- Movie Card -->
             <div class="col">
                 <div class="card h-100">
-                    <img src="heres-all-the-new-movie-posters-that-were-released-v0-qrjiokeggsle1.webp" class="card-img-top" alt="Minecraft 3D">
+                    <img src="https://source.unsplash.com/random/600x900/?minecraft" class="card-img-top" alt="Minecraft 3D">
                     <div class="card-body d-flex flex-column">
-                        <h5 class="card-title text-primary">Minecraft 3D</h5>
-                        <p class="card-text flex-grow-1 text-white-50">Four misfits are suddenly pulled through a mysterious portal into a bizarre cubic wonderland that thrives on imagination. To get back home they'll have to master this world while embarking on a quest with an unexpected expert crafter.</p>
+                        <h5 class="card-title fw-bold" style="color: var(--primary-accent)">Minecraft 3D</h5>
+                        <p class="card-text flex-grow-1 text-white-50">Four misfits are suddenly pulled through a mysterious portal into a bizarre cubic wonderland that thrives on imagination.</p>
                         <div class="mt-auto">
-                            <a href="minecraft.html" class="btn btn-primary w-100">Book Now</a>
+                            <a href="#" class="btn btn-primary w-100 book-now-btn">Book Now</a>
                         </div>
                     </div>
                 </div>
             </div>
+            
             <!-- Comedy Card -->
             <div class="col">
                 <div class="card h-100">
-                    <img src="download (1).jpeg" class="card-img-top" alt="Laugh Factory">
+                    <img src="https://source.unsplash.com/random/600x900/?travis-scott" class="card-img-top" alt="Travis Scott">
                     <div class="card-body d-flex flex-column">
-                        <h5 class="card-title text-primary">Travis Scott India Tour</h5>
-                        <p class="card-text flex-grow-1 text-white-50">A visionary, a hitmaker, a cultural force -Travis Scott commands the global stage like no other!</p>
+                        <h5 class="card-title fw-bold" style="color: var(--primary-accent)">Travis Scott India Tour</h5>
+                        <p class="card-text flex-grow-1 text-white-50">An evening with top comedians from around the country. Prepare for non-stop laughter!</p>
                         <div class="mt-auto">
-                            <a href="#" class="btn btn-primary w-100">Book Now</a>
+                            <a href="#" class="btn btn-primary w-100 book-now-btn">Book Now</a>
                         </div>
                     </div>
                 </div>
             </div>
+            
             <!-- Concert Card -->
             <div class="col">
                 <div class="card h-100">
-                    <img src="download (4).jpeg" class="card-img-top" alt="Summer Beats">
+                    <img src="https://source.unsplash.com/random/600x900/?concert" class="card-img-top" alt="Summer Beats">
                     <div class="card-body d-flex flex-column">
-                        <h5 class="card-title text-primary">Marco</h5>
-                        <p class="card-text flex-grow-1 text-white-50">The adoptive son of the Adattu family, Marco, sets off on a ruthless quest for vengeance after his brother is brutally murdered, finding only betrayal, loss and unimaginable brutality at every step.</p>
+                        <h5 class="card-title fw-bold" style="color: var(--primary-accent)">Summer Beats</h5>
+                        <p class="card-text flex-grow-1 text-white-50">The biggest music festival of the year featuring top artists across multiple genres.</p>
                         <div class="mt-auto">
-                            <a href="marco.html" class="btn btn-primary w-100">Book Now</a>
+                            <a href="#" class="btn btn-primary w-100 book-now-btn">Book Now</a>
                         </div>
                     </div>
                 </div>
             </div>
+            
             <!-- Additional Card -->
             <div class="col">
                 <div class="card h-100">
-                    <img src="maxresdefault.jpg" class="card-img-top" alt="Broadway Nights">
+                    <img src="https://source.unsplash.com/random/600x900/?theater" class="card-img-top" alt="Broadway Nights">
                     <div class="card-body d-flex flex-column">
-                        <h5 class="card-title text-primary">JAAT</h5>
-                        <p class="card-text flex-grow-1 text-white-50">Jaat is a massive action drama directed by Gopichand Malineni. The film stars Sunny Deol in the crucial role alongside Randeep Hooda, Vineet Kumar, Regina Cassandra, and Saiyami Kher.</p>
+                        <h5 class="card-title fw-bold" style="color: var(--primary-accent)">Broadway Nights</h5>
+                        <p class="card-text flex-grow-1 text-white-50">Experience the magic of live theater with these award-winning performances.</p>
                         <div class="mt-auto">
-                            <a href="jaat.html" class="btn btn-primary w-100">Book Now</a>
+                            <a href="#" class="btn btn-primary w-100 book-now-btn">Book Now</a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
+
     <!-- Categories Section -->
     <section class="container mb-5 browse-categories">
-      <h2 class="text-center mb-5">Browse Categories</h2>
+      <h2 class="text-center mb-5 fw-bold">Browse Categories</h2>
       <div class="row g-4">
           <div class="col-md-4">
               <div class="card text-center h-100">
                   <div class="card-body">
-                      <i class="bi bi-film fs-1 mb-3 text-primary"></i>
-                      <h3 class="card-title text-primary">Movies</h3>
+                      <i class="bi bi-film fs-1 mb-3 category-icon" style="color: var(--primary-accent)"></i>
+                      <h3 class="card-title fw-bold" style="color: var(--primary-accent)">Movies</h3>
                       <p class="card-text text-white-50">Blockbusters, indies, and classics</p>
-                      <a href="#" class="btn btn-outline-light">Explore</a>
+                      <a href="#" class="btn btn-outline-light mt-3 explore-btn">Explore</a>
                   </div>
               </div>
           </div>
           <div class="col-md-4">
               <div class="card text-center h-100">
                   <div class="card-body">
-                      <i class="bi bi-mic fs-1 mb-3 text-primary"></i>
-                      <h3 class="card-title text-primary">Comedy</h3>
+                      <i class="bi bi-mic fs-1 mb-3 category-icon" style="color: var(--primary-accent)"></i>
+                      <h3 class="card-title fw-bold" style="color: var(--primary-accent)">Comedy</h3>
                       <p class="card-text text-white-50">Stand-up specials and live shows</p>
-                      <a href="#" class="btn btn-outline-light">Explore</a>
+                      <a href="#" class="btn btn-outline-light mt-3 explore-btn">Explore</a>
                   </div>
               </div>
           </div>
           <div class="col-md-4">
               <div class="card text-center h-100">
                   <div class="card-body">
-                      <i class="bi bi-music-note-list fs-1 mb-3 text-primary"></i>
-                      <h3 class="card-title text-primary">Concerts</h3>
+                      <i class="bi bi-music-note-list fs-1 mb-3 category-icon" style="color: var(--primary-accent)"></i>
+                      <h3 class="card-title fw-bold" style="color: var(--primary-accent)">Concerts</h3>
                       <p class="card-text text-white-50">Live music experiences</p>
-                      <a href="#" class="btn btn-outline-light">Explore</a>
+                      <a href="#" class="btn btn-outline-light mt-3 explore-btn">Explore</a>
                   </div>
               </div>
           </div>
       </div>
     </section>
+
+    <!-- Newsletter Section -->
+    <section class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 text-center">
+                <h2 class="fw-bold mb-4">Never Miss an Event</h2>
+                <p class="mb-4">Subscribe to our newsletter and be the first to know about upcoming events and exclusive offers.</p>
+                <div class="input-group mb-3 mx-auto" style="max-width: 500px;">
+                    <input type="email" class="form-control newsletter-input" placeholder="Your email address">
+                    <button class="btn btn-primary newsletter-btn" type="button">Subscribe</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Footer -->
     <footer>
         <div class="container">
             <div class="row">
                 <div class="col-lg-4 mb-4">
-                    <h3 class="mb-3">PLANR</h3>
+                    <h3 class="mb-3 fw-bold" style="color: var(--primary-accent)">PLANR</h3>
+                    <div class="footer-divider"></div>
                     <p>Your gateway to unforgettable live experiences. Book tickets for movies, comedy shows, and concerts with ease.</p>
+                    <div class="social-icons mt-4">
+                        <a href="#" class="text-light me-3"><i class="bi bi-facebook fs-4"></i></a>
+                        <a href="#" class="text-light me-3"><i class="bi bi-twitter fs-4"></i></a>
+                        <a href="#" class="text-light me-3"><i class="bi bi-instagram fs-4"></i></a>
+                        <a href="#" class="text-light"><i class="bi bi-youtube fs-4"></i></a>
+                    </div>
                 </div>
                 <div class="col-lg-2 col-md-4 mb-4">
-                    <h5 class="mb-3">Quick Links</h5>
+                    <h5 class="mb-3 fw-bold">Quick Links</h5>
+                    <div class="footer-divider"></div>
                     <ul class="nav flex-column">
                         <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-light">Home</a></li>
                         <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-light">Movies</a></li>
@@ -407,7 +1140,8 @@
                     </ul>
                 </div>
                 <div class="col-lg-2 col-md-4 mb-4">
-                    <h5 class="mb-3">Support</h5>
+                    <h5 class="mb-3 fw-bold">Support</h5>
+                    <div class="footer-divider"></div>
                     <ul class="nav flex-column">
                         <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-light">Contact Us</a></li>
                         <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-light">FAQs</a></li>
@@ -416,18 +1150,23 @@
                     </ul>
                 </div>
                 <div class="col-lg-4 col-md-4 mb-4">
-                    <h5 class="mb-3">Newsletter</h5>
-                    <p>Subscribe for updates and exclusive offers</p>
-                    <div class="input-group mb-3">
-                        <input type="email" class="form-control" placeholder="Your email">
-                        <button class="btn btn-primary" type="button">Subscribe</button>
+                    <h5 class="mb-3 fw-bold">Download Our App</h5>
+                    <div class="footer-divider"></div>
+                    <p>Get the Planr app for a seamless booking experience on the go.</p>
+                    <div class="app-buttons mt-3">
+                        <a href="#" class="btn btn-outline-light me-2">
+                            <i class="bi bi-apple me-2"></i> App Store
+                        </a>
+                        <a href="#" class="btn btn-outline-light">
+                            <i class="bi bi-google-play me-2"></i> Google Play
+                        </a>
                     </div>
                 </div>
             </div>
             <hr class="my-4 bg-secondary">
             <div class="d-flex flex-column flex-md-row justify-content-between align-items-center">
                 <div class="mb-3 mb-md-0">
-                    © 2025 Planr(By chitkara university sem2 students). All rights reserved(Not True). 
+                    © 2025 Planr. All rights reserved.
                 </div>
                 <div class="social-icons">
                     <a href="#" class="text-light me-3"><i class="bi bi-facebook"></i></a>
@@ -439,71 +1178,308 @@
         </div>
     </footer>
 
-    <!-- LOGIN SLIDE-IN MODAL (RIGHT SIDEBAR) -->
-    <div class="modal-overlay-login" id="login-modal">
-        <div class="login-sidebar">
-            <button type="button" class="close-button" id="close-login">&times;</button>
-            <div class="login-container">
-                <div class="login-panel">
-                    <h1>Sign in</h1>
+    <!-- Simple Login Modal -->
+    <div class="modal-overlay" id="simple-login-modal">
+        <div class="login-popup">
+            <button class="close-button" id="close-simple-login">×</button>
+            <h2>Welcome Back!</h2>
+            <p>Sign in to access your account and book your next adventure</p>
+            <button class="sign-in-btn" id="open-full-login">Sign In</button>
+        </div>
+    </div>
+
+    <!-- Full Authentication Modal -->
+    <div class="modal-overlay" id="auth-modal">
+        <div class="auth-container">
+            <div class="auth-forms">
+                <!-- Login Form -->
+                <div class="auth-form login-form">
+                    <h1>Login to Your Account</h1>
                     <div class="social-login">
-                        <button class="social-btn">f</button>
-                        <button class="social-btn">G+</button>
-                        <button class="social-btn">in</button>
+                        <button class="social-btn"><i class="bi bi-google"></i></button>
+                        <button class="social-btn"><i class="bi bi-facebook"></i></button>
+                        <button class="social-btn"><i class="bi bi-twitter"></i></button>
                     </div>
-                    <div class="divider">or use your account</div>
-                    <form id="login-form">
+                    <div class="divider">or continue with email</div>
+                    <form>
                         <div class="form-group">
-                            <input type="email" class="form-control" placeholder="Email" required>
+                            <input type="email" class="form-control" placeholder="Email Address" required>
                         </div>
                         <div class="form-group">
                             <input type="password" class="form-control" placeholder="Password" required>
                         </div>
                         <div class="forgot-password">
-                            <a href="#">Forgot your password?</a>
+                            <a href="#">Forgot password?</a>
                         </div>
-                        <button type="submit" class="signin-btn">SIGN IN</button>
+                        <button type="submit" class="auth-btn">Login</button>
                     </form>
                 </div>
-                <div class="welcome-panel">
-                    <h2>Hello, Friend!</h2>
-                    <p>Enter your personal details and start your journey with us</p>
-                    <button class="signup-btn">SIGN UP</button>
+                
+                <!-- Signup Form -->
+                <div class="auth-form signup-form">
+                    <h1>Create an Account</h1>
+                    <div class="social-login">
+                        <button class="social-btn"><i class="bi bi-google"></i></button>
+                        <button class="social-btn"><i class="bi bi-facebook"></i></button>
+                        <button class="social-btn"><i class="bi bi-twitter"></i></button>
+                    </div>
+                    <div class="divider">or register with email</div>
+                    <form>
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Full Name" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" class="form-control" placeholder="Email Address" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="password" class="form-control" placeholder="Password" required>
+                        </div>
+                        <button type="submit" class="auth-btn">Create Account</button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="welcome-panel">
+                <!-- Login Welcome Content -->
+                <div class="welcome-content login-welcome">
+                    <h2>New Here?</h2>
+                    <p>Sign up and discover a great amount of new opportunities!</p>
+                    <button class="toggle-auth-btn" id="show-signup">Sign Up</button>
+                </div>
+                
+                <!-- Signup Welcome Content -->
+                <div class="welcome-content signup-welcome">
+                    <h2>One of Us?</h2>
+                    <p>If you already have an account, just sign in. We've missed you!</p>
+                    <button class="toggle-auth-btn" id="show-login">Sign In</button>
                 </div>
             </div>
         </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="search.js"></script>
     <script>
-        // LOGIN PANEL LOGIC
-        const openLoginBtn = document.getElementById('open-login');
-        const closeLoginBtn = document.getElementById('close-login');
-        const loginModal = document.getElementById('login-modal');
-        const loginForm = document.getElementById('login-form');
+        // Slideshow Logic with horizontal sliding effect
+        let slideIndex = 0;
+        const slides = document.querySelectorAll('.slide');
+        const dots = document.querySelectorAll('.slide-dot');
+        let slideTimer;
 
-        function openLoginModal() {
-            loginModal.classList.add('active');
+        function showSlides() {
+            // Remove all classes first
+            slides.forEach(slide => slide.classList.remove('active', 'prev', 'next'));
+            dots.forEach(dot => dot.classList.remove('active'));
+
+            // Calculate indices for prev, current, and next slides
+            const prevIndex = (slideIndex - 1 + slides.length) % slides.length;
+            const nextIndex = (slideIndex + 1) % slides.length;
+            
+            // Apply appropriate classes
+            slides[prevIndex].classList.add('prev');
+            slides[slideIndex].classList.add('active');
+            slides[nextIndex].classList.add('next');
+            
+            // Update active dot
+            dots[slideIndex].classList.add('active');
+            
+            // Reset progress bar
+            resetProgressBar();
+            
+            // Set timer for next slide
+            slideTimer = setTimeout(() => {
+                slideIndex = (slideIndex + 1) % slides.length;
+                showSlides();
+            }, 8000);
         }
-        function closeLoginModal() {
-            loginModal.classList.remove('active');
+
+        function resetProgressBar() {
+            const progressBar = document.getElementById('slideProgressBar');
+            if (progressBar) {
+                progressBar.style.width = '0';
+                setTimeout(() => {
+                    progressBar.style.width = '100%';
+                }, 50);
+                progressBar.style.transition = 'width 8s linear';
+            }
         }
-        openLoginBtn.addEventListener('click', openLoginModal);
-        closeLoginBtn.addEventListener('click', closeLoginModal);
-        loginModal.addEventListener('click', function(event) {
-            if (event.target === loginModal) closeLoginModal();
-        });
-        loginForm.addEventListener('submit', function(event) {
-            event.preventDefault();
-            alert('Login functionality would be implemented here');
-            closeLoginModal();
-        });
-        document.addEventListener('keydown', function(event) {
-            if (event.key === 'Escape' && loginModal.classList.contains('active')) {
-                closeLoginModal();
+
+        function currentSlide(n) {
+            clearTimeout(slideTimer);
+            slideIndex = n;
+            showSlides();
+        }
+
+        function nextSlide() {
+            clearTimeout(slideTimer);
+            slideIndex = (slideIndex + 1) % slides.length;
+            showSlides();
+        }
+
+        function prevSlide() {
+            clearTimeout(slideTimer);
+            slideIndex = (slideIndex - 1 + slides.length) % slides.length;
+            showSlides();
+        }
+        
+        // Touch and Swipe Support
+        let touchStartX = 0;
+        let touchEndX = 0;
+        const slideContainer = document.querySelector('.slideshow-container');
+
+        if (slideContainer) {
+            slideContainer.addEventListener('touchstart', e => {
+                touchStartX = e.changedTouches[0].screenX;
+            });
+
+            slideContainer.addEventListener('touchend', e => {
+                touchEndX = e.changedTouches[0].screenX;
+                handleSwipe();
+            });
+        }
+
+        function handleSwipe() {
+            if (touchEndX < touchStartX) {
+                // Swipe left, go to next slide
+                nextSlide();
+            } else if (touchEndX > touchStartX) {
+                // Swipe right, go to previous slide
+                prevSlide();
+            }
+        }
+
+        // Keyboard Navigation
+        document.addEventListener('keydown', e => {
+            if (e.key === 'ArrowRight') {
+                nextSlide();
+            } else if (e.key === 'ArrowLeft') {
+                prevSlide();
             }
         });
+        
+        // Initialize slideshow if slides exist
+        if (slides.length > 0) {
+            showSlides();
+        }
+        
+        // Add card hover effect from first code
+        document.querySelectorAll('.card').forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                card.style.transform = `
+                    translateY(-10px)
+                    rotateX(${(rect.height/2 - y)/15}deg)
+                    rotateY(${(x - rect.width/2)/15}deg)
+                `;
+            });
+
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'translateY(0) rotateX(0) rotateY(0)';
+            });
+        });
+        
+        // Navbar Scroll Effect
+        window.addEventListener('scroll', () => {
+            document.querySelector('.navbar').classList.toggle('scrolled', window.scrollY > 50);
+        });
+        
+        // Simple Login Modal
+        const openLoginBtn = document.getElementById('open-login');
+        const openSignupBtn = document.getElementById('open-signup');
+        const closeSimpleLoginBtn = document.getElementById('close-simple-login');
+        const simpleLoginModal = document.getElementById('simple-login-modal');
+        const openFullLoginBtn = document.getElementById('open-full-login');
+        
+        // Full Auth Modal
+        const authModal = document.getElementById('auth-modal');
+        const showSignupBtn = document.getElementById('show-signup');
+        const showLoginBtn = document.getElementById('show-login');
+        const authContainer = document.querySelector('.auth-container');
+        
+        // Open simple login modal
+        if (openLoginBtn) {
+            openLoginBtn.addEventListener('click', () => {
+                simpleLoginModal.classList.add('active');
+            });
+        }
+        
+        // Open signup directly
+        if (openSignupBtn) {
+            openSignupBtn.addEventListener('click', () => {
+                authModal.classList.add('active');
+                authContainer.classList.add('show-signup');
+            });
+        }
+        
+        // Close simple login modal
+        if (closeSimpleLoginBtn) {
+            closeSimpleLoginBtn.addEventListener('click', () => {
+                simpleLoginModal.classList.remove('active');
+            });
+        }
+        
+        // Open full auth modal from simple login
+        if (openFullLoginBtn) {
+            openFullLoginBtn.addEventListener('click', () => {
+                simpleLoginModal.classList.remove('active');
+                authModal.classList.add('active');
+            });
+        }
+        
+        // Toggle between login and signup
+        if (showSignupBtn) {
+            showSignupBtn.addEventListener('click', () => {
+                authContainer.classList.add('show-signup');
+            });
+        }
+        
+        if (showLoginBtn) {
+            showLoginBtn.addEventListener('click', () => {
+                authContainer.classList.remove('show-signup');
+            });
+        }
+        
+        // Close auth modal when clicking outside
+        window.addEventListener('click', (e) => {
+            if (e.target === simpleLoginModal) {
+                simpleLoginModal.classList.remove('active');
+            }
+            if (e.target === authModal) {
+                authModal.classList.remove('active');
+                setTimeout(() => {
+                    authContainer.classList.remove('show-signup');
+                }, 300);
+            }
+        });
+        
+        // Update countdown for events
+        function updateCountdown() {
+            const now = new Date('2025-04-22T10:12:00'); // Current date: April 22, 2025
+            
+            // Alt-Rock Revolution - April 25, 2025
+            const altRockDate = new Date('2025-04-25T20:00:00');
+            const altRockDiff = altRockDate - now;
+            const altRockDays = Math.floor(altRockDiff / (1000 * 60 * 60 * 24));
+            
+            // Comedy Night - May 2, 2025
+            const comedyDate = new Date('2025-05-02T21:00:00');
+            const comedyDiff = comedyDate - now;
+            const comedyDays = Math.floor(comedyDiff / (1000 * 60 * 60 * 24));
+            
+            // Film Festival - May 15, 2025
+            const filmDate = new Date('2025-05-15T00:00:00');
+            const filmDiff = filmDate - now;
+            const filmDays = Math.floor(filmDiff / (1000 * 60 * 60 * 24));
+            
+            console.log(`Alt-Rock Revolution: ${altRockDays} days away`);
+            console.log(`Comedy Night: ${comedyDays} days away`);
+            console.log(`Film Festival: ${filmDays} days away`);
+        }
+        
+        // Call once on page load
+        updateCountdown();
     </script>
 </body>
 </html>
