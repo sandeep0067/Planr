@@ -10,36 +10,52 @@
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
         
         :root {
-            --dark-bg: #121212;
-            --dark-card: #1e1e1e;
-            --dark-border: #333;
-            --text-light: #e0e0e0;
-            --primary-accent: #0d6efd;
-            --primary-accent-hover: #0b5ed7;
+            --dark-bg: #0f0f13;
+            --dark-card: #1a1a22;
+            --dark-border: #2a2a35;
+            --text-light: #f0f0f5;
+            --primary-accent: #4d7cfe;
+            --primary-accent-hover: #3a69eb;
             
             /* Enhanced Gradient Variables */
-            --gradient-primary: linear-gradient(135deg, #0d6efd, #0b5ed7);
-            --gradient-primary-hover: linear-gradient(135deg, #0b5ed7, #094bbd);
-            --gradient-hero: linear-gradient(rgba(0, 0, 0, 0.7), rgba(13, 110, 253, 0.1));
-            --gradient-card-hover: linear-gradient(135deg, rgba(13, 110, 253, 0.05), rgba(11, 94, 215, 0.1));
-            --gradient-login: linear-gradient(135deg, #0d6efd, #0052cc);
-            --gradient-welcome: linear-gradient(135deg, rgba(13, 110, 253, 0.7), rgba(11, 94, 215, 0.7));
-            --gradient-cool: linear-gradient(135deg, #0d6efd, #0b5ed7);
+            --gradient-primary: linear-gradient(135deg, #4d7cfe, #6d5dfc);
+            --gradient-primary-hover: linear-gradient(135deg, #3a69eb, #5c4ce9);
+            --gradient-hero: linear-gradient(rgba(0, 0, 0, 0.7), rgba(77, 124, 254, 0.1));
+            --gradient-card-hover: linear-gradient(135deg, rgba(77, 124, 254, 0.05), rgba(109, 93, 252, 0.1));
+            --gradient-login: linear-gradient(135deg, #4d7cfe, #6d5dfc);
         }
         
         * {
             font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
         
         body {
             background-color: var(--dark-bg);
             color: var(--text-light);
+            line-height: 1.6;
         }
         
+        .container {
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header Styles */
         .navbar {
-            background-color: #000 !important;
-            border-bottom: 1px solid var(--dark-border);
+            background-color: rgba(15, 15, 19, 0.7) !important;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
             padding: 12px 0;
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            transition: all 0.3s ease;
         }
         
         .navbar-brand {
@@ -51,30 +67,295 @@
             letter-spacing: 1px;
         }
         
-        .hero-section {
-            background: var(--gradient-hero), url('https://source.unsplash.com/random/1200x600/?cinema');
+        /* Navigation hover effects */
+        .nav-link {
+            position: relative;
+            padding: 8px 16px;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: var(--primary-accent);
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        .nav-link:hover::after {
+            width: 80%;
+        }
+        
+        /* Hero Slideshow - Enhanced with Sliding Effect */
+        .slideshow-container {
+            position: relative;
+            height: 100vh;
+            perspective: 1000px;
+            overflow: hidden;
+            margin-top: 0;
+        }
+        
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             background-size: cover;
             background-position: center;
-            padding: 150px 0;
-            margin-bottom: 60px;
+            transform-style: preserve-3d;
+            transition: transform 1.2s cubic-bezier(0.77, 0, 0.175, 1), 
+                        opacity 1.2s ease,
+                        z-index 0.01s 0.6s;
+            transform: translateX(100%) scale(0.9);
+            opacity: 0;
+            z-index: 1;
+            display: flex;
+            align-items: center;
+            padding: 0 80px;
+        }
+
+        .slide.active {
+            transform: translateX(0) scale(1);
+            opacity: 1;
+            z-index: 3;
+            transition-delay: 0s;
+        }
+
+        .slide.prev {
+            transform: translateX(-100%) scale(0.9);
+            opacity: 0.5;
+            z-index: 2;
+        }
+
+        .slide.next {
+            transform: translateX(100%) scale(0.9);
+            opacity: 0.5;
+            z-index: 2;
+        }
+        
+        .slide-content {
+            max-width: 550px;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1) 0.3s;
+        }
+        
+        .slide.active .slide-content {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .slide-title {
+            font-size: 90px;
+            line-height: 0.9;
+            text-transform: uppercase;
+            font-weight: 900;
+            background: linear-gradient(135deg, #fff, #a0b8ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+            text-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+            letter-spacing: -2px;
+        }
+        
+        .event-details {
+            background: rgba(77, 124, 254, 0.85);
+            backdrop-filter: blur(8px);
+            padding: 30px;
+            max-width: 300px;
+            margin-left: auto;
+            transform: translateX(100px);
+            opacity: 0;
+            transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1) 0.5s;
+            border: 1px solid rgba(255,255,255,0.2);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+            border-radius: 12px;
+        }
+        
+        .slide.active .event-details {
+            transform: translateX(0);
+            opacity: 1;
+        }
+        
+        .event-date {
+            background-color: #000;
+            color: #fff;
+            padding: 8px 16px;
+            display: inline-block;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        
+        .event-time {
+            background-color: #000;
+            color: #fff;
+            padding: 8px 16px;
+            display: inline-block;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+        
+        .ticket-button {
+            display: inline-flex;
+            align-items: center;
+            background-color: transparent;
+            border: 2px solid #000;
+            color: #000;
+            padding: 10px 16px;
+            text-decoration: none;
+            font-weight: bold;
+            text-transform: uppercase;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             position: relative;
             overflow: hidden;
         }
         
-        .hero-section::after {
+        .ticket-button::before {
             content: '';
             position: absolute;
-            bottom: 0;
-            left: 0;
+            top: 0;
+            left: -100%;
             width: 100%;
-            height: 100px;
-            background: linear-gradient(to top, var(--dark-bg), transparent);
+            height: 100%;
+            background-color: #000;
+            transition: all 0.3s ease;
+            z-index: -1;
         }
         
+        .ticket-button:hover {
+            color: var(--primary-accent);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .ticket-button:hover::before {
+            left: 0;
+        }
+        
+        .arrow-icon {
+            margin-right: 10px;
+            transition: transform 0.3s ease;
+        }
+        
+        .ticket-button:hover .arrow-icon {
+            transform: translateX(3px);
+        }
+        
+        /* Slideshow Navigation - Enhanced */
+        .slideshow-nav {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 15px;
+            z-index: 20;
+        }
+        
+        .slide-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .slide-dot::after {
+            content: '';
+            position: absolute;
+            top: -4px;
+            left: -4px;
+            right: -4px;
+            bottom: -4px;
+            border-radius: 50%;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            opacity: 0;
+            transform: scale(0.8);
+            transition: all 0.3s ease;
+        }
+        
+        .slide-dot:hover {
+            background-color: rgba(255, 255, 255, 0.8);
+        }
+        
+        .slide-dot.active {
+            background-color: #fff;
+        }
+        
+        .slide-dot.active::after {
+            opacity: 1;
+            transform: scale(1);
+        }
+        
+        /* Slide Controls */
+        .slide-controls {
+            position: absolute;
+            width: 100%;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            justify-content: space-between;
+            padding: 0 30px;
+            z-index: 30;
+        }
+        
+        .slide-control {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+            color: #fff;
+            font-size: 20px;
+            transform: perspective(800px) rotateY(15deg);
+        }
+        
+        .slide-control:hover {
+            background-color: var(--primary-accent);
+            color: #000;
+            transform: perspective(800px) rotateY(0deg);
+        }
+        
+        /* Slide Progress Indicator */
+        .slide-progress {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 200px;
+            height: 3px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 3px;
+            overflow: hidden;
+            z-index: 25;
+        }
+
+        .progress-bar {
+            height: 100%;
+            width: 0;
+            background: var(--primary-accent);
+            border-radius: 3px;
+            transition: width 5s linear;
+        }
+        
+        /* Enhanced Card Hover Effect */
         .card {
-            background-color: var(--dark-card);
-            border: 1px solid var(--dark-border);
-            transition: transform 0.3s, box-shadow 0.3s, background 0.3s;
+            background-color: rgba(26, 26, 34, 0.8);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+                        box-shadow 0.4s ease;
             height: 100%;
             border-radius: 12px;
             overflow: hidden;
@@ -100,8 +381,8 @@
         }
         
         .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.4);
+            transform: translateY(-10px);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.4);
         }
         
         .card-body {
@@ -139,7 +420,7 @@
         .btn-outline-light:hover {
             transform: translateY(-2px);
         }
-               
+        
         /* Special styles for non-login buttons */
         .book-now-btn {
             border-radius: 25px;
@@ -167,11 +448,12 @@
         }
         
         .category-icon {
-            transition: all 0.3s ease;
+            transform: perspective(800px) rotateY(15deg);
+            transition: transform 0.5s ease;
         }
         
         .card:hover .category-icon {
-            transform: scale(1.2);
+            transform: perspective(800px) rotateY(0deg) scale(1.2);
         }
         
         .search-container {
@@ -216,38 +498,41 @@
         .login-popup {
             background: var(--gradient-login);
             color: white;
-            width: 450px;
-            padding: 40px;
+            width: 90%;
+            max-width: 450px;
+            padding: 40px 20px;
             border-radius: 12px;
             text-align: center;
             position: relative;
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
             animation: fadeIn 0.3s ease;
+            margin: auto;
         }
         
         .login-popup h2 {
-            font-size: 2.5rem;
+            font-size: 2rem;
             margin-bottom: 20px;
             font-weight: 600;
         }
         
         .login-popup p {
             margin-bottom: 30px;
-            font-size: 1.1rem;
+            font-size: 1rem;
             opacity: 0.9;
         }
         
         .sign-in-btn {
-            background-color: white;
-            color: #0d6efd;
-            border: none;
-            padding: 12px 35px;
-            border-radius: 30px;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            background: var(--gradient-login);
+            color: white;
+            width: 90%;
+            max-width: 450px;
+            padding: 40px 20px;
+            border-radius: 12px;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            animation: fadeIn 0.3s ease;
+            margin: auto;
         }
         
         .sign-in-btn:hover {
@@ -554,8 +839,36 @@
                 font-size: 2.5rem;
             }
             
-            .hero-section {
-                padding: 100px 0;
+            .slideshow-container {
+                height: 100vh;
+            }
+            
+            .slide-title {
+                font-size: 50px;
+                letter-spacing: -1px;
+            }
+            
+            .slide {
+                padding: 0 20px;
+                flex-direction: column;
+                justify-content: center;
+                align-items: flex-start;
+            }
+            
+            .event-details {
+                margin: 20px 0 0 0;
+                width: 100%;
+                max-width: none;
+            }
+            
+            .slide-controls {
+                padding: 0 15px;
+            }
+            
+            .slide-control {
+                width: 40px;
+                height: 40px;
+                font-size: 16px;
             }
             
             .card-img-top {
@@ -575,9 +888,20 @@
             }
             
             .login-popup {
-                width: 90%;
-                max-width: 400px;
-                padding: 30px;
+                padding: 30px 15px;
+            }
+
+            .login-popup h2 {
+                font-size: 1.5rem;
+            }
+
+            .login-popup p {
+                font-size: 0.95rem;
+            }
+            
+            .slide.prev, .slide.next {
+                transform: translateX(-50%);
+                opacity: 0;
             }
         }
     </style>
@@ -596,13 +920,13 @@
                         <a class="nav-link active" href="#">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Movies</a>
+                        <a class="nav-link" href="movies.2.html">Movies</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Comedy</a>
+                        <a class="nav-link" href="standup.html">Comedy</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Concerts</a>
+                        <a class="nav-link" href="concertpage.html">Concerts</a>
                     </li>
                 </ul>
                 <div class="d-flex">
@@ -613,26 +937,75 @@
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <section class="hero-section text-center">
-        <div class="container">
-            <h1 class="hero-title">FEELL IT IN</h1>
-            <p class="hero-subtitle">Book tickets for unforgettable experiences</p>
-            <div class="row justify-content-center">
-                <div class="col-md-8 search-container">
-                    <div class="input-group">
-                        <input type="text" class="form-control form-control-lg rounded-start" placeholder="Search events...">
-                        <button class="btn btn-primary btn-lg" type="button">
-                            <i class="bi bi-search"></i>
-                        </button>
-                    </div>
-                </div>
+    <!-- Hero Slideshow Section -->
+    <div class="slideshow-container">
+        <!-- Slide 1: Concert -->
+        <div class="slide active" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://wallpaperaccess.com/full/2183063.jpg')">
+            <div class="slide-content">
+                <h2 class="slide-title">Alt-Rock<br>Revolution.</h2>
+            </div>
+            <div class="event-details">
+                <div class="event-date">SATURDAY APR. 25</div>
+                <div class="event-time">8:00PM</div>
+                <a href="#" class="ticket-button">
+                    <span class="arrow-icon">→</span>
+                    Get Tickets
+                </a>
             </div>
         </div>
-    </section>
+        
+        <!-- Slide 2: Comedy -->
+        <div class="slide" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://i.pinimg.com/736x/c1/e7/83/c1e783c507b7755031519f6299f5f96b.jpg')">
+            <div class="slide-content">
+                <h2 class="slide-title">Music<br>Night.</h2>
+            </div>
+            <div class="event-details">
+                <div class="event-date">FRIDAY MAY. 2</div>
+                <div class="event-time">9:00PM</div>
+                <a href="#" class="ticket-button">
+                    <span class="arrow-icon">→</span>
+                    Get Tickets
+                </a>
+            </div>
+        </div>
+        
+        <!-- Slide 3: Movies -->
+        <div class="slide" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://static01.nyt.com/images/2023/05/16/multimedia/16cannes-promo-230pm-pwvg/16cannes-promo-230pm-pwvg-videoSixteenByNine3000.jpg')">
+            <div class="slide-content">
+                <h2 class="slide-title">Film<br>Festival.</h2>
+            </div>
+            <div class="event-details">
+                <div class="event-date">MAY 15-20</div>
+                <div class="event-time">Various Times</div>
+                <a href="#" class="ticket-button">
+                    <span class="arrow-icon">→</span>
+                    Get Tickets
+                </a>
+            </div>
+        </div>
+        
+        <div class="slide-controls">
+            <div class="slide-control prev" onclick="prevSlide()">
+                <i class="bi bi-chevron-left"></i>
+            </div>
+            <div class="slide-control next" onclick="nextSlide()">
+                <i class="bi bi-chevron-right"></i>
+            </div>
+        </div>
+        
+        <div class="slideshow-nav">
+            <div class="slide-dot active" onclick="currentSlide(0)"></div>
+            <div class="slide-dot" onclick="currentSlide(1)"></div>
+            <div class="slide-dot" onclick="currentSlide(2)"></div>
+        </div>
+        
+        <div class="slide-progress">
+            <div class="progress-bar" id="slideProgressBar"></div>
+        </div>
+    </div>
 
     <!-- Trending Movies -->
-    <section class="container mb-5">
+    <section class="container mb-5 mt-5">
         <div class="d-flex justify-content-between align-items-center mb-4">
             <h2 class="fw-bold">Trending Now</h2>
             <a href="#" class="btn btn-outline-light">
@@ -649,7 +1022,7 @@
                         <h5 class="card-title fw-bold" style="color: var(--primary-accent)">Minecraft 3D</h5>
                         <p class="card-text flex-grow-1 text-white-50">Four misfits are suddenly pulled through a mysterious portal into a bizarre cubic wonderland that thrives on imagination.</p>
                         <div class="mt-auto">
-                            <a href="#" class="btn btn-primary w-100 book-now-btn">Book Now</a>
+                            <a href="minecraft.html" class="btn btn-primary w-100 book-now-btn">Book Now</a>
                         </div>
                     </div>
                 </div>
@@ -658,7 +1031,7 @@
             <!-- Comedy Card -->
             <div class="col">
                 <div class="card h-100">
-                    <img src="Images\download (1).jpeg" class="card-img-top" alt="Laugh Factory">
+                    <img src="Images\download (1).jpeg" class="card-img-top" alt="Travis Scott">
                     <div class="card-body d-flex flex-column">
                         <h5 class="card-title fw-bold" style="color: var(--primary-accent)">Travis Scott India Tour</h5>
                         <p class="card-text flex-grow-1 text-white-50">An evening with top comedians from around the country. Prepare for non-stop laughter!</p>
@@ -668,7 +1041,7 @@
                     </div>
                 </div>
             </div>
-                                                            
+            
             <!-- Concert Card -->
             <div class="col">
                 <div class="card h-100">
@@ -709,7 +1082,7 @@
                       <i class="bi bi-film fs-1 mb-3 category-icon" style="color: var(--primary-accent)"></i>
                       <h3 class="card-title fw-bold" style="color: var(--primary-accent)">Movies</h3>
                       <p class="card-text text-white-50">Blockbusters, indies, and classics</p>
-                      <a href="#" class="btn btn-outline-light mt-3 explore-btn">Explore</a>
+                      <a href="movies.2.html" class="btn btn-outline-light mt-3 explore-btn">Explore</a>
                   </div>
               </div>
           </div>
@@ -719,7 +1092,7 @@
                       <i class="bi bi-mic fs-1 mb-3 category-icon" style="color: var(--primary-accent)"></i>
                       <h3 class="card-title fw-bold" style="color: var(--primary-accent)">Comedy</h3>
                       <p class="card-text text-white-50">Stand-up specials and live shows</p>
-                      <a href="#" class="btn btn-outline-light mt-3 explore-btn">Explore</a>
+                      <a href="standup.html" class="btn btn-outline-light mt-3 explore-btn">Explore</a>
                   </div>
               </div>
           </div>
@@ -788,7 +1161,6 @@
                 <div class="col-lg-4 col-md-4 mb-4">
                     <h5 class="mb-3 fw-bold">Download Our App</h5>
                     <div class="footer-divider"></div>
-                    <!-- Completing the footer section -->
                     <p>Get the Planr app for a seamless booking experience on the go.</p>
                     <div class="app-buttons mt-3">
                         <a href="#" class="btn btn-outline-light me-2">
@@ -896,6 +1268,132 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
+        // Slideshow Logic with horizontal sliding effect
+        let slideIndex = 0;
+        const slides = document.querySelectorAll('.slide');
+        const dots = document.querySelectorAll('.slide-dot');
+        let slideTimer;
+
+        function showSlides() {
+            // Remove all classes first
+            slides.forEach(slide => slide.classList.remove('active', 'prev', 'next'));
+            dots.forEach(dot => dot.classList.remove('active'));
+
+            // Calculate indices for prev, current, and next slides
+            const prevIndex = (slideIndex - 1 + slides.length) % slides.length;
+            const nextIndex = (slideIndex + 1) % slides.length;
+            
+            // Apply appropriate classes
+            slides[prevIndex].classList.add('prev');
+            slides[slideIndex].classList.add('active');
+            slides[nextIndex].classList.add('next');
+            
+            // Update active dot
+            dots[slideIndex].classList.add('active');
+            
+            // Reset progress bar
+            resetProgressBar();
+            
+            // Set timer for next slide
+            slideTimer = setTimeout(() => {
+                slideIndex = (slideIndex + 1) % slides.length;
+                showSlides();
+            }, 8000);
+        }
+
+        function resetProgressBar() {
+            const progressBar = document.getElementById('slideProgressBar');
+            if (progressBar) {
+                progressBar.style.width = '0';
+                setTimeout(() => {
+                    progressBar.style.width = '100%';
+                }, 50);
+                progressBar.style.transition = 'width 8s linear';
+            }
+        }
+
+        function currentSlide(n) {
+            clearTimeout(slideTimer);
+            slideIndex = n;
+            showSlides();
+        }
+
+        function nextSlide() {
+            clearTimeout(slideTimer);
+            slideIndex = (slideIndex + 1) % slides.length;
+            showSlides();
+        }
+
+        function prevSlide() {
+            clearTimeout(slideTimer);
+            slideIndex = (slideIndex - 1 + slides.length) % slides.length;
+            showSlides();
+        }
+        
+        // Touch and Swipe Support
+        let touchStartX = 0;
+        let touchEndX = 0;
+        const slideContainer = document.querySelector('.slideshow-container');
+
+        if (slideContainer) {
+            slideContainer.addEventListener('touchstart', e => {
+                touchStartX = e.changedTouches[0].screenX;
+            });
+
+            slideContainer.addEventListener('touchend', e => {
+                touchEndX = e.changedTouches[0].screenX;
+                handleSwipe();
+            });
+        }
+
+        function handleSwipe() {
+            if (touchEndX < touchStartX) {
+                // Swipe left, go to next slide
+                nextSlide();
+            } else if (touchEndX > touchStartX) {
+                // Swipe right, go to previous slide
+                prevSlide();
+            }
+        }
+
+        // Keyboard Navigation
+        document.addEventListener('keydown', e => {
+            if (e.key === 'ArrowRight') {
+                nextSlide();
+            } else if (e.key === 'ArrowLeft') {
+                prevSlide();
+            }
+        });
+        
+        // Initialize slideshow if slides exist
+        if (slides.length > 0) {
+            showSlides();
+        }
+        
+        // Add card hover effect from first code
+        document.querySelectorAll('.card').forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                card.style.transform = `
+                    translateY(-10px)
+                    rotateX(${(rect.height/2 - y)/15}deg)
+                    rotateY(${(x - rect.width/2)/15}deg)
+                `;
+            });
+
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'translateY(0) rotateX(0) rotateY(0)';
+            });
+        });
+        
+        // Navbar Scroll Effect
+        window.addEventListener('scroll', () => {
+            document.querySelector('.navbar').classList.toggle('scrolled', window.scrollY > 50);
+        });
+        
         // Simple Login Modal
         const openLoginBtn = document.getElementById('open-login');
         const openSignupBtn = document.getElementById('open-signup');
@@ -964,6 +1462,33 @@
                 }, 300);
             }
         });
+        
+        // Update countdown for events
+        function updateCountdown() {
+            const now = new Date('2025-04-22T10:12:00'); // Current date: April 22, 2025
+            
+            // Alt-Rock Revolution - April 25, 2025
+            const altRockDate = new Date('2025-04-25T20:00:00');
+            const altRockDiff = altRockDate - now;
+            const altRockDays = Math.floor(altRockDiff / (1000 * 60 * 60 * 24));
+            
+            // Comedy Night - May 2, 2025
+            const comedyDate = new Date('2025-05-02T21:00:00');
+            const comedyDiff = comedyDate - now;
+            const comedyDays = Math.floor(comedyDiff / (1000 * 60 * 60 * 24));
+            
+            // Film Festival - May 15, 2025
+            const filmDate = new Date('2025-05-15T00:00:00');
+            const filmDiff = filmDate - now;
+            const filmDays = Math.floor(filmDiff / (1000 * 60 * 60 * 24));
+            
+            console.log(`Alt-Rock Revolution: ${altRockDays} days away`);
+            console.log(`Comedy Night: ${comedyDays} days away`);
+            console.log(`Film Festival: ${filmDays} days away`);
+        }
+        
+        // Call once on page load
+        updateCountdown();
     </script>
 </body>
 </html>
