@@ -711,6 +711,7 @@
             .shows-grid {
                 grid-template-columns: 1fr;
             }
+        }
             /* Add to your existing CSS */
             .gift-cards-grid {
                 display: grid;
@@ -766,7 +767,7 @@
                 font-size: 1.2rem;
                 background-color: rgba(255,255,255,0.9);
             }
-        }
+        
     </style>
 </head>
 <body>
@@ -1515,6 +1516,69 @@
                     });
                 }
             });
+        });
+        
+        // Gift Card Purchase Functionality
+        const addToCartBtns = document.querySelectorAll('.add-to-cart');
+        const customAmountBtn = document.getElementById('add-custom-amount');
+        const customAmountInput = document.getElementById('custom-amount');
+        const checkoutBtn = document.getElementById('checkout-gift-card');
+        let selectedGiftCardAmount = 0;
+
+        // Standard gift card amounts
+        addToCartBtns.forEach(btn => {
+            if (btn.id !== 'add-custom-amount') {
+                btn.addEventListener('click', () => {
+                    selectedGiftCardAmount = parseInt(btn.dataset.value);
+                    alert(`₹${selectedGiftCardAmount} gift card added to cart!`);
+                });
+            }
+        });
+
+        // Custom amount
+        customAmountBtn.addEventListener('click', () => {
+            const amount = parseInt(customAmountInput.value);
+            if (amount >= 500) {
+                selectedGiftCardAmount = amount;
+                alert(`₹${selectedGiftCardAmount} gift card added to cart!`);
+            } else {
+                alert('Minimum amount is ₹500');
+            }
+        });
+
+        // Checkout
+        checkoutBtn.addEventListener('click', () => {
+            if (selectedGiftCardAmount > 0) {
+                alert(`Proceeding to checkout with ₹${selectedGiftCardAmount} gift card`);
+                // In a real implementation, this would redirect to payment page
+            } else {
+                alert('Please select a gift card amount first');
+            }
+        });
+
+        // Gift Card Redemption in Booking Modal
+        const applyGiftCardBtn = document.getElementById('applyGiftCard');
+        const giftCardCodeInput = document.getElementById('giftCardCode');
+        const giftCardMessage = document.getElementById('giftCardMessage');
+
+        applyGiftCardBtn.addEventListener('click', () => {
+            const code = giftCardCodeInput.value.trim();
+            
+            if (code === '') {
+                giftCardMessage.textContent = 'Please enter a gift card code';
+                giftCardMessage.style.color = 'var(--primary)';
+                return;
+            }
+            
+            // In a real implementation, you would validate with your backend
+            // This is just a simulation
+            if (code.length === 16 && code.startsWith('LFGC')) {
+                giftCardMessage.textContent = 'Gift card applied successfully! ₹1000 credit added.';
+                giftCardMessage.style.color = 'var(--accent)';
+            } else {
+                giftCardMessage.textContent = 'Invalid gift card code. Please try again.';
+                giftCardMessage.style.color = 'var(--primary)';
+            }
         });
     </script>
 </body>
