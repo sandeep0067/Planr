@@ -1,846 +1,199 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Planar - Feedback Form</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --primary-color: #6c5ce7;
-            --primary-light: #8579e9;
-            --secondary-color: #a29bfe;
-            --accent-color: #fd79a8;
-            --accent-light: #ff8db6;
-            --dark-color: #2d3436;
-            --light-color: #f5f6fa;
-            --success-color: #00b894;
-            --warning-color: #fdcb6e;
-            --error-color: #d63031;
-
-            --bg-color: #121212;
-            --bg-light: #1e1e1e;
-            --text-color: #dfe6e9;
-            --text-light: #b2bec3;
-            --input-bg: #2c2c2c;
-            --input-border: #444;
-            --input-focus: #3d3d3d;
-            --card-bg: #1f1f1f;
-            --card-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-
-            --border-radius-sm: 8px;
-            --border-radius-md: 12px;
-            --border-radius-lg: 16px;
-            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        body {
-            font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            line-height: 1.6;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-            background-image: 
-                radial-gradient(circle at 10% 20%, rgba(108, 92, 231, 0.1) 0%, transparent 20%),
-                radial-gradient(circle at 90% 80%, rgba(253, 121, 168, 0.1) 0%, transparent 20%);
-        }
-
-        .container {
-            max-width: 850px;
-            margin: 2rem auto;
-            padding: 2.5rem;
-            background-color: var(--bg-light);
-            border-radius: var(--border-radius-lg);
-            box-shadow: var(--card-shadow);
-            animation: fadeIn 0.6s ease-in-out;
-            color: var(--text-color);
-            position: relative;
-            overflow: hidden;
-            z-index: 1;
-        }
-
-        .container::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 5px;
-            background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
-            z-index: 2;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        h1, h2, h3 {
-            font-weight: 600;
-            line-height: 1.3;
-        }
-
-        h1 {
-            color: var(--primary-color);
-            text-align: center;
-            margin-bottom: 1.5rem;
-            font-size: 2.8rem;
-            position: relative;
-            padding-bottom: 1rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 1rem;
-        }
-
-        h1::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 120px;
-            height: 4px;
-            background: linear-gradient(to right, var(--primary-color), var(--accent-color));
-            border-radius: 2px;
-        }
-
-        h2 {
-            color: var(--text-color);
-            font-size: 1.8rem;
-            margin-bottom: 1.5rem;
-            display: flex;
-            align-items: center;
-            gap: 0.8rem;
-        }
-
-        .intro-text {
-            text-align: center;
-            margin-bottom: 2.5rem;
-            color: var(--text-light);
-            font-size: 1.1rem;
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
-            line-height: 1.8;
-        }
-
-        .form-group {
-            margin-bottom: 2rem;
-            position: relative;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 0.8rem;
-            font-weight: 500;
-            color: var(--text-color);
-            display: flex;
-            align-items: center;
-            gap: 0.6rem;
-        }
-
-        label i {
-            width: 20px;
-            text-align: center;
-            color: var(--primary-light);
-        }
-
-        input, textarea, select {
-            width: 100%;
-            padding: 14px 18px;
-            border: 2px solid var(--input-border);
-            border-radius: var(--border-radius-sm);
-            font-size: 1rem;
-            transition: var(--transition);
-            background-color: var(--input-bg);
-            color: var(--text-color);
-            font-family: 'Poppins', sans-serif;
-        }
-
-        textarea {
-            min-height: 150px;
-            resize: vertical;
-        }
-
-        input:focus, textarea:focus, select:focus {
-            border-color: var(--primary-color);
-            outline: none;
-            box-shadow: 0 0 0 4px rgba(108, 92, 231, 0.2);
-            background-color: var(--input-focus);
-        }
-
-        input::placeholder, textarea::placeholder {
-            color: #555;
-            font-style: italic;
-        }
-
-        .rating-container {
-            display: flex;
-            flex-direction: column;
-            gap: 0.8rem;
-        }
-
-        .rating {
-            display: flex;
-            justify-content: center;
-            width: 100%;
-            margin: 0.5rem 0;
-            direction: rtl;
-        }
-
-        .rating input {
-            display: none;
-        }
-
-        .rating label {
-            font-size: 2.5rem;
-            color: var(--input-border);
-            cursor: pointer;
-            transition: var(--transition);
-            padding: 0 5px;
-            position: relative;
-        }
-
-        .rating label:hover,
-        .rating label:hover ~ label,
-        .rating input:checked ~ label {
-            color: var(--warning-color);
-            text-shadow: 0 0 10px rgba(253, 203, 110, 0.4);
-        }
-
-        .rating label::after {
-            content: attr(data-value);
-            position: absolute;
-            top: -25px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 0.9rem;
-            color: var(--text-light);
-            opacity: 0;
-            transition: var(--transition);
-        }
-
-        .rating label:hover::after {
-            opacity: 1;
-            top: -30px;
-        }
-
-        .rating-text {
-            text-align: center;
-            font-style: italic;
-            color: var(--text-light);
-            font-size: 0.95rem;
-            margin-top: 0.5rem;
-        }
-
-        .button-group {
-            display: flex;
-            gap: 1.2rem;
-            margin-top: 2.5rem;
-            flex-wrap: wrap;
-        }
-
-        button {
-            padding: 14px 28px;
-            border: none;
-            border-radius: var(--border-radius-sm);
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: var(--transition);
-            display: flex;
-            align-items: center;
-            gap: 0.8rem;
-            flex: 1;
-            min-width: 200px;
-            justify-content: center;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-
-        button i {
-            font-size: 1.1rem;
-        }
-
-        .submit-btn {
-            background-color: var(--primary-color);
-            color: white;
-        }
-
-        .submit-btn:hover {
-            background-color: var(--primary-light);
-            transform: translateY(-3px);
-            box-shadow: 0 6px 12px rgba(108, 92, 231, 0.3);
-        }
-
-        .view-btn {
-            background-color: var(--dark-color);
-            color: white;
-        }
-
-        .view-btn:hover {
-            background-color: #3a454d;
-            transform: translateY(-3px);
-            box-shadow: 0 6px 12px rgba(45, 52, 54, 0.3);
-        }
-
-        .back-btn {
-            background-color: #636e72;
-            color: white;
-        }
-
-        .back-btn:hover {
-            background-color: #4a5357;
-            transform: translateY(-3px);
-            box-shadow: 0 6px 12px rgba(99, 110, 114, 0.3);
-        }
-
-        #adminPanel {
-            margin-top: 2rem;
-            padding-top: 2rem;
-            border-top: 1px solid var(--input-border);
-            animation: fadeIn 0.5s ease-in-out;
-        }
-
-        .feedback-list {
-            display: grid;
-            gap: 1.8rem;
-            margin-top: 2rem;
-        }
-
-        .feedback-item {
-            background-color: var(--card-bg);
-            border-radius: var(--border-radius-md);
-            padding: 2rem;
-            border-left: 4px solid var(--primary-color);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            transition: var(--transition);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .feedback-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
-        }
-
-        .feedback-item::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, rgba(108, 92, 231, 0.05) 0%, rgba(253, 121, 168, 0.05) 100%);
-            z-index: -1;
-        }
-
-        .feedback-header {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 0.8rem;
-            flex-wrap: wrap;
-            gap: 1rem;
-        }
-
-        .feedback-user {
-            font-weight: 600;
-            color: var(--primary-color);
-            font-size: 1.2rem;
-        }
-
-        .feedback-email {
-            color: var(--text-light);
-            font-size: 0.95rem;
-        }
-
-        .feedback-rating {
-            color: var(--warning-color);
-            font-size: 1.4rem;
-            margin: 0.8rem 0;
-            letter-spacing: 2px;
-        }
-
-        .feedback-content {
-            margin: 1.2rem 0;
-            line-height: 1.8;
-            color: var(--text-color);
-        }
-
-        .feedback-date {
-            font-size: 0.85rem;
-            color: var(--text-light);
-            text-align: right;
-            display: flex;
-            align-items: center;
-            justify-content: flex-end;
-            gap: 0.5rem;
-        }
-
-        .empty-state {
-            text-align: center;
-            padding: 3rem 2rem;
-            color: var(--text-light);
-            background-color: var(--card-bg);
-            border-radius: var(--border-radius-md);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-
-        .empty-state i {
-            font-size: 3.5rem;
-            color: var(--input-border);
-            margin-bottom: 1.5rem;
-            opacity: 0.7;
-        }
-
-        .empty-state h3 {
-            color: var(--text-light);
-            margin-bottom: 0.8rem;
-            font-weight: 500;
-        }
-
-        .empty-state p {
-            max-width: 400px;
-            margin: 0 auto;
-        }
-
-        .hidden {
-            display: none;
-        }
-
-        .success-message {
-            position: fixed;
-            top: 25px;
-            right: 25px;
-            background-color: var(--success-color);
-            color: white;
-            padding: 18px 28px;
-            border-radius: var(--border-radius-sm);
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            z-index: 1000;
-            box-shadow: 0 6px 12px rgba(0, 184, 148, 0.3);
-            animation: slideIn 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55), fadeOut 0.5s ease-in 3.5s forwards;
-        }
-
-        .success-message i {
-            font-size: 1.5rem;
-        }
-
-        @keyframes slideIn {
-            from { transform: translateX(100%); opacity: 0; }
-            to { transform: translateX(0); opacity: 1; }
-        }
-
-        @keyframes fadeOut {
-            to { opacity: 0; }
-        }
-
-        .stats-container {
-            display: flex;
-            gap: 1.5rem;
-            margin-bottom: 2rem;
-            flex-wrap: wrap;
-        }
-
-        .stat-card {
-            flex: 1;
-            min-width: 150px;
-            background-color: var(--card-bg);
-            border-radius: var(--border-radius-md);
-            padding: 1.5rem;
-            text-align: center;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            transition: var(--transition);
-        }
-
-        .stat-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-        }
-
-        .stat-value {
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: var(--primary-color);
-            margin-bottom: 0.5rem;
-            line-height: 1;
-        }
-
-        .stat-label {
-            font-size: 0.95rem;
-            color: var(--text-light);
-        }
-
-        .filter-controls {
-            display: flex;
-            gap: 1rem;
-            margin-bottom: 1.5rem;
-            flex-wrap: wrap;
-        }
-
-        .filter-btn {
-            padding: 8px 16px;
-            background-color: var(--input-bg);
-            border: 1px solid var(--input-border);
-            color: var(--text-color);
-            border-radius: 20px;
-            cursor: pointer;
-            transition: var(--transition);
-            font-size: 0.9rem;
-        }
-
-        .filter-btn.active {
-            background-color: var(--primary-color);
-            border-color: var(--primary-color);
-            color: white;
-        }
-
-        .filter-btn:hover {
-            background-color: var(--input-focus);
-        }
-
-        .confetti {
-            position: fixed;
-            width: 10px;
-            height: 10px;
-            background-color: var(--primary-color);
-            opacity: 0;
-            z-index: 999;
-            animation: confetti-fall 3s ease-in-out forwards;
-        }
-
-        @keyframes confetti-fall {
-            0% {
-                transform: translateY(-100px) rotate(0deg);
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(100vh) rotate(360deg);
-                opacity: 0;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .container {
-                margin: 1rem;
-                padding: 1.8rem;
-                border-radius: var(--border-radius-md);
-            }
-
-            h1 {
-                font-size: 2.2rem;
-            }
-
-            .button-group {
-                flex-direction: column;
-            }
-
-            button {
-                width: 100%;
-                min-width: auto;
-            }
-
-            .stats-container {
-                flex-direction: column;
-                gap: 1rem;
-            }
-
-            .stat-card {
-                min-width: 100%;
-            }
-
-            .feedback-item {
-                padding: 1.5rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .container {
-                padding: 1.5rem;
-            }
-
-            h1 {
-                font-size: 1.8rem;
-                flex-direction: column;
-                gap: 0.5rem;
-            }
-
-            .rating label {
-                font-size: 2rem;
-            }
-
-            .feedback-header {
-                flex-direction: column;
-            }
-
-            .feedback-date {
-                justify-content: flex-start;
-            }
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Planr - Feedback</title>
+  <style>
+    :root {
+      --primary: #6c5ce7;
+      --accent: #fd79a8;
+      --bg: #1e1e2f;
+      --light: #f8f9fa;
+      --text: #ffffff;
+      --card: #2d2d44;
+      --input: #3b3b5c;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    .container {
+      background: var(--card);
+      padding: 30px;
+      border-radius: 15px;
+      max-width: 500px;
+      width: 100%;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      animation: fadeIn 0.5s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    h1, h2 {
+      color: var(--primary);
+      text-align: center;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    label {
+      margin-bottom: 8px;
+      display: block;
+      font-weight: 500;
+    }
+
+    input, textarea, select {
+      width: 100%;
+      background: var(--input);
+      color: var(--text);
+      border: none;
+      border-radius: 8px;
+      padding: 12px;
+    }
+
+    textarea { resize: vertical; min-height: 80px; }
+
+    .rating {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .rating input {
+      display: none;
+    }
+
+    .rating label {
+      font-size: 2rem;
+      color: #555;
+      cursor: pointer;
+    }
+
+    .rating input:checked ~ label,
+    .rating label:hover,
+    .rating label:hover ~ label {
+      color: var(--accent);
+    }
+
+    button {
+      width: 100%;
+      background: var(--primary);
+      color: white;
+      border: none;
+      padding: 12px;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background: #5649c0;
+    }
+
+    #thankYouMessage {
+      display: none;
+      text-align: center;
+    }
+
+    .emoji {
+      font-size: 3rem;
+      animation: bounce 1s infinite alternate;
+    }
+
+    @keyframes bounce {
+      from { transform: translateY(0); }
+      to { transform: translateY(-10px); }
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <h1><i class="fas fa-comment-alt"></i> Planr Feedback</h1>
-        
+  <div class="container">
+    <h1>Planr</h1>
+    <p style="text-align:center;margin-bottom:20px;">Your Event Planning Partner</p>
 
-        <form id="feedbackForm">
-            <div class="form-group">
-                <label for="name"><i class="fas fa-user"></i> Name (optional):</label>
-                <input type="text" id="name" name="name" placeholder="How should we call you?">
-            </div>
-            <div class="form-group">
-                <label for="email"><i class="fas fa-envelope"></i> Email (optional):</label>
-                <input type="email" id="email" name="email" placeholder="Your email (for follow-up if needed)">
-            </div>
-            <div class="form-group rating-container">
-                <label><i class="fas fa-star"></i> How would you rate your experience?</label>
-                <div class="rating">
-                    <input type="radio" id="star5" name="rating" value="5">
-                    <label for="star5" data-value="Excellent">★</label>
-                    <input type="radio" id="star4" name="rating" value="4">
-                    <label for="star4" data-value="Very Good">★</label>
-                    <input type="radio" id="star3" name="rating" value="3">
-                    <label for="star3" data-value="Good">★</label>
-                    <input type="radio" id="star2" name="rating" value="2">
-                    <label for="star2" data-value="Fair">★</label>
-                    <input type="radio" id="star1" name="rating" value="1">
-                    <label for="star1" data-value="Poor">★</label>
-                </div>
-                <p class="rating-text">Click on a star to rate your experience with Planar</p>
-            </div>
-            <div class="form-group">
-                <label for="feedback"><i class="fas fa-edit"></i> Your Feedback:</label>
-                <textarea id="feedback" name="feedback" rows="5" required placeholder="What did you love? What can we improve? Your detailed feedback helps us the most..."></textarea>
-            </div>
-            <div class="button-group">
-                <button type="submit" class="submit-btn"><i class="fas fa-paper-plane"></i> Submit Feedback</button>
-                <button type="button" id="viewFeedbackBtn" class="view-btn"><i class="fas fa-eye"></i> View Feedback</button>
-            </div>
-        </form>
+    <form id="feedbackForm">
+      <div class="form-group">
+        <label>Your Name</label>
+        <input type="text" required />
+      </div>
 
-        <div id="adminPanel" class="hidden">
-            <h2><i class="fas fa-clipboard-list"></i> Feedback Submissions</h2>
-            
-            <div class="stats-container">
-                <div class="stat-card">
-                    <div class="stat-value" id="totalFeedback">0</div>
-                    <div class="stat-label">Total Feedback</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-value" id="avgRating">0.0</div>
-                    <div class="stat-label">Average Rating</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-value" id="recentFeedback">0</div>
-                    <div class="stat-label">This Month</div>
-                </div>
-            </div>
-            
-            <div class="filter-controls">
-                <button class="filter-btn active" data-filter="all">All</button>
-                <button class="filter-btn" data-filter="5">5 Stars</button>
-                <button class="filter-btn" data-filter="4">4 Stars</button>
-                <button class="filter-btn" data-filter="3">3 Stars</button>
-                <button class="filter-btn" data-filter="2">2 Stars</button>
-                <button class="filter-btn" data-filter="1">1 Star</button>
-            </div>
-            
-            <button id="backToFormBtn" class="back-btn"><i class="fas fa-arrow-left"></i> Back to Form</button>
-            <div id="feedbackList" class="feedback-list"></div>
+      <div class="form-group">
+        <label>Email Address</label>
+        <input type="email" required />
+      </div>
+
+      <div class="form-group">
+        <label>Rating</label>
+        <div class="rating">
+          <input type="radio" id="star5" name="rating" value="5"><label for="star5">★</label>
+          <input type="radio" id="star4" name="rating" value="4"><label for="star4">★</label>
+          <input type="radio" id="star3" name="rating" value="3"><label for="star3">★</label>
+          <input type="radio" id="star2" name="rating" value="2"><label for="star2">★</label>
+          <input type="radio" id="star1" name="rating" value="1"><label for="star1">★</label>
         </div>
+      </div>
+
+      <div class="form-group">
+        <label>Feedback Type</label>
+        <select required>
+          <option disabled selected>Select feedback type</option>
+          <option>Suggestion</option>
+          <option>Compliment</option>
+          <option>Complaint</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Your Feedback</label>
+        <textarea required></textarea>
+      </div>
+
+      <button type="submit">Submit Feedback</button>
+    </form>
+
+    <div id="thankYouMessage">
+      <div class="emoji">🎉</div>
+      <h2>Thank You!</h2>
+      <p>We appreciate your feedback!</p>
+      <button onclick="resetForm()">Submit Another</button>
     </div>
+  </div>
 
-    <script>
-        // Enhanced feedback handling with statistics and filtering
-        function saveFeedback(feedback) {
-            const savedFeedback = JSON.parse(localStorage.getItem('planarFeedback') || '[]');
-            feedback.id = Date.now();
-            feedback.date = new Date().toISOString();
-            savedFeedback.unshift(feedback);
-            localStorage.setItem('planarFeedback', JSON.stringify(savedFeedback));
-            showSuccessMessage();
-            createConfetti();
-        }
+  <script>
+    const form = document.getElementById('feedbackForm');
+    const thankYou = document.getElementById('thankYouMessage');
 
-        function loadFeedback() {
-            return JSON.parse(localStorage.getItem('planarFeedback') || '[]');
-        }
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+      form.style.display = 'none';
+      thankYou.style.display = 'block';
+    });
 
-        function showSuccessMessage() {
-            const message = document.createElement('div');
-            message.className = 'success-message';
-            message.innerHTML = `
-                <i class="fas fa-check-circle"></i>
-                <div>
-                    <div style="font-weight: 600;">Thank you for your feedback!</div>
-                    <div style="font-size: 0.9rem; opacity: 0.9;">We appreciate your time and input.</div>
-                </div>
-            `;
-            document.body.appendChild(message);
-            setTimeout(() => message.remove(), 3500);
-        }
-
-        function createConfetti() {
-            const colors = ['#6c5ce7', '#fd79a8', '#00b894', '#fdcb6e', '#a29bfe'];
-            for (let i = 0; i < 50; i++) {
-                const confetti = document.createElement('div');
-                confetti.className = 'confetti';
-                confetti.style.left = Math.random() * 100 + 'vw';
-                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-                confetti.style.width = Math.random() * 8 + 5 + 'px';
-                confetti.style.height = Math.random() * 8 + 5 + 'px';
-                confetti.style.animationDuration = Math.random() * 2 + 2 + 's';
-                confetti.style.animationDelay = Math.random() * 0.5 + 's';
-                document.body.appendChild(confetti);
-                setTimeout(() => confetti.remove(), 3000);
-            }
-        }
-
-        function updateStats(feedbacks) {
-            document.getElementById('totalFeedback').textContent = feedbacks.length;
-            
-            if (feedbacks.length > 0) {
-                const totalRating = feedbacks.reduce((sum, fb) => sum + parseInt(fb.rating || 0), 0);
-                const avgRating = (totalRating / feedbacks.length).toFixed(1);
-                document.getElementById('avgRating').textContent = avgRating;
-                
-                const now = new Date();
-                const recentCount = feedbacks.filter(fb => {
-                    const fbDate = new Date(fb.date);
-                    return fbDate.getMonth() === now.getMonth() && fbDate.getFullYear() === now.getFullYear();
-                }).length;
-                document.getElementById('recentFeedback').textContent = recentCount;
-            } else {
-                document.getElementById('avgRating').textContent = '0.0';
-                document.getElementById('recentFeedback').textContent = '0';
-            }
-        }
-
-        function displayFeedback(filter = 'all') {
-            const feedbackList = document.getElementById('feedbackList');
-            let feedbacks = loadFeedback();
-            
-            // Apply filter if not 'all'
-            if (filter !== 'all') {
-                feedbacks = feedbacks.filter(fb => fb.rating == filter);
-            }
-            
-            updateStats(feedbacks);
-            feedbackList.innerHTML = '';
-
-            if (feedbacks.length === 0) {
-                feedbackList.innerHTML = `
-                    <div class="empty-state">
-                        <i class="fas fa-comment-slash"></i>
-                        <h3>No feedback found</h3>
-                        <p>There are no feedback submissions matching your criteria</p>
-                    </div>
-                `;
-                return;
-            }
-
-            feedbacks.forEach(fb => {
-                const item = document.createElement('div');
-                item.className = 'feedback-item';
-                const date = new Date(fb.date);
-                const formattedDate = date.toLocaleString('en-US', {
-                    year: 'numeric', 
-                    month: 'short', 
-                    day: 'numeric',
-                    hour: '2-digit', 
-                    minute: '2-digit'
-                });
-                const stars = '★'.repeat(fb.rating) + '☆'.repeat(5 - fb.rating);
-
-                item.innerHTML = `
-                    <div class="feedback-header">
-                        <span class="feedback-user">${fb.name || 'Anonymous User'}</span>
-                        <span class="feedback-email">${fb.email || 'No email provided'}</span>
-                    </div>
-                    <div class="feedback-rating" title="${fb.rating} out of 5 stars">${stars}</div>
-                    <div class="feedback-content">${fb.feedback}</div>
-                    <div class="feedback-date">
-                        <i class="far fa-clock"></i> 
-                        ${formattedDate}
-                    </div>
-                `;
-                feedbackList.appendChild(item);
-            });
-        }
-
-        // Form submission
-        document.getElementById('feedbackForm').addEventListener('submit', function (e) {
-            e.preventDefault();
-            const feedbackText = document.getElementById('feedback').value.trim();
-            if (!feedbackText) {
-                alert('Please provide your feedback before submitting');
-                document.getElementById('feedback').focus();
-                return;
-            }
-
-            const rating = document.querySelector('input[name="rating"]:checked')?.value;
-            if (!rating) {
-                alert('Please select a rating before submitting');
-                return;
-            }
-
-            const formData = {
-                name: document.getElementById('name').value.trim(),
-                email: document.getElementById('email').value.trim(),
-                rating: rating,
-                feedback: feedbackText
-            };
-
-            saveFeedback(formData);
-            this.reset();
-            document.querySelectorAll('input[name="rating"]').forEach(radio => radio.checked = false);
-        });
-
-        // View feedback button
-        document.getElementById('viewFeedbackBtn').addEventListener('click', function () {
-            document.getElementById('feedbackForm').classList.add('hidden');
-            document.getElementById('adminPanel').classList.remove('hidden');
-            displayFeedback();
-        });
-
-        // Back to form button
-        document.getElementById('backToFormBtn').addEventListener('click', function () {
-            document.getElementById('adminPanel').classList.add('hidden');
-            document.getElementById('feedbackForm').classList.remove('hidden');
-        });
-
-        // Filter buttons
-        document.querySelectorAll('.filter-btn').forEach(btn => {
-            btn.addEventListener('click', function() {
-                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-                this.classList.add('active');
-                displayFeedback(this.dataset.filter);
-            });
-        });
-
-        // Check for #view hash
-        if (window.location.hash === '#view') {
-            document.getElementById('feedbackForm').classList.add('hidden');
-            document.getElementById('adminPanel').classList.remove('hidden');
-            displayFeedback();
-        }
-
-        // Initialize stats if on admin panel
-        if (!document.getElementById('feedbackForm').classList.contains('hidden')) {
-            updateStats(loadFeedback());
-        }
-    </script>
+    function resetForm() {
+      form.reset();
+      form.style.display = 'block';
+      thankYou.style.display = 'none';
+    }
+  </script>
 </body>
 </html>
