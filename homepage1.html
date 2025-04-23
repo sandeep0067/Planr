@@ -1060,6 +1060,105 @@
             border-radius: 2px;
         }
         
+   /* Featured Events Section Styling */
+.section-title {
+  font-size: 2rem;
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 40px;
+  color: var(--text-light);
+  position: relative;
+}
+
+.section-title::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 70px;
+  height: 3px;
+  background: #4d7cfe;
+  border-radius: 3px;
+}
+
+.card {
+  background-color: #1a1a22;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+.card-img-top {
+  height: 200px;
+  object-fit: cover;
+}
+
+.category-badge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: rgba(0, 0, 0, 0.7);
+  color: #fff;
+  padding: 5px 15px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  backdrop-filter: blur(5px);
+}
+
+.card-body {
+  padding: 20px;
+}
+
+.card-title {
+  font-size: 1.4rem;
+  font-weight: 600;
+  margin-bottom: 10px;
+  color: #fff;
+}
+
+.event-date, .event-location {
+  display: flex;
+  align-items: center;
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 8px;
+  font-size: 0.9rem;
+}
+
+.event-date i, .event-location i {
+  margin-right: 8px;
+  color: #4d7cfe;
+}
+
+.card-text {
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 20px;
+  font-size: 0.95rem;
+}
+
+.book-now-btn {
+  background-color: #4d7cfe;
+  border: none;
+  border-radius: 4px;
+  padding: 8px 20px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.book-now-btn:hover {
+  background-color: #3a69eb;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(77, 124, 254, 0.3);
+}
+
+
+        
         @media (max-width: 768px) {
             .hero-title {
                 font-size: 2.5rem;
@@ -1350,6 +1449,67 @@
       </div>
     </section>
 
+ <!-- Featured Events Section -->
+<section class="container mt-5">
+  <h2 class="section-title">Featured Events</h2>
+  <div class="row g-4">
+      <div class="col-md-4 mb-4">
+          <div class="card h-100">
+              <div class="position-relative">
+                  <img src="https://wallpaperaccess.com/full/2183063.jpg" class="card-img-top" alt="Concert">
+                  <span class="category-badge">Concert</span>
+              </div>
+              <div class="card-body d-flex flex-column">
+                  <h5 class="card-title">Summer Music Festival</h5>
+                  <p class="event-date"><i class="bi bi-calendar-event"></i> May 15, 2025 &centerdot; 7:00 PM</p>
+                  <p class="event-location"><i class="bi bi-geo-alt"></i> Central Park, New York</p>
+                  <p class="card-text">Experience the ultimate summer music festival featuring top artists from around the world.</p>
+                  <div class="d-flex justify-content-between align-items-center mt-auto">
+                      <span class="fw-bold">$59.99</span>
+                      <a href="#" class="btn btn-primary book-now-btn">Book Now</a>
+                  </div>
+              </div>
+          </div>
+      </div>
+      <div class="col-md-4 mb-4">
+          <div class="card h-100">
+              <div class="position-relative">
+                  <img src="https://i.pinimg.com/736x/c1/e7/83/c1e783c507b7755031519f6299f5f96b.jpg" class="card-img-top" alt="Comedy Show">
+                  <span class="category-badge">Comedy</span>
+              </div>
+              <div class="card-body d-flex flex-column">
+                  <h5 class="card-title">Stand-Up Comedy Night</h5>
+                  <p class="event-date"><i class="bi bi-calendar-event"></i> May 20, 2025 &centerdot; 8:30 PM</p>
+                  <p class="event-location"><i class="bi bi-geo-alt"></i> Laugh Factory, Los Angeles</p>
+                  <p class="card-text">A night of non-stop laughter with the country's top stand-up comedians.</p>
+                  <div class="d-flex justify-content-between align-items-center mt-auto">
+                      <span class="fw-bold">$39.99</span>
+                      <a href="#" class="btn btn-primary book-now-btn">Book Now</a>
+                  </div>
+              </div>
+          </div>
+      </div>
+      <div class="col-md-4 mb-4">
+          <div class="card h-100">
+              <div class="position-relative">
+                  <img src="https://static01.nyt.com/images/2023/05/16/multimedia/16cannes-promo-230pm-pwvg/16cannes-promo-230pm-pwvg-videoSixteenByNine3000.jpg" class="card-img-top" alt="Sports Event">
+                  <span class="category-badge">Sports</span>
+              </div>
+              <div class="card-body d-flex flex-column">
+                  <h5 class="card-title">Championship Basketball</h5>
+                  <p class="event-date"><i class="bi bi-calendar-event"></i> May 25, 2025 &centerdot; 6:00 PM</p>
+                  <p class="event-location"><i class="bi bi-geo-alt"></i> Madison Square Garden, New York</p>
+                  <p class="card-text">Witness the ultimate basketball showdown as top teams compete for the championship.</p>
+                  <div class="d-flex justify-content-between align-items-center mt-auto">
+                      <span class="fw-bold">$79.99</span>
+                      <a href="#" class="btn btn-primary book-now-btn">Book Now</a>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</section>
+
     <!-- Newsletter Section -->
     <section class="container py-5">
         <div class="row justify-content-center">
@@ -1504,510 +1664,227 @@
                     <button class="toggle-auth-btn" id="show-login">Sign In</button>
                 </div>
             </div>
+            <button class="close-button" id="close-auth-modal" style="color: white; top: 15px; right: 15px;">×</button>
         </div>
     </div>
-    
+
     <!-- Profile Sidebar -->
     <div class="profile-sidebar" id="profile-sidebar">
         <div class="profile-header">
-            <button class="profile-close" id="close-profile">
-                <i class="bi bi-x"></i>
-            </button>
-            <img src="https://source.unsplash.com/random/200x200/?portrait" alt="Profile" class="profile-avatar" id="sidebar-avatar">
-            <h3 class="profile-name" id="sidebar-name">John Doe</h3>
-            <p class="profile-email" id="sidebar-email">john@example.com</p>
+            <button class="profile-close" id="close-profile">×</button>
+            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Profile" class="profile-avatar">
+            <h3 class="profile-name">John Doe</h3>
+            <p class="profile-email">john.doe@example.com</p>
         </div>
         
         <div class="profile-body">
-            <div class="membership-card">
-                <div class="membership-tier">PLANR GOLD MEMBER</div>
-                <div class="membership-points">1,250 Points</div>
-                <div class="progress-container">
-                    <div class="progress-bar"></div>
-                </div>
-                <small>650 points to next tier</small>
-            </div>
-            
             <div class="profile-section">
-                <h4 class="profile-section-title">
-                    <i class="bi bi-person"></i> My Account
-                </h4>
-                <ul class="profile-menu">
-                    <li><a href="#"><i class="bi bi-person"></i> Profile Settings</a></li>
-                    <li><a href="#"><i class="bi bi-credit-card"></i> Payment Methods</a></li>
-                    <li><a href="#"><i class="bi bi-gear"></i> Account Settings</a></li>
-                    <li><a href="#"><i class="bi bi-bookmark"></i> Saved Events</a></li>
-                </ul>
-            </div>
-            
-            <div class="profile-section">
-                <h4 class="profile-section-title">
-                    <i class="bi bi-ticket-perforated"></i> Upcoming Events
-                </h4>
+                <h4 class="profile-section-title"><i class="bi bi-ticket-perforated"></i> My Tickets</h4>
                 <ul class="tickets-list">
                     <li class="ticket-item">
-                        <img src="https://source.unsplash.com/random/300x300/?concert" class="ticket-image">
+                        <img src="https://i.pinimg.com/736x/36/e5/0e/36e50ef4bf1f749861ccf4dff9efae80.jpg" alt="Event" class="ticket-image">
                         <div class="ticket-details">
-                            <div class="ticket-event">Summer Beats Festival</div>
-                            <div class="ticket-date">June 15, 2025 • 8:00 PM</div>
-                            <span class="ticket-status">Confirmed</span>
+                            <div class="ticket-event">Minecraft 3D</div>
+                            <div class="ticket-date">Apr 28, 2025 • 7:30 PM</div>
+                            <div class="ticket-status">Confirmed</div>
                         </div>
-                        <div class="ticket-qr">
-                            <!-- QR code placeholder -->
-                            <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                                <rect x="10" y="10" width="20" height="20" fill="black"/>
-                                <rect x="40" y="10" width="20" height="20" fill="black"/>
-                                <rect x="70" y="10" width="20" height="20" fill="black"/>
-                                <rect x="10" y="40" width="20" height="20" fill="black"/>
-                                <rect x="70" y="40" width="20" height="20" fill="black"/>
-                                <rect x="10" y="70" width="20" height="20" fill="black"/>
-                                <rect x="40" y="70" width="20" height="20" fill="black"/>
-                                <rect x="70" y="70" width="20" height="20" fill="black"/>
-                            </svg>
-                        </div>
+                        <img src="https://api.qrserver.com/v1/create-qr-code/?size=60x60&data=TICKET123456" alt="QR Code" class="ticket-qr">
                     </li>
                     <li class="ticket-item">
-                        <img src="https://source.unsplash.com/random/300x300/?movie" class="ticket-image">
+                        <img src="https://assets-in.bmscdn.com/nmcms/events/banner/desktop/media-desktop-travis-scott-circus-maximus-stadium-tour-india-0-2025-4-7-t-12-15-0.jpg" alt="Event" class="ticket-image">
                         <div class="ticket-details">
-                            <div class="ticket-event">Minecraft 3D Premiere</div>
-                            <div class="ticket-date">May 20, 2025 • 7:30 PM</div>
-                            <span class="ticket-status">Confirmed</span>
+                            <div class="ticket-event">Travis Scott India Tour</div>
+                            <div class="ticket-date">May 15, 2025 • 8:00 PM</div>
+                            <div class="ticket-status">Confirmed</div>
                         </div>
-                        <div class="ticket-qr">
-                            <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                                <rect x="10" y="10" width="20" height="20" fill="black"/>
-                                <rect x="40" y="10" width="20" height="20" fill="black"/>
-                                <rect x="70" y="10" width="20" height="20" fill="black"/>
-                                <rect x="10" y="40" width="20" height="20" fill="black"/>
-                                <rect x="70" y="40" width="20" height="20" fill="black"/>
-                                <rect x="10" y="70" width="20" height="20" fill="black"/>
-                                <rect x="40" y="70" width="20" height="20" fill="black"/>
-                                <rect x="70" y="70" width="20" height="20" fill="black"/>
-                            </svg>
-                        </div>
+                        <img src="https://api.qrserver.com/v1/create-qr-code/?size=60x60&data=TICKET789012" alt="QR Code" class="ticket-qr">
                     </li>
                 </ul>
             </div>
             
             <div class="profile-section">
-                <h4 class="profile-section-title">
-                    <i class="bi bi-box-arrow-right"></i> Sign Out
-                </h4>
+                <h4 class="profile-section-title"><i class="bi bi-star"></i> Membership</h4>
+                <div class="membership-card">
+                    <div class="membership-tier">Gold Member</div>
+                    <div class="membership-points">650 Points</div>
+                    <div class="progress-container">
+                        <div class="progress-bar"></div>
+                    </div>
+                    <small>350 more points to Platinum</small>
+                </div>
+            </div>
+            
+            <div class="profile-section">
+                <h4 class="profile-section-title"><i class="bi bi-gear"></i> Account</h4>
                 <ul class="profile-menu">
+                    <li><a href="#"><i class="bi bi-person"></i> Edit Profile</a></li>
+                    <li><a href="#"><i class="bi bi-credit-card"></i> Payment Methods</a></li>
+                    <li><a href="#"><i class="bi bi-bell"></i> Notifications</a></li>
+                    <li><a href="#"><i class="bi bi-shield-lock"></i> Privacy & Security</a></li>
                     <li><a href="#" id="sidebar-logout"><i class="bi bi-box-arrow-right"></i> Logout</a></li>
                 </ul>
             </div>
         </div>
     </div>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        // Slideshow Logic with horizontal sliding effect
+        // Slideshow functionality
         let slideIndex = 0;
         const slides = document.querySelectorAll('.slide');
         const dots = document.querySelectorAll('.slide-dot');
-        let slideTimer;
-
+        const progressBar = document.getElementById('slideProgressBar');
+        let slideInterval;
+        
         function showSlides() {
-            // Remove all classes first
-            slides.forEach(slide => slide.classList.remove('active', 'prev', 'next'));
-            dots.forEach(dot => dot.classList.remove('active'));
-
-            // Calculate indices for prev, current, and next slides
+            for (let i = 0; i < slides.length; i++) {
+                slides[i].classList.remove('active', 'prev', 'next');
+                dots[i].classList.remove('active');
+            }
+            
             const prevIndex = (slideIndex - 1 + slides.length) % slides.length;
             const nextIndex = (slideIndex + 1) % slides.length;
             
-            // Apply appropriate classes
             slides[prevIndex].classList.add('prev');
             slides[slideIndex].classList.add('active');
             slides[nextIndex].classList.add('next');
-            
-            // Update active dot
             dots[slideIndex].classList.add('active');
             
-            // Reset progress bar
-            resetProgressBar();
-            
-            // Set timer for next slide
-            slideTimer = setTimeout(() => {
-                slideIndex = (slideIndex + 1) % slides.length;
-                showSlides();
-            }, 8000);
+            // Reset and start progress bar
+            progressBar.style.width = '0%';
+            setTimeout(() => {
+                progressBar.style.width = '100%';
+            }, 50);
         }
-
-        function resetProgressBar() {
-            const progressBar = document.getElementById('slideProgressBar');
-            if (progressBar) {
-                progressBar.style.width = '0';
-                setTimeout(() => {
-                    progressBar.style.width = '100%';
-                }, 50);
-                progressBar.style.transition = 'width 8s linear';
-            }
-        }
-
-        function currentSlide(n) {
-            clearTimeout(slideTimer);
-            slideIndex = n;
-            showSlides();
-        }
-
+        
         function nextSlide() {
-            clearTimeout(slideTimer);
             slideIndex = (slideIndex + 1) % slides.length;
             showSlides();
+            resetSlideInterval();
         }
-
+        
         function prevSlide() {
-            clearTimeout(slideTimer);
             slideIndex = (slideIndex - 1 + slides.length) % slides.length;
             showSlides();
+            resetSlideInterval();
         }
         
-        // Touch and Swipe Support
-        let touchStartX = 0;
-        let touchEndX = 0;
-        const slideContainer = document.querySelector('.slideshow-container');
-
-        if (slideContainer) {
-            slideContainer.addEventListener('touchstart', e => {
-                touchStartX = e.changedTouches[0].screenX;
-            });
-
-            slideContainer.addEventListener('touchend', e => {
-                touchEndX = e.changedTouches[0].screenX;
-                handleSwipe();
-            });
-        }
-
-        function handleSwipe() {
-            if (touchEndX < touchStartX) {
-                // Swipe left, go to next slide
-                nextSlide();
-            } else if (touchEndX > touchStartX) {
-                // Swipe right, go to previous slide
-                prevSlide();
-            }
-        }
-
-        // Keyboard Navigation
-        document.addEventListener('keydown', e => {
-            if (e.key === 'ArrowRight') {
-                nextSlide();
-            } else if (e.key === 'ArrowLeft') {
-                prevSlide();
-            }
-        });
-        
-        // Initialize slideshow if slides exist
-        if (slides.length > 0) {
+        function currentSlide(n) {
+            slideIndex = n;
             showSlides();
+            resetSlideInterval();
         }
         
-        // Add card hover effect from first code
-        document.querySelectorAll('.card').forEach(card => {
-            card.addEventListener('mousemove', (e) => {
-                const rect = card.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
-                
-                card.style.transform = `
-                    translateY(-10px)
-                    rotateX(${(rect.height/2 - y)/15}deg)
-                    rotateY(${(x - rect.width/2)/15}deg)
-                `;
-            });
-
-            card.addEventListener('mouseleave', () => {
-                card.style.transform = 'translateY(0) rotateX(0) rotateY(0)';
-            });
-        });
+        function resetSlideInterval() {
+            clearInterval(slideInterval);
+            slideInterval = setInterval(nextSlide, 5000);
+        }
         
-        // Navbar Scroll Effect
-        window.addEventListener('scroll', () => {
-            document.querySelector('.navbar').classList.toggle('scrolled', window.scrollY > 50);
-        });
+        // Initialize slideshow
+        showSlides();
+        resetSlideInterval();
         
-        // Simple Login Modal
-        const openLoginBtn = document.getElementById('open-login');
-        const openSignupBtn = document.getElementById('open-signup');
-        const closeSimpleLoginBtn = document.getElementById('close-simple-login');
+        // Modal functionality
         const simpleLoginModal = document.getElementById('simple-login-modal');
-        const openFullLoginBtn = document.getElementById('open-full-login');
-        
-        // Full Auth Modal
         const authModal = document.getElementById('auth-modal');
-        const showSignupBtn = document.getElementById('show-signup');
-        const showLoginBtn = document.getElementById('show-login');
         const authContainer = document.querySelector('.auth-container');
         
-        // Open simple login modal
-        if (openLoginBtn) {
-            openLoginBtn.addEventListener('click', () => {
-                simpleLoginModal.classList.add('active');
-            });
-        }
+        document.getElementById('open-login').addEventListener('click', () => {
+            simpleLoginModal.classList.add('active');
+        });
         
-        // Open signup directly
-        if (openSignupBtn) {
-            openSignupBtn.addEventListener('click', () => {
-                authModal.classList.add('active');
-                authContainer.classList.add('show-signup');
-            });
-        }
+        document.getElementById('open-signup').addEventListener('click', () => {
+            authModal.classList.add('active');
+            authContainer.classList.add('show-signup');
+        });
         
-        // Close simple login modal
-        if (closeSimpleLoginBtn) {
-            closeSimpleLoginBtn.addEventListener('click', () => {
-                simpleLoginModal.classList.remove('active');
-            });
-        }
+        document.getElementById('close-simple-login').addEventListener('click', () => {
+            simpleLoginModal.classList.remove('active');
+        });
         
-        // Open full auth modal from simple login
-        if (openFullLoginBtn) {
-            openFullLoginBtn.addEventListener('click', () => {
-                simpleLoginModal.classList.remove('active');
-                authModal.classList.add('active');
-            });
-        }
+        document.getElementById('open-full-login').addEventListener('click', () => {
+            simpleLoginModal.classList.remove('active');
+            authModal.classList.add('active');
+            authContainer.classList.remove('show-signup');
+        });
         
-        // Toggle between login and signup
-        if (showSignupBtn) {
-            showSignupBtn.addEventListener('click', () => {
-                authContainer.classList.add('show-signup');
-            });
-        }
+        document.getElementById('close-auth-modal').addEventListener('click', () => {
+            authModal.classList.remove('active');
+        });
         
-        if (showLoginBtn) {
-            showLoginBtn.addEventListener('click', () => {
-                authContainer.classList.remove('show-signup');
-            });
-        }
+        document.getElementById('show-signup').addEventListener('click', () => {
+            authContainer.classList.add('show-signup');
+        });
         
-        // Close auth modal when clicking outside
+        document.getElementById('show-login').addEventListener('click', () => {
+            authContainer.classList.remove('show-signup');
+        });
+        
+        // Close modals when clicking outside
         window.addEventListener('click', (e) => {
             if (e.target === simpleLoginModal) {
                 simpleLoginModal.classList.remove('active');
             }
             if (e.target === authModal) {
                 authModal.classList.remove('active');
-                setTimeout(() => {
-                    authContainer.classList.remove('show-signup');
-                }, 300);
             }
         });
         
-        // Update countdown for events
-        function updateCountdown() {
-            const now = new Date('2025-04-22T10:12:00'); // Current date: April 22, 2025
+        // Google Sign-In
+        function handleCredentialResponse(response) {
+            // Decode the credential response
+            const responsePayload = parseJwt(response.credential);
             
-            // Alt-Rock Revolution - April 25, 2025
-            const altRockDate = new Date('2025-04-25T20:00:00');
-            const altRockDiff = altRockDate - now;
-            const altRockDays = Math.floor(altRockDiff / (1000 * 60 * 60 * 24));
+            // Update UI to show logged in state
+            document.getElementById('auth-buttons').classList.add('d-none');
+            document.getElementById('profile-section').classList.remove('d-none');
             
-            // Comedy Night - May 2, 2025
-            const comedyDate = new Date('2025-05-02T21:00:00');
-            const comedyDiff = comedyDate - now;
-            const comedyDays = Math.floor(comedyDiff / (1000 * 60 * 60 * 24));
+            // Set profile info
+            document.getElementById('profile-pic').src = responsePayload.picture;
+            document.getElementById('profile-name').textContent = responsePayload.name;
             
-            // Film Festival - May 15, 2025
-            const filmDate = new Date('2025-05-15T00:00:00');
-            const filmDiff = filmDate - now;
-            const filmDays = Math.floor(filmDiff / (1000 * 60 * 60 * 24));
-            
-            console.log(`Alt-Rock Revolution: ${altRockDays} days away`);
-            console.log(`Comedy Night: ${comedyDays} days away`);
-            console.log(`Film Festival: ${filmDays} days away`);
+            // Close any open auth modals
+            simpleLoginModal.classList.remove('active');
+            authModal.classList.remove('active');
         }
         
-        // Call once on page load
-        updateCountdown();
-    </script>
-    <script>
-        // Add this to the script section
-        let currentUser = null;
-        
-        // Initialize Google Sign-In
-        function initializeGoogleSignIn() {
-            google.accounts.id.initialize({
-                client_id: 'YOUR_GOOGLE_CLIENT_ID.apps.googleusercontent.com',
-                callback: handleGoogleResponse
-            });
-            
-            google.accounts.id.renderButton(
-                document.getElementById('google-login'),
-                { theme: 'outline', size: 'large' }
-            );
-        }
-        
-        function handleGoogleResponse(response) {
-            // Here you would typically verify the credential with your backend
-            const user = {
-                name: 'John Doe', // Get from Google API
-                email: 'john@example.com',
-                picture: 'https://example.com/profile.jpg'
-            };
-            handleLogin(user);
-        }
-        
-        // Social login handlers
-        document.querySelectorAll('.social-btn').forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                const provider = e.currentTarget.querySelector('i').className.split('-')[1];
-                // Simulated login - replace with actual OAuth flow
-                const user = {
-                    name: 'Test User',
-                    email: 'test@example.com',
-                    picture: `https://th.bing.com/th/id/OIP.Qp8Hx8jR3Wivqhp2C1SzrwHaFj?rs=1&pid=ImgDetMain`
-                };
-                handleLogin(user);
-            });
-        });
-        
-        // Handle login
-        function handleLogin(user) {
-            currentUser = user;
-            localStorage.setItem('currentUser', JSON.stringify(user));
-            updateAuthUI();
+        // Helper function to parse JWT
+        function parseJwt(token) {
+            const base64Url = token.split('.')[1];
+            const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+            const jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
+                return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+            }).join(''));
+            return JSON.parse(jsonPayload);
         }
         
         // Handle logout
         document.getElementById('logout').addEventListener('click', () => {
-            localStorage.removeItem('currentUser');
-            currentUser = null;
-            updateAuthUI();
-        });
-        
-        // Update UI based on auth state
-        function updateAuthUI() {
-            const authButtons = document.getElementById('auth-buttons');
-            const profileSection = document.getElementById('profile-section');
+            // Reset UI to logged out state
+            document.getElementById('auth-buttons').classList.remove('d-none');
+            document.getElementById('profile-section').classList.add('d-none');
             
-            if (currentUser) {
-                authButtons.classList.add('d-none');
-                profileSection.classList.remove('d-none');
-                document.getElementById('profile-name').textContent = currentUser.name;
-                document.getElementById('profile-pic').src = currentUser.picture;
-            } else {
-                authButtons.classList.remove('d-none');
-                profileSection.classList.add('d-none');
-            }
-        }
-        
-        // Check for existing session on page load
-        window.addEventListener('load', () => {
-            const storedUser = localStorage.getItem('currentUser');
-            if (storedUser) {
-                currentUser = JSON.parse(storedUser);
-                updateAuthUI();
-            }
-            initializeGoogleSignIn();
+            // Sign out from Google
+            google.accounts.id.disableAutoSelect();
         });
         
-        // Modify the existing auth modal code to close on successful login
-        function handleLogin(user) {
-            currentUser = user;
-            localStorage.setItem('currentUser', JSON.stringify(user));
-            updateAuthUI();
-            document.querySelectorAll('.modal-overlay.active').forEach(modal => {
-                modal.classList.remove('active');
-            });
-        }
-        </script>
-        <script>
-            // Add this to your existing JavaScript
-            // Profile Sidebar Functionality
-            function toggleProfileSidebar() {
-                const sidebar = document.getElementById('profile-sidebar');
-                sidebar.classList.toggle('active');
-                
-                // Update profile info in sidebar
-                if (currentUser) {
-                    document.getElementById('sidebar-name').textContent = currentUser.name;
-                    document.getElementById('sidebar-email').textContent = currentUser.email || 'user@example.com';
-                    document.getElementById('sidebar-avatar').src = currentUser.picture || 'https://th.bing.com/th/id/OIP.Qp8Hx8jR3Wivqhp2C1SzrwHaFj?rs=1&pid=ImgDetMain';
-                }
-                
-                // Prevent body scrolling when sidebar is open
-                document.body.style.overflow = sidebar.classList.contains('active') ? 'hidden' : '';
-            }
-    
-            // Close profile sidebar when clicking outside
-            document.addEventListener('click', (e) => {
-                const profileSidebar = document.getElementById('profile-sidebar');
-                const profileBtn = document.querySelector('.dropdown-toggle');
-                
-                if (profileSidebar.classList.contains('active') && 
-                    !profileSidebar.contains(e.target) && 
-                    e.target !== profileBtn && 
-                    !profileBtn.contains(e.target)) {
-                    profileSidebar.classList.remove('active');
-                    document.body.style.overflow = '';
-                }
-            });
-    
-            // Update the existing updateAuthUI function to include profile button event
-            function updateAuthUI() {
-                const authButtons = document.getElementById('auth-buttons');
-                const profileSection = document.getElementById('profile-section');
-                
-                if (currentUser) {
-                    authButtons.classList.add('d-none');
-                    profileSection.classList.remove('d-none');
-                    document.getElementById('profile-name').textContent = currentUser.name;
-                    const profilePic = document.getElementById('profile-pic');
-                    profilePic.src = currentUser.picture || 'https://th.bing.com/th/id/OIP.Qp8Hx8jR3Wivqhp2C1SzrwHaFj?rs=1&pid=ImgDetMain';
-                    profilePic.onerror = function() {
-                        this.src = 'https://via.placeholder.com/32';
-                    };
-                    
-                    // Add click event to profile button
-                    const profileBtn = document.querySelector('.dropdown-toggle');
-                    if (profileBtn) {
-                        profileBtn.addEventListener('click', (e) => {
-                            e.preventDefault();
-                            toggleProfileSidebar();
-                        });
-                    }
-                } else {
-                    authButtons.classList.remove('d-none');
-                    profileSection.classList.add('d-none');
-                    document.body.style.overflow = '';
-                }
-            }
-    
-            // Close button for profile sidebar
-            document.getElementById('close-profile').addEventListener('click', () => {
-                document.getElementById('profile-sidebar').classList.remove('active');
-                document.body.style.overflow = '';
-            });
-    
-            // Sidebar logout button
-            document.getElementById('sidebar-logout').addEventListener('click', (e) => {
-                e.preventDefault();
-                localStorage.removeItem('currentUser');
-                currentUser = null;
-                updateAuthUI();
-                document.getElementById('profile-sidebar').classList.remove('active');
-                document.body.style.overflow = '';
-            });
-    
-            // Initialize with mock user data for demo
-            window.addEventListener('load', () => {
-                const storedUser = localStorage.getItem('currentUser');
-                if (storedUser) {
-                    currentUser = JSON.parse(storedUser);
-                } else {
-                    // Mock user for demo
-                    currentUser = {
-                        name: "John Doe",
-                        email: "john@example.com",
-                        picture: "https://th.bing.com/th/id/OIP.Qp8Hx8jR3Wivqhp2C1SzrwHaFj?rs=1&pid=ImgDetMain"
-                    };
-                    localStorage.setItem('currentUser', JSON.stringify(currentUser));
-                }
-                updateAuthUI();
-            });
-        </script>
+        // Profile Sidebar
+        document.getElementById('profile-section').addEventListener('click', (e) => {
+            e.preventDefault();
+            document.getElementById('profile-sidebar').classList.add('active');
+        });
+        
+        document.getElementById('close-profile').addEventListener('click', () => {
+            document.getElementById('profile-sidebar').classList.remove('active');
+        });
+        
+        document.getElementById('sidebar-logout').addEventListener('click', (e) => {
+            e.preventDefault();
+            document.getElementById('profile-sidebar').classList.remove('active');
+            document.getElementById('auth-buttons').classList.remove('d-none');
+            document.getElementById('profile-section').classList.add('d-none');
+            google.accounts.id.disableAutoSelect();
+        });
+    </script>
 </body>
 </html>
