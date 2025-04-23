@@ -293,7 +293,509 @@
             opacity: 1;
             transform: scale(1);
         }
-        
+        /* Feedback Form Styles */
+:root {
+  --error-color: #e74c3c;
+  --success-color: #2ecc71;
+}
+
+.feedback-button {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  background: linear-gradient(135deg, var(--primary-accent), #fd79a8);
+  color: white;
+  border: none;
+  border-radius: 50px;
+  padding: 12px 24px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 4px 20px rgba(67, 97, 238, 0.3);
+  display: flex;
+  align-items: center;
+  transition: all 0.3s ease;
+  z-index: 999;
+}
+
+.feedback-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 25px rgba(67, 97, 238, 0.4);
+}
+
+.feedback-button svg {
+  margin-right: 8px;
+  width: 20px;
+  height: 20px;
+}
+
+.feedback-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(5px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+  color-scheme: dark;
+}
+
+.feedback-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.feedback-container {
+  background-color: var(--dark-card);
+  border-radius: 12px;
+  width: 90%;
+  max-width: 550px;
+  padding: 30px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+  position: relative;
+  overflow: hidden;
+  transform: translateY(20px);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  max-height: 80vh;
+  overflow-y: auto;
+  padding-right: 10px;
+}
+
+.feedback-container::-webkit-scrollbar {
+  width: 10px;
+}
+
+.feedback-container::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+}
+
+.feedback-container::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+}
+
+.feedback-container::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.feedback-container {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.2) rgba(255, 255, 255, 0.05);
+}
+
+.feedback-overlay.active .feedback-container {
+  transform: translateY(0);
+}
+
+.feedback-close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: rgba(255, 255, 255, 0.05);
+  border: none;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.feedback-close:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  transform: rotate(90deg);
+}
+
+.feedback-header {
+  margin-bottom: 25px;
+  text-align: center;
+}
+
+.feedback-title {
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+  background: linear-gradient(135deg, var(--primary-accent), #fd79a8);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.feedback-subtitle {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 1rem;
+}
+
+.feedback-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-label {
+  font-weight: 600;
+  font-size: 0.95rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.required-label {
+  color: #fd79a8;
+  font-size: 0.8rem;
+}
+
+.form-input, .form-select, .form-textarea {
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  padding: 12px 16px;
+  color: var(--text-light);
+  font-size: 1rem;
+  transition: all 0.2s ease;
+}
+
+.form-input:focus, .form-select:focus, .form-textarea:focus {
+  border-color: var(--primary-accent);
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(67, 97, 238, 0.2);
+}
+
+.form-textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+.char-count {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 0.85rem;
+  text-align: right;
+  margin-top: 4px;
+}
+
+.rating-group {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.rating-option {
+  flex: 1;
+}
+
+.rating-input {
+  display: none;
+}
+
+.rating-label {
+  display: block;
+  padding: 12px;
+  text-align: center;
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.rating-input:checked + .rating-label {
+  background-color: rgba(67, 97, 238, 0.2);
+  border-color: var(--primary-accent);
+  box-shadow: 0 0 0 2px rgba(67, 97, 238, 0.2);
+}
+
+.rating-text {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.7);
+  text-align: center;
+  margin-top: 8px;
+  min-height: 20px;
+}
+
+.error-message {
+  color: var(--error-color);
+  font-size: 0.85rem;
+  margin-top: 4px;
+  display: none;
+}
+
+.feedback-submit {
+  background: linear-gradient(135deg, var(--primary-accent), #fd79a8);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 14px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+  position: sticky;
+  bottom: 0;
+  z-index: 5;
+}
+
+.feedback-submit:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(67, 97, 238, 0.3);
+}
+
+.feedback-submit:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.feedback-spinner {
+  width: 20px;
+  height: 20px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top: 2px solid white;
+  border-radius: 50%;
+  margin-right: 10px;
+  animation: spin 0.8s linear infinite;
+  display: none;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.feedback-thank-you {
+  text-align: center;
+  display: none;
+}
+
+.thank-you-icon {
+  font-size: 3rem;
+  margin-bottom: 20px;
+  color: var(--success-color);
+}
+
+.thank-you-title {
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.thank-you-message {
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 20px;
+}
+
+/* Submission confirmation styles */
+.submission-confirmation {
+  display: none;
+  text-align: center;
+  animation: fadeIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.feedback-overlay.active .feedback-container.submission-confirmation {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+}
+
+/* Enhanced success circle */
+.success-circle {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  background: var(--primary-accent);
+  margin: 0 auto 35px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 0 40px rgba(108, 92, 231, 0.6);
+  animation: pulseIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+  background: linear-gradient(135deg, #6c5ce7, #fd79a8);
+  overflow: hidden;
+}
+
+.success-circle::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0) 70%);
+  opacity: 0;
+  animation: circleSweep 2s ease-in-out infinite alternate 0.8s;
+}
+
+@keyframes circleSweep {
+  0% { opacity: 0; transform: rotate(0deg); }
+  50% { opacity: 0.3; }
+  100% { opacity: 0; transform: rotate(360deg); }
+}
+
+/* Enhanced checkmark animation */
+.checkmark {
+  width: 80px;
+  height: 80px;
+  position: relative;
+}
+
+.checkmark-path {
+  stroke-dasharray: 100;
+  stroke-dashoffset: 100;
+  stroke: white;
+  stroke-width: 6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  fill: none;
+  animation: drawCheck 0.8s ease-in-out forwards 0.4s;
+}
+
+@keyframes drawCheck {
+  0% { stroke-dashoffset: 100; opacity: 0; }
+  30% { opacity: 1; }
+  100% { stroke-dashoffset: 0; opacity: 1; }
+}
+
+@keyframes pulseIn {
+  0% { transform: scale(0); opacity: 0; }
+  70% { transform: scale(1.1); opacity: 1; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.response-submitted-text {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #fd79a8;
+  margin: 0 0 10px;
+  animation: fadeInText 0.5s ease forwards 0.6s;
+  opacity: 0;
+}
+
+.submission-message {
+  font-size: 1.1rem;
+  margin: 0 0 25px;
+  line-height: 1.5;
+  color: rgba(255,255,255,0.8);
+  animation: fadeInText 0.5s ease forwards 0.7s;
+  opacity: 0;
+}
+
+.info-box {
+  background: rgba(108, 92, 231, 0.08);
+  border-left: 4px solid #6c5ce7;
+  padding: 20px;
+  text-align: left;
+  margin: 25px 0;
+  border-radius: 0 8px 8px 0;
+  animation: fadeInText 0.5s ease forwards 0.8s;
+  opacity: 0;
+}
+
+.info-title {
+  display: flex;
+  align-items: center;
+  color: #6c5ce7;
+  font-weight: 600;
+  margin-bottom: 8px;
+  font-size: 1.1rem;
+}
+
+.info-icon {
+  margin-right: 10px;
+  font-size: 1.3em;
+}
+
+.info-content {
+  font-size: 1rem;
+  color: rgba(255,255,255,0.9);
+  line-height: 1.6;
+}
+
+.action-buttons {
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  animation: fadeInText 0.5s ease forwards 0.9s;
+  opacity: 0;
+}
+
+.action-button {
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  font-size: 1rem;
+}
+
+.new-feedback-btn {
+  background: rgba(108, 92, 231, 0.08);
+  border: 1px solid rgba(108, 92, 231, 0.5);
+  color: #6c5ce7;
+}
+
+.new-feedback-btn:hover {
+  background: rgba(108, 92, 231, 0.15);
+  transform: translateY(-2px);
+}
+
+.close-btn {
+  background: linear-gradient(135deg, #6c5ce7, #fd79a8);
+  border: none;
+  color: white;
+  box-shadow: 0 5px 15px rgba(108, 92, 231, 0.3);
+}
+
+.close-btn:hover {
+  background: linear-gradient(135deg, #5b4bd4, #fc6aa0);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(108, 92, 231, 0.4);
+}
+
+.feedback-id {
+  display: inline-block;
+  background: rgba(255,255,255,0.04);
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-weight: 500;
+  margin-top: 25px;
+  color: rgba(255,255,255,0.5);
+  font-size: 0.9rem;
+  animation: fadeInText 0.5s ease forwards 1s;
+  opacity: 0;
+  border: 1px solid rgba(255,255,255,0.08);
+}
+
+@keyframes fadeInText {
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
         /* Slide Controls */
         .slide-controls {
             position: absolute;
@@ -1711,6 +2213,149 @@
             </div>
         </div>
     </div>
+    <!-- Feedback Button and Form -->
+<button class="feedback-button" id="feedbackButton">
+  <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="white" stroke-width="2"/>
+      <path d="M8 12H16" stroke="white" stroke-width="2" stroke-linecap="round"/>
+      <path d="M12 8L12 16" stroke="white" stroke-width="2" stroke-linecap="round"/>
+  </svg>
+  Feedback
+</button>
+
+<div class="feedback-overlay" id="feedbackOverlay">
+  <div class="feedback-container">
+      <button class="feedback-close" id="feedbackClose">✕</button>
+      
+      <div class="feedback-header">
+          <h2 class="feedback-title">We Value Your Feedback</h2>
+          <p class="feedback-subtitle">Help us improve your experience by sharing your thoughts.</p>
+      </div>
+      
+      <form class="feedback-form" id="feedbackForm">
+          <div class="form-group">
+              <label class="form-label" for="feedbackName">
+                  Your Name
+                  <span class="required-label">Required</span>
+              </label>
+              <input type="text" id="feedbackName" class="form-input" placeholder="Enter your name">
+              <div class="error-message" id="nameError">Please enter your name</div>
+          </div>
+          
+          <div class="form-group">
+              <label class="form-label" for="feedbackEmail">
+                  Email Address
+                  <span class="required-label">Required</span>
+              </label>
+              <input type="email" id="feedbackEmail" class="form-input" placeholder="Enter your email address">
+              <div class="error-message" id="emailError">Please enter a valid email address</div>
+          </div>
+          
+          <div class="form-group">
+              <label class="form-label">
+                  How would you rate your experience?
+                  <span class="required-label">Required</span>
+              </label>
+              <div class="rating-group">
+                  <div class="rating-option">
+                      <input type="radio" name="feedbackRating" id="rating1" value="1" class="rating-input">
+                      <label for="rating1" class="rating-label">1</label>
+                  </div>
+                  <div class="rating-option">
+                      <input type="radio" name="feedbackRating" id="rating2" value="2" class="rating-input">
+                      <label for="rating2" class="rating-label">2</label>
+                  </div>
+                  <div class="rating-option">
+                      <input type="radio" name="feedbackRating" id="rating3" value="3" class="rating-input">
+                      <label for="rating3" class="rating-label">3</label>
+                  </div>
+                  <div class="rating-option">
+                      <input type="radio" name="feedbackRating" id="rating4" value="4" class="rating-input">
+                      <label for="rating4" class="rating-label">4</label>
+                  </div>
+                  <div class="rating-option">
+                      <input type="radio" name="feedbackRating" id="rating5" value="5" class="rating-input">
+                      <label for="rating5" class="rating-label">5</label>
+                  </div>
+              </div>
+              <div class="rating-text" id="feedbackRatingText"></div>
+              <div class="error-message" id="ratingError">Please select a rating</div>
+          </div>
+          
+          <div class="form-group">
+              <label class="form-label" for="feedbackType">
+                  Feedback Type
+                  <span class="required-label">Required</span>
+              </label>
+              <select id="feedbackType" class="form-select">
+                  <option value="">Select feedback type</option>
+                  <option value="suggestion">Suggestion</option>
+                  <option value="bug">Bug Report</option>
+                  <option value="compliment">Compliment</option>
+                  <option value="complaint">Complaint</option>
+                  <option value="other">Other</option>
+              </select>
+              <div class="error-message" id="typeError">Please select a feedback type</div>
+          </div>
+          
+          <div class="form-group">
+              <label class="form-label" for="feedbackText">
+                  Your Feedback
+                  <span class="required-label">Required</span>
+              </label>
+              <textarea id="feedbackText" class="form-textarea" placeholder="Please share your thoughts, suggestions, or issues..." maxlength="500"></textarea>
+              <div class="char-count"><span id="feedbackCurrentCount">0</span>/500</div>
+              <div class="error-message" id="feedbackError">Please enter your feedback</div>
+          </div>
+          
+          <button type="submit" class="feedback-submit" id="feedbackSubmitBtn">
+              <span class="feedback-spinner" id="feedbackSpinner"></span>
+              Submit Feedback
+          </button>
+      </form>
+      
+      <div class="feedback-thank-you" id="feedbackThankYouMessage">
+          <div class="thank-you-icon">✓</div>
+          <h2 class="thank-you-title">Thank You!</h2>
+          <p class="thank-you-message">Your feedback has been submitted successfully.</p>
+      </div>
+  </div>
+
+  <!-- Enhanced submission confirmation screen -->
+  <div class="feedback-container submission-confirmation" id="submissionConfirmation" style="display: none;">
+      <!-- Success circle with checkmark -->
+      <div class="success-circle">
+          <svg class="checkmark" viewBox="0 0 52 52">
+              <path class="checkmark-path" d="M14,27 L22,35 L38,15"></path>
+          </svg>
+      </div>
+      
+      <h2 class="response-submitted-text">Response Submitted</h2>
+      
+      <p class="submission-message">
+          Your feedback has been submitted successfully.
+      </p>
+      
+      <!-- Enhanced info box -->
+      <div class="info-box">
+          <div class="info-title">
+              <span class="info-icon">ℹ️</span>
+              What happens next?
+          </div>
+          <div class="info-content">
+              Our team reviews all feedback carefully. If you've provided your email, we'll get back to you within 48 hours.
+          </div>
+      </div>
+      
+      <div class="action-buttons">
+          <button class="action-button new-feedback-btn" id="newFeedbackBtn">New Feedback</button>
+          <button class="action-button close-btn" id="closeFeedbackModalBtn">Close</button>
+      </div>
+      
+      <div class="feedback-id">Feedback ID: FBK-2025-04-23-8742</div>
+  </div>
+</div>
+
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
@@ -1870,6 +2515,170 @@
             document.getElementById('profile-section').classList.add('d-none');
             google.accounts.id.disableAutoSelect();
         });
+        // Feedback Form Functionality
+const feedbackButton = document.getElementById('feedbackButton');
+const feedbackOverlay = document.getElementById('feedbackOverlay');
+const feedbackClose = document.getElementById('feedbackClose');
+const feedbackForm = document.getElementById('feedbackForm');
+const feedbackNameInput = document.getElementById('feedbackName');
+const feedbackEmail = document.getElementById('feedbackEmail');
+const feedbackType = document.getElementById('feedbackType');
+const feedbackText = document.getElementById('feedbackText');
+const feedbackCurrentCount = document.getElementById('feedbackCurrentCount');
+const feedbackRatingText = document.getElementById('feedbackRatingText');
+const feedbackThankYouMessage = document.getElementById('feedbackThankYouMessage');
+const feedbackSpinner = document.getElementById('feedbackSpinner');
+const feedbackSubmitBtn = document.getElementById('feedbackSubmitBtn');
+
+// Event Listeners for Feedback Form
+feedbackButton.addEventListener('click', () => {
+    feedbackOverlay.classList.add('active');
+    document.body.style.overflow = 'hidden';
+});
+
+feedbackClose.addEventListener('click', () => {
+    feedbackOverlay.classList.remove('active');
+    document.body.style.overflow = '';
+});
+
+// Close on outside click
+feedbackOverlay.addEventListener('click', (e) => {
+    if (e.target === feedbackOverlay) {
+        feedbackOverlay.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+});
+
+// Character counter for feedback text
+feedbackText.addEventListener('input', () => {
+    const currentLength = feedbackText.value.length;
+    feedbackCurrentCount.textContent = currentLength;
+});
+
+// Rating text update
+const ratingLabels = {
+    1: 'Very Dissatisfied',
+    2: 'Dissatisfied',
+    3: 'Neutral',
+    4: 'Satisfied',
+    5: 'Very Satisfied'
+};
+
+document.querySelectorAll('input[name="feedbackRating"]').forEach(radio => {
+    radio.addEventListener('change', () => {
+        const rating = radio.value;
+        feedbackRatingText.textContent = ratingLabels[rating];
+    });
+});
+
+// Form submission
+feedbackForm.addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    // Basic validation
+    let isValid = true;
+    
+    // Validate name
+    if (!feedbackNameInput.value.trim()) {
+        document.getElementById('nameError').style.display = 'block';
+        isValid = false;
+    } else {
+        document.getElementById('nameError').style.display = 'none';
+    }
+    
+    // Validate email
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(feedbackEmail.value.trim())) {
+        document.getElementById('emailError').style.display = 'block';
+        isValid = false;
+    } else {
+        document.getElementById('emailError').style.display = 'none';
+    }
+    
+    // Validate rating
+    if (!document.querySelector('input[name="feedbackRating"]:checked')) {
+        document.getElementById('ratingError').style.display = 'block';
+        isValid = false;
+    } else {
+        document.getElementById('ratingError').style.display = 'none';
+    }
+    
+    // Validate feedback type
+    if (!feedbackType.value) {
+        document.getElementById('typeError').style.display = 'block';
+        isValid = false;
+    } else {
+        document.getElementById('typeError').style.display = 'none';
+    }
+    
+    // Validate feedback text
+    if (!feedbackText.value.trim()) {
+        document.getElementById('feedbackError').style.display = 'block';
+        isValid = false;
+    } else {
+        document.getElementById('feedbackError').style.display = 'none';
+    }
+    
+    if (!isValid) return;
+    
+    // Show spinner
+    feedbackSpinner.style.display = 'inline-block';
+    feedbackSubmitBtn.disabled = true;
+    
+    // Generate a random feedback ID with current date
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = String(today.getMonth() + 1).padStart(2, '0');
+    const day = String(today.getDate()).padStart(2, '0');
+    const randomNum = Math.floor(1000 + Math.random() * 9000);
+    const feedbackId = `FBK-${year}-${month}-${day}-${randomNum}`;
+    
+    // Simulate API call with a delay
+    setTimeout(function() {
+        // Hide spinner
+        feedbackSpinner.style.display = 'none';
+        
+        // Hide the entire original container
+        document.querySelector('.feedback-container:not(.submission-confirmation)').style.display = 'none';
+        
+        // Update the feedback ID in the confirmation
+        document.querySelector('.feedback-id').textContent = `Feedback ID: ${feedbackId}`;
+        
+        // Show the submission confirmation
+        document.getElementById('submissionConfirmation').style.display = 'block';
+        
+        // Enable the submit button again
+        feedbackSubmitBtn.disabled = false;
+    }, 1500);
+});
+
+// Add event handlers for the confirmation buttons
+document.getElementById('newFeedbackBtn').addEventListener('click', function() {
+    // Hide confirmation and show form again
+    document.getElementById('submissionConfirmation').style.display = 'none';
+    document.querySelector('.feedback-container:not(.submission-confirmation)').style.display = 'block';
+    
+    // Reset form
+    feedbackForm.reset();
+    feedbackCurrentCount.textContent = '0';
+    feedbackRatingText.textContent = '';
+});
+
+document.getElementById('closeFeedbackModalBtn').addEventListener('click', function() {
+    // Close the entire feedback overlay
+    feedbackOverlay.classList.remove('active');
+    document.body.style.overflow = '';
+    
+    // Reset for next time after animation completes
+    setTimeout(function() {
+        document.getElementById('submissionConfirmation').style.display = 'none';
+        document.querySelector('.feedback-container:not(.submission-confirmation)').style.display = 'block';
+        feedbackForm.reset();
+        feedbackCurrentCount.textContent = '0';
+        feedbackRatingText.textContent = '';
+    }, 300);
+});
+
     </script>
 </body>
 </html>
