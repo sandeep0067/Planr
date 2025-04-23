@@ -711,6 +711,61 @@
             .shows-grid {
                 grid-template-columns: 1fr;
             }
+            /* Add to your existing CSS */
+            .gift-cards-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                gap: 2rem;
+                margin-top: 3rem;
+            }
+
+            .gift-card-option {
+                background-color: var(--dark);
+                border-radius: 10px;
+                padding: 2rem;
+                text-align: center;
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+                transition: transform 0.3s ease;
+            }
+
+            .gift-card-option:hover {
+                transform: translateY(-5px);
+            }
+
+            .gift-card-value {
+                font-size: 2rem;
+                font-weight: 700;
+                color: var(--accent);
+                margin-bottom: 0.5rem;
+            }
+
+            .gift-card-price {
+                font-size: 1.2rem;
+                margin-bottom: 1.5rem;
+            }
+
+            .custom-amount {
+                background-color: var(--secondary);
+                color: var(--light);
+            }
+
+            .custom-amount h4 {
+                margin-bottom: 1.5rem;
+            }
+
+            .custom-amount .form-group {
+                margin-bottom: 1.5rem;
+            }
+
+            .custom-amount input {
+                width: 100%;
+                padding: 0.8rem;
+                border-radius: 5px;
+                border: none;
+                text-align: center;
+                font-size: 1.2rem;
+                background-color: rgba(255,255,255,0.9);
+            }
         }
     </style>
 </head>
@@ -726,6 +781,7 @@
                         <li><a href="#home">Home</a></li>
                         <li><a href="#comedians">Comedians</a></li>
                         <li><a href="#shows">Shows</a></li>
+                        <li><a href="#gift-cards">Gift Cards</a></li>
                         <li><a href="#testimonials">Reviews</a></li>
                         <li><a href="#contact">Contact</a></li>
                     </ul>
@@ -1031,6 +1087,52 @@
                             </div>
                         </div>
                     </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Gift Cards Section -->
+        <section class="gift-cards section-padding" id="gift-cards">
+            <div class="container">
+                <h2 class="section-title text-center">Give the Gift of Laughter</h2>
+                <p class="text-center">Perfect for birthdays, anniversaries, or just because! Our gift cards never expire.</p>
+                
+                <div class="gift-cards-grid">
+                    <!-- Gift Card Option 1 -->
+                    <div class="gift-card-option">
+                        <div class="gift-card-value">₹1,000</div>
+                        <div class="gift-card-price">₹1,000</div>
+                        <button class="btn btn-secondary add-to-cart" data-value="1000">Add to Cart</button>
+                    </div>
+                    
+                    <!-- Gift Card Option 2 -->
+                    <div class="gift-card-option">
+                        <div class="gift-card-value">₹2,500</div>
+                        <div class="gift-card-price">₹2,500</div>
+                        <button class="btn btn-secondary add-to-cart" data-value="2500">Add to Cart</button>
+                    </div>
+                    
+                    <!-- Gift Card Option 3 -->
+                    <div class="gift-card-option">
+                        <div class="gift-card-value">₹5,000</div>
+                        <div class="gift-card-price">₹5,000</div>
+                        <button class="btn btn-secondary add-to-cart" data-value="5000">Add to Cart</button>
+                    </div>
+                    
+                    <!-- Custom Amount Option -->
+                    <div class="gift-card-option custom-amount">
+                        <h4>Custom Amount</h4>
+                        <div class="form-group">
+                            <label for="custom-amount">Enter Amount (₹500 minimum)</label>
+                            <input type="number" id="custom-amount" min="500" step="100" placeholder="₹">
+                        </div>
+                        <button class="btn btn-primary add-to-cart" id="add-custom-amount">Add to Cart</button>
+                    </div>
+                </div>
+                
+                <!-- Checkout Button -->
+                <div class="text-center" style="margin-top: 3rem;">
+                    <button class="btn btn-primary" id="checkout-gift-card">Proceed to Checkout</button>
                 </div>
             </div>
         </section>
