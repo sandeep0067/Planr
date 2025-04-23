@@ -150,103 +150,6 @@
             border-radius: 2px;
         }
 
-        /* Onboarding Screens */
-        .onboarding-screen {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            background-color: var(--darker);
-            z-index: 3000;
-            transition: all 0.5s ease;
-            padding: 2rem;
-        }
-
-        .onboarding-content {
-            max-width: 600px;
-            text-align: center;
-            padding: 2rem;
-            background-color: var(--dark);
-            border-radius: 10px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-        }
-
-        .onboarding-screen.hidden {
-            opacity: 0;
-            pointer-events: none;
-            transform: translateY(20px);
-        }
-
-        /* Login Form */
-        .login-form {
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-            width: 100%;
-            max-width: 400px;
-        }
-
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 600;
-        }
-
-        .form-group input {
-            width: 100%;
-            padding: 0.8rem;
-            border: 2px solid var(--gray-dark);
-            border-radius: 5px;
-            font-size: 1rem;
-            background-color: var(--dark);
-            color: var(--light);
-        }
-
-        /* Selection Screens */
-        .selection-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-            gap: 1.5rem;
-            margin-top: 2rem;
-        }
-
-        .selection-card {
-            background-color: var(--dark);
-            border-radius: 10px;
-            padding: 1.5rem;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            border: 2px solid transparent;
-        }
-
-        .selection-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-        }
-
-        .selection-card.selected {
-            border-color: var(--primary);
-            background-color: rgba(255, 71, 87, 0.1);
-        }
-
-        .selection-card img {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            object-fit: cover;
-            margin-bottom: 1rem;
-        }
-
         /* Header Styles */
         header {
             background-color: var(--dark);
@@ -786,10 +689,6 @@
                 flex-direction: column;
                 gap: 0;
             }
-
-            .selection-grid {
-                grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-            }
         }
 
         @media (max-width: 576px) {
@@ -816,109 +715,8 @@
     </style>
 </head>
 <body>
-    <!-- Onboarding Screens -->
-    <!-- Welcome Screen -->
-    <div class="onboarding-screen" id="welcomeScreen">
-        <div class="onboarding-content">
-            <h1>Welcome to Laugh Factory</h1>
-            <p>India's premier platform for standup comedy shows featuring the best Indian comedians.</p>
-            <p>Let's get you started with a personalized experience.</p>
-            <button class="btn btn-primary mt-3" onclick="nextScreen('welcomeScreen', 'loginScreen')">Get Started</button>
-        </div>
-    </div>
-
-    <!-- Login Screen -->
-    <div class="onboarding-screen hidden" id="loginScreen">
-        <div class="onboarding-content">
-            <h1>Login to Continue</h1>
-            <p>Sign in to book shows and get personalized recommendations</p>
-            <form class="login-form">
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" id="email" required>
-                </div>
-                <div class="form-group">
-                    <label for="password">Password</label>
-                    <input type="password" id="password" required>
-                </div>
-                <button type="button" class="btn btn-primary" onclick="nextScreen('loginScreen', 'comedianSelectionScreen')">Login</button>
-                <p class="mt-2">Don't have an account? <a href="#" style="color: var(--accent)">Sign up</a></p>
-            </form>
-        </div>
-    </div>
-
-    <!-- Comedian Selection Screen -->
-    <div class="onboarding-screen hidden" id="comedianSelectionScreen">
-        <div class="onboarding-content">
-            <h1>Select Your Favorite Comedians</h1>
-            <p>Choose at least 3 comedians to get personalized recommendations</p>
-            <div class="selection-grid">
-                <div class="selection-card" onclick="toggleSelection(this)">
-                    <img src="https://www.bollywoodhungama.com/wp-content/uploads/2021/10/Zakir-Khan-1.jpg" alt="Zakir Khan">
-                    <h4>Zakir Khan</h4>
-                </div>
-                <div class="selection-card" onclick="toggleSelection(this)">
-                    <img src="https://i0.wp.com/www.urbanasian.com/wp-content/uploads/2022/05/Anubhav-Singh-Bassi.jpg" alt="Anubhav Singh Bassi">
-                    <h4>Anubhav Bassi</h4>
-                </div>
-                <div class="selection-card" onclick="toggleSelection(this)">
-                    <img src="https://www.mumbaitheatreguide.com/dramas/wp-content/uploads/2021/04/Ravi-Gupta.jpg" alt="Ravi Gupta">
-                    <h4>Ravi Gupta</h4>
-                </div>
-                <div class="selection-card" onclick="toggleSelection(this)">
-                    <img src="https://mumbaitheatreguide.com/dramas/wp-content/uploads/2019/12/Vipul-Goyal-1.jpg" alt="Vipul Goyal">
-                    <h4>Vipul Goyal</h4>
-                </div>
-                <div class="selection-card" onclick="toggleSelection(this)">
-                    <img src="https://www.bollywoodhungama.com/wp-content/uploads/2023/05/Nayab-Midha-1.jpg" alt="Nayab Midha">
-                    <h4>Nayab Midha</h4>
-                </div>
-                <div class="selection-card" onclick="toggleSelection(this)">
-                    <img src="https://www.mumbaitheatreguide.com/dramas/wp-content/uploads/2019/12/Kaneez-Surka-1.jpg" alt="Kaneez Surka">
-                    <h4>Kaneez Surka</h4>
-                </div>
-            </div>
-            <button class="btn btn-primary mt-3" onclick="nextScreen('comedianSelectionScreen', 'genreSelectionScreen')">Continue</button>
-        </div>
-    </div>
-
-    <!-- Genre Selection Screen -->
-    <div class="onboarding-screen hidden" id="genreSelectionScreen">
-        <div class="onboarding-content">
-            <h1>Select Your Favorite Genres</h1>
-            <p>Choose the types of comedy you enjoy most</p>
-            <div class="selection-grid">
-                <div class="selection-card" onclick="toggleSelection(this)">
-                    <i class="fas fa-microphone-alt" style="font-size: 2.5rem; color: var(--primary); margin-bottom: 1rem;"></i>
-                    <h4>Observational</h4>
-                </div>
-                <div class="selection-card" onclick="toggleSelection(this)">
-                    <i class="fas fa-theater-masks" style="font-size: 2.5rem; color: var(--primary); margin-bottom: 1rem;"></i>
-                    <h4>Satire</h4>
-                </div>
-                <div class="selection-card" onclick="toggleSelection(this)">
-                    <i class="fas fa-grin-squint-tears" style="font-size: 2.5rem; color: var(--primary); margin-bottom: 1rem;"></i>
-                    <h4>Slapstick</h4>
-                </div>
-                <div class="selection-card" onclick="toggleSelection(this)">
-                    <i class="fas fa-brain" style="font-size: 2.5rem; color: var(--primary); margin-bottom: 1rem;"></i>
-                    <h4>Dark Humor</h4>
-                </div>
-                <div class="selection-card" onclick="toggleSelection(this)">
-                    <i class="fas fa-music" style="font-size: 2.5rem; color: var(--primary); margin-bottom: 1rem;"></i>
-                    <h4>Musical</h4>
-                </div>
-                <div class="selection-card" onclick="toggleSelection(this)">
-                    <i class="fas fa-bolt" style="font-size: 2.5rem; color: var(--primary); margin-bottom: 1rem;"></i>
-                    <h4>Improv</h4>
-                </div>
-            </div>
-            <button class="btn btn-primary mt-3" onclick="completeOnboarding()">Finish Setup</button>
-        </div>
-    </div>
-
-    <!-- Main Website Content (hidden initially) -->
-    <div id="mainContent" style="display: none;">
+    <!-- Main Website Content -->
+    <div id="mainContent">
         <!-- Header -->
         <header>
             <div class="container">
@@ -1469,22 +1267,6 @@
     </div>
 
     <script>
-        // Onboarding Screens Navigation
-        function nextScreen(currentScreenId, nextScreenId) {
-            document.getElementById(currentScreenId).classList.add('hidden');
-            document.getElementById(nextScreenId).classList.remove('hidden');
-        }
-
-        function toggleSelection(card) {
-            card.classList.toggle('selected');
-        }
-
-        function completeOnboarding() {
-            document.getElementById('genreSelectionScreen').classList.add('hidden');
-            document.getElementById('mainContent').style.display = 'block';
-            window.scrollTo(0, 0);
-        }
-
         // Mobile Menu Toggle
         const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
         const navLinks = document.querySelector('.nav-links');
