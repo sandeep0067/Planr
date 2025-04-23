@@ -1,0 +1,1640 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planr - Discover and Book Events</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+    <style>
+        :root {
+            --primary: #7c4dff;
+            --primary-dark: #6a3de8;
+            --secondary: #ff4081;
+            --dark: #1a1a2e;
+            --light: #f5f5f5;
+            --gray: #6c757d;
+            --success: #28a745;
+            --danger: #dc3545;
+            --warning: #ffc107;
+            --info: #17a2b8;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+        }
+
+        /* Navbar Styles */
+        .navbar {
+            background-color: var(--dark);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.8rem;
+            color: white;
+        }
+
+        .navbar-brand span {
+            color: var(--primary);
+        }
+
+        /* Hero Section */
+        .hero-section {
+            position: relative;
+            height: 600px;
+            overflow: hidden;
+            background-color: var(--dark);
+        }
+
+        .slideshow-container {
+            position: relative;
+            height: 100%;
+            width: 100%;
+        }
+
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            padding: 2rem;
+        }
+
+        .slide.active {
+            opacity: 1;
+            z-index: 2;
+        }
+
+        .slide.prev {
+            opacity: 0;
+            z-index: 1;
+        }
+
+        .slide-content {
+            max-width: 600px;
+            color: white;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+            position: relative;
+            z-index: 2;
+        }
+
+        .slide::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to right, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.4) 50%, rgba(0, 0, 0, 0.1) 100%);
+            z-index: 1;
+        }
+
+        .slide-title {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .slide-subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            font-weight: 300;
+        }
+
+        .slide-dots {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+            z-index: 3;
+        }
+
+        .slide-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+        }
+
+        .slide-dot.active {
+            background-color: white;
+            transform: scale(1.2);
+        }
+
+        .slide-progress {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background-color: rgba(255, 255, 255, 0.2);
+            z-index: 3;
+        }
+
+        .slide-progress-bar {
+            height: 100%;
+            background-color: var(--primary);
+            width: 0;
+            transition: width 5s linear;
+        }
+
+        /* Event Cards */
+        .event-card {
+            border: none;
+            border-radius: 10px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            height: 100%;
+        }
+
+        .event-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-img-top {
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .event-date {
+            background-color: var(--primary);
+            color: white;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            font-weight: 600;
+        }
+
+        .card-body {
+            padding: 1.5rem;
+        }
+
+        .card-title {
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .card-text {
+            color: var(--gray);
+            margin-bottom: 1rem;
+        }
+
+        .event-meta {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            color: var(--gray);
+        }
+
+        .book-now-btn {
+            width: 100%;
+            padding: 0.75rem;
+            font-weight: 600;
+        }
+
+        /* Featured Section */
+        .featured-section {
+            background-color: white;
+            padding: 4rem 0;
+        }
+
+        .section-title {
+            font-weight: 700;
+            margin-bottom: 2rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 50px;
+            height: 4px;
+            background-color: var(--primary);
+        }
+
+        /* Categories Section */
+        .categories-section {
+            padding: 4rem 0;
+            background-color: #f8f9fa;
+        }
+
+        .category-card {
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+            height: 200px;
+            transition: transform 0.3s ease;
+        }
+
+        .category-card:hover {
+            transform: scale(1.03);
+        }
+
+        .category-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .category-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.4) 50%, rgba(0, 0, 0, 0.1) 100%);
+            display: flex;
+            align-items: flex-end;
+            padding: 1.5rem;
+        }
+
+        .category-name {
+            color: white;
+            font-weight: 700;
+            font-size: 1.5rem;
+            margin: 0;
+        }
+
+        /* Footer */
+        .footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 3rem 0 1.5rem;
+        }
+
+        .footer-logo {
+            font-weight: 700;
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .footer-logo span {
+            color: var(--primary);
+        }
+
+        .footer-links h5 {
+            font-weight: 600;
+            margin-bottom: 1.2rem;
+        }
+
+        .footer-links ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white;
+            transition: background-color 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background-color: var(--primary);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 1.5rem;
+            margin-top: 3rem;
+            text-align: center;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.9rem;
+        }
+
+        /* Modal Styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .login-popup {
+            background-color: white;
+            border-radius: 10px;
+            padding: 2rem;
+            width: 400px;
+            max-width: 90%;
+            position: relative;
+            transform: translateY(20px);
+            transition: transform 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .modal-overlay.active .login-popup {
+            transform: translateY(0);
+        }
+
+        .close-button {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--gray);
+        }
+
+        /* Auth Container */
+        .auth-container {
+            position: relative;
+            width: 100%;
+            height: 600px;
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .auth-sidebar {
+            position: absolute;
+            width: 40%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 2rem;
+            transition: transform 0.6s ease-in-out;
+            z-index: 2;
+        }
+
+        .auth-sidebar h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .auth-sidebar p {
+            margin-bottom: 2rem;
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+
+        .auth-sidebar-btn {
+            background-color: transparent;
+            border: 2px solid white;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .auth-sidebar-btn:hover {
+            background-color: white;
+            color: var(--primary);
+        }
+
+        .auth-forms {
+            position: absolute;
+            width: 60%;
+            height: 100%;
+            right: 0;
+            background-color: white;
+            transition: transform 0.6s ease-in-out;
+            padding: 3rem 2rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .auth-form {
+            opacity: 1;
+            transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+            transform: translateX(0);
+            position: absolute;
+            width: 100%;
+            padding: 0 2rem;
+        }
+
+        .signup-form {
+            opacity: 0;
+            transform: translateX(100px);
+        }
+
+        .auth-container.show-signup .signup-form {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .auth-container.show-signup .login-form {
+            opacity: 0;
+            transform: translateX(-100px);
+        }
+
+        .auth-container.show-signup .auth-sidebar {
+            transform: translateX(150%);
+        }
+
+        .auth-container.show-signup .auth-forms {
+            transform: translateX(-66.6%);
+        }
+
+        .auth-form h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: var(--dark);
+        }
+
+        .social-login {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .social-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #e0e0e0;
+            background-color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1.2rem;
+        }
+
+        .social-btn:hover {
+            background-color: #f5f5f5;
+        }
+
+        .divider {
+            display: flex;
+            align-items: center;
+            text-align: center;
+            margin-bottom: 1.5rem;
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: '';
+            flex: 1;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .divider::before {
+            margin-right: 0.5rem;
+        }
+
+        .divider::after {
+            margin-left: 0.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-control {
+            height: 50px;
+            border-radius: 8px;
+            padding: 0.75rem 1rem;
+            border: 1px solid #e0e0e0;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-control:focus {
+            border-color: var(--primary);
+            box-shadow: none;
+        }
+
+        .forgot-password {
+            text-align: right;
+            margin-bottom: 1.5rem;
+        }
+
+        .forgot-password a {
+            color: var(--primary);
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+
+        .auth-btn {
+            height: 50px;
+            border-radius: 8px;
+            background-color: var(--primary);
+            border: none;
+            color: white;
+            font-weight: 600;
+            width: 100%;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .auth-btn:hover {
+            background-color: var(--primary-dark);
+        }
+
+        /* Simple Login */
+        .simple-login {
+            text-align: center;
+        }
+
+        .simple-login h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .simple-login p {
+            margin-bottom: 1.5rem;
+            color: var(--gray);
+        }
+
+        /* Profile Sidebar */
+        .profile-sidebar {
+            position: fixed;
+            top: 0;
+            right: -350px;
+            width: 350px;
+            height: 100%;
+            background-color: white;
+            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            transition: right 0.3s ease;
+            padding: 2rem;
+            overflow-y: auto;
+        }
+
+        .profile-sidebar.active {
+            right: 0;
+        }
+
+        .profile-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .profile-pic-large {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 1rem;
+        }
+
+        .profile-info h3 {
+            font-weight: 700;
+            margin-bottom: 0.2rem;
+        }
+
+        .profile-info p {
+            color: var(--gray);
+            margin: 0;
+        }
+
+        .profile-section {
+            margin-bottom: 2rem;
+        }
+
+        .profile-section h4 {
+            font-weight: 600;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .ticket-item {
+            display: flex;
+            align-items: center;
+            padding: 1rem;
+            border-radius: 8px;
+            background-color: #f8f9fa;
+            margin-bottom: 1rem;
+        }
+
+        .ticket-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            background-color: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            margin-right: 1rem;
+        }
+
+        .ticket-details h5 {
+            font-weight: 600;
+            margin-bottom: 0.2rem;
+            font-size: 1rem;
+        }
+
+        .ticket-details p {
+            color: var(--gray);
+            margin: 0;
+            font-size: 0.9rem;
+        }
+
+        .sidebar-footer {
+            margin-top: 2rem;
+            text-align: center;
+        }
+
+        .sidebar-logout {
+            color: var(--danger);
+            background: none;
+            border: none;
+            padding: 0;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        /* Toast Notifications */
+        .toast {
+            border: none;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .toast-header {
+            border-bottom: none;
+            padding: 0.75rem 1rem;
+        }
+
+        .toast-body {
+            padding: 1rem;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .slide-title {
+                font-size: 2.5rem;
+            }
+
+            .auth-sidebar {
+                width: 100%;
+                height: 30%;
+                top: 0;
+            }
+
+            .auth-forms {
+                width: 100%;
+                height: 70%;
+                top: 30%;
+                right: 0;
+            }
+
+            .auth-container.show-signup .auth-sidebar {
+                transform: translateY(-100%);
+            }
+
+            .auth-container.show-signup .auth-forms {
+                transform: translateY(-42.85%);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .slide-title {
+                font-size: 2rem;
+            }
+
+            .slide-subtitle {
+                font-size: 1.2rem;
+            }
+
+            .hero-section {
+                height: 500px;
+            }
+
+            .auth-container {
+                height: 700px;
+            }
+
+            .auth-sidebar {
+                height: 25%;
+            }
+
+            .auth-forms {
+                height: 75%;
+                top: 25%;
+                padding: 2rem 1.5rem;
+            }
+
+            .auth-form {
+                padding: 0 1rem;
+            }
+
+            .auth-container.show-signup .auth-forms {
+                transform: translateY(-33.33%);
+            }
+
+            .profile-sidebar {
+                width: 100%;
+                right: -100%;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .slide-title {
+                font-size: 1.8rem;
+            }
+
+            .slide-subtitle {
+                font-size: 1rem;
+            }
+
+            .hero-section {
+                height: 400px;
+            }
+
+            .section-title {
+                font-size: 1.5rem;
+            }
+
+            .auth-form h1 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">Plan<span>r</span></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Events</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Venues</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Contact</a>
+                    </li>
+                </ul>
+                <div class="d-flex align-items-center">
+                    <button type="button" class="btn btn-link text-light me-3" aria-label="Search" id="search-button">
+                        <i class="bi bi-search fs-5"></i>
+                    </button>
+                    <div class="d-flex align-items-center" id="auth-buttons">
+                        <button class="btn btn-outline-light me-2" id="open-login">Login</button>
+                        <button class="btn btn-primary" id="open-signup">Sign Up</button>
+                    </div>
+                    <div class="dropdown d-none" id="profile-section">
+                        <button class="btn btn-link dropdown-toggle text-light" type="button" id="profile-dropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                            <img src="" alt="" id="profile-pic" class="rounded-circle" style="width: 32px; height: 32px; object-fit: cover;">
+                            <span id="profile-name" class="ms-2"></span>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profile-dropdown">
+                            <li><a class="dropdown-item" href="#" id="view-profile">My Profile</a></li>
+                            <li><a class="dropdown-item" href="#" id="my-tickets">My Tickets</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="#" id="logout">Logout</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section with Slideshow -->
+    <section class="hero-section">
+        <div class="slideshow-container">
+            <div class="slide active" style="background-image: url('https://source.unsplash.com/random/1600x900/?concert');">
+                <div class="container">
+                    <div class="slide-content">
+                        <h1 class="slide-title">Discover Amazing Events Near You</h1>
+                        <p class="slide-subtitle">Book tickets for concerts, sports, theater, and more.</p>
+                        <button class="btn btn-primary btn-lg">Explore Events</button>
+                    </div>
+                </div>
+            </div>
+            <div class="slide" style="background-image: url('https://source.unsplash.com/random/1600x900/?festival');">
+                <div class="container">
+                    <div class="slide-content">
+                        <h1 class="slide-title">Experience Unforgettable Festivals</h1>
+                        <p class="slide-subtitle">From music to food, find festivals that match your interests.</p>
+                        <button class="btn btn-primary btn-lg">View Festivals</button>
+                    </div>
+                </div>
+            </div>
+            <div class="slide" style="background-image: url('https://source.unsplash.com/random/1600x900/?sports');">
+                <div class="container">
+                    <div class="slide-content">
+                        <h1 class="slide-title">Catch the Biggest Sports Events</h1>
+                        <p class="slide-subtitle">Get tickets to your favorite teams and competitions.</p>
+                        <button class="btn btn-primary btn-lg">Find Sports Events</button>
+                    </div>
+                </div>
+            </div>
+            <div class="slide-dots" role="tablist">
+                <button class="slide-dot active" onclick="currentSlide(0)" aria-label="Slide 1" role="tab" aria-selected="true"></button>
+                <button class="slide-dot" onclick="currentSlide(1)" aria-label="Slide 2" role="tab" aria-selected="false"></button>
+                <button class="slide-dot" onclick="currentSlide(2)" aria-label="Slide 3" role="tab" aria-selected="false"></button>
+            </div>
+            <div class="slide-progress">
+                <div class="slide-progress-bar" id="slideProgressBar"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Events Section -->
+    <section class="featured-section">
+        <div class="container">
+            <h2 class="section-title">Featured Events</h2>
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-4">
+                    <div class="card event-card">
+                        <img src="https://source.unsplash.com/random/600x400/?concert" class="card-img-top" alt="Alt-Rock Revolution">
+                        <div class="event-date">APR 25</div>
+                        <div class="card-body">
+                            <h5 class="card-title">Alt-Rock Revolution</h5>
+                            <p class="card-text">Experience an evening of alternative rock with three emerging bands.</p>
+                            <div class="event-meta">
+                                <span><i class="bi bi-geo-alt"></i> The Sound Garden</span>
+                                <span><i class="bi bi-clock"></i> 8:00 PM</span>
+                            </div>
+                            <button class="btn btn-primary book-now-btn">Book Now</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="card event-card">
+                        <img src="https://source.unsplash.com/random/600x400/?jazz" class="card-img-top" alt="Jazz & Blues Night">
+                        <div class="event-date">MAY 2</div>
+                        <div class="card-body">
+                            <h5 class="card-title">Jazz & Blues Night</h5>
+                            <p class="card-text">A sophisticated evening of smooth jazz and soulful blues performances.</p>
+                            <div class="event-meta">
+                                <span><i class="bi bi-geo-alt"></i> Blue Note Club</span>
+                                <span><i class="bi bi-clock"></i> 7:30 PM</span>
+                            </div>
+                            <button class="btn btn-primary book-now-btn">Book Now</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="card event-card">
+                        <img src="https://source.unsplash.com/random/600x400/?film" class="card-img-top" alt="International Film Festival">
+                        <div class="event-date">MAY 15-20</div>
+                        <div class="card-body">
+                            <h5 class="card-title">International Film Festival</h5>
+                            <p class="card-text">Showcasing award-winning films from around the world with director Q&As.</p>
+                            <div class="event-meta">
+                                <span><i class="bi bi-geo-alt"></i> Cinema Paradiso</span>
+                                <span><i class="bi bi-clock"></i> Various Times</span>
+                            </div>
+                            <button class="btn btn-primary book-now-btn">Book Now</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-4">
+                <button class="btn btn-outline-primary">View All Events</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories Section -->
+    <section class="categories-section">
+        <div class="container">
+            <h2 class="section-title">Browse by Category</h2>
+            <div class="row g-4">
+                <div class="col-6 col-md-4 col-lg-3">
+                    <div class="category-card">
+                        <img src="https://source.unsplash.com/random/400x300/?concert" alt="Concerts">
+                        <div class="category-overlay">
+                            <h3 class="category-name">Concerts</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6 col-md-4 col-lg-3">
+                    <div class="category-card">
+                        <img src="https://source.unsplash.com/random/400x300/?theater" alt="Theater">
+                        <div class="category-overlay">
+                            <h3 class="category-name">Theater</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6 col-md-4 col-lg-3">
+                    <div class="category-card">
+                        <img src="https://source.unsplash.com/random/400x300/?comedy" alt="Comedy">
+                        <div class="category-overlay">
+                            <h3 class="category-name">Comedy</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6 col-md-4 col-lg-3">
+                    <div class="category-card">
+                        <img src="https://source.unsplash.com/random/400x300/?sports" alt="Sports">
+                        <div class="category-overlay">
+                            <h3 class="category-name">Sports</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6 col-md-4 col-lg-3">
+                    <div class="category-card">
+                        <img src="https://source.unsplash.com/random/400x300/?festival" alt="Festivals">
+                        <div class="category-overlay">
+                            <h3 class="category-name">Festivals</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6 col-md-4 col-lg-3">
+                    <div class="category-card">
+                        <img src="https://source.unsplash.com/random/400x300/?art" alt="Art & Museums">
+                        <div class="category-overlay">
+                            <h3 class="category-name">Art & Museums</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6 col-md-4 col-lg-3">
+                    <div class="category-card">
+                        <img src="https://source.unsplash.com/random/400x300/?food" alt="Food & Drink">
+                        <div class="category-overlay">
+                            <h3 class="category-name">Food & Drink</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6 col-md-4 col-lg-3">
+                    <div class="category-card">
+                        <img src="https://source.unsplash.com/random/400x300/?workshop" alt="Workshops">
+                        <div class="category-overlay">
+                            <h3 class="category-name">Workshops</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4 mb-lg-0">
+                    <div class="footer-logo">Plan<span>r</span></div>
+                    <p>Discover and book the best events happening in your city. From concerts to workshops, we've got you covered.</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="bi bi-twitter"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+                        <a href="#" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-4 col-lg-2 mb-4 mb-lg-0">
+                    <div class="footer-links">
+                        <h5>Company</h5>
+                        <ul>
+                            <li><a href="#">About Us</a></li>
+                            <li><a href="#">Careers</a></li>
+                            <li><a href="#">Blog</a></li>
+                            <li><a href="#">Press</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-4 col-lg-2 mb-4 mb-lg-0">
+                    <div class="footer-links">
+                        <h5>Support</h5>
+                        <ul>
+                            <li><a href="#">Help Center</a></li>
+                            <li><a href="#">Contact Us</a></li>
+                            <li><a href="#">Privacy Policy</a></li>
+                            <li><a href="#">Terms of Service</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-4 col-lg-2 mb-4 mb-lg-0">
+                    <div class="footer-links">
+                        <h5>For Organizers</h5>
+                        <ul>
+                            <li><a href="#">Create Events</a></li>
+                            <li><a href="#">Pricing</a></li>
+                            <li><a href="#">Resources</a></li>
+                            <li><a href="#">Success Stories</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-lg-2">
+                    <div class="footer-links">
+                        <h5>Download App</h5>
+                        <ul>
+                            <li><a href="#">iOS App</a></li>
+                            <li><a href="#">Android App</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Planr. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Simple Login Modal -->
+    <div class="modal-overlay" id="simple-login-modal" aria-hidden="true">
+        <div class="login-popup" role="dialog" aria-labelledby="login-title">
+            <button class="close-button" id="close-simple-login" aria-label="Close login form">×</button>
+            <div class="simple-login">
+                <h2 id="login-title">Log in to continue</h2>
+                <p>Please log in to book tickets and access your account.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="email" class="form-control" placeholder="Email Address" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="password" class="form-control" placeholder="Password" required>
+                    </div>
+                    <button type="submit" class="auth-btn mb-3">Login</button>
+                </form>
+                <p class="mb-0">Don't have an account? <a href="#" id="open-full-login">Sign up</a></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Full Auth Modal -->
+    <div class="modal-overlay" id="auth-modal" aria-hidden="true">
+        <div class="auth-container" role="dialog" aria-labelledby="auth-title">
+            <div class="auth-sidebar">
+                <h2 id="auth-title">Welcome Back!</h2>
+                <p>To keep connected with us please login with your personal info</p>
+                <button class="auth-sidebar-btn" id="show-signup">Sign Up</button>
+            </div>
+            <div class="auth-forms">
+                <!-- Login Form -->
+                <div class="auth-form login-form">
+                    <h1>Login to Your Account</h1>
+                    <div class="social-login">
+                        <button class="social-btn"><i class="bi bi-google"></i></button>
+                        <button class="social-btn"><i class="bi bi-facebook"></i></button>
+                        <button class="social-btn"><i class="bi bi-twitter"></i></button>
+                    </div>
+                    <div class="divider">or continue with email</div>
+                    <form id="login-form">
+                        <div class="form-group">
+                            <input type="email" id="login-email" class="form-control" placeholder="Email Address" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="password" id="login-password" class="form-control" placeholder="Password" required>
+                        </div>
+                        <div class="forgot-password">
+                            <a href="#">Forgot password?</a>
+                        </div>
+                        <button type="submit" class="auth-btn">Login</button>
+                    </form>
+                </div>
+
+                <!-- Signup Form -->
+                <div class="auth-form signup-form">
+                    <h1>Create an Account</h1>
+                    <div class="social-login">
+                        <button class="social-btn"><i class="bi bi-google"></i></button>
+                        <button class="social-btn"><i class="bi bi-facebook"></i></button>
+                        <button class="social-btn"><i class="bi bi-twitter"></i></button>
+                    </div>
+                    <div class="divider">or register with email</div>
+                    <form id="signup-form">
+                        <div class="form-group">
+                            <input type="text" id="signup-name" class="form-control" placeholder="Full Name" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" id="signup-email" class="form-control" placeholder="Email Address" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="password" id="signup-password" class="form-control" placeholder="Password" required>
+                        </div>
+                        <button type="submit" class="auth-btn">Create Account</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Search Modal -->
+    <div class="modal-overlay" id="search-modal" aria-hidden="true">
+        <div class="login-popup" style="width: 600px; max-width: 90%;" role="dialog" aria-labelledby="search-title">
+            <button class="close-button" id="close-search" aria-label="Close search">×</button>
+            <h2 id="search-title" class="mb-4">Search Events</h2>
+            <form id="search-form">
+                <div class="input-group mb-3">
+                    <input type="search" class="form-control form-control-lg" placeholder="Search for events, artists, venues..." aria-label="Search query">
+                    <button class="btn btn-primary" type="submit">
+                        <i class="bi bi-search"></i>
+                    </button>
+                </div>
+                <div class="d-flex flex-wrap gap-2 mt-3">
+                    <button type="button" class="btn btn-sm btn-outline-light">Concerts</button>
+                    <button type="button" class="btn btn-sm btn-outline-light">Movies</button>
+                    <button type="button" class="btn btn-sm btn-outline-light">Comedy</button>
+                    <button type="button" class="btn btn-sm btn-outline-light">Theater</button>
+                    <button type="button" class="btn btn-sm btn-outline-light">Sports</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Profile Sidebar -->
+    <div class="profile-sidebar" id="profile-sidebar">
+        <button class="close-button" id="close-profile" aria-label="Close profile">×</button>
+        <div class="profile-header">
+            <img src="https://source.unsplash.com/random/200x200/?portrait" alt="Profile Picture" class="profile-pic-large" id="sidebar-pic">
+            <div class="profile-info">
+                <h3 id="sidebar-name">John Doe</h3>
+                <p id="sidebar-email">john.doe@example.com</p>
+            </div>
+        </div>
+        <div class="profile-section">
+            <h4>My Tickets</h4>
+            <div class="ticket-item">
+                <div class="ticket-icon">
+                    <i class="bi bi-music-note-beamed"></i>
+                </div>
+                <div class="ticket-details">
+                    <h5>Alt-Rock Revolution</h5>
+                    <p>Apr 25, 2025 • 8:00 PM</p>
+                </div>
+            </div>
+            <div class="ticket-item">
+                <div class="ticket-icon">
+                    <i class="bi bi-film"></i>
+                </div>
+                <div class="ticket-details">
+                    <h5>International Film Festival</h5>
+                    <p>May 15, 2025 • 7:00 PM</p>
+                </div>
+            </div>
+        </div>
+        <div class="profile-section">
+            <h4>Account Settings</h4>
+            <div class="list-group">
+                <a href="#" class="list-group-item list-group-item-action">Edit Profile</a>
+                <a href="#" class="list-group-item list-group-item-action">Payment Methods</a>
+                <a href="#" class="list-group-item list-group-item-action">Notification Settings</a>
+                <a href="#" class="list-group-item list-group-item-action">Privacy Settings</a>
+            </div>
+        </div>
+        <div class="sidebar-footer">
+            <button class="sidebar-logout" id="sidebar-logout">Log Out</button>
+        </div>
+    </div>
+
+    <!-- Toast Notifications -->
+    <div class="toast-container position-fixed bottom-0 end-0 p-3">
+        <div id="successToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header bg-success text-white">
+                <i class="bi bi-check-circle me-2"></i>
+                <strong class="me-auto">Success</strong>
+                <small>Just now</small>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div class="toast-body">
+                Your action was completed successfully!
+            </div>
+        </div>
+        
+        <div id="errorToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header bg-danger text-white">
+                <i class="bi bi-exclamation-circle me-2"></i>
+                <strong class="me-auto">Error</strong>
+                <small>Just now</small>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div class="toast-body">
+                There was an error processing your request. Please try again.
+            </div>
+        </div>
+        
+        <div id="infoToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header bg-info text-white">
+                <i class="bi bi-info-circle me-2"></i>
+                <strong class="me-auto">Information</strong>
+                <small>Just now</small>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div class="toast-body">
+                This is an informational message.
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap and JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // DOM Elements
+        const slides = document.querySelectorAll('.slide');
+        const dots = document.querySelectorAll('.slide-dot');
+        const progressBar = document.getElementById('slideProgressBar');
+        const simpleLoginModal = document.getElementById('simple-login-modal');
+        const authModal = document.getElementById('auth-modal');
+        const searchModal = document.getElementById('search-modal');
+        const profileSidebar = document.getElementById('profile-sidebar');
+        const authContainer = document.querySelector('.auth-container');
+        const successToast = document.getElementById('successToast');
+        const errorToast = document.getElementById('errorToast');
+        const infoToast = document.getElementById('infoToast');
+
+        // Initialize Bootstrap toasts
+        const toasts = [successToast, errorToast, infoToast].map(
+            toast => new bootstrap.Toast(toast, {
+                animation: true,
+                autohide: true,
+                delay: 5000
+            })
+        );
+
+        // Show toast function
+        function showToast(type, message) {
+            const toast = document.getElementById(`${type}Toast`);
+            const toastBody = toast.querySelector('.toast-body');
+            toastBody.textContent = message;
+            bootstrap.Toast.getInstance(toast).show();
+        }
+
+        // Slideshow functionality
+        let currentSlideIndex = 0;
+        let slideInterval;
+
+        function showSlide(index) {
+            // Reset progress bar
+            progressBar.style.width = '0';
+            
+            // Update slides
+            slides.forEach((slide, i) => {
+                slide.classList.remove('active', 'prev');
+                if (i === index) {
+                    slide.classList.add('active');
+                } else if (i === (index === 0 ? slides.length - 1 : index - 1)) {
+                    slide.classList.add('prev');
+                }
+            });
+            
+            // Update dots
+            dots.forEach((dot, i) => {
+                dot.classList.toggle('active', i === index);
+                dot.setAttribute('aria-selected', i === index);
+            });
+            
+            // Animate progress bar
+            progressBar.style.width = '100%';
+            
+            // Reset the interval
+            clearInterval(slideInterval);
+            startSlideInterval();
+        }
+
+        function nextSlide() {
+            currentSlideIndex = (currentSlideIndex + 1) % slides.length;
+            showSlide(currentSlideIndex);
+        }
+
+        function prevSlide() {
+            currentSlideIndex = (currentSlideIndex - 1 + slides.length) % slides.length;
+            showSlide(currentSlideIndex);
+        }
+
+        function currentSlide(index) {
+            currentSlideIndex = index;
+            showSlide(currentSlideIndex);
+        }
+
+        function startSlideInterval() {
+            slideInterval = setInterval(() => {
+                nextSlide();
+            }, 5000);
+        }
+
+        // Initialize slideshow
+        startSlideInterval();
+
+        // Modal functionality
+        function openModal(modal) {
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+            
+            // Set focus on the first focusable element
+            setTimeout(() => {
+                const focusableElements = modal.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+                if (focusableElements.length) {
+                    focusableElements[0].focus();
+                }
+            }, 100);
+        }
+
+        function closeModal(modal) {
+            modal.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // Authentication UI functionality
+        document.getElementById('open-login').addEventListener('click', () => {
+            openModal(simpleLoginModal);
+        });
+
+        document.getElementById('open-signup').addEventListener('click', () => {
+            openModal(authModal);
+            authContainer.classList.add('show-signup');
+        });
+
+        document.getElementById('open-full-login').addEventListener('click', () => {
+            closeModal(simpleLoginModal);
+            openModal(authModal);
+            authContainer.classList.remove('show-signup');
+        });
+
+        document.getElementById('close-simple-login').addEventListener('click', () => {
+            closeModal(simpleLoginModal);
+        });
+
+        document.getElementById('show-signup').addEventListener('click', () => {
+            authContainer.classList.add('show-signup');
+        });
+
+        document.getElementById('show-login').addEventListener('click', () => {
+            authContainer.classList.remove('show-signup');
+        });
+
+        // Close modals when clicking outside
+        document.querySelectorAll('.modal-overlay').forEach(overlay => {
+            overlay.addEventListener('click', (e) => {
+                if (e.target === overlay) {
+                    closeModal(overlay);
+                }
+            });
+        });
+
+        // Search functionality
+        document.getElementById('search-button').addEventListener('click', () => {
+            openModal(searchModal);
+        });
+
+        document.getElementById('close-search').addEventListener('click', () => {
+            closeModal(searchModal);
+        });
+
+        // Profile sidebar functionality
+        document.getElementById('view-profile').addEventListener('click', (e) => {
+            e.preventDefault();
+            profileSidebar.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+
+        document.getElementById('close-profile').addEventListener('click', () => {
+            profileSidebar.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+
+        // Form submissions
+        document.getElementById('login-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const email = document.getElementById('login-email').value;
+            const password = document.getElementById('login-password').value;
+            
+            // Simulate login API call
+            setTimeout(() => {
+                if (email && password) {
+                    // Success case
+                    showToast('success', 'Login successful! Welcome back.');
+                    closeModal(authModal);
+                    
+                    // Update UI to show logged in state
+                    document.getElementById('auth-buttons').classList.add('d-none');
+                    document.getElementById('profile-section').classList.remove('d-none');
+                    document.getElementById('profile-name').textContent = email.split('@')[0];
+                    document.getElementById('profile-pic').src = 'https://source.unsplash.com/random/200x200/?portrait';
+                    
+                    // Update sidebar info
+                    document.getElementById('sidebar-name').textContent = email.split('@')[0];
+                    document.getElementById('sidebar-email').textContent = email;
+                } else {
+                    // Error case
+                    showToast('error', 'Invalid email or password. Please try again.');
+                }
+            }, 1000);
+        });
+
+        document.getElementById('signup-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const name = document.getElementById('signup-name').value;
+            const email = document.getElementById('signup-email').value;
+            const password = document.getElementById('signup-password').value;
+            
+            // Simulate signup API call
+            setTimeout(() => {
+                if (name && email && password) {
+                    // Success case
+                    showToast('success', 'Account created successfully! Welcome to Planr.');
+                    closeModal(authModal);
+                    
+                    // Update UI to show logged in state
+                    document.getElementById('auth-buttons').classList.add('d-none');
+                    document.getElementById('profile-section').classList.remove('d-none');
+                    document.getElementById('profile-name').textContent = name;
+                    document.getElementById('profile-pic').src = 'https://source.unsplash.com/random/200x200/?portrait';
+                    
+                    // Update sidebar info
+                    document.getElementById('sidebar-name').textContent = name;
+                    document.getElementById('sidebar-email').textContent = email;
+                } else {
+                    // Error case
+                    showToast('error', 'Please fill in all required fields.');
+                }
+            }, 1000);
+        });
+
+        // Logout functionality
+        const logoutButtons = [document.getElementById('logout'), document.getElementById('sidebar-logout')];
+        logoutButtons.forEach(button => {
+            button.addEventListener('click', (e) => {
+                e.preventDefault();
+                
+                // Simulate logout
+                setTimeout(() => {
+                    // Update UI to show logged out state
+                    document.getElementById('auth-buttons').classList.remove('d-none');
+                    document.getElementById('profile-section').classList.add('d-none');
+                    profileSidebar.classList.remove('active');
+                    document.body.style.overflow = '';
+                    
+                    showToast('info', 'You have been logged out successfully.');
+                }, 500);
+            });
+        });
+
+        // Book Now button functionality
+        document.querySelectorAll('.book-now-btn').forEach(button => {
+            button.addEventListener('click', (e) => {
+                // Check if user is logged in
+                if (document.getElementById('auth-buttons').classList.contains('d-none')) {
+                    // User is logged in, proceed to booking
+                    // For demo purposes, just show a toast
+                    showToast('info', 'Redirecting to booking page...');
+                } else {
+                    // User is not logged in, show login modal
+                    e.preventDefault();
+                    openModal(simpleLoginModal);
+                    showToast('info', 'Please login to book tickets');
+                }
+            });
+        });
+
+        // Keyboard accessibility
+        document.addEventListener('keydown', (e) => {
+            // Close modals with Escape key
+            if (e.key === 'Escape') {
+                if (simpleLoginModal.classList.contains('active')) {
+                    closeModal(simpleLoginModal);
+                }
+                if (authModal.classList.contains('active')) {
+                    closeModal(authModal);
+                }
+                if (searchModal.classList.contains('active')) {
+                    closeModal(searchModal);
+                }
+                if (profileSidebar.classList.contains('active')) {
+                    profileSidebar.classList.remove('active');
+                    document.body.style.overflow = '';
+                }
+            }
+            
+            // Control slideshow with arrow keys when focused
+            if (document.activeElement.closest('.slideshow-container')) {
+                if (e.key === 'ArrowRight') {
+                    nextSlide();
+                } else if (e.key === 'ArrowLeft') {
+                    prevSlide();
+                }
+            }
+        });
+
+        // Initialize event dates to be dynamic based on current date
+        const today = new Date();
+
+        // Alt-Rock Revolution - This Saturday (April 25, 2025)
+        const altRockDate = new Date(2025, 3, 25); // April 25, 2025
+
+        // Music Night - Next Friday (May 2, 2025)
+        const musicNightDate = new Date(2025, 4, 2); // May 2, 2025
+
+        // Film Festival - May 15-20, 2025
+        const filmFestivalStartDate = new Date(2025, 4, 15); // May 15, 2025
+        const filmFestivalEndDate = new Date(2025, 4, 20); // May 20, 2025
+
+        // Check if events are in the past and update UI accordingly
+        const currentDate = new Date(2025, 3, 23); // April 23, 2025 (from the provided date)
+
+        // Update event status based on current date
+        function updateEventStatus() {
+            const eventCards = document.querySelectorAll('.card');
+            
+            eventCards.forEach(card => {
+                const eventDate = new Date(2025, 4, 15); // Example date for demonstration
+                
+                if (eventDate < currentDate) {
+                    const bookButton = card.querySelector('.book-now-btn');
+                    if (bookButton) {
+                        bookButton.textContent = 'Event Ended';
+                        bookButton.classList.remove('btn-primary');
+                        bookButton.classList.add('btn-secondary');
+                        bookButton.disabled = true;
+                    }
+                }
+            });
+        }
+
+        // Call the function to update event status
+        updateEventStatus();
+
+        // Initialize any Bootstrap components
+        document.addEventListener('DOMContentLoaded', () => {
+            // Initialize dropdowns
+            const dropdownElementList = [].slice.call(document.querySelectorAll('.dropdown-toggle'));
+            dropdownElementList.map(function (dropdownToggleEl) {
+                return new bootstrap.Dropdown(dropdownToggleEl);
+            });
+            
+            // Show welcome toast for first-time visitors
+            if (!localStorage.getItem('returnVisitor')) {
+                setTimeout(() => {
+                    showToast('info', 'Welcome to Planr! Discover and book your favorite events.');
+                    localStorage.setItem('returnVisitor', 'true');
+                }, 2000);
+            }
+        });
+    </script>
+</body>
+</html>
