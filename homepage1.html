@@ -298,6 +298,22 @@
   --error-color: #e74c3c;
   --success-color: #2ecc71;
 }
+footer .nav-link::after,
+footer .nav-item .nav-link::after {
+    display: none;
+}
+
+footer .nav-link:hover::after,
+footer .nav-item .nav-link:hover::after {
+    width: 0;
+}
+
+/* Additional selectors to ensure all footer links are covered */
+footer ul.nav .nav-link::after,
+footer ul.nav .nav-link:hover::after {
+    display: none;
+}
+
 
 .feedback-button {
   position: fixed;
