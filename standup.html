@@ -767,10 +767,143 @@
                 font-size: 1.2rem;
                 background-color: rgba(255,255,255,0.9);
             }
+            /* Welcome Screen Styles */
+            .welcome-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--secondary), var(--secondary-dark));
+            color: var(--light);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            overflow-y: auto;
+            padding: 2rem;
+            }
+
+            .welcome-content {
+            max-width: 800px;
+            text-align: center;
+            animation: fadeIn 0.5s ease;
+            }
+
+            .preference-section {
+            margin: 2rem 0;
+            }
+
+            .comedian-options {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+            margin: 1.5rem 0;
+            }
+
+            .option-card {
+            width: 120px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            border-radius: 8px;
+            overflow: hidden;
+            background: rgba(255,255,255,0.1);
+            }
+
+            .option-card:hover {
+            transform: scale(1.05);
+            }
+
+            .option-card.selected {
+            box-shadow: 0 0 0 3px var(--accent);
+            }
+
+            .option-card img {
+            width: 100%;
+            height: 120px;
+            object-fit: cover;
+            }
+
+            .option-card p {
+            padding: 0.5rem;
+            margin: 0;
+            }
+
+            .genre-options {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.8rem;
+            margin: 1.5rem 0;
+            }
+
+            .genre-btn {
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            background: rgba(255,255,255,0.1);
+            border: none;
+            color: var(--light);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            }
+
+            .genre-btn:hover, .genre-btn.selected {
+            background: var(--accent);
+            color: var(--darker);
+            }
+
+            #continueBtn {
+            margin-top: 2rem;
+            padding: 1rem 3rem;
+            font-size: 1.1rem;
+            }
         
     </style>
 </head>
 <body>
+    <!-- Welcome Screen -->
+<div id="welcomeScreen" class="welcome-screen">
+    <div class="welcome-content">
+      <h1>Welcome to LaughFactory</h1>
+      <p>Help us personalize your comedy experience</p>
+      
+      <div class="preference-section">
+        <h2>Choose your favorite comedians</h2>
+        <div class="comedian-options">
+          <div class="option-card" data-comedian="zakir">
+            <img src="https://www.bollywoodhungama.com/wp-content/uploads/2021/10/Zakir-Khan-1.jpg" alt="Zakir Khan">
+            <p>Zakir Khan</p>
+          </div>
+          <div class="option-card" data-comedian="bassi">
+            <img src="https://i0.wp.com/www.urbanasian.com/wp-content/uploads/2022/05/Anubhav-Singh-Bassi.jpg" alt="Anubhav Bassi">
+            <p>Anubhav Bassi</p>
+          </div>
+          <div class="option-card" data-comedian="kaneez">
+            <img src="https://www.mumbaitheatreguide.com/dramas/wp-content/uploads/2019/12/Kaneez-Surka-1.jpg" alt="Kaneez Surka">
+            <p>Kaneez Surka</p>
+          </div>
+          <div class="option-card" data-comedian="ravi">
+            <img src="https://www.mumbaitheatreguide.com/dramas/wp-content/uploads/2021/04/Ravi-Gupta.jpg" alt="Ravi Gupta">
+            <p>Ravi Gupta</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="preference-section">
+        <h2>Select your favorite comedy genres</h2>
+        <div class="genre-options">
+          <button class="genre-btn" data-genre="observational">Observational</button>
+          <button class="genre-btn" data-genre="satire">Satire</button>
+          <button class="genre-btn" data-genre="improv">Improv</button>
+          <button class="genre-btn" data-genre="storytelling">Storytelling</button>
+          <button class="genre-btn" data-genre="dark">Dark Humor</button>
+        </div>
+      </div>
+      
+      <button id="continueBtn" class="btn btn-primary">Continue to LaughFactory</button>
+    </div>
+  </div>
     <!-- Main Website Content -->
     <div id="mainContent">
         <!-- Header -->
@@ -1264,6 +1397,7 @@
                             <li><i class="fas fa-map-marker-alt"></i> 123 Comedy Street, Mumbai, India</li>
                             <li><i class="fas fa-phone"></i> +91 9876543210</li>
                             <li><i class="fas fa-envelope"></i> info@laughfactory.in</li>
+                            <li><i class="fas fa-user-tie"></i> Event Manager: Shivoy Budhiraja</li>
                         </ul>
                     </div>
                 </div>
@@ -1333,6 +1467,13 @@
                                 <option value="none">No Preference</option>
                             </select>
                         </div>
+                        <!-- Add this to your booking modal form, before the special requirements textarea -->
+                        <div class="form-group">
+                            <label for="giftCardCode">Gift Card Code (if applicable)</label>
+                            <input type="text" id="giftCardCode" placeholder="Enter gift card code">
+                            <button type="button" class="btn btn-accent" id="applyGiftCard" style="margin-top: 0.5rem;">Apply Gift Card</button>
+                            <div id="giftCardMessage" style="margin-top: 0.5rem; font-size: 0.9rem;"></div>
+                        </div>
                         
                         <div class="form-group">
                             <label for="special">Special Requirements</label>
@@ -1370,6 +1511,79 @@
     </div>
 
     <script>
+        // Hide main content initially
+    document.getElementById('mainContent').style.display = 'none';
+        // Welcome Screen Functionality
+    document.addEventListener('DOMContentLoaded', function() {
+    const welcomeScreen = document.getElementById('welcomeScreen');
+    const continueBtn = document.getElementById('continueBtn');
+    const optionCards = document.querySelectorAll('.option-card');
+    const genreBtns = document.querySelectorAll('.genre-btn');
+    
+    let selectedComedians = [];
+    let selectedGenres = [];
+    
+    // Hide main content initially
+    document.getElementById('mainContent').style.display = 'none';
+    
+    // Comedian selection
+    optionCards.forEach(card => {
+        card.addEventListener('click', function() {
+        const comedian = this.dataset.comedian;
+        
+        if (this.classList.contains('selected')) {
+            this.classList.remove('selected');
+            selectedComedians = selectedComedians.filter(c => c !== comedian);
+        } else {
+            this.classList.add('selected');
+            selectedComedians.push(comedian);
+        }
+        });
+    });
+    
+    // Genre selection
+    genreBtns.forEach(btn => {
+        btn.addEventListener('click', function() {
+        const genre = this.dataset.genre;
+        
+        if (this.classList.contains('selected')) {
+            this.classList.remove('selected');
+            selectedGenres = selectedGenres.filter(g => g !== genre);
+        } else {
+            this.classList.add('selected');
+            selectedGenres.push(genre);
+        }
+        });
+    });
+    
+    // Continue to main site
+    continueBtn.addEventListener('click', function() {
+        // Save preferences (in a real app, you might send to server)
+        localStorage.setItem('comedyPreferences', JSON.stringify({
+        comedians: selectedComedians,
+        genres: selectedGenres
+        }));
+        
+        // Hide welcome screen
+        welcomeScreen.style.opacity = '0';
+        welcomeScreen.style.pointerEvents = 'none';
+        welcomeScreen.style.transition = 'opacity 0.5s ease';
+        
+        // Show main content
+        document.getElementById('mainContent').style.display = 'block';
+        
+        // In a real app, you could use these preferences to:
+        // - Highlight recommended shows
+        // - Filter comedians
+        // - Personalize the experience
+    });
+    
+    // Optional: Skip if they've done this before
+    if (localStorage.getItem('comedyPreferences')) {
+        welcomeScreen.style.display = 'none';
+        document.getElementById('mainContent').style.display = 'block';
+    }
+    });
         // Mobile Menu Toggle
         const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
         const navLinks = document.querySelector('.nav-links');
