@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Planr - Feedback</title>
+  <style>
+    :root {
+      --primary: #6c5ce7;
+      --primary-hover: #5649c0;
+      --accent: #fd79a8;
+      --bg: #1e1e2f;
+      --light: #f8f9fa;
+      --text: #ffffff;
+      --card: #2d2d44;
+      --input: #3b3b5c;
+      --error: #ff6b6b;
+      --success: #1dd1a1;
+      --border-radius: 12px;
+      --transition: all 0.3s ease;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px;
+      line-height: 1.6;
+    }
+
+    .container {
+      background: var(--card);
+      padding: 35px;
+      border-radius: var(--border-radius);
+      max-width: 550px;
+      width: 100%;
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+      animation: fadeIn 0.6s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(25px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .logo {
+      margin-bottom: 5px;
+      font-weight: 800;
+      font-size: 2.5rem;
+      background: linear-gradient(45deg, var(--primary), var(--accent));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .tagline {
+      color: var(--light);
+      opacity: 0.8;
+      font-size: 1rem;
+    }
+
+    h1, h2 {
+      color: var(--primary);
+      text-align: center;
+    }
+
+    .form-group {
+      margin-bottom: 24px;
+    }
+
+    label {
+      margin-bottom: 8px;
+      display: block;
+      font-weight: 500;
+    }
+
+    input, textarea, select {
+      width: 100%;
+      background: var(--input);
+      color: var(--text);
+      border: 2px solid transparent;
+      border-radius: var(--border-radius);
+      padding: 12px 15px;
+      transition: var(--transition);
+      font-size: 1rem;
+    }
+
+    input:focus, textarea:focus, select:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(108, 92, 231, 0.2);
+    }
+
+    input.error, textarea.error, select.error {
+      border-color: var(--error);
+    }
+
+    .error-message {
+      color: var(--error);
+      font-size: 0.85rem;
+      margin-top: 5px;
+      display: none;
+    }
+
+    textarea { 
+      resize: vertical; 
+      min-height: 100px; 
+    }
+
+    .rating-container {
+      text-align: center;
+    }
+
+    .rating {
+      display: inline-flex;
+      flex-direction: row-reverse;
+      justify-content: center;
+      margin: 12px 0;
+    }
+
+    .rating input {
+      display: none;
+    }
+
+    .rating label {
+      font-size: 2.5rem;
+      color: #555;
+      cursor: pointer;
+      margin: 0 5px;
+      transition: var(--transition);
+    }
+
+    .rating:not(:checked) > label:hover,
+    .rating:not(:checked) > label:hover ~ label {
+      color: var(--accent);
+    }
+
+    .rating input:checked ~ label {
+      color: var(--accent);
+    }
+
+    .rating-text {
+      height: 24px;
+      font-size: 0.9rem;
+      margin-top: 5px;
+      font-weight: 500;
+      color: var(--accent);
+    }
+
+    button {
+      width: 100%;
+      background: var(--primary);
+      color: white;
+      border: none;
+      padding: 14px;
+      border-radius: var(--border-radius);
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: var(--transition);
+      margin-top: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    button:hover {
+      background: var(--primary-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    button:active {
+      transform: translateY(0);
+    }
+
+    #spinner {
+      display: none;
+      margin-left: 10px;
+      width: 20px;
+      height: 20px;
+      border: 3px solid rgba(255,255,255,0.3);
+      border-radius: 50%;
+      border-top-color: white;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    #thankYouMessage {
+      display: none;
+      text-align: center;
+      animation: fadeIn 0.6s ease;
+    }
+
+    .emoji {
+      font-size: 4rem;
+      margin: 20px 0;
+      animation: bounce 1s infinite alternate;
+    }
+
+    @keyframes bounce {
+      from { transform: translateY(0); }
+      to { transform: translateY(-15px); }
+    }
+
+    .thank-you-text {
+      font-size: 1.2rem;
+      margin: 20px 0;
+    }
+    
+    .form-divider {
+      border-top: 1px solid rgba(255,255,255,0.1);
+      margin: 30px 0;
+    }
+    
+    .feedback-type-options {
+      position: relative;
+    }
+    
+    select {
+      appearance: none;
+      cursor: pointer;
+    }
+    
+    .feedback-type-options::after {
+      content: '▼';
+      font-size: 0.8rem;
+      position: absolute;
+      right: 15px;
+      top: 48px;
+      pointer-events: none;
+      color: var(--accent);
+    }
+    
+    .input-container {
+      position: relative;
+    }
+    
+    .character-count {
+      position: absolute;
+      bottom: 12px;
+      right: 12px;
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.6);
+    }
+
+    .response-card {
+      background: rgba(108, 92, 231, 0.1);
+      border-left: 4px solid var(--primary);
+      padding: 20px;
+      border-radius: 8px;
+      margin: 25px 0;
+      animation: slideIn 0.5s ease;
+    }
+
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateX(-20px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+
+    .response-header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .response-icon {
+      margin-right: 12px;
+      font-size: 1.5rem;
+    }
+
+    .response-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--primary);
+    }
+
+    .response-content {
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+
+    .action-button {
+      background: transparent;
+      border: 2px solid var(--primary);
+      color: var(--primary);
+      font-size: 0.9rem;
+      padding: 8px 16px;
+      margin-top: 15px;
+      width: auto;
+      display: inline-flex;
+    }
+
+    .action-button:hover {
+      background: var(--primary);
+      color: white;
+    }
+
+    .next-steps {
+      margin-top: 20px;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    @media (max-width: 500px) {
+      .next-steps {
+        flex-direction: column;
+        gap: 10px;
+      }
+      
+      .action-button {
+        width: 100%;
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div class="logo">Planr</div>
+      <p class="tagline">Your Event Planning Partner</p>
+    </div>
+
+    <form id="feedbackForm">
+      <div class="form-group">
+        <label for="name">Your Name</label>
+        <input type="text" id="name" placeholder="Enter your full name" required />
+        <div class="error-message" id="nameError">Please enter your name</div>
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email Address</label>
+        <input type="email" id="email" placeholder="your@email.com" required />
+        <div class="error-message" id="emailError">Please enter a valid email address</div>
+      </div>
+      
+      <div class="form-divider"></div>
+
+      <div class="form-group rating-container">
+        <label>How was your experience?</label>
+        <div class="rating">
+          <input type="radio" id="star5" name="rating" value="5"><label for="star5" title="Excellent">★</label>
+          <input type="radio" id="star4" name="rating" value="4"><label for="star4" title="Good">★</label>
+          <input type="radio" id="star3" name="rating" value="3"><label for="star3" title="Average">★</label>
+          <input type="radio" id="star2" name="rating" value="2"><label for="star2" title="Poor">★</label>
+          <input type="radio" id="star1" name="rating" value="1"><label for="star1" title="Very Poor">★</label>
+        </div>
+        <div class="rating-text" id="ratingText"></div>
+        <div class="error-message" id="ratingError">Please select a rating</div>
+      </div>
+
+      <div class="form-group feedback-type-options">
+        <label for="feedbackType">Feedback Type</label>
+        <select id="feedbackType" required>
+          <option value="" disabled selected>Select feedback type</option>
+          <option value="suggestion">Suggestion</option>
+          <option value="compliment">Compliment</option>
+          <option value="complaint">Complaint</option>
+          <option value="question">Question</option>
+          <option value="bug">Bug Report</option>
+        </select>
+        <div class="error-message" id="typeError">Please select a feedback type</div>
+      </div>
+
+      <div class="form-group">
+        <label for="feedback">Your Feedback</label>
+        <div class="input-container">
+          <textarea id="feedback" placeholder="Share your thoughts with us..." required maxlength="500"></textarea>
+          <div class="character-count"><span id="currentCount">0</span>/500</div>
+        </div>
+        <div class="error-message" id="feedbackError">Please provide your feedback</div>
+      </div>
+
+      <button type="submit" id="submitBtn">
+        Submit Feedback
+        <div id="spinner"></div>
+      </button>
+    </form>
+
+    <div id="thankYouMessage">
+      <div class="emoji" id="responseEmoji">🎉</div>
+      <h2>Thank You, <span id="userName">there</span>!</h2>
+      <p class="thank-you-text" id="thankYouText">We appreciate your valuable feedback!</p>
+      
+      <div class="response-card">
+        <div class="response-header">
+          <div class="response-icon" id="responseIcon">💡</div>
+          <div class="response-title" id="responseTitle">What happens next?</div>
+        </div>
+        <div class="response-content" id="responseContent">
+          Thank you for taking the time to share your thoughts with us. Your feedback helps us improve Planr for everyone.
+        </div>
+      </div>
+      
+      <div class="next-steps">
+        <button class="action-button" id="trackButton">
+          <span id="trackButtonText">Track your feedback</span>
+        </button>
+        <button onclick="resetForm()" class="action-button">Submit another response</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const form = document.getElementById('feedbackForm');
+    const thankYou = document.getElementById('thankYouMessage');
+    const submitBtn = document.getElementById('submitBtn');
+    const spinner = document.getElementById('spinner');
+    const ratingLabels = document.querySelectorAll('.rating label');
+    const ratingInputs = document.querySelectorAll('.rating input');
+    const ratingText = document.getElementById('ratingText');
+    const feedback = document.getElementById('feedback');
+    const currentCount = document.getElementById('currentCount');
+    const nameInput = document.getElementById('name');
+    const userNameSpan = document.getElementById('userName');
+    const trackButton = document.getElementById('trackButton');
+    const trackButtonText = document.getElementById('trackButtonText');
+    
+    // Rating text display
+    const ratingTexts = {
+      '1': 'Very Poor',
+      '2': 'Poor',
+      '3': 'Average',
+      '4': 'Good',
+      '5': 'Excellent'
+    };
+    
+    // Feedback type responses
+    const responseData = {
+      'suggestion': {
+        emoji: '💡',
+        icon: '🚀',
+        title: 'Your suggestion matters!',
+        content: 'Thank you for your suggestion! Our product team will review it carefully. We're always looking for ways to make Planr even better for our users.',
+        buttonText: 'Track your suggestion'
+      },
+      'compliment': {
+        emoji: '🙏',
+        icon: '❤️',
+        title: 'Thank you for the kind words!',
+        content: 'We're thrilled to hear you're enjoying Planr! We've shared your compliment with our team - it means a lot to us and motivates us to keep improving.',
+        buttonText: 'Share your experience'
+      },
+      'complaint': {
+        emoji: '🛠️',
+        icon: '🔧',
+        title: 'We're on it!',
+        content: 'We're sorry you encountered an issue. Your feedback has been sent to our support team who will review it immediately. We're committed to making this right.',
+        buttonText: 'Track resolution status'
+      },
+      'question': {
+        emoji: '📝',
+        icon: '❓',
+        title: 'We've got your question!',
+        content: 'Thank you for reaching out. Our support team will review your question and get back to you via email within 24 hours with a detailed response.',
+        buttonText: 'Check our FAQ'
+      },
+      'bug': {
+        emoji: '🐞',
+        icon: '🔍',
+        title: 'Bug report received!',
+        content: 'Thank you for reporting this issue. Our development team has been notified and will investigate. Your report helps us make Planr more reliable for everyone.',
+        buttonText: 'View bug status'
+      }
+    };
+    
+    // Update character count
+    feedback.addEventListener('input', () => {
+      const count = feedback.value.length;
+      currentCount.textContent = count;
+      
+      if (count >= 450) {
+        currentCount.style.color = '#ff6b6b';
+      } else {
+        currentCount.style.color = 'rgba(255,255,255,0.6)';
+      }
+    });
+    
+    // Display rating text when selecting stars
+    ratingInputs.forEach(input => {
+      input.addEventListener('change', () => {
+        const value = input.value;
+        ratingText.textContent = ratingTexts[value];
+      });
+    });
+
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+      
+      // Form validation
+      let isValid = true;
+      
+      // Reset error messages
+      document.querySelectorAll('.error-message').forEach(el => {
+        el.style.display = 'none';
+      });
+      
+      // Validate name
+      if (!nameInput.value.trim()) {
+        document.getElementById('nameError').style.display = 'block';
+        nameInput.classList.add('error');
+        isValid = false;
+      } else {
+        nameInput.classList.remove('error');
+      }
+      
+      // Validate email
+      const email = document.getElementById('email');
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(email.value.trim())) {
+        document.getElementById('emailError').style.display = 'block';
+        email.classList.add('error');
+        isValid = false;
+      } else {
+        email.classList.remove('error');
+      }
+      
+      // Validate rating
+      const rating = document.querySelector('input[name="rating"]:checked');
+      if (!rating) {
+        document.getElementById('ratingError').style.display = 'block';
+        isValid = false;
+      }
+      
+      // Validate feedback type
+      const feedbackType = document.getElementById('feedbackType');
+      if (feedbackType.value === "") {
+        document.getElementById('typeError').style.display = 'block';
+        feedbackType.classList.add('error');
+        isValid = false;
+      } else {
+        feedbackType.classList.remove('error');
+      }
+      
+      // Validate feedback text
+      if (!feedback.value.trim()) {
+        document.getElementById('feedbackError').style.display = 'block';
+        feedback.classList.add('error');
+        isValid = false;
+      } else {
+        feedback.classList.remove('error');
+      }
+      
+      if (!isValid) {
+        return;
+      }
+      
+      // Show loading state
+      submitBtn.disabled = true;
+      spinner.style.display = 'block';
+      
+      // Get selected feedback type
+      const selectedType = feedbackType.value;
+      const firstName = nameInput.value.trim().split(' ')[0];
+      
+      // Prepare personalized response
+      const responseType = responseData[selectedType] || responseData['suggestion'];
+      
+      document.getElementById('responseEmoji').textContent = responseType.emoji;
+      document.getElementById('responseIcon').textContent = responseType.icon;
+      document.getElementById('responseTitle').textContent = responseType.title;
+      document.getElementById('responseContent').textContent = responseType.content;
+      trackButtonText.textContent = responseType.buttonText;
+      userNameSpan.textContent = firstName;
+      
+      // Add rating-specific text if needed
+      const ratingValue = rating ? rating.value : '3';
+      if (ratingValue <= 2 && selectedType === 'complaint') {
+        document.getElementById('responseContent').textContent += ' Our team lead will personally review your case.';
+      } else if (ratingValue >= 4 && selectedType === 'compliment') {
+        document.getElementById('responseContent').textContent += ' Users like you make our work meaningful!';
+      }
+      
+      // Simulate form submission delay
+      setTimeout(() => {
+        form.style.display = 'none';
+        thankYou.style.display = 'block';
+        spinner.style.display = 'none';
+        submitBtn.disabled = false;
+      }, 1000);
+    });
+
+    function resetForm() {
+      form.reset();
+      form.style.display = 'block';
+      thankYou.style.display = 'none';
+      ratingText.textContent = '';
+      currentCount.textContent = '0';
+      
+      // Reset any validation styling
+      document.querySelectorAll('input, textarea, select').forEach(el => {
+        el.classList.remove('error');
+      });
+    }
+    
+    // Add feedback ID tracking
+    trackButton.addEventListener('click', () => {
+      // Generate random feedback ID
+      const feedbackId = Math.floor(100000 + Math.random() * 900000);
+      alert(`Your feedback ID is: #${feedbackId}\nWe'll keep you updated on any progress.`);
+    });
+  </script>
+</body>
+</html>

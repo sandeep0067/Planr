@@ -1,3 +1,4 @@
+<<<<<<< Sahil792006-patch-1
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -311,4 +312,430 @@
         </div>
     </footer>
 </body>
+=======
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Concerts in Chandigarh | PLANR</title>
+    <link rel="icon" type="image/jpg" href="./Images/concertfavicon.jpg">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #121212;
+            color: #e0e0e0;
+            line-height: 1.6;
+        }
+        
+        /* New Navigation Bar Styles */
+        .navbar {
+            background-color: #1a1a1a;
+            padding: 15px 0;
+            border-bottom: 1px solid #333;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #bb86fc;
+            text-decoration: none;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 25px;
+        }
+        
+        .nav-links a {
+            color: #e0e0e0;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+        
+        .nav-links a:hover {
+            color: #bb86fc;
+        }
+        
+        .nav-links a.active {
+            color: #bb86fc;
+        }
+        
+        .nav-links a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: #bb86fc;
+        }
+        
+        .search-bar {
+            display: flex;
+            align-items: center;
+            background: #2d2d2d;
+            border-radius: 20px;
+            padding: 8px 15px;
+            width: 250px;
+        }
+        
+        .search-bar input {
+            background: transparent;
+            border: none;
+            color: #e0e0e0;
+            width: 100%;
+            outline: none;
+        }
+        
+        .search-bar i {
+            color: #a0a0a0;
+            margin-right: 10px;
+        }
+        
+        .container {
+            display: flex;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .filters {
+            width: 250px;
+            padding-right: 20px;
+        }
+        
+        .filter-section {
+            margin-bottom: 25px;
+        }
+        
+        .filter-section h3 {
+            font-size: 16px;
+            margin-bottom: 10px;
+            color: #bb86fc;
+        }
+        
+        .filter-options {
+            list-style: none;
+        }
+        
+        .filter-options li {
+            padding: 8px 0;
+            cursor: pointer;
+            color: #e0e0e0;
+            transition: all 0.3s ease;
+        }
+        
+        .filter-options li:hover {
+            color: #bb86fc;
+        }
+        
+        .filter-options li.active {
+            color: #bb86fc;
+            font-weight: bold;
+        }
+        
+        .main-content {
+            flex: 1;
+        }
+        
+        .page-title {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #ffffff;
+        }
+        
+        .event-tabs {
+            display: flex;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #333;
+        }
+        
+        .event-tab {
+            padding: 10px 20px;
+            cursor: pointer;
+            color: #e0e0e0;
+            transition: all 0.3s ease;
+        }
+        
+        .event-tab:hover {
+            color: #bb86fc;
+        }
+        
+        .event-tab.active {
+            border-bottom: 2px solid #bb86fc;
+            color: #bb86fc;
+            font-weight: bold;
+        }
+        
+        .event-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        .event-card {
+            background: #1e1e1e;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .event-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.4);
+        }
+        
+        .event-image {
+            height: 180px;
+            background-color: #2d2d2d;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+        
+        .event-image::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 40%;
+            background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+        }
+        
+        .event-details {
+            padding: 15px;
+        }
+        
+        .event-date {
+            font-size: 14px;
+            color: #bb86fc;
+            margin-bottom: 5px;
+        }
+        
+        .event-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: #ffffff;
+        }
+        
+        .event-venue {
+            font-size: 14px;
+            color: #a0a0a0;
+            margin-bottom: 8px;
+        }
+        
+        .event-category {
+            font-size: 12px;
+            color: #7a7a7a;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .footer {
+            background-color: #1a1a1a;
+            color: #a0a0a0;
+            padding: 30px 0;
+            margin-top: 40px;
+            border-top: 1px solid #333;
+        }
+        
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 20px;
+        }
+        
+        .footer-links {
+            display: flex;
+            gap: 30px;
+        }
+        
+        .footer-links a {
+            color: #a0a0a0;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: #bb86fc;
+            text-decoration: none;
+        }
+        
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .nav-links {
+                width: 100%;
+                justify-content: space-around;
+            }
+            
+            .search-bar {
+                width: 100%;
+            }
+            
+            .container {
+                flex-direction: column;
+            }
+            
+            .filters {
+                width: 100%;
+                padding-right: 0;
+                margin-bottom: 20px;
+            }
+            
+            .event-list {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- New Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">PLANR</a>
+            
+            <div class="nav-links">
+                <a href="#" class="active">Concerts</a>
+                <a href="#">Festivals</a>
+                <a href="#">Sports</a>
+                <a href="#">Theater</a>
+                <a href="#">Comedy</a>
+            </div>
+            
+            <div class="search-bar">
+                <i>🔍</i>
+                <input type="text" placeholder="Search events...">
+            </div>
+        </div>
+    </nav>
+    
+    <div class="container">
+        <aside class="filters">
+            <div class="filter-section">
+                <h3>Date</h3>
+                <ul class="filter-options">
+                    <li class="active">Today</li>
+                    <li>This Weekend</li>
+                </ul>
+            </div>
+            
+            <div class="filter-section">
+                <h3>Date Range</h3>
+                <!-- Date range picker would go here -->
+            </div>
+            
+            <div class="filter-section">
+                <h3>Languages</h3>
+                <!-- Language options would go here -->
+            </div>
+            
+            <div class="filter-section">
+                <h3>Categories</h3>
+                <ul class="filter-options">
+                    <li class="active">Concerts</li>
+                    <li>Music Festivals</li>
+                    <li>Club Gigs</li>
+                </ul>
+            </div>
+            
+            <div class="filter-section">
+                <h3>Price</h3>
+                <!-- Price range slider would go here -->
+            </div>
+            
+            <div class="filter-section">
+                <h3>More Filters</h3>
+                <!-- Additional filters would go here -->
+            </div>
+        </aside>
+        
+        <main class="main-content">
+            <h1 class="page-title">Concerts In Chandigarh</h1>
+            
+            <div class="event-tabs">
+                <div class="event-tab active">Concerts</div>
+                <div class="event-tab">Music Festivals</div>
+                <div class="event-tab">Club Gigs</div>
+            </div>
+            
+            <div class="event-list">
+                <!-- Event 1 -->
+                <div class="event-card">
+                    <div class="event-image" style="background-image: url('Images/gunsnroses.jpeg');"></div>
+                    <div class="event-details">
+                        <div class="event-date">Sat. 17 May</div>
+                        <h3 class="event-title">Guns N' Roses: India 2025</h3>
+                        <div class="event-venue">Mahalaxmi Race Course, Mumbai</div>
+                        <div class="event-category">Concerts</div>
+                    </div>
+                </div>
+                
+                <!-- Event 2 -->
+                <div class="event-card">
+                    <div class="event-image" style="background-image: url('./Images/vilen.jpg'); background-color: #2a2a2a;"></div>
+                    <div class="event-details">
+                        <div class="event-date">Coming Soon</div>
+                        <h3 class="event-title">VILEN LIVE - CHANDIGARH</h3>
+                        <div class="event-venue">Venue To Be Announced</div>
+                        <div class="event-category">Concerts</div>
+                    </div>
+                </div>
+                
+                <!-- Event 3 -->
+                <div class="event-card">
+                    <div class="event-image" style="background-image: url('./Images/djoshnin&jeez.jpg'); background-color: #2a2a2a;"></div>
+                    <div class="event-details">
+                        <div class="event-date">Sun, 11 May | Sat, 19 Apr</div>
+                        <h3 class="event-title">Saturday's Vibe with DJ OSHIN x SHEZZ</h3>
+                        <div class="event-venue">Pyramid Elante, Chandigarh</div>
+                        <div class="event-category">Concerts</div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    
+    <footer class="footer">
+        <div class="footer-container">
+            <div style="color: #bb86fc;">Chandigarh</div>
+            <div class="footer-links">
+                <a href="#">ListYourShow</a>
+                <a href="#">Corporates</a>
+                <a href="#">Offers</a>
+                <a href="#">Gift Cards</a>
+            </div>
+        </div>
+    </footer>
+</body>
+>>>>>>> master
 </html>

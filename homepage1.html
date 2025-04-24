@@ -293,7 +293,529 @@
             opacity: 1;
             transform: scale(1);
         }
+<<<<<<< Sahil792006-patch-1
         
+=======
+        /* Feedback Form Styles */
+:root {
+  --error-color: #e74c3c;
+  --success-color: #2ecc71;
+}
+footer .nav-link::after,
+footer .nav-item .nav-link::after {
+    display: none;
+}
+
+footer .nav-link:hover::after,
+footer .nav-item .nav-link:hover::after {
+    width: 0;
+}
+
+/* Additional selectors to ensure all footer links are covered */
+footer ul.nav .nav-link::after,
+footer ul.nav .nav-link:hover::after {
+    display: none;
+}
+
+
+.feedback-button {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  background: linear-gradient(135deg, var(--primary-accent), #fd79a8);
+  color: white;
+  border: none;
+  border-radius: 50px;
+  padding: 12px 24px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 4px 20px rgba(67, 97, 238, 0.3);
+  display: flex;
+  align-items: center;
+  transition: all 0.3s ease;
+  z-index: 999;
+}
+
+.feedback-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 25px rgba(67, 97, 238, 0.4);
+}
+
+.feedback-button svg {
+  margin-right: 8px;
+  width: 20px;
+  height: 20px;
+}
+
+.feedback-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(5px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+  color-scheme: dark;
+}
+
+.feedback-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.feedback-container {
+  background-color: var(--dark-card);
+  border-radius: 12px;
+  width: 90%;
+  max-width: 550px;
+  padding: 30px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+  position: relative;
+  overflow: hidden;
+  transform: translateY(20px);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  max-height: 80vh;
+  overflow-y: auto;
+  padding-right: 10px;
+}
+
+.feedback-container::-webkit-scrollbar {
+  width: 10px;
+}
+
+.feedback-container::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+}
+
+.feedback-container::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+}
+
+.feedback-container::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.feedback-container {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.2) rgba(255, 255, 255, 0.05);
+}
+
+.feedback-overlay.active .feedback-container {
+  transform: translateY(0);
+}
+
+.feedback-close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: rgba(255, 255, 255, 0.05);
+  border: none;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.feedback-close:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  transform: rotate(90deg);
+}
+
+.feedback-header {
+  margin-bottom: 25px;
+  text-align: center;
+}
+
+.feedback-title {
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+  background: linear-gradient(135deg, var(--primary-accent), #fd79a8);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.feedback-subtitle {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 1rem;
+}
+
+.feedback-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-label {
+  font-weight: 600;
+  font-size: 0.95rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.required-label {
+  color: #fd79a8;
+  font-size: 0.8rem;
+}
+
+.form-input, .form-select, .form-textarea {
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  padding: 12px 16px;
+  color: var(--text-light);
+  font-size: 1rem;
+  transition: all 0.2s ease;
+}
+
+.form-input:focus, .form-select:focus, .form-textarea:focus {
+  border-color: var(--primary-accent);
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(67, 97, 238, 0.2);
+}
+
+.form-textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+.char-count {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 0.85rem;
+  text-align: right;
+  margin-top: 4px;
+}
+
+.rating-group {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.rating-option {
+  flex: 1;
+}
+
+.rating-input {
+  display: none;
+}
+
+.rating-label {
+  display: block;
+  padding: 12px;
+  text-align: center;
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.rating-input:checked + .rating-label {
+  background-color: rgba(67, 97, 238, 0.2);
+  border-color: var(--primary-accent);
+  box-shadow: 0 0 0 2px rgba(67, 97, 238, 0.2);
+}
+
+.rating-text {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.7);
+  text-align: center;
+  margin-top: 8px;
+  min-height: 20px;
+}
+
+.error-message {
+  color: var(--error-color);
+  font-size: 0.85rem;
+  margin-top: 4px;
+  display: none;
+}
+
+.feedback-submit {
+  background: linear-gradient(135deg, var(--primary-accent), #fd79a8);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 14px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+  position: sticky;
+  bottom: 0;
+  z-index: 5;
+}
+
+.feedback-submit:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(67, 97, 238, 0.3);
+}
+
+.feedback-submit:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.feedback-spinner {
+  width: 20px;
+  height: 20px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top: 2px solid white;
+  border-radius: 50%;
+  margin-right: 10px;
+  animation: spin 0.8s linear infinite;
+  display: none;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.feedback-thank-you {
+  text-align: center;
+  display: none;
+}
+
+.thank-you-icon {
+  font-size: 3rem;
+  margin-bottom: 20px;
+  color: var(--success-color);
+}
+
+.thank-you-title {
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.thank-you-message {
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 20px;
+}
+
+/* Submission confirmation styles */
+.submission-confirmation {
+  display: none;
+  text-align: center;
+  animation: fadeIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.feedback-overlay.active .feedback-container.submission-confirmation {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+}
+
+/* Enhanced success circle */
+.success-circle {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  background: var(--primary-accent);
+  margin: 0 auto 35px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 0 40px rgba(108, 92, 231, 0.6);
+  animation: pulseIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+  background: linear-gradient(135deg, #6c5ce7, #fd79a8);
+  overflow: hidden;
+}
+
+.success-circle::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0) 70%);
+  opacity: 0;
+  animation: circleSweep 2s ease-in-out infinite alternate 0.8s;
+}
+
+@keyframes circleSweep {
+  0% { opacity: 0; transform: rotate(0deg); }
+  50% { opacity: 0.3; }
+  100% { opacity: 0; transform: rotate(360deg); }
+}
+
+/* Enhanced checkmark animation */
+.checkmark {
+  width: 80px;
+  height: 80px;
+  position: relative;
+}
+
+.checkmark-path {
+  stroke-dasharray: 100;
+  stroke-dashoffset: 100;
+  stroke: white;
+  stroke-width: 6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  fill: none;
+  animation: drawCheck 0.8s ease-in-out forwards 0.4s;
+}
+
+@keyframes drawCheck {
+  0% { stroke-dashoffset: 100; opacity: 0; }
+  30% { opacity: 1; }
+  100% { stroke-dashoffset: 0; opacity: 1; }
+}
+
+@keyframes pulseIn {
+  0% { transform: scale(0); opacity: 0; }
+  70% { transform: scale(1.1); opacity: 1; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.response-submitted-text {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #fd79a8;
+  margin: 0 0 10px;
+  animation: fadeInText 0.5s ease forwards 0.6s;
+  opacity: 0;
+}
+
+.submission-message {
+  font-size: 1.1rem;
+  margin: 0 0 25px;
+  line-height: 1.5;
+  color: rgba(255,255,255,0.8);
+  animation: fadeInText 0.5s ease forwards 0.7s;
+  opacity: 0;
+}
+
+.info-box {
+  background: rgba(108, 92, 231, 0.08);
+  border-left: 4px solid #6c5ce7;
+  padding: 20px;
+  text-align: left;
+  margin: 25px 0;
+  border-radius: 0 8px 8px 0;
+  animation: fadeInText 0.5s ease forwards 0.8s;
+  opacity: 0;
+}
+
+.info-title {
+  display: flex;
+  align-items: center;
+  color: #6c5ce7;
+  font-weight: 600;
+  margin-bottom: 8px;
+  font-size: 1.1rem;
+}
+
+.info-icon {
+  margin-right: 10px;
+  font-size: 1.3em;
+}
+
+.info-content {
+  font-size: 1rem;
+  color: rgba(255,255,255,0.9);
+  line-height: 1.6;
+}
+
+.action-buttons {
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  animation: fadeInText 0.5s ease forwards 0.9s;
+  opacity: 0;
+}
+
+.action-button {
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  font-size: 1rem;
+}
+
+.new-feedback-btn {
+  background: rgba(108, 92, 231, 0.08);
+  border: 1px solid rgba(108, 92, 231, 0.5);
+  color: #6c5ce7;
+}
+
+.new-feedback-btn:hover {
+  background: rgba(108, 92, 231, 0.15);
+  transform: translateY(-2px);
+}
+
+.close-btn {
+  background: linear-gradient(135deg, #6c5ce7, #fd79a8);
+  border: none;
+  color: white;
+  box-shadow: 0 5px 15px rgba(108, 92, 231, 0.3);
+}
+
+.close-btn:hover {
+  background: linear-gradient(135deg, #5b4bd4, #fc6aa0);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(108, 92, 231, 0.4);
+}
+
+.feedback-id {
+  display: inline-block;
+  background: rgba(255,255,255,0.04);
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-weight: 500;
+  margin-top: 25px;
+  color: rgba(255,255,255,0.5);
+  font-size: 0.9rem;
+  animation: fadeInText 0.5s ease forwards 1s;
+  opacity: 0;
+  border: 1px solid rgba(255,255,255,0.08);
+}
+
+@keyframes fadeInText {
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+>>>>>>> master
         /* Slide Controls */
         .slide-controls {
             position: absolute;
@@ -304,6 +826,7 @@
             justify-content: space-between;
             padding: 0 30px;
             z-index: 30;
+<<<<<<< Sahil792006-patch-1
         }
         
         .slide-control {
@@ -349,6 +872,53 @@
             transition: width 5s linear;
         }
         
+=======
+        }
+        
+        .slide-control {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+            color: #fff;
+            font-size: 20px;
+            transform: perspective(800px) rotateY(15deg);
+        }
+        
+        .slide-control:hover {
+            background-color: var(--primary-accent);
+            color: #000;
+            transform: perspective(800px) rotateY(0deg);
+        }
+        
+        /* Slide Progress Indicator */
+        .slide-progress {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 200px;
+            height: 3px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 3px;
+            overflow: hidden;
+            z-index: 25;
+        }
+
+        .progress-bar {
+            height: 100%;
+            width: 0;
+            background: var(--primary-accent);
+            border-radius: 3px;
+            transition: width 5s linear;
+        }
+        
+>>>>>>> master
         /* Enhanced Card Hover Effect */
         .card {
             background-color: rgba(26, 26, 34, 0.8);
@@ -1060,6 +1630,105 @@
             border-radius: 2px;
         }
         
+   /* Featured Events Section Styling */
+.section-title {
+  font-size: 2rem;
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 40px;
+  color: var(--text-light);
+  position: relative;
+}
+
+.section-title::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 70px;
+  height: 3px;
+  background: #4d7cfe;
+  border-radius: 3px;
+}
+
+.card {
+  background-color: #1a1a22;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+.card-img-top {
+  height: 200px;
+  object-fit: cover;
+}
+
+.category-badge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: rgba(0, 0, 0, 0.7);
+  color: #fff;
+  padding: 5px 15px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  backdrop-filter: blur(5px);
+}
+
+.card-body {
+  padding: 20px;
+}
+
+.card-title {
+  font-size: 1.4rem;
+  font-weight: 600;
+  margin-bottom: 10px;
+  color: #fff;
+}
+
+.event-date, .event-location {
+  display: flex;
+  align-items: center;
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 8px;
+  font-size: 0.9rem;
+}
+
+.event-date i, .event-location i {
+  margin-right: 8px;
+  color: #4d7cfe;
+}
+
+.card-text {
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 20px;
+  font-size: 0.95rem;
+}
+
+.book-now-btn {
+  background-color: #4d7cfe;
+  border: none;
+  border-radius: 4px;
+  padding: 8px 20px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.book-now-btn:hover {
+  background-color: #3a69eb;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(77, 124, 254, 0.3);
+}
+
+
+        
         @media (max-width: 768px) {
             .hero-title {
                 font-size: 2.5rem;
@@ -1129,6 +1798,11 @@
                 transform: translateX(-50%);
                 opacity: 0;
             }
+            
+            .slide.prev, .slide.next {
+                transform: translateX(-50%);
+                opacity: 0;
+            }
         }
     </style>
 </head>
@@ -1152,7 +1826,10 @@
                         <a class="nav-link" href="standup.html">Comedy</a>
                     </li>
                     <li class="nav-item">
+<<<<<<< Sahil792006-patch-1
                         
+=======
+>>>>>>> master
                         <a class="nav-link" href="concertpage.html">Concerts</a>
                     </li>
                 </ul>
@@ -1253,9 +1930,13 @@
             <!-- Movie Card -->
             <div class="col">
                 <div class="card h-100">
+<<<<<<< Sahil792006-patch-1
 
                     <img src="Images\heres-all-the-new-movie-posters-that-were-released-v0-qrjiokeggsle1.webp" class="card-img-top" alt="Minecraft 3D">
 
+=======
+                    <img src="https://i.pinimg.com/736x/36/e5/0e/36e50ef4bf1f749861ccf4dff9efae80.jpg" class="card-img-top" alt="Minecraft 3D">
+>>>>>>> master
                     <div class="card-body d-flex flex-column">
                         <h5 class="card-title fw-bold" style="color: var(--primary-accent)">Minecraft 3D</h5>
                         <p class="card-text flex-grow-1 text-white-50">Four misfits are suddenly pulled through a mysterious portal into a bizarre cubic wonderland that thrives on imagination.</p>
@@ -1269,10 +1950,14 @@
             <!-- Comedy Card -->
             <div class="col">
                 <div class="card h-100">
+<<<<<<< Sahil792006-patch-1
 
                     
                     <img src="https://assets-in.bmscdn.com/nmcms/events/banner/desktop/media-desktop-travis-scott-circus-maximus-stadium-tour-india-0-2025-4-7-t-12-15-0.jpg" class="card-img-top" alt="Travis Scott">
 
+=======
+                    <img src="https://assets-in.bmscdn.com/nmcms/events/banner/desktop/media-desktop-travis-scott-circus-maximus-stadium-tour-india-0-2025-4-7-t-12-15-0.jpg" class="card-img-top" alt="Travis Scott">
+>>>>>>> master
                     <div class="card-body d-flex flex-column">
                         <h5 class="card-title fw-bold" style="color: var(--primary-accent)">Travis Scott India Tour</h5>
                         <p class="card-text flex-grow-1 text-white-50">An evening with top comedians from around the country. Prepare for non-stop laughter!</p>
@@ -1349,6 +2034,67 @@
           </div>
       </div>
     </section>
+
+ <!-- Featured Events Section -->
+<section class="container mt-5">
+  <h2 class="section-title">Featured Events</h2>
+  <div class="row g-4">
+      <div class="col-md-4 mb-4">
+          <div class="card h-100">
+              <div class="position-relative">
+                  <img src="https://wallpaperaccess.com/full/2183063.jpg" class="card-img-top" alt="Concert">
+                  <span class="category-badge">Concert</span>
+              </div>
+              <div class="card-body d-flex flex-column">
+                  <h5 class="card-title">Summer Music Festival</h5>
+                  <p class="event-date"><i class="bi bi-calendar-event"></i> May 15, 2025 &centerdot; 7:00 PM</p>
+                  <p class="event-location"><i class="bi bi-geo-alt"></i> Central Park, New York</p>
+                  <p class="card-text">Experience the ultimate summer music festival featuring top artists from around the world.</p>
+                  <div class="d-flex justify-content-between align-items-center mt-auto">
+                      <span class="fw-bold">$59.99</span>
+                      <a href="#" class="btn btn-primary book-now-btn">Book Now</a>
+                  </div>
+              </div>
+          </div>
+      </div>
+      <div class="col-md-4 mb-4">
+          <div class="card h-100">
+              <div class="position-relative">
+                  <img src="https://i.pinimg.com/736x/c1/e7/83/c1e783c507b7755031519f6299f5f96b.jpg" class="card-img-top" alt="Comedy Show">
+                  <span class="category-badge">Comedy</span>
+              </div>
+              <div class="card-body d-flex flex-column">
+                  <h5 class="card-title">Stand-Up Comedy Night</h5>
+                  <p class="event-date"><i class="bi bi-calendar-event"></i> May 20, 2025 &centerdot; 8:30 PM</p>
+                  <p class="event-location"><i class="bi bi-geo-alt"></i> Laugh Factory, Los Angeles</p>
+                  <p class="card-text">A night of non-stop laughter with the country's top stand-up comedians.</p>
+                  <div class="d-flex justify-content-between align-items-center mt-auto">
+                      <span class="fw-bold">$39.99</span>
+                      <a href="#" class="btn btn-primary book-now-btn">Book Now</a>
+                  </div>
+              </div>
+          </div>
+      </div>
+      <div class="col-md-4 mb-4">
+          <div class="card h-100">
+              <div class="position-relative">
+                  <img src="https://static01.nyt.com/images/2023/05/16/multimedia/16cannes-promo-230pm-pwvg/16cannes-promo-230pm-pwvg-videoSixteenByNine3000.jpg" class="card-img-top" alt="Sports Event">
+                  <span class="category-badge">Sports</span>
+              </div>
+              <div class="card-body d-flex flex-column">
+                  <h5 class="card-title">Championship Basketball</h5>
+                  <p class="event-date"><i class="bi bi-calendar-event"></i> May 25, 2025 &centerdot; 6:00 PM</p>
+                  <p class="event-location"><i class="bi bi-geo-alt"></i> Madison Square Garden, New York</p>
+                  <p class="card-text">Witness the ultimate basketball showdown as top teams compete for the championship.</p>
+                  <div class="d-flex justify-content-between align-items-center mt-auto">
+                      <span class="fw-bold">$79.99</span>
+                      <a href="#" class="btn btn-primary book-now-btn">Book Now</a>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</section>
 
     <!-- Newsletter Section -->
     <section class="container py-5">
@@ -1504,8 +2250,69 @@
                     <button class="toggle-auth-btn" id="show-login">Sign In</button>
                 </div>
             </div>
+            <button class="close-button" id="close-auth-modal" style="color: white; top: 15px; right: 15px;">×</button>
         </div>
     </div>
+
+    <!-- Profile Sidebar -->
+    <div class="profile-sidebar" id="profile-sidebar">
+        <div class="profile-header">
+            <button class="profile-close" id="close-profile">×</button>
+            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Profile" class="profile-avatar">
+            <h3 class="profile-name">John Doe</h3>
+            <p class="profile-email">john.doe@example.com</p>
+        </div>
+        
+        <div class="profile-body">
+            <div class="profile-section">
+                <h4 class="profile-section-title"><i class="bi bi-ticket-perforated"></i> My Tickets</h4>
+                <ul class="tickets-list">
+                    <li class="ticket-item">
+                        <img src="https://i.pinimg.com/736x/36/e5/0e/36e50ef4bf1f749861ccf4dff9efae80.jpg" alt="Event" class="ticket-image">
+                        <div class="ticket-details">
+                            <div class="ticket-event">Minecraft 3D</div>
+                            <div class="ticket-date">Apr 28, 2025 • 7:30 PM</div>
+                            <div class="ticket-status">Confirmed</div>
+                        </div>
+                        <img src="https://api.qrserver.com/v1/create-qr-code/?size=60x60&data=TICKET123456" alt="QR Code" class="ticket-qr">
+                    </li>
+                    <li class="ticket-item">
+                        <img src="https://assets-in.bmscdn.com/nmcms/events/banner/desktop/media-desktop-travis-scott-circus-maximus-stadium-tour-india-0-2025-4-7-t-12-15-0.jpg" alt="Event" class="ticket-image">
+                        <div class="ticket-details">
+                            <div class="ticket-event">Travis Scott India Tour</div>
+                            <div class="ticket-date">May 15, 2025 • 8:00 PM</div>
+                            <div class="ticket-status">Confirmed</div>
+                        </div>
+                        <img src="https://api.qrserver.com/v1/create-qr-code/?size=60x60&data=TICKET789012" alt="QR Code" class="ticket-qr">
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="profile-section">
+                <h4 class="profile-section-title"><i class="bi bi-star"></i> Membership</h4>
+                <div class="membership-card">
+                    <div class="membership-tier">Gold Member</div>
+                    <div class="membership-points">650 Points</div>
+                    <div class="progress-container">
+                        <div class="progress-bar"></div>
+                    </div>
+                    <small>350 more points to Platinum</small>
+                </div>
+            </div>
+            
+            <div class="profile-section">
+                <h4 class="profile-section-title"><i class="bi bi-gear"></i> Account</h4>
+                <ul class="profile-menu">
+                    <li><a href="#"><i class="bi bi-person"></i> Edit Profile</a></li>
+                    <li><a href="#"><i class="bi bi-credit-card"></i> Payment Methods</a></li>
+                    <li><a href="#"><i class="bi bi-bell"></i> Notifications</a></li>
+                    <li><a href="#"><i class="bi bi-shield-lock"></i> Privacy & Security</a></li>
+                    <li><a href="#" id="sidebar-logout"><i class="bi bi-box-arrow-right"></i> Logout</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+<<<<<<< Sahil792006-patch-1
     
     <!-- Profile Sidebar -->
     <div class="profile-sidebar" id="profile-sidebar">
@@ -1745,57 +2552,256 @@
             openLoginBtn.addEventListener('click', () => {
                 simpleLoginModal.classList.add('active');
             });
+=======
+    <!-- Feedback Button and Form -->
+<button class="feedback-button" id="feedbackButton">
+  <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="white" stroke-width="2"/>
+      <path d="M8 12H16" stroke="white" stroke-width="2" stroke-linecap="round"/>
+      <path d="M12 8L12 16" stroke="white" stroke-width="2" stroke-linecap="round"/>
+  </svg>
+  Feedback
+</button>
+
+<div class="feedback-overlay" id="feedbackOverlay">
+  <div class="feedback-container">
+      <button class="feedback-close" id="feedbackClose">✕</button>
+      
+      <div class="feedback-header">
+          <h2 class="feedback-title">We Value Your Feedback</h2>
+          <p class="feedback-subtitle">Help us improve your experience by sharing your thoughts.</p>
+      </div>
+      
+      <form class="feedback-form" id="feedbackForm">
+          <div class="form-group">
+              <label class="form-label" for="feedbackName">
+                  Your Name
+                  <span class="required-label">Required</span>
+              </label>
+              <input type="text" id="feedbackName" class="form-input" placeholder="Enter your name">
+              <div class="error-message" id="nameError">Please enter your name</div>
+          </div>
+          
+          <div class="form-group">
+              <label class="form-label" for="feedbackEmail">
+                  Email Address
+                  <span class="required-label">Required</span>
+              </label>
+              <input type="email" id="feedbackEmail" class="form-input" placeholder="Enter your email address">
+              <div class="error-message" id="emailError">Please enter a valid email address</div>
+          </div>
+          
+          <div class="form-group">
+              <label class="form-label">
+                  How would you rate your experience?
+                  <span class="required-label">Required</span>
+              </label>
+              <div class="rating-group">
+                  <div class="rating-option">
+                      <input type="radio" name="feedbackRating" id="rating1" value="1" class="rating-input">
+                      <label for="rating1" class="rating-label">1</label>
+                  </div>
+                  <div class="rating-option">
+                      <input type="radio" name="feedbackRating" id="rating2" value="2" class="rating-input">
+                      <label for="rating2" class="rating-label">2</label>
+                  </div>
+                  <div class="rating-option">
+                      <input type="radio" name="feedbackRating" id="rating3" value="3" class="rating-input">
+                      <label for="rating3" class="rating-label">3</label>
+                  </div>
+                  <div class="rating-option">
+                      <input type="radio" name="feedbackRating" id="rating4" value="4" class="rating-input">
+                      <label for="rating4" class="rating-label">4</label>
+                  </div>
+                  <div class="rating-option">
+                      <input type="radio" name="feedbackRating" id="rating5" value="5" class="rating-input">
+                      <label for="rating5" class="rating-label">5</label>
+                  </div>
+              </div>
+              <div class="rating-text" id="feedbackRatingText"></div>
+              <div class="error-message" id="ratingError">Please select a rating</div>
+          </div>
+          
+          <div class="form-group">
+              <label class="form-label" for="feedbackType">
+                  Feedback Type
+                  <span class="required-label">Required</span>
+              </label>
+              <select id="feedbackType" class="form-select">
+                  <option value="">Select feedback type</option>
+                  <option value="suggestion">Suggestion</option>
+                  <option value="bug">Bug Report</option>
+                  <option value="compliment">Compliment</option>
+                  <option value="complaint">Complaint</option>
+                  <option value="other">Other</option>
+              </select>
+              <div class="error-message" id="typeError">Please select a feedback type</div>
+          </div>
+          
+          <div class="form-group">
+              <label class="form-label" for="feedbackText">
+                  Your Feedback
+                  <span class="required-label">Required</span>
+              </label>
+              <textarea id="feedbackText" class="form-textarea" placeholder="Please share your thoughts, suggestions, or issues..." maxlength="500"></textarea>
+              <div class="char-count"><span id="feedbackCurrentCount">0</span>/500</div>
+              <div class="error-message" id="feedbackError">Please enter your feedback</div>
+          </div>
+          
+          <button type="submit" class="feedback-submit" id="feedbackSubmitBtn">
+              <span class="feedback-spinner" id="feedbackSpinner"></span>
+              Submit Feedback
+          </button>
+      </form>
+      
+      <div class="feedback-thank-you" id="feedbackThankYouMessage">
+          <div class="thank-you-icon">✓</div>
+          <h2 class="thank-you-title">Thank You!</h2>
+          <p class="thank-you-message">Your feedback has been submitted successfully.</p>
+      </div>
+  </div>
+
+  <!-- Enhanced submission confirmation screen -->
+  <div class="feedback-container submission-confirmation" id="submissionConfirmation" style="display: none;">
+      <!-- Success circle with checkmark -->
+      <div class="success-circle">
+          <svg class="checkmark" viewBox="0 0 52 52">
+              <path class="checkmark-path" d="M14,27 L22,35 L38,15"></path>
+          </svg>
+      </div>
+      
+      <h2 class="response-submitted-text">Response Submitted</h2>
+      
+      <p class="submission-message">
+          Your feedback has been submitted successfully.
+      </p>
+      
+      <!-- Enhanced info box -->
+      <div class="info-box">
+          <div class="info-title">
+              <span class="info-icon">ℹ️</span>
+              What happens next?
+          </div>
+          <div class="info-content">
+              Our team reviews all feedback carefully. If you've provided your email, we'll get back to you within 48 hours.
+          </div>
+      </div>
+      
+      <div class="action-buttons">
+          <button class="action-button new-feedback-btn" id="newFeedbackBtn">New Feedback</button>
+          <button class="action-button close-btn" id="closeFeedbackModalBtn">Close</button>
+      </div>
+      
+      <div class="feedback-id">Feedback ID: FBK-2025-04-23-8742</div>
+  </div>
+</div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Slideshow functionality
+        let slideIndex = 0;
+        const slides = document.querySelectorAll('.slide');
+        const dots = document.querySelectorAll('.slide-dot');
+        const progressBar = document.getElementById('slideProgressBar');
+        let slideInterval;
+        
+        function showSlides() {
+            for (let i = 0; i < slides.length; i++) {
+                slides[i].classList.remove('active', 'prev', 'next');
+                dots[i].classList.remove('active');
+            }
+            
+            const prevIndex = (slideIndex - 1 + slides.length) % slides.length;
+            const nextIndex = (slideIndex + 1) % slides.length;
+            
+            slides[prevIndex].classList.add('prev');
+            slides[slideIndex].classList.add('active');
+            slides[nextIndex].classList.add('next');
+            dots[slideIndex].classList.add('active');
+            
+            // Reset and start progress bar
+            progressBar.style.width = '0%';
+            setTimeout(() => {
+                progressBar.style.width = '100%';
+            }, 50);
+>>>>>>> master
         }
         
-        // Open signup directly
-        if (openSignupBtn) {
-            openSignupBtn.addEventListener('click', () => {
-                authModal.classList.add('active');
-                authContainer.classList.add('show-signup');
-            });
+        function nextSlide() {
+            slideIndex = (slideIndex + 1) % slides.length;
+            showSlides();
+            resetSlideInterval();
         }
         
-        // Close simple login modal
-        if (closeSimpleLoginBtn) {
-            closeSimpleLoginBtn.addEventListener('click', () => {
-                simpleLoginModal.classList.remove('active');
-            });
+        function prevSlide() {
+            slideIndex = (slideIndex - 1 + slides.length) % slides.length;
+            showSlides();
+            resetSlideInterval();
         }
         
-        // Open full auth modal from simple login
-        if (openFullLoginBtn) {
-            openFullLoginBtn.addEventListener('click', () => {
-                simpleLoginModal.classList.remove('active');
-                authModal.classList.add('active');
-            });
+        function currentSlide(n) {
+            slideIndex = n;
+            showSlides();
+            resetSlideInterval();
         }
         
-        // Toggle between login and signup
-        if (showSignupBtn) {
-            showSignupBtn.addEventListener('click', () => {
-                authContainer.classList.add('show-signup');
-            });
+        function resetSlideInterval() {
+            clearInterval(slideInterval);
+            slideInterval = setInterval(nextSlide, 5000);
         }
         
-        if (showLoginBtn) {
-            showLoginBtn.addEventListener('click', () => {
-                authContainer.classList.remove('show-signup');
-            });
-        }
+        // Initialize slideshow
+        showSlides();
+        resetSlideInterval();
         
-        // Close auth modal when clicking outside
+        // Modal functionality
+        const simpleLoginModal = document.getElementById('simple-login-modal');
+        const authModal = document.getElementById('auth-modal');
+        const authContainer = document.querySelector('.auth-container');
+        
+        document.getElementById('open-login').addEventListener('click', () => {
+            simpleLoginModal.classList.add('active');
+        });
+        
+        document.getElementById('open-signup').addEventListener('click', () => {
+            authModal.classList.add('active');
+            authContainer.classList.add('show-signup');
+        });
+        
+        document.getElementById('close-simple-login').addEventListener('click', () => {
+            simpleLoginModal.classList.remove('active');
+        });
+        
+        document.getElementById('open-full-login').addEventListener('click', () => {
+            simpleLoginModal.classList.remove('active');
+            authModal.classList.add('active');
+            authContainer.classList.remove('show-signup');
+        });
+        
+        document.getElementById('close-auth-modal').addEventListener('click', () => {
+            authModal.classList.remove('active');
+        });
+        
+        document.getElementById('show-signup').addEventListener('click', () => {
+            authContainer.classList.add('show-signup');
+        });
+        
+        document.getElementById('show-login').addEventListener('click', () => {
+            authContainer.classList.remove('show-signup');
+        });
+        
+        // Close modals when clicking outside
         window.addEventListener('click', (e) => {
             if (e.target === simpleLoginModal) {
                 simpleLoginModal.classList.remove('active');
             }
             if (e.target === authModal) {
                 authModal.classList.remove('active');
-                setTimeout(() => {
-                    authContainer.classList.remove('show-signup');
-                }, 300);
             }
         });
         
+<<<<<<< Sahil792006-patch-1
         // Update countdown for events
         function updateCountdown() {
             const now = new Date('2025-04-22T10:12:00'); // Current date: April 22, 2025
@@ -1822,6 +2828,227 @@
         
         // Call once on page load
         updateCountdown();
+=======
+        // Google Sign-In
+        function handleCredentialResponse(response) {
+            // Decode the credential response
+            const responsePayload = parseJwt(response.credential);
+            
+            // Update UI to show logged in state
+            document.getElementById('auth-buttons').classList.add('d-none');
+            document.getElementById('profile-section').classList.remove('d-none');
+            
+            // Set profile info
+            document.getElementById('profile-pic').src = responsePayload.picture;
+            document.getElementById('profile-name').textContent = responsePayload.name;
+            
+            // Close any open auth modals
+            simpleLoginModal.classList.remove('active');
+            authModal.classList.remove('active');
+        }
+        
+        // Helper function to parse JWT
+        function parseJwt(token) {
+            const base64Url = token.split('.')[1];
+            const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+            const jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
+                return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+            }).join(''));
+            return JSON.parse(jsonPayload);
+        }
+        
+        // Handle logout
+        document.getElementById('logout').addEventListener('click', () => {
+            // Reset UI to logged out state
+            document.getElementById('auth-buttons').classList.remove('d-none');
+            document.getElementById('profile-section').classList.add('d-none');
+            
+            // Sign out from Google
+            google.accounts.id.disableAutoSelect();
+        });
+        
+        // Profile Sidebar
+        document.getElementById('profile-section').addEventListener('click', (e) => {
+            e.preventDefault();
+            document.getElementById('profile-sidebar').classList.add('active');
+        });
+        
+        document.getElementById('close-profile').addEventListener('click', () => {
+            document.getElementById('profile-sidebar').classList.remove('active');
+        });
+        
+        document.getElementById('sidebar-logout').addEventListener('click', (e) => {
+            e.preventDefault();
+            document.getElementById('profile-sidebar').classList.remove('active');
+            document.getElementById('auth-buttons').classList.remove('d-none');
+            document.getElementById('profile-section').classList.add('d-none');
+            google.accounts.id.disableAutoSelect();
+        });
+        // Feedback Form Functionality
+const feedbackButton = document.getElementById('feedbackButton');
+const feedbackOverlay = document.getElementById('feedbackOverlay');
+const feedbackClose = document.getElementById('feedbackClose');
+const feedbackForm = document.getElementById('feedbackForm');
+const feedbackNameInput = document.getElementById('feedbackName');
+const feedbackEmail = document.getElementById('feedbackEmail');
+const feedbackType = document.getElementById('feedbackType');
+const feedbackText = document.getElementById('feedbackText');
+const feedbackCurrentCount = document.getElementById('feedbackCurrentCount');
+const feedbackRatingText = document.getElementById('feedbackRatingText');
+const feedbackThankYouMessage = document.getElementById('feedbackThankYouMessage');
+const feedbackSpinner = document.getElementById('feedbackSpinner');
+const feedbackSubmitBtn = document.getElementById('feedbackSubmitBtn');
+
+// Event Listeners for Feedback Form
+feedbackButton.addEventListener('click', () => {
+    feedbackOverlay.classList.add('active');
+    document.body.style.overflow = 'hidden';
+});
+
+feedbackClose.addEventListener('click', () => {
+    feedbackOverlay.classList.remove('active');
+    document.body.style.overflow = '';
+});
+
+// Close on outside click
+feedbackOverlay.addEventListener('click', (e) => {
+    if (e.target === feedbackOverlay) {
+        feedbackOverlay.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+});
+
+// Character counter for feedback text
+feedbackText.addEventListener('input', () => {
+    const currentLength = feedbackText.value.length;
+    feedbackCurrentCount.textContent = currentLength;
+});
+
+// Rating text update
+const ratingLabels = {
+    1: 'Very Dissatisfied',
+    2: 'Dissatisfied',
+    3: 'Neutral',
+    4: 'Satisfied',
+    5: 'Very Satisfied'
+};
+
+document.querySelectorAll('input[name="feedbackRating"]').forEach(radio => {
+    radio.addEventListener('change', () => {
+        const rating = radio.value;
+        feedbackRatingText.textContent = ratingLabels[rating];
+    });
+});
+
+// Form submission
+feedbackForm.addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    // Basic validation
+    let isValid = true;
+    
+    // Validate name
+    if (!feedbackNameInput.value.trim()) {
+        document.getElementById('nameError').style.display = 'block';
+        isValid = false;
+    } else {
+        document.getElementById('nameError').style.display = 'none';
+    }
+    
+    // Validate email
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(feedbackEmail.value.trim())) {
+        document.getElementById('emailError').style.display = 'block';
+        isValid = false;
+    } else {
+        document.getElementById('emailError').style.display = 'none';
+    }
+    
+    // Validate rating
+    if (!document.querySelector('input[name="feedbackRating"]:checked')) {
+        document.getElementById('ratingError').style.display = 'block';
+        isValid = false;
+    } else {
+        document.getElementById('ratingError').style.display = 'none';
+    }
+    
+    // Validate feedback type
+    if (!feedbackType.value) {
+        document.getElementById('typeError').style.display = 'block';
+        isValid = false;
+    } else {
+        document.getElementById('typeError').style.display = 'none';
+    }
+    
+    // Validate feedback text
+    if (!feedbackText.value.trim()) {
+        document.getElementById('feedbackError').style.display = 'block';
+        isValid = false;
+    } else {
+        document.getElementById('feedbackError').style.display = 'none';
+    }
+    
+    if (!isValid) return;
+    
+    // Show spinner
+    feedbackSpinner.style.display = 'inline-block';
+    feedbackSubmitBtn.disabled = true;
+    
+    // Generate a random feedback ID with current date
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = String(today.getMonth() + 1).padStart(2, '0');
+    const day = String(today.getDate()).padStart(2, '0');
+    const randomNum = Math.floor(1000 + Math.random() * 9000);
+    const feedbackId = `FBK-${year}-${month}-${day}-${randomNum}`;
+    
+    // Simulate API call with a delay
+    setTimeout(function() {
+        // Hide spinner
+        feedbackSpinner.style.display = 'none';
+        
+        // Hide the entire original container
+        document.querySelector('.feedback-container:not(.submission-confirmation)').style.display = 'none';
+        
+        // Update the feedback ID in the confirmation
+        document.querySelector('.feedback-id').textContent = `Feedback ID: ${feedbackId}`;
+        
+        // Show the submission confirmation
+        document.getElementById('submissionConfirmation').style.display = 'block';
+        
+        // Enable the submit button again
+        feedbackSubmitBtn.disabled = false;
+    }, 1500);
+});
+
+// Add event handlers for the confirmation buttons
+document.getElementById('newFeedbackBtn').addEventListener('click', function() {
+    // Hide confirmation and show form again
+    document.getElementById('submissionConfirmation').style.display = 'none';
+    document.querySelector('.feedback-container:not(.submission-confirmation)').style.display = 'block';
+    
+    // Reset form
+    feedbackForm.reset();
+    feedbackCurrentCount.textContent = '0';
+    feedbackRatingText.textContent = '';
+});
+
+document.getElementById('closeFeedbackModalBtn').addEventListener('click', function() {
+    // Close the entire feedback overlay
+    feedbackOverlay.classList.remove('active');
+    document.body.style.overflow = '';
+    
+    // Reset for next time after animation completes
+    setTimeout(function() {
+        document.getElementById('submissionConfirmation').style.display = 'none';
+        document.querySelector('.feedback-container:not(.submission-confirmation)').style.display = 'block';
+        feedbackForm.reset();
+        feedbackCurrentCount.textContent = '0';
+        feedbackRatingText.textContent = '';
+    }, 300);
+});
+
+>>>>>>> master
     </script>
     <script>
         // Add this to the script section
