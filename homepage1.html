@@ -293,6 +293,9 @@
             opacity: 1;
             transform: scale(1);
         }
+<<<<<<< Sahil792006-patch-1
+        
+=======
         /* Feedback Form Styles */
 :root {
   --error-color: #e74c3c;
@@ -812,6 +815,7 @@ footer ul.nav .nav-link:hover::after {
   to { opacity: 1; transform: translateY(0); }
 }
 
+>>>>>>> master
         /* Slide Controls */
         .slide-controls {
             position: absolute;
@@ -822,6 +826,7 @@ footer ul.nav .nav-link:hover::after {
             justify-content: space-between;
             padding: 0 30px;
             z-index: 30;
+<<<<<<< Sahil792006-patch-1
         }
         
         .slide-control {
@@ -867,6 +872,53 @@ footer ul.nav .nav-link:hover::after {
             transition: width 5s linear;
         }
         
+=======
+        }
+        
+        .slide-control {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+            color: #fff;
+            font-size: 20px;
+            transform: perspective(800px) rotateY(15deg);
+        }
+        
+        .slide-control:hover {
+            background-color: var(--primary-accent);
+            color: #000;
+            transform: perspective(800px) rotateY(0deg);
+        }
+        
+        /* Slide Progress Indicator */
+        .slide-progress {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 200px;
+            height: 3px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 3px;
+            overflow: hidden;
+            z-index: 25;
+        }
+
+        .progress-bar {
+            height: 100%;
+            width: 0;
+            background: var(--primary-accent);
+            border-radius: 3px;
+            transition: width 5s linear;
+        }
+        
+>>>>>>> master
         /* Enhanced Card Hover Effect */
         .card {
             background-color: rgba(26, 26, 34, 0.8);
@@ -1242,38 +1294,41 @@ footer ul.nav .nav-link:hover::after {
         .login-popup {
             background: var(--gradient-login);
             color: white;
-            width: 450px;
-            padding: 40px;
+            width: 90%;
+            max-width: 450px;
+            padding: 40px 20px;
             border-radius: 12px;
             text-align: center;
             position: relative;
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
             animation: fadeIn 0.3s ease;
+            margin: auto;
         }
         
         .login-popup h2 {
-            font-size: 2.5rem;
+            font-size: 2rem;
             margin-bottom: 20px;
             font-weight: 600;
         }
         
         .login-popup p {
             margin-bottom: 30px;
-            font-size: 1.1rem;
+            font-size: 1rem;
             opacity: 0.9;
         }
         
         .sign-in-btn {
-            background-color: white;
-            color: #0d6efd;
-            border: none;
-            padding: 12px 35px;
-            border-radius: 30px;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            background: var(--gradient-login);
+            color: white;
+            width: 90%;
+            max-width: 450px;
+            padding: 40px 20px;
+            border-radius: 12px;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            animation: fadeIn 0.3s ease;
+            margin: auto;
         }
         
         .sign-in-btn:hover {
@@ -1728,9 +1783,20 @@ footer ul.nav .nav-link:hover::after {
             }
             
             .login-popup {
-                width: 90%;
-                max-width: 400px;
-                padding: 30px;
+                padding: 30px 15px;
+            }
+
+            .login-popup h2 {
+                font-size: 1.5rem;
+            }
+
+            .login-popup p {
+                font-size: 0.95rem;
+            }
+            
+            .slide.prev, .slide.next {
+                transform: translateX(-50%);
+                opacity: 0;
             }
             
             .slide.prev, .slide.next {
@@ -1757,9 +1823,13 @@ footer ul.nav .nav-link:hover::after {
                         <a class="nav-link" href="movies.2.html">Movies</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Comedy</a>
+                        <a class="nav-link" href="standup.html">Comedy</a>
                     </li>
                     <li class="nav-item">
+<<<<<<< Sahil792006-patch-1
+                        
+=======
+>>>>>>> master
                         <a class="nav-link" href="concertpage.html">Concerts</a>
                     </li>
                 </ul>
@@ -1860,7 +1930,13 @@ footer ul.nav .nav-link:hover::after {
             <!-- Movie Card -->
             <div class="col">
                 <div class="card h-100">
+<<<<<<< Sahil792006-patch-1
+
+                    <img src="Images\heres-all-the-new-movie-posters-that-were-released-v0-qrjiokeggsle1.webp" class="card-img-top" alt="Minecraft 3D">
+
+=======
                     <img src="https://i.pinimg.com/736x/36/e5/0e/36e50ef4bf1f749861ccf4dff9efae80.jpg" class="card-img-top" alt="Minecraft 3D">
+>>>>>>> master
                     <div class="card-body d-flex flex-column">
                         <h5 class="card-title fw-bold" style="color: var(--primary-accent)">Minecraft 3D</h5>
                         <p class="card-text flex-grow-1 text-white-50">Four misfits are suddenly pulled through a mysterious portal into a bizarre cubic wonderland that thrives on imagination.</p>
@@ -1874,12 +1950,19 @@ footer ul.nav .nav-link:hover::after {
             <!-- Comedy Card -->
             <div class="col">
                 <div class="card h-100">
+<<<<<<< Sahil792006-patch-1
+
+                    
                     <img src="https://assets-in.bmscdn.com/nmcms/events/banner/desktop/media-desktop-travis-scott-circus-maximus-stadium-tour-india-0-2025-4-7-t-12-15-0.jpg" class="card-img-top" alt="Travis Scott">
+
+=======
+                    <img src="https://assets-in.bmscdn.com/nmcms/events/banner/desktop/media-desktop-travis-scott-circus-maximus-stadium-tour-india-0-2025-4-7-t-12-15-0.jpg" class="card-img-top" alt="Travis Scott">
+>>>>>>> master
                     <div class="card-body d-flex flex-column">
                         <h5 class="card-title fw-bold" style="color: var(--primary-accent)">Travis Scott India Tour</h5>
                         <p class="card-text flex-grow-1 text-white-50">An evening with top comedians from around the country. Prepare for non-stop laughter!</p>
                         <div class="mt-auto">
-                            <a href="#" class="btn btn-primary w-100 book-now-btn">Book Now</a>
+                            <a href="travis.html" class="btn btn-primary w-100 book-now-btn">Book Now</a>
                         </div>
                     </div>
                 </div>
@@ -2229,6 +2312,247 @@ footer ul.nav .nav-link:hover::after {
             </div>
         </div>
     </div>
+<<<<<<< Sahil792006-patch-1
+    
+    <!-- Profile Sidebar -->
+    <div class="profile-sidebar" id="profile-sidebar">
+        <div class="profile-header">
+            <button class="profile-close" id="close-profile">
+                <i class="bi bi-x"></i>
+            </button>
+            <img src="https://source.unsplash.com/random/200x200/?portrait" alt="Profile" class="profile-avatar" id="sidebar-avatar">
+            <h3 class="profile-name" id="sidebar-name">John Doe</h3>
+            <p class="profile-email" id="sidebar-email">john@example.com</p>
+        </div>
+        
+        <div class="profile-body">
+            <div class="membership-card">
+                <div class="membership-tier">PLANR GOLD MEMBER</div>
+                <div class="membership-points">1,250 Points</div>
+                <div class="progress-container">
+                    <div class="progress-bar"></div>
+                </div>
+                <small>650 points to next tier</small>
+            </div>
+            
+            <div class="profile-section">
+                <h4 class="profile-section-title">
+                    <i class="bi bi-person"></i> My Account
+                </h4>
+                <ul class="profile-menu">
+                    <li><a href="#"><i class="bi bi-person"></i> Profile Settings</a></li>
+                    <li><a href="#"><i class="bi bi-credit-card"></i> Payment Methods</a></li>
+                    <li><a href="#"><i class="bi bi-gear"></i> Account Settings</a></li>
+                    <li><a href="#"><i class="bi bi-bookmark"></i> Saved Events</a></li>
+                </ul>
+            </div>
+            
+            <div class="profile-section">
+                <h4 class="profile-section-title">
+                    <i class="bi bi-ticket-perforated"></i> Upcoming Events
+                </h4>
+                <ul class="tickets-list">
+                    <li class="ticket-item">
+                        <img src="https://source.unsplash.com/random/300x300/?concert" class="ticket-image">
+                        <div class="ticket-details">
+                            <div class="ticket-event">Summer Beats Festival</div>
+                            <div class="ticket-date">June 15, 2025 • 8:00 PM</div>
+                            <span class="ticket-status">Confirmed</span>
+                        </div>
+                        <div class="ticket-qr">
+                            <!-- QR code placeholder -->
+                            <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                                <rect x="10" y="10" width="20" height="20" fill="black"/>
+                                <rect x="40" y="10" width="20" height="20" fill="black"/>
+                                <rect x="70" y="10" width="20" height="20" fill="black"/>
+                                <rect x="10" y="40" width="20" height="20" fill="black"/>
+                                <rect x="70" y="40" width="20" height="20" fill="black"/>
+                                <rect x="10" y="70" width="20" height="20" fill="black"/>
+                                <rect x="40" y="70" width="20" height="20" fill="black"/>
+                                <rect x="70" y="70" width="20" height="20" fill="black"/>
+                            </svg>
+                        </div>
+                    </li>
+                    <li class="ticket-item">
+                        <img src="https://source.unsplash.com/random/300x300/?movie" class="ticket-image">
+                        <div class="ticket-details">
+                            <div class="ticket-event">Minecraft 3D Premiere</div>
+                            <div class="ticket-date">May 20, 2025 • 7:30 PM</div>
+                            <span class="ticket-status">Confirmed</span>
+                        </div>
+                        <div class="ticket-qr">
+                            <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                                <rect x="10" y="10" width="20" height="20" fill="black"/>
+                                <rect x="40" y="10" width="20" height="20" fill="black"/>
+                                <rect x="70" y="10" width="20" height="20" fill="black"/>
+                                <rect x="10" y="40" width="20" height="20" fill="black"/>
+                                <rect x="70" y="40" width="20" height="20" fill="black"/>
+                                <rect x="10" y="70" width="20" height="20" fill="black"/>
+                                <rect x="40" y="70" width="20" height="20" fill="black"/>
+                                <rect x="70" y="70" width="20" height="20" fill="black"/>
+                            </svg>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="profile-section">
+                <h4 class="profile-section-title">
+                    <i class="bi bi-box-arrow-right"></i> Sign Out
+                </h4>
+                <ul class="profile-menu">
+                    <li><a href="#" id="sidebar-logout"><i class="bi bi-box-arrow-right"></i> Logout</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Slideshow Logic with horizontal sliding effect
+        let slideIndex = 0;
+        const slides = document.querySelectorAll('.slide');
+        const dots = document.querySelectorAll('.slide-dot');
+        let slideTimer;
+
+        function showSlides() {
+            // Remove all classes first
+            slides.forEach(slide => slide.classList.remove('active', 'prev', 'next'));
+            dots.forEach(dot => dot.classList.remove('active'));
+
+            // Calculate indices for prev, current, and next slides
+            const prevIndex = (slideIndex - 1 + slides.length) % slides.length;
+            const nextIndex = (slideIndex + 1) % slides.length;
+            
+            // Apply appropriate classes
+            slides[prevIndex].classList.add('prev');
+            slides[slideIndex].classList.add('active');
+            slides[nextIndex].classList.add('next');
+            
+            // Update active dot
+            dots[slideIndex].classList.add('active');
+            
+            // Reset progress bar
+            resetProgressBar();
+            
+            // Set timer for next slide
+            slideTimer = setTimeout(() => {
+                slideIndex = (slideIndex + 1) % slides.length;
+                showSlides();
+            }, 8000);
+        }
+
+        function resetProgressBar() {
+            const progressBar = document.getElementById('slideProgressBar');
+            if (progressBar) {
+                progressBar.style.width = '0';
+                setTimeout(() => {
+                    progressBar.style.width = '100%';
+                }, 50);
+                progressBar.style.transition = 'width 8s linear';
+            }
+        }
+
+        function currentSlide(n) {
+            clearTimeout(slideTimer);
+            slideIndex = n;
+            showSlides();
+        }
+
+        function nextSlide() {
+            clearTimeout(slideTimer);
+            slideIndex = (slideIndex + 1) % slides.length;
+            showSlides();
+        }
+
+        function prevSlide() {
+            clearTimeout(slideTimer);
+            slideIndex = (slideIndex - 1 + slides.length) % slides.length;
+            showSlides();
+        }
+        
+        // Touch and Swipe Support
+        let touchStartX = 0;
+        let touchEndX = 0;
+        const slideContainer = document.querySelector('.slideshow-container');
+
+        if (slideContainer) {
+            slideContainer.addEventListener('touchstart', e => {
+                touchStartX = e.changedTouches[0].screenX;
+            });
+
+            slideContainer.addEventListener('touchend', e => {
+                touchEndX = e.changedTouches[0].screenX;
+                handleSwipe();
+            });
+        }
+
+        function handleSwipe() {
+            if (touchEndX < touchStartX) {
+                // Swipe left, go to next slide
+                nextSlide();
+            } else if (touchEndX > touchStartX) {
+                // Swipe right, go to previous slide
+                prevSlide();
+            }
+        }
+
+        // Keyboard Navigation
+        document.addEventListener('keydown', e => {
+            if (e.key === 'ArrowRight') {
+                nextSlide();
+            } else if (e.key === 'ArrowLeft') {
+                prevSlide();
+            }
+        });
+        
+        // Initialize slideshow if slides exist
+        if (slides.length > 0) {
+            showSlides();
+        }
+        
+        // Add card hover effect from first code
+        document.querySelectorAll('.card').forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                card.style.transform = `
+                    translateY(-10px)
+                    rotateX(${(rect.height/2 - y)/15}deg)
+                    rotateY(${(x - rect.width/2)/15}deg)
+                `;
+            });
+
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'translateY(0) rotateX(0) rotateY(0)';
+            });
+        });
+        
+        // Navbar Scroll Effect
+        window.addEventListener('scroll', () => {
+            document.querySelector('.navbar').classList.toggle('scrolled', window.scrollY > 50);
+        });
+        
+        // Simple Login Modal
+        const openLoginBtn = document.getElementById('open-login');
+        const openSignupBtn = document.getElementById('open-signup');
+        const closeSimpleLoginBtn = document.getElementById('close-simple-login');
+        const simpleLoginModal = document.getElementById('simple-login-modal');
+        const openFullLoginBtn = document.getElementById('open-full-login');
+        
+        // Full Auth Modal
+        const authModal = document.getElementById('auth-modal');
+        const showSignupBtn = document.getElementById('show-signup');
+        const showLoginBtn = document.getElementById('show-login');
+        const authContainer = document.querySelector('.auth-container');
+        
+        // Open simple login modal
+        if (openLoginBtn) {
+            openLoginBtn.addEventListener('click', () => {
+                simpleLoginModal.classList.add('active');
+            });
+=======
     <!-- Feedback Button and Form -->
 <button class="feedback-button" id="feedbackButton">
   <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -2401,6 +2725,7 @@ footer ul.nav .nav-link:hover::after {
             setTimeout(() => {
                 progressBar.style.width = '100%';
             }, 50);
+>>>>>>> master
         }
         
         function nextSlide() {
@@ -2476,6 +2801,34 @@ footer ul.nav .nav-link:hover::after {
             }
         });
         
+<<<<<<< Sahil792006-patch-1
+        // Update countdown for events
+        function updateCountdown() {
+            const now = new Date('2025-04-22T10:12:00'); // Current date: April 22, 2025
+            
+            // Alt-Rock Revolution - April 25, 2025
+            const altRockDate = new Date('2025-04-25T20:00:00');
+            const altRockDiff = altRockDate - now;
+            const altRockDays = Math.floor(altRockDiff / (1000 * 60 * 60 * 24));
+            
+            // Comedy Night - May 2, 2025
+            const comedyDate = new Date('2025-05-02T21:00:00');
+            const comedyDiff = comedyDate - now;
+            const comedyDays = Math.floor(comedyDiff / (1000 * 60 * 60 * 24));
+            
+            // Film Festival - May 15, 2025
+            const filmDate = new Date('2025-05-15T00:00:00');
+            const filmDiff = filmDate - now;
+            const filmDays = Math.floor(filmDiff / (1000 * 60 * 60 * 24));
+            
+            console.log(`Alt-Rock Revolution: ${altRockDays} days away`);
+            console.log(`Comedy Night: ${comedyDays} days away`);
+            console.log(`Film Festival: ${filmDays} days away`);
+        }
+        
+        // Call once on page load
+        updateCountdown();
+=======
         // Google Sign-In
         function handleCredentialResponse(response) {
             // Decode the credential response
@@ -2695,6 +3048,193 @@ document.getElementById('closeFeedbackModalBtn').addEventListener('click', funct
     }, 300);
 });
 
+>>>>>>> master
     </script>
+    <script>
+        // Add this to the script section
+        let currentUser = null;
+        
+        // Initialize Google Sign-In
+        function initializeGoogleSignIn() {
+            google.accounts.id.initialize({
+                client_id: 'YOUR_GOOGLE_CLIENT_ID.apps.googleusercontent.com',
+                callback: handleGoogleResponse
+            });
+            
+            google.accounts.id.renderButton(
+                document.getElementById('google-login'),
+                { theme: 'outline', size: 'large' }
+            );
+        }
+        
+        function handleGoogleResponse(response) {
+            // Here you would typically verify the credential with your backend
+            const user = {
+                name: 'John Doe', // Get from Google API
+                email: 'john@example.com',
+                picture: 'https://example.com/profile.jpg'
+            };
+            handleLogin(user);
+        }
+        
+        // Social login handlers
+        document.querySelectorAll('.social-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const provider = e.currentTarget.querySelector('i').className.split('-')[1];
+                // Simulated login - replace with actual OAuth flow
+                const user = {
+                    name: 'Test User',
+                    email: 'test@example.com',
+                    picture: `https://th.bing.com/th/id/OIP.Qp8Hx8jR3Wivqhp2C1SzrwHaFj?rs=1&pid=ImgDetMain`
+                };
+                handleLogin(user);
+            });
+        });
+        
+        // Handle login
+        function handleLogin(user) {
+            currentUser = user;
+            localStorage.setItem('currentUser', JSON.stringify(user));
+            updateAuthUI();
+        }
+        
+        // Handle logout
+        document.getElementById('logout').addEventListener('click', () => {
+            localStorage.removeItem('currentUser');
+            currentUser = null;
+            updateAuthUI();
+        });
+        
+        // Update UI based on auth state
+        function updateAuthUI() {
+            const authButtons = document.getElementById('auth-buttons');
+            const profileSection = document.getElementById('profile-section');
+            
+            if (currentUser) {
+                authButtons.classList.add('d-none');
+                profileSection.classList.remove('d-none');
+                document.getElementById('profile-name').textContent = currentUser.name;
+                document.getElementById('profile-pic').src = currentUser.picture;
+            } else {
+                authButtons.classList.remove('d-none');
+                profileSection.classList.add('d-none');
+            }
+        }
+        
+        // Check for existing session on page load
+        window.addEventListener('load', () => {
+            const storedUser = localStorage.getItem('currentUser');
+            if (storedUser) {
+                currentUser = JSON.parse(storedUser);
+                updateAuthUI();
+            }
+            initializeGoogleSignIn();
+        });
+        
+        // Modify the existing auth modal code to close on successful login
+        function handleLogin(user) {
+            currentUser = user;
+            localStorage.setItem('currentUser', JSON.stringify(user));
+            updateAuthUI();
+            document.querySelectorAll('.modal-overlay.active').forEach(modal => {
+                modal.classList.remove('active');
+            });
+        }
+        </script>
+        <script>
+            // Add this to your existing JavaScript
+            // Profile Sidebar Functionality
+            function toggleProfileSidebar() {
+                const sidebar = document.getElementById('profile-sidebar');
+                sidebar.classList.toggle('active');
+                
+                // Update profile info in sidebar
+                if (currentUser) {
+                    document.getElementById('sidebar-name').textContent = currentUser.name;
+                    document.getElementById('sidebar-email').textContent = currentUser.email || 'user@example.com';
+                    document.getElementById('sidebar-avatar').src = currentUser.picture || 'https://th.bing.com/th/id/OIP.Qp8Hx8jR3Wivqhp2C1SzrwHaFj?rs=1&pid=ImgDetMain';
+                }
+                
+                // Prevent body scrolling when sidebar is open
+                document.body.style.overflow = sidebar.classList.contains('active') ? 'hidden' : '';
+            }
+    
+            // Close profile sidebar when clicking outside
+            document.addEventListener('click', (e) => {
+                const profileSidebar = document.getElementById('profile-sidebar');
+                const profileBtn = document.querySelector('.dropdown-toggle');
+                
+                if (profileSidebar.classList.contains('active') && 
+                    !profileSidebar.contains(e.target) && 
+                    e.target !== profileBtn && 
+                    !profileBtn.contains(e.target)) {
+                    profileSidebar.classList.remove('active');
+                    document.body.style.overflow = '';
+                }
+            });
+    
+            // Update the existing updateAuthUI function to include profile button event
+            function updateAuthUI() {
+                const authButtons = document.getElementById('auth-buttons');
+                const profileSection = document.getElementById('profile-section');
+                
+                if (currentUser) {
+                    authButtons.classList.add('d-none');
+                    profileSection.classList.remove('d-none');
+                    document.getElementById('profile-name').textContent = currentUser.name;
+                    const profilePic = document.getElementById('profile-pic');
+                    profilePic.src = currentUser.picture || 'https://th.bing.com/th/id/OIP.Qp8Hx8jR3Wivqhp2C1SzrwHaFj?rs=1&pid=ImgDetMain';
+                    profilePic.onerror = function() {
+                        this.src = 'https://via.placeholder.com/32';
+                    };
+                    
+                    // Add click event to profile button
+                    const profileBtn = document.querySelector('.dropdown-toggle');
+                    if (profileBtn) {
+                        profileBtn.addEventListener('click', (e) => {
+                            e.preventDefault();
+                            toggleProfileSidebar();
+                        });
+                    }
+                } else {
+                    authButtons.classList.remove('d-none');
+                    profileSection.classList.add('d-none');
+                    document.body.style.overflow = '';
+                }
+            }
+    
+            // Close button for profile sidebar
+            document.getElementById('close-profile').addEventListener('click', () => {
+                document.getElementById('profile-sidebar').classList.remove('active');
+                document.body.style.overflow = '';
+            });
+    
+            // Sidebar logout button
+            document.getElementById('sidebar-logout').addEventListener('click', (e) => {
+                e.preventDefault();
+                localStorage.removeItem('currentUser');
+                currentUser = null;
+                updateAuthUI();
+                document.getElementById('profile-sidebar').classList.remove('active');
+                document.body.style.overflow = '';
+            });
+    
+            // Initialize with mock user data for demo
+            window.addEventListener('load', () => {
+                const storedUser = localStorage.getItem('currentUser');
+                if (storedUser) {
+                    currentUser = JSON.parse(storedUser);
+                } else {
+                    // Mock user for demo
+                    currentUser = {
+                        name: "John Doe",
+                        email: "john@example.com",
+                        picture: "https://th.bing.com/th/id/OIP.Qp8Hx8jR3Wivqhp2C1SzrwHaFj?rs=1&pid=ImgDetMain"
+                    };
+                    localStorage.setItem('currentUser', JSON.stringify(currentUser));
+                }
+                updateAuthUI();
+            });
+        </script>
 </body>
 </html>
