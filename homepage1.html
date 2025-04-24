@@ -124,7 +124,18 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            cursor: none;}
+            }
+            /* Add these styles instead */
+body {
+    cursor: none;
+}/* Add cursor styles for interactive elements */
+button, a, input, select, textarea, .modal-overlay, .feedback-overlay, .profile-sidebar {
+    cursor: pointer !important;
+}
+
+.form-control, .form-input, .form-textarea {
+    cursor: text !important;
+}
         .cursor-trail {
             position: fixed;
             width: 6px;
