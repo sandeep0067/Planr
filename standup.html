@@ -1520,6 +1520,57 @@
                 </form>
             </div>
         </section>
+        <!-- Membership Section -->
+        <section class="membership section-padding" id="membership">
+            <div class="container">
+                <h2 class="section-title text-center">Become a Member</h2>
+                <p class="text-center">Unlock exclusive benefits and discounts on all comedy shows!</p>
+                
+                <div class="membership-tiers">
+                    <!-- Basic Tier -->
+                    <div class="tier-card">
+                        <h3>Basic</h3>
+                        <div class="tier-price">Free</div>
+                        <ul class="tier-benefits">
+                            <li><i class="fas fa-check"></i> Early access to show announcements</li>
+                            <li><i class="fas fa-check"></i> Newsletter with comedy news</li>
+                            <li><i class="fas fa-check"></i> Basic seat selection</li>
+                            <li><i class="fas fa-times"></i> No priority booking</li>
+                        </ul>
+                        <button class="btn btn-secondary join-btn" data-tier="basic">Join Free</button>
+                    </div>
+                    
+                    <!-- Premium Tier -->
+                    <div class="tier-card featured">
+                        <div class="popular-badge">Most Popular</div>
+                        <h3>Premium</h3>
+                        <div class="tier-price">₹499<span>/month</span></div>
+                        <ul class="tier-benefits">
+                            <li><i class="fas fa-check"></i> 15% off all tickets</li>
+                            <li><i class="fas fa-check"></i> Priority booking (48hr early access)</li>
+                            <li><i class="fas fa-check"></i> Premium seat selection</li>
+                            <li><i class="fas fa-check"></i> Free drink at every show</li>
+                            <li><i class="fas fa-check"></i> Exclusive member-only events</li>
+                        </ul>
+                        <button class="btn btn-primary join-btn" data-tier="premium">Get Premium</button>
+                    </div>
+                    
+                    <!-- VIP Tier -->
+                    <div class="tier-card">
+                        <h3>VIP</h3>
+                        <div class="tier-price">₹1,999<span>/month</span></div>
+                        <ul class="tier-benefits">
+                            <li><i class="fas fa-check"></i> 25% off all tickets</li>
+                            <li><i class="fas fa-check"></i> VIP seating at all shows</li>
+                            <li><i class="fas fa-check"></i> Meet & greet with comedians</li>
+                            <li><i class="fas fa-check"></i> Free premium food/drinks</li>
+                            <li><i class="fas fa-check"></i> Personal booking assistant</li>
+                        </ul>
+                        <button class="btn btn-secondary join-btn" data-tier="vip">Go VIP</button>
+                    </div>
+                </div>
+            </div>
+        </section>
 
         <!-- Footer -->
         <footer id="contact">
@@ -2328,5 +2379,111 @@ document.querySelector('.confirm-booking').addEventListener('click', function(e)
     }
 });
     </script>
+    <!-- Membership Signup Modal -->
+<div class="modal" id="membershipModal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3 id="membershipModalTitle">Join LaughFactory</h3>
+            <span class="close-modal">&times;</span>
+        </div>
+        <div class="modal-body">
+            <form id="membershipForm">
+                <input type="hidden" id="selectedTier" value="">
+                
+                <div class="form-group">
+                    <label for="mName">Full Name</label>
+                    <input type="text" id="mName" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="mEmail">Email</label>
+                    <input type="email" id="mEmail" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="mPassword">Password</label>
+                    <input type="password" id="mPassword" required minlength="6">
+                </div>
+                
+                <div class="form-group" id="paymentSection" style="display: none;">
+                    <label>Payment Method</label>
+                    <div class="payment-options">
+                        <label class="payment-method">
+                            <input type="radio" name="payment" value="card" checked>
+                            <i class="fab fa-cc-visa"></i> Credit/Debit Card
+                        </label>
+                        <label class="payment-method">
+                            <input type="radio" name="payment" value="upi">
+                            <i class="fas fa-mobile-alt"></i> UPI
+                        </label>
+                        <label class="payment-method">
+                            <input type="radio" name="payment" value="wallet">
+                            <i class="fas fa-wallet"></i> Wallet
+                        </label>
+                    </div>
+                    
+                    <div id="cardDetails" class="payment-details">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="cardNumber">Card Number</label>
+                                <input type="text" id="cardNumber" placeholder="1234 5678 9012 3456">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="cardExpiry">Expiry Date</label>
+                                <input type="text" id="cardExpiry" placeholder="MM/YY">
+                            </div>
+                            <div class="form-group">
+                                <label for="cardCvv">CVV</label>
+                                <input type="text" id="cardCvv" placeholder="123">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <input type="checkbox" id="agreeTerms" required>
+                    <label for="agreeTerms">I agree to the Terms of Service and Privacy Policy</label>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-secondary close-modal-btn">Cancel</button>
+            <button class="btn btn-primary" id="confirmMembership">Complete Signup</button>
+        </div>
+    </div>
+</div>
+
+<!-- Membership Login Modal -->
+<div class="modal" id="loginModal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3>Member Login</h3>
+            <span class="close-modal">&times;</span>
+        </div>
+        <div class="modal-body">
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="loginEmail">Email</label>
+                    <input type="email" id="loginEmail" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="loginPassword">Password</label>
+                    <input type="password" id="loginPassword" required>
+                </div>
+                
+                <div class="form-group">
+                    <a href="#" id="forgotPassword">Forgot Password?</a>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-secondary close-modal-btn">Cancel</button>
+            <button class="btn btn-primary" id="loginBtn">Login</button>
+        </div>
+    </div>
+</div>
 </body>
 </html>
