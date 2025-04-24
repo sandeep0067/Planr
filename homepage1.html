@@ -145,6 +145,7 @@ button, a, input, select, textarea, .modal-overlay, .feedback-overlay, .profile-
             pointer-events: none;
             transition: transform 0.1s, opacity 0.7s;
             z-index: 998;
+            
         }
         
         /* Navigation hover effects */
@@ -1584,19 +1585,24 @@ footer ul.nav .nav-link:hover::after {
         .form-control {
             width: 100%;
             padding: 15px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(161, 109, 109, 0.1);
             border-radius: 8px;
-            background: rgba(255, 255, 255, 0.05);
+            
             font-size: 1rem;
-            color: var(--text-light);
+            color: #6b6b80;
             transition: all 0.3s ease;
+            input::placeholder,
+textarea::placeholder {
+  color: rgb(69, 101, 189); /* Or any color you want */
+  opacity: 1;  /* Make sure it's fully visible */
+}
         }
         
         .form-control:focus {
             outline: none;
             border-color: var(--primary-accent);
             box-shadow: 0 0 0 3px rgba(13, 110, 253, 0.2);
-            background: rgba(255, 255, 255, 0.1);
+            
         }
         
         .forgot-password {
@@ -2373,7 +2379,7 @@ footer {
                 <h2 class="fw-bold mb-4">Never Miss an Event</h2>
                 <p class="mb-4">Subscribe to our newsletter and be the first to know about upcoming events and exclusive offers.</p>
                 <div class="input-group mb-3 mx-auto" style="max-width: 500px;">
-                    <input type="email" class="form-control newsletter-input" placeholder="Your email address">
+                    <input type="email" class="form-control newsletter-input" placeholder="Your email address" >
                     <button class="btn btn-primary newsletter-btn" type="button">Subscribe</button>
                 </div>
             </div>
@@ -2507,18 +2513,19 @@ footer {
             
             <div class="welcome-panel">
                 <!-- Login Welcome Content -->
-                <div class="welcome-content login-welcome">
-                    <h2>New Here?</h2>
-                    <p>Sign up and discover a great amount of new opportunities!</p>
-                    <button class="toggle-auth-btn" id="show-signup">Sign Up</button>
-                </div>
-                
-                <!-- Signup Welcome Content -->
-                <div class="welcome-content signup-welcome">
-                    <h2>One of Us?</h2>
-                    <p>If you already have an account, just sign in. We've missed you!</p>
-                    <button class="toggle-auth-btn" id="show-login">Sign In</button>
-                </div>
+                <!-- Login Welcome Content -->
+<div class="welcome-content login-welcome">
+    <h2>New Here?</h2>
+    <p>Sign up and discover a great amount of new opportunities!</p>
+    <button class="toggle-auth-btn" id="show-signup">Sign Up</button>
+</div>
+
+<!-- Signup Welcome Content -->
+<div class="welcome-content signup-welcome">
+    <h2>One of Us?</h2>
+    <p>If you already have an account, just sign in. We've missed you!</p>
+    <button class="toggle-auth-btn" id="show-login">Sign In</button>
+</div>
             </div>
             <button class="close-button" id="close-auth-modal" style="color: white; top: 15px; right: 15px;">×</button>
         </div>
@@ -2852,50 +2859,58 @@ footer {
         resetSlideInterval();
         
         // Modal functionality
-        const simpleLoginModal = document.getElementById('simple-login-modal');
-        const authModal = document.getElementById('auth-modal');
-        const authContainer = document.querySelector('.auth-container');
-        
-        document.getElementById('open-login').addEventListener('click', () => {
-            simpleLoginModal.classList.add('active');
-        });
-        
-        document.getElementById('open-signup').addEventListener('click', () => {
-            authModal.classList.add('active');
-            authContainer.classList.add('show-signup');
-        });
-        
-        document.getElementById('close-simple-login').addEventListener('click', () => {
-            simpleLoginModal.classList.remove('active');
-        });
-        
-        document.getElementById('open-full-login').addEventListener('click', () => {
-            simpleLoginModal.classList.remove('active');
-            authModal.classList.add('active');
-            authContainer.classList.remove('show-signup');
-        });
-        
-        document.getElementById('close-auth-modal').addEventListener('click', () => {
-            authModal.classList.remove('active');
-        });
-        
-        document.getElementById('show-signup').addEventListener('click', () => {
-            authContainer.classList.add('show-signup');
-        });
-        
-        document.getElementById('show-login').addEventListener('click', () => {
-            authContainer.classList.remove('show-signup');
-        });
-        
-        // Close modals when clicking outside
-        window.addEventListener('click', (e) => {
-            if (e.target === simpleLoginModal) {
-                simpleLoginModal.classList.remove('active');
-            }
-            if (e.target === authModal) {
-                authModal.classList.remove('active');
-            }
-        });
+const simpleLoginModal = document.getElementById('simple-login-modal');
+const authModal = document.getElementById('auth-modal');
+const authContainer = document.querySelector('.auth-container');
+
+// Open simple login modal
+document.getElementById('open-login').addEventListener('click', () => {
+    simpleLoginModal.classList.add('active');
+});
+
+// Open auth modal with signup form
+document.getElementById('open-signup').addEventListener('click', () => {
+    authModal.classList.add('active');
+    authContainer.classList.add('show-signup');
+});
+
+// Close simple login modal
+document.getElementById('close-simple-login').addEventListener('click', () => {
+    simpleLoginModal.classList.remove('active');
+});
+
+// Open full auth modal from simple login
+document.getElementById('open-full-login').addEventListener('click', () => {
+    simpleLoginModal.classList.remove('active');
+    authModal.classList.add('active');
+    authContainer.classList.remove('show-signup');
+});
+
+// Close auth modal
+document.getElementById('close-auth-modal').addEventListener('click', () => {
+    authModal.classList.remove('active');
+});
+
+// Toggle between login and signup forms
+document.getElementById('show-signup').addEventListener('click', (e) => {
+    e.preventDefault();
+    authContainer.classList.add('show-signup');
+});
+
+document.getElementById('show-login').addEventListener('click', (e) => {
+    e.preventDefault();
+    authContainer.classList.remove('show-signup');
+});
+
+// Close modals when clicking outside
+window.addEventListener('click', (e) => {
+    if (e.target === simpleLoginModal) {
+        simpleLoginModal.classList.remove('active');
+    }
+    if (e.target === authModal) {
+        authModal.classList.remove('active');
+    }
+});
         
         // Google Sign-In
         function handleCredentialResponse(response) {
