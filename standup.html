@@ -954,6 +954,77 @@
             padding-top: 0.5rem;
             margin-top: 0.5rem;
         }
+        /* Meal Booking Styles */
+        .meal-options {
+            margin: 1rem 0;
+            border: 1px solid var(--gray-dark);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .meal-option {
+            padding: 1rem;
+            border-bottom: 1px solid var(--gray-dark);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .meal-option:last-child {
+            border-bottom: none;
+        }
+
+        .meal-select {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .meal-checkbox {
+            width: 18px;
+            height: 18px;
+            accent-color: var(--accent);
+        }
+
+        .meal-details {
+            text-align: right;
+        }
+
+        .meal-details p {
+            margin: 0.3rem 0;
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.6);
+        }
+
+        .meal-price {
+            color: var(--accent);
+            font-weight: bold;
+        }
+
+        .meal-summary {
+            background-color: var(--darker);
+            padding: 1rem;
+            border-radius: 8px;
+            margin-top: 1.5rem;
+        }
+
+        #selectedMealsList {
+            margin: 0.5rem 0;
+            padding-left: 1.5rem;
+        }
+
+        #selectedMealsList li {
+            margin-bottom: 0.3rem;
+        }
+
+        .meal-total {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 0.5rem;
+            padding-top: 0.5rem;
+            border-top: 1px solid var(--gray);
+            font-weight: bold;
+        }
         
     </style>
 </head>
@@ -1679,6 +1750,69 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="form-group">
+                            <h4>Food & Beverage Options</h4>
+                            <p>Pre-order your snacks and drinks for the show (optional)</p>
+                            
+                            <div class="meal-options">
+                                <!-- Meal Option 1 -->
+                                <div class="meal-option">
+                                    <div class="meal-select">
+                                        <input type="checkbox" id="meal1" class="meal-checkbox" data-meal="popcorn-combo" data-price="250">
+                                        <label for="meal1">Popcorn Combo</label>
+                                    </div>
+                                    <div class="meal-details">
+                                        <p>Large popcorn + 1 soft drink</p>
+                                        <div class="meal-price">₹250</div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Meal Option 2 -->
+                                <div class="meal-option">
+                                    <div class="meal-select">
+                                        <input type="checkbox" id="meal2" class="meal-checkbox" data-meal="nachos-combo" data-price="350">
+                                        <label for="meal2">Nachos Combo</label>
+                                    </div>
+                                    <div class="meal-details">
+                                        <p>Loaded nachos + 1 beer/mocktail</p>
+                                        <div class="meal-price">₹350</div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Beverage Option 1 -->
+                                <div class="meal-option">
+                                    <div class="meal-select">
+                                        <input type="checkbox" id="drink1" class="meal-checkbox" data-meal="beer" data-price="200">
+                                        <label for="drink1">Beer (Pint)</label>
+                                    </div>
+                                    <div class="meal-details">
+                                        <p>Domestic beer (500ml)</p>
+                                        <div class="meal-price">₹200</div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Beverage Option 2 -->
+                                <div class="meal-option">
+                                    <div class="meal-select">
+                                        <input type="checkbox" id="drink2" class="meal-checkbox" data-meal="mocktail" data-price="180">
+                                        <label for="drink2">Mocktail</label>
+                                    </div>
+                                    <div class="meal-details">
+                                        <p>Fresh fruit mocktail</p>
+                                        <div class="meal-price">₹180</div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="meal-summary">
+                                <h5>Your Selections:</h5>
+                                <ul id="selectedMealsList"></ul>
+                                <div class="meal-total">
+                                    <span>Food & Beverage Total:</span>
+                                    <span id="mealTotalPrice">₹0</span>
+                                </div>
+                            </div>
+                        </div>
                         
                         <div class="form-group">
                             <label for="special">Special Requirements</label>
@@ -2092,6 +2226,107 @@
                 giftCardMessage.style.color = 'var(--primary)';
             }
         });
+        // Meal Booking Functionality
+const mealCheckboxes = document.querySelectorAll('.meal-checkbox');
+const selectedMealsList = document.getElementById('selectedMealsList');
+const mealTotalPrice = document.getElementById('mealTotalPrice');
+let selectedMeals = [];
+
+// Handle meal selection
+mealCheckboxes.forEach(checkbox => {
+    checkbox.addEventListener('change', function() {
+        const mealName = this.dataset.meal;
+        const mealPrice = parseInt(this.dataset.price);
+        
+        if (this.checked) {
+            selectedMeals.push({
+                name: this.nextElementSibling.textContent,
+                price: mealPrice
+            });
+        } else {
+            selectedMeals = selectedMeals.filter(meal => 
+                meal.name !== this.nextElementSibling.textContent
+            );
+        }
+        
+        updateMealSummary();
+    });
+});
+
+// Update meal summary display
+function updateMealSummary() {
+    selectedMealsList.innerHTML = '';
+    let total = 0;
+    
+    selectedMeals.forEach(meal => {
+        const li = document.createElement('li');
+        li.textContent = `${meal.name} - ₹${meal.price}`;
+        selectedMealsList.appendChild(li);
+        total += meal.price;
+    });
+    
+    mealTotalPrice.textContent = `₹${total}`;
+    
+    // Update the overall total in the booking summary
+    updateBookingTotal();
+}
+
+// Update the overall booking total (combines seats and meals)
+function updateBookingTotal() {
+    const seatPrice = parseInt(document.getElementById('ticket-count').textContent) * 799 || 0;
+    const mealPrice = selectedMeals.reduce((sum, meal) => sum + meal.price, 0);
+    const totalPrice = seatPrice + mealPrice;
+    
+    document.getElementById('total-price').textContent = `₹${totalPrice}`;
+}
+
+// Reset meal selections when modal is closed
+document.querySelectorAll('.close-modal, .close-modal-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+        // Clear meal selections
+        mealCheckboxes.forEach(checkbox => {
+            checkbox.checked = false;
+        });
+        selectedMeals = [];
+        selectedMealsList.innerHTML = '';
+        mealTotalPrice.textContent = '₹0';
+    });
+});
+
+// Include meals in booking confirmation
+document.querySelector('.confirm-booking').addEventListener('click', function(e) {
+    e.preventDefault();
+    
+    // [Your existing validation code...]
+    
+    if (isValid) {
+        // Generate random booking ID
+        const bookingId = 'LF' + new Date().getFullYear() + Math.floor(1000 + Math.random() * 9000);
+        document.getElementById('bookingId').textContent = bookingId;
+        
+        // Build meal summary text
+        let mealSummary = 'No food/drinks selected';
+        if (selectedMeals.length > 0) {
+            mealSummary = selectedMeals.map(meal => 
+                `${meal.name} (₹${meal.price})`
+            ).join(', ');
+        }
+        
+        // Set confirmation message with meal info
+        const confirmationMessage = `Your tickets for ${showNameInput.value} have been booked successfully. 
+            Seats: ${selectedSeats.join(', ')}. 
+            Food/Drinks: ${mealSummary}.
+            A confirmation has been sent to your email.`;
+        document.getElementById('confirmationMessage').textContent = confirmationMessage;
+        
+        // Show confirmation modal
+        bookingModal.style.display = 'none';
+        confirmationModal.style.display = 'block';
+        
+        // Reset form
+        bookingForm.reset();
+    }
+});
     </script>
 </body>
 </html>
