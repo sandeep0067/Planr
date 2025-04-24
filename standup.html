@@ -1025,6 +1025,161 @@
             border-top: 1px solid var(--gray);
             font-weight: bold;
         }
+        /* Membership Section Styles */
+        .membership-tiers {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .tier-card {
+            background-color: var(--darker);
+            border-radius: 10px;
+            padding: 2rem;
+            position: relative;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .tier-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .tier-card.featured {
+            border: 2px solid var(--accent);
+            transform: scale(1.05);
+        }
+
+        .popular-badge {
+            position: absolute;
+            top: -10px;
+            right: 20px;
+            background-color: var(--primary);
+            color: white;
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        .tier-price {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin: 1rem 0;
+            color: var(--accent);
+        }
+
+        .tier-price span {
+            font-size: 1rem;
+            color: rgba(255,255,255,0.7);
+        }
+
+        .tier-benefits {
+            margin: 1.5rem 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .tier-benefits li {
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .tier-benefits i {
+            margin-right: 0.5rem;
+            width: 20px;
+        }
+
+        .tier-benefits .fa-check {
+            color: var(--accent);
+        }
+
+        .tier-benefits .fa-times {
+            color: var(--primary);
+        }
+
+        /* Payment Methods */
+        .payment-options {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .payment-method {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            background-color: var(--gray-dark);
+            cursor: pointer;
+        }
+
+        .payment-method input {
+            margin: 0;
+        }
+
+        .payment-details {
+            background-color: var(--gray-dark);
+            padding: 1rem;
+            border-radius: 5px;
+            margin-top: 1rem;
+        }
+
+        /* User Profile in Header */
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--secondary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        .user-menu {
+            position: absolute;
+            top: 50px;
+            right: 0;
+            background-color: var(--dark);
+            border-radius: 5px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            padding: 1rem;
+            width: 200px;
+            display: none;
+            z-index: 100;
+        }
+
+        .user-menu.active {
+            display: block;
+        }
+
+        .user-menu a {
+            display: block;
+            padding: 0.5rem 0;
+            transition: color 0.3s ease;
+        }
+
+        .user-menu a:hover {
+            color: var(--primary);
+        }
+
+        .user-menu a i {
+            margin-right: 0.5rem;
+            width: 20px;
+            text-align: center;
+        }
         
     </style>
 </head>
@@ -1518,6 +1673,57 @@
                     <input type="email" placeholder="Enter your email address" required>
                     <button type="submit" class="btn btn-primary">Subscribe</button>
                 </form>
+            </div>
+        </section>
+        <!-- Membership Section -->
+        <section class="membership section-padding" id="membership">
+            <div class="container">
+                <h2 class="section-title text-center">Become a Member</h2>
+                <p class="text-center">Unlock exclusive benefits and discounts on all comedy shows!</p>
+                
+                <div class="membership-tiers">
+                    <!-- Basic Tier -->
+                    <div class="tier-card">
+                        <h3>Basic</h3>
+                        <div class="tier-price">Free</div>
+                        <ul class="tier-benefits">
+                            <li><i class="fas fa-check"></i> Early access to show announcements</li>
+                            <li><i class="fas fa-check"></i> Newsletter with comedy news</li>
+                            <li><i class="fas fa-check"></i> Basic seat selection</li>
+                            <li><i class="fas fa-times"></i> No priority booking</li>
+                        </ul>
+                        <button class="btn btn-secondary join-btn" data-tier="basic">Join Free</button>
+                    </div>
+                    
+                    <!-- Premium Tier -->
+                    <div class="tier-card featured">
+                        <div class="popular-badge">Most Popular</div>
+                        <h3>Premium</h3>
+                        <div class="tier-price">₹499<span>/month</span></div>
+                        <ul class="tier-benefits">
+                            <li><i class="fas fa-check"></i> 15% off all tickets</li>
+                            <li><i class="fas fa-check"></i> Priority booking (48hr early access)</li>
+                            <li><i class="fas fa-check"></i> Premium seat selection</li>
+                            <li><i class="fas fa-check"></i> Free drink at every show</li>
+                            <li><i class="fas fa-check"></i> Exclusive member-only events</li>
+                        </ul>
+                        <button class="btn btn-primary join-btn" data-tier="premium">Get Premium</button>
+                    </div>
+                    
+                    <!-- VIP Tier -->
+                    <div class="tier-card">
+                        <h3>VIP</h3>
+                        <div class="tier-price">₹1,999<span>/month</span></div>
+                        <ul class="tier-benefits">
+                            <li><i class="fas fa-check"></i> 25% off all tickets</li>
+                            <li><i class="fas fa-check"></i> VIP seating at all shows</li>
+                            <li><i class="fas fa-check"></i> Meet & greet with comedians</li>
+                            <li><i class="fas fa-check"></i> Free premium food/drinks</li>
+                            <li><i class="fas fa-check"></i> Personal booking assistant</li>
+                        </ul>
+                        <button class="btn btn-secondary join-btn" data-tier="vip">Go VIP</button>
+                    </div>
+                </div>
             </div>
         </section>
 
@@ -2327,6 +2533,276 @@ document.querySelector('.confirm-booking').addEventListener('click', function(e)
         bookingForm.reset();
     }
 });
+// Membership System
+document.addEventListener('DOMContentLoaded', function() {
+    // Open membership modal when join buttons are clicked
+    document.querySelectorAll('.join-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const tier = this.dataset.tier;
+            document.getElementById('selectedTier').value = tier;
+            document.getElementById('membershipModalTitle').textContent = 
+                `Join LaughFactory ${tier.charAt(0).toUpperCase() + tier.slice(1)} Membership`;
+            
+            // Show payment section for paid tiers
+            if (tier !== 'basic') {
+                document.getElementById('paymentSection').style.display = 'block';
+            } else {
+                document.getElementById('paymentSection').style.display = 'none';
+            }
+            
+            document.getElementById('membershipModal').style.display = 'block';
+        });
+    });
+    
+    // Handle payment method selection
+    document.querySelectorAll('input[name="payment"]').forEach(radio => {
+        radio.addEventListener('change', function() {
+            // Hide all payment details first
+            document.querySelectorAll('.payment-details').forEach(detail => {
+                detail.style.display = 'none';
+            });
+            
+            // Show selected payment method details
+            if (this.value === 'card') {
+                document.getElementById('cardDetails').style.display = 'block';
+            }
+            // Add other payment methods here as needed
+        });
+    });
+    
+    // Complete membership signup
+    document.getElementById('confirmMembership').addEventListener('click', function() {
+        const tier = document.getElementById('selectedTier').value;
+        const name = document.getElementById('mName').value;
+        const email = document.getElementById('mEmail').value;
+        
+        // Simple validation
+        if (!name || !email || !document.getElementById('agreeTerms').checked) {
+            alert('Please fill all required fields');
+            return;
+        }
+        
+        // In a real app, you would send this to your backend
+        localStorage.setItem('currentUser', JSON.stringify({
+            name: name,
+            email: email,
+            tier: tier,
+            joined: new Date().toISOString()
+        }));
+        
+        // Close modal and update UI
+        document.getElementById('membershipModal').style.display = 'none';
+        updateUserStatus();
+        alert(`Welcome to LaughFactory ${tier} membership, ${name}!`);
+    });
+    
+    // Login functionality
+    document.getElementById('loginBtn').addEventListener('click', function() {
+        const email = document.getElementById('loginEmail').value;
+        const password = document.getElementById('loginPassword').value;
+        
+        // Simple validation
+        if (!email || !password) {
+            alert('Please enter both email and password');
+            return;
+        }
+        
+        // In a real app, you would verify credentials with your backend
+        // For demo, we'll just check if the user exists in localStorage
+        const user = JSON.parse(localStorage.getItem('currentUser'));
+        
+        if (user && user.email === email) {
+            document.getElementById('loginModal').style.display = 'none';
+            updateUserStatus();
+            alert(`Welcome back, ${user.name}!`);
+        } else {
+            alert('Invalid credentials. Please try again or sign up.');
+        }
+    });
+    
+    // Update UI based on login state
+    function updateUserStatus() {
+        const user = JSON.parse(localStorage.getItem('currentUser'));
+        const nav = document.querySelector('.nav-links');
+        
+        if (user) {
+            // Remove login/signup buttons if they exist
+            const existingProfile = document.querySelector('.user-profile');
+            if (existingProfile) existingProfile.remove();
+            
+            // Add user profile to navbar
+            const profileHtml = `
+                <li class="user-profile">
+                    <div class="user-avatar">${user.name.charAt(0).toUpperCase()}</div>
+                    <span>${user.name.split(' ')[0]}</span>
+                    <div class="user-menu">
+                        <a href="#"><i class="fas fa-user"></i> My Profile</a>
+                        <a href="#"><i class="fas fa-ticket-alt"></i> My Tickets</a>
+                        <a href="#"><i class="fas fa-crown"></i> Membership (${user.tier})</a>
+                        <a href="#" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                    </div>
+                </li>
+            `;
+            
+            nav.insertAdjacentHTML('beforeend', profileHtml);
+            
+            // Add logout functionality
+            document.getElementById('logoutBtn').addEventListener('click', function(e) {
+                e.preventDefault();
+                localStorage.removeItem('currentUser');
+                location.reload();
+            });
+            
+            // Toggle user menu
+            document.querySelector('.user-profile').addEventListener('click', function() {
+                document.querySelector('.user-menu').classList.toggle('active');
+            });
+            
+            // Apply membership discounts to shows
+            applyMembershipDiscounts(user.tier);
+        }
+    }
+    
+    // Apply membership discounts to show prices
+    function applyMembershipDiscounts(tier) {
+        const discount = {
+            'basic': 0,
+            'premium': 15,
+            'vip': 25
+        }[tier];
+        
+        if (discount > 0) {
+            document.querySelectorAll('.price').forEach(priceElement => {
+                const originalPrice = parseInt(priceElement.textContent.replace(/[^\d]/g, ''));
+                const discountedPrice = originalPrice * (1 - discount/100);
+                priceElement.textContent = `₹${Math.floor(discountedPrice)} (${discount}% off)`;
+                priceElement.style.color = 'var(--accent)';
+            });
+        }
+    }
+    
+    // Initialize user status on page load
+    updateUserStatus();
+    
+    // Add login button to nav if not logged in
+    if (!localStorage.getItem('currentUser')) {
+        const nav = document.querySelector('.nav-links');
+        const loginHtml = `<li><a href="#" id="navLogin">Login</a></li>`;
+        nav.insertAdjacentHTML('beforeend', loginHtml);
+        
+        document.getElementById('navLogin').addEventListener('click', function(e) {
+            e.preventDefault();
+            document.getElementById('loginModal').style.display = 'block';
+        });
+    }
+});
     </script>
+    <!-- Membership Signup Modal -->
+<div class="modal" id="membershipModal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3 id="membershipModalTitle">Join LaughFactory</h3>
+            <span class="close-modal">&times;</span>
+        </div>
+        <div class="modal-body">
+            <form id="membershipForm">
+                <input type="hidden" id="selectedTier" value="">
+                
+                <div class="form-group">
+                    <label for="mName">Full Name</label>
+                    <input type="text" id="mName" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="mEmail">Email</label>
+                    <input type="email" id="mEmail" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="mPassword">Password</label>
+                    <input type="password" id="mPassword" required minlength="6">
+                </div>
+                
+                <div class="form-group" id="paymentSection" style="display: none;">
+                    <label>Payment Method</label>
+                    <div class="payment-options">
+                        <label class="payment-method">
+                            <input type="radio" name="payment" value="card" checked>
+                            <i class="fab fa-cc-visa"></i> Credit/Debit Card
+                        </label>
+                        <label class="payment-method">
+                            <input type="radio" name="payment" value="upi">
+                            <i class="fas fa-mobile-alt"></i> UPI
+                        </label>
+                        <label class="payment-method">
+                            <input type="radio" name="payment" value="wallet">
+                            <i class="fas fa-wallet"></i> Wallet
+                        </label>
+                    </div>
+                    
+                    <div id="cardDetails" class="payment-details">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="cardNumber">Card Number</label>
+                                <input type="text" id="cardNumber" placeholder="1234 5678 9012 3456">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="cardExpiry">Expiry Date</label>
+                                <input type="text" id="cardExpiry" placeholder="MM/YY">
+                            </div>
+                            <div class="form-group">
+                                <label for="cardCvv">CVV</label>
+                                <input type="text" id="cardCvv" placeholder="123">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <input type="checkbox" id="agreeTerms" required>
+                    <label for="agreeTerms">I agree to the Terms of Service and Privacy Policy</label>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-secondary close-modal-btn">Cancel</button>
+            <button class="btn btn-primary" id="confirmMembership">Complete Signup</button>
+        </div>
+    </div>
+</div>
+
+<!-- Membership Login Modal -->
+<div class="modal" id="loginModal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3>Member Login</h3>
+            <span class="close-modal">&times;</span>
+        </div>
+        <div class="modal-body">
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="loginEmail">Email</label>
+                    <input type="email" id="loginEmail" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="loginPassword">Password</label>
+                    <input type="password" id="loginPassword" required>
+                </div>
+                
+                <div class="form-group">
+                    <a href="#" id="forgotPassword">Forgot Password?</a>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-secondary close-modal-btn">Cancel</button>
+            <button class="btn btn-primary" id="loginBtn">Login</button>
+        </div>
+    </div>
+</div>
+
 </body>
 </html>
