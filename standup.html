@@ -2533,6 +2533,169 @@ document.querySelector('.confirm-booking').addEventListener('click', function(e)
         bookingForm.reset();
     }
 });
+// Membership System
+document.addEventListener('DOMContentLoaded', function() {
+    // Open membership modal when join buttons are clicked
+    document.querySelectorAll('.join-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const tier = this.dataset.tier;
+            document.getElementById('selectedTier').value = tier;
+            document.getElementById('membershipModalTitle').textContent = 
+                `Join LaughFactory ${tier.charAt(0).toUpperCase() + tier.slice(1)} Membership`;
+            
+            // Show payment section for paid tiers
+            if (tier !== 'basic') {
+                document.getElementById('paymentSection').style.display = 'block';
+            } else {
+                document.getElementById('paymentSection').style.display = 'none';
+            }
+            
+            document.getElementById('membershipModal').style.display = 'block';
+        });
+    });
+    
+    // Handle payment method selection
+    document.querySelectorAll('input[name="payment"]').forEach(radio => {
+        radio.addEventListener('change', function() {
+            // Hide all payment details first
+            document.querySelectorAll('.payment-details').forEach(detail => {
+                detail.style.display = 'none';
+            });
+            
+            // Show selected payment method details
+            if (this.value === 'card') {
+                document.getElementById('cardDetails').style.display = 'block';
+            }
+            // Add other payment methods here as needed
+        });
+    });
+    
+    // Complete membership signup
+    document.getElementById('confirmMembership').addEventListener('click', function() {
+        const tier = document.getElementById('selectedTier').value;
+        const name = document.getElementById('mName').value;
+        const email = document.getElementById('mEmail').value;
+        
+        // Simple validation
+        if (!name || !email || !document.getElementById('agreeTerms').checked) {
+            alert('Please fill all required fields');
+            return;
+        }
+        
+        // In a real app, you would send this to your backend
+        localStorage.setItem('currentUser', JSON.stringify({
+            name: name,
+            email: email,
+            tier: tier,
+            joined: new Date().toISOString()
+        }));
+        
+        // Close modal and update UI
+        document.getElementById('membershipModal').style.display = 'none';
+        updateUserStatus();
+        alert(`Welcome to LaughFactory ${tier} membership, ${name}!`);
+    });
+    
+    // Login functionality
+    document.getElementById('loginBtn').addEventListener('click', function() {
+        const email = document.getElementById('loginEmail').value;
+        const password = document.getElementById('loginPassword').value;
+        
+        // Simple validation
+        if (!email || !password) {
+            alert('Please enter both email and password');
+            return;
+        }
+        
+        // In a real app, you would verify credentials with your backend
+        // For demo, we'll just check if the user exists in localStorage
+        const user = JSON.parse(localStorage.getItem('currentUser'));
+        
+        if (user && user.email === email) {
+            document.getElementById('loginModal').style.display = 'none';
+            updateUserStatus();
+            alert(`Welcome back, ${user.name}!`);
+        } else {
+            alert('Invalid credentials. Please try again or sign up.');
+        }
+    });
+    
+    // Update UI based on login state
+    function updateUserStatus() {
+        const user = JSON.parse(localStorage.getItem('currentUser'));
+        const nav = document.querySelector('.nav-links');
+        
+        if (user) {
+            // Remove login/signup buttons if they exist
+            const existingProfile = document.querySelector('.user-profile');
+            if (existingProfile) existingProfile.remove();
+            
+            // Add user profile to navbar
+            const profileHtml = `
+                <li class="user-profile">
+                    <div class="user-avatar">${user.name.charAt(0).toUpperCase()}</div>
+                    <span>${user.name.split(' ')[0]}</span>
+                    <div class="user-menu">
+                        <a href="#"><i class="fas fa-user"></i> My Profile</a>
+                        <a href="#"><i class="fas fa-ticket-alt"></i> My Tickets</a>
+                        <a href="#"><i class="fas fa-crown"></i> Membership (${user.tier})</a>
+                        <a href="#" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                    </div>
+                </li>
+            `;
+            
+            nav.insertAdjacentHTML('beforeend', profileHtml);
+            
+            // Add logout functionality
+            document.getElementById('logoutBtn').addEventListener('click', function(e) {
+                e.preventDefault();
+                localStorage.removeItem('currentUser');
+                location.reload();
+            });
+            
+            // Toggle user menu
+            document.querySelector('.user-profile').addEventListener('click', function() {
+                document.querySelector('.user-menu').classList.toggle('active');
+            });
+            
+            // Apply membership discounts to shows
+            applyMembershipDiscounts(user.tier);
+        }
+    }
+    
+    // Apply membership discounts to show prices
+    function applyMembershipDiscounts(tier) {
+        const discount = {
+            'basic': 0,
+            'premium': 15,
+            'vip': 25
+        }[tier];
+        
+        if (discount > 0) {
+            document.querySelectorAll('.price').forEach(priceElement => {
+                const originalPrice = parseInt(priceElement.textContent.replace(/[^\d]/g, ''));
+                const discountedPrice = originalPrice * (1 - discount/100);
+                priceElement.textContent = `₹${Math.floor(discountedPrice)} (${discount}% off)`;
+                priceElement.style.color = 'var(--accent)';
+            });
+        }
+    }
+    
+    // Initialize user status on page load
+    updateUserStatus();
+    
+    // Add login button to nav if not logged in
+    if (!localStorage.getItem('currentUser')) {
+        const nav = document.querySelector('.nav-links');
+        const loginHtml = `<li><a href="#" id="navLogin">Login</a></li>`;
+        nav.insertAdjacentHTML('beforeend', loginHtml);
+        
+        document.getElementById('navLogin').addEventListener('click', function(e) {
+            e.preventDefault();
+            document.getElementById('loginModal').style.display = 'block';
+        });
+    }
+});
     </script>
     <!-- Membership Signup Modal -->
 <div class="modal" id="membershipModal">
@@ -2640,5 +2803,6 @@ document.querySelector('.confirm-booking').addEventListener('click', function(e)
         </div>
     </div>
 </div>
+
 </body>
 </html>
