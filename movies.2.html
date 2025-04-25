@@ -307,6 +307,13 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .theater-info {
+            flex: 1;
+            min-width: 200px;
+            margin-bottom: 1rem;
         }
 
         .theater-info h3 {
@@ -338,6 +345,11 @@
             color: white;
         }
 
+        .showtime.selected {
+            background: #0f4c81;
+            color: white;
+        }
+
         /* Seats Selection */
         .seat-selection {
             margin-top: 2rem;
@@ -357,6 +369,8 @@
             flex-direction: column;
             align-items: center;
             gap: 1rem;
+            overflow-x: auto;
+            width: 100%;
         }
 
         .seat-row {
@@ -375,6 +389,7 @@
             cursor: pointer;
             font-size: 0.7rem;
             transition: all 0.3s;
+            flex-shrink: 0;
         }
 
         .seat:hover {
@@ -397,6 +412,7 @@
             justify-content: center;
             gap: 1rem;
             margin-top: 1rem;
+            flex-wrap: wrap;
         }
 
         .legend-item {
@@ -473,6 +489,96 @@
             border-top: 1px solid #444;
         }
 
+        /* Notification */
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 1rem;
+            background: #4CAF50;
+            color: white;
+            border-radius: 4px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            z-index: 1001;
+            display: none;
+            animation: slideIn 0.3s, fadeOut 0.5s 2.5s forwards;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeOut {
+            from {
+                opacity: 1;
+            }
+            to {
+                opacity: 0;
+            }
+        }
+
+        /* Login Modal */
+        .login-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+        }
+
+        .login-content {
+            background: white;
+            margin: 10% auto;
+            padding: 2rem;
+            width: 90%;
+            max-width: 400px;
+            border-radius: 8px;
+            position: relative;
+        }
+
+        .login-close {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .login-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .form-group input {
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        .form-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 1rem;
+        }
+
         /* Responsive Adjustments */
         @media (max-width: 768px) {
             .navbar {
@@ -482,14 +588,63 @@
 
             .nav-links {
                 gap: 1rem;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .user-actions {
+                justify-content: center;
+                width: 100%;
             }
 
             .hero h1 {
                 font-size: 2rem;
             }
 
+            .hero p {
+                font-size: 1rem;
+            }
+
             .modal-content {
                 width: 95%;
+            }
+
+            .theater-item {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .showtimes {
+                width: 100%;
+            }
+
+            .seat-row {
+                gap: 0.3rem;
+            }
+
+            .seat {
+                width: 25px;
+                height: 25px;
+                font-size: 0.6rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero {
+                height: 300px;
+                padding: 0 1rem;
+            }
+
+            .section {
+                padding: 2rem 1rem;
+            }
+
+            .movie-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .login-content {
+                margin: 20% auto;
             }
         }
     </style>
@@ -500,14 +655,13 @@
         <div class="navbar">
             <div class="logo">Cine<span>Book</span></div>
             <div class="nav-links">
-                <a href="#">Movies</a>
-                <a href="#">Theaters</a>
-                <a href="#">Offers</a>
-                
+                <a href="#" class="nav-link" data-section="now-showing">Movies</a>
+                <a href="#" class="nav-link" data-section="theaters">Theaters</a>
+                <a href="#" class="nav-link" data-section="offers">Offers</a>
             </div>
             <div class="user-actions">
-                <button class="btn btn-outline">Sign In</button>
-                <button class="btn btn-primary">Register</button>
+                <button class="btn btn-outline" id="loginBtn">Sign In</button>
+                <button class="btn btn-primary" id="registerBtn">Register</button>
             </div>
         </div>
     </header>
@@ -517,210 +671,40 @@
         <h1>Book Movie Tickets Online</h1>
         <p>Discover the latest movies and theaters near you. Get the best seats at the best prices!</p>
         <div class="search-bar">
-            <input type="text" placeholder="Search for movies, theaters...">
-            <button>Search</button>
+            <input type="text" id="searchInput" placeholder="Search for movies, theaters...">
+            <button id="searchBtn">Search</button>
         </div>
     </section>
 
     <!-- Now Showing Section -->
-    <section class="section">
+    <section class="section" id="now-showing">
         <h2 class="section-title">Now Showing</h2>
         <div class="movie-grid">
-            <!-- Movie 1 -->
-            <div class="movie-card">
-                <img src="https://th.bing.com/th/id/OIP.DYu1tC2Eiybn3ffHpnTJqgHaJL?w=154&h=191&c=7&r=0&o=5&dpr=1.1&pid=1.7" alt="Movie Poster" class="movie-poster">
-                <div class="movie-info">
-                    <h3 class="movie-title">Akaal</h3>
-                    <div class="movie-meta">
-                        <span>Action</span>
-                        <span class="movie-rating">★ 8.4</span>
-                    </div>
-                    <div class="movie-actions">
-                        <span class="price">$12.99</span>
-                        <button class="btn btn-primary btn-sm book-btn" data-movie="Akaal">Book Now</button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Movie 2 -->
-            <div class="movie-card">
-                <img src="https://th.bing.com/th/id/OIP.qrMAq5b-z643Gk5KBpJ3ZAHaJP?w=160&h=200&c=7&r=0&o=5&dpr=1.1&pid=1.7" alt="Movie Poster" class="movie-poster">
-                <div class="movie-info">
-                    <h3 class="movie-title">Chhaava</h3>
-                    <div class="movie-meta">
-                        <span>Action</span>
-                        <span class="movie-rating">★ 7.9</span>
-                    </div>
-                    <div class="movie-actions">
-                        <span class="price">$11.99</span>
-                        <button class="btn btn-primary btn-sm book-btn" data-movie="Chhaava">Book Now</button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Movie 3 -->
-            <div class="movie-card">
-                <img src="https://th.bing.com/th/id/OIP.0xeSbwlkgYICEP7Ct2FMrwAAAA?w=204&h=165&c=7&r=0&o=5&dpr=1.1&pid=1.7" alt="Movie Poster" class="movie-poster">
-                <div class="movie-info">
-                    <h3 class="movie-title">Jaat</h3>
-                    <div class="movie-meta">
-                        <span>Sci-Fi</span>
-                        <span class="movie-rating">★ 8.0</span>
-                    </div>
-                    <div class="movie-actions">
-                        <span class="price">$10.99</span>
-                        <button class="btn btn-primary btn-sm book-btn" data-movie="Jaat">Book Now</button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Movie 4 -->
-            <div class="movie-card">
-                <img src="https://th.bing.com/th/id/OIP.RJCVBZIkZDDGNxk2h9zZmQHaJQ?w=141&h=180&c=7&r=0&o=5&dpr=1.1&pid=1.7" alt="Movie Poster" class="movie-poster">
-                <div class="movie-info">
-                    <h3 class="movie-title">The Diplomat</h3>
-                    <div class="movie-meta">
-                        <span>Action</span>
-                        <span class="movie-rating">★ 7.3</span>
-                    </div>
-                    <div class="movie-actions">
-                        <span class="price">$9.99</span>
-                        <button class="btn btn-primary btn-sm book-btn" data-movie="The Diplomat">Book Now</button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Movie 5 -->
-            <div class="movie-card">
-                <img src="https://th.bing.com/th/id/OIP.3yrKyHjOaqn5WnNyE7bVOQHaEK?w=298&h=180&c=7&r=0&o=5&dpr=1.1&pid=1.7" alt="Movie Poster" class="movie-poster">
-                <div class="movie-info">
-                    <h3 class="movie-title">Deva</h3>
-                    <div class="movie-meta">
-                        <span>Action</span>
-                        <span class="movie-rating">★ 8.6</span>
-                    </div>
-                    <div class="movie-actions">
-                        <span class="price">$13.99</span>
-                        <button class="btn btn-primary btn-sm book-btn" data-movie="Deva">Book Now</button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Movie 6 -->
-            <div class="movie-card">
-                <img src="https://th.bing.com/th/id/OIP.DyPCHC0GElG8vQho1KjUnwAAAA?w=117&h=180&c=7&r=0&o=5&dpr=1.1&pid=1.7" alt="Movie Poster" class="movie-poster">
-                <div class="movie-info">
-                    <h3 class="movie-title">Azaad</h3>
-                    <div class="movie-meta">
-                        <span>Action</span>
-                        <span class="movie-rating">★ 6.7</span>
-                    </div>
-                    <div class="movie-actions">
-                        <span class="price">$8.99</span>
-                        <button class="btn btn-primary btn-sm book-btn" data-movie="Azaad">Book Now</button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Movie 7 -->
-            <div class="movie-card">
-                <img src="https://th.bing.com/th/id/OIP.upYBc5-oQdh-s1k8Vzec1wHaEK?w=333&h=187&c=7&r=0&o=5&dpr=1.1&pid=1.7" alt="Movie Poster" class="movie-poster">
-                <div class="movie-info">
-                    <h3 class="movie-title">Game Changer</h3>
-                    <div class="movie-meta">
-                        <span>Sci-Fi</span>
-                        <span class="movie-rating">★ 6.7</span>
-                    </div>
-                    <div class="movie-actions">
-                        <span class="price">$8.99</span>
-                        <button class="btn btn-primary btn-sm book-btn" data-movie="Game Changer">Book Now</button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Movie 8 -->
-            <div class="movie-card">
-                <img src="https://th.bing.com/th/id/OIP.2jAnW00x3noW_0KSqyGpPAHaFj?w=195&h=146&c=7&r=0&o=5&dpr=1.1&pid=1.7" alt="Movie Poster" class="movie-poster">
-                <div class="movie-info">
-                    <h3 class="movie-title">Be Happy</h3>
-                    <div class="movie-meta">
-                        <span>Sci-Fi</span>
-                        <span class="movie-rating">★ 6.7</span>
-                    </div>
-                    <div class="movie-actions">
-                        <span class="price">$8.99</span>
-                        <button class="btn btn-primary btn-sm book-btn" data-movie="Be Happy">Book Now</button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Movie 9 -->
-            <div class="movie-card">
-                <img src="https://th.bing.com/th/id/OIP.H3QSHDe8hF7d2X7p2j-lHgHaD4?w=344&h=180&c=7&r=0&o=5&dpr=1.1&pid=1.7" alt="Movie Poster" class="movie-poster">
-                <div class="movie-info">
-                    <h3 class="movie-title">Kesari Chapter 2</h3>
-                    <div class="movie-meta">
-                        <span>Sci-Fi</span>
-                        <span class="movie-rating">★ 6.7</span>
-                    </div>
-                    <div class="movie-actions">
-                        <span class="price">$8.99</span>
-                        <button class="btn btn-primary btn-sm book-btn" data-movie="Kesari Chapter 2">Book Now</button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Movie 10 -->
-            <div class="movie-card">
-                <img src="https://th.bing.com/th/id/OIP.cpHfv7ACUJZK_JRY-IyN0AHaEK?w=307&h=180&c=7&r=0&o=5&dpr=1.1&pid=1.7" alt="Movie Poster" class="movie-poster">
-                <div class="movie-info">
-                    <h3 class="movie-title">Sikandar</h3>
-                    <div class="movie-meta">
-                        <span>Sci-Fi</span>
-                        <span class="movie-rating">★ 6.7</span>
-                    </div>
-                    <div class="movie-actions">
-                        <span class="price">$8.99</span>
-                        <button class="btn btn-primary btn-sm book-btn" data-movie="Sikandar">Book Now</button>
-                    </div>
-                </div>
-            </div>
+            <!-- Movie cards will be populated by JavaScript -->
         </div>
     </section>
 
     <!-- Coming Soon Section -->
-    <section class="section" style="background-color: #f9f9f9;">
+    <section class="section" style="background-color: #f9f9f9;" id="coming-soon">
         <h2 class="section-title">Coming Soon</h2>
         <div class="movie-grid">
-            <!-- Coming Soon Movie 1 -->
-            <div class="movie-card">
-                <img src="https://tse3.mm.bing.net/th?id=OIP.T295t7H2kjRPLbm_3bAY8QAAAA&w=200&h=300&c=7" alt="Movie Poster" class="movie-poster">
-                <div class="movie-info">
-                    <h3 class="movie-title">Bhool Chuk Maaf</h3>
-                    <div class="movie-meta">
-                        <span>Action</span>
-                        <span>May 6, 2023</span>
-                    </div>
-                    <div class="movie-actions">
-                        <button class="btn btn-outline btn-sm" style="border-color: #0f4c81; color: #0f4c81;">Notify Me</button>
-                    </div>
-                </div>
-            </div>
+            <!-- Coming soon movies will be populated by JavaScript -->
+        </div>
+    </section>
 
-            <!-- Coming Soon Movie 2 -->
-            <div class="movie-card">
-                <img src="https://tse2.mm.bing.net/th/id/OIP.LYNKFlEAw5jSBKY6ksYp2gAAAA?cb=iwc1&w=200&h=300&c=7" alt="Movie Poster" class="movie-poster">
-                <div class="movie-info">
-                    <h3 class="movie-title">Raid 2</h3>
-                    <div class="movie-meta">
-                        <span>Adventure</span>
-                        <span>June 10, 2023</span>
-                    </div>
-                    <div class="movie-actions">
-                        <button class="btn btn-outline btn-sm" style="border-color: #0f4c81; color: #0f4c81;">Notify Me</button>
-                    </div>
-                </div>
-            </div>
+    <!-- Theaters Section (hidden by default) -->
+    <section class="section" id="theaters" style="display: none;">
+        <h2 class="section-title">Our Theaters</h2>
+        <div class="theater-grid" id="theaterList">
+            <!-- Theaters will be populated by JavaScript -->
+        </div>
+    </section>
+
+    <!-- Offers Section (hidden by default) -->
+    <section class="section" id="offers" style="display: none; background-color: #f9f9f9;">
+        <h2 class="section-title">Special Offers</h2>
+        <div class="offers-grid" id="offersList">
+            <!-- Offers will be populated by JavaScript -->
         </div>
     </section>
 
@@ -728,120 +712,20 @@
     <div id="bookingModal" class="modal">
         <div class="modal-content">
             <div class="modal-header">
-                <h3 class="modal-title" id="modalMovieTitle">Avengers: Endgame</h3>
+                <h3 class="modal-title" id="modalMovieTitle">Movie Title</h3>
                 <span class="close-btn">&times;</span>
             </div>
             <div class="modal-body">
                 <h4>Select Theater & Showtime</h4>
-                <div class="theater-list">
-                    <!-- Theater 1 -->
-                    <div class="theater-item">
-                        <div class="theater-info">
-                            <h3>Cineplex Downtown</h3>
-                            <p>123 Main Street, City Center</p>
-                        </div>
-                        <div class="showtimes">
-                            <div class="showtime" data-time="10:00 AM">10:00 AM</div>
-                            <div class="showtime" data-time="1:30 PM">1:30 PM</div>
-                            <div class="showtime" data-time="5:00 PM">5:00 PM</div>
-                            <div class="showtime" data-time="8:30 PM">8:30 PM</div>
-                        </div>
-                    </div>
-
-                    <!-- Theater 2 -->
-                    <div class="theater-item">
-                        <div class="theater-info">
-                            <h3>AMC Riverside</h3>
-                            <p>456 River Road, Riverside</p>
-                        </div>
-                        <div class="showtimes">
-                            <div class="showtime" data-time="11:00 AM">11:00 AM</div>
-                            <div class="showtime" data-time="2:30 PM">2:30 PM</div>
-                            <div class="showtime" data-time="6:00 PM">6:00 PM</div>
-                            <div class="showtime" data-time="9:30 PM">9:30 PM</div>
-                        </div>
-                    </div>
-
-                    <!-- Theater 3 -->
-                    <div class="theater-item">
-                        <div class="theater-info">
-                            <h3>Regal Cinemas</h3>
-                            <p>789 Park Avenue, Uptown</p>
-                        </div>
-                        <div class="showtimes">
-                            <div class="showtime" data-time="9:30 AM">9:30 AM</div>
-                            <div class="showtime" data-time="12:45 PM">12:45 PM</div>
-                            <div class="showtime" data-time="4:15 PM">4:15 PM</div>
-                            <div class="showtime" data-time="7:45 PM">7:45 PM</div>
-                        </div>
-                    </div>
+                <div class="theater-list" id="theaterSelection">
+                    <!-- Theaters will be populated by JavaScript -->
                 </div>
 
                 <!-- Seat Selection (hidden by default) -->
                 <div id="seatSelection" class="seat-selection" style="display: none;">
                     <div class="screen">SCREEN</div>
-                    <div class="seats-container">
-                        <!-- Rows A-F -->
-                        <div class="seat-row">
-                            <div class="seat" data-seat="A1">A1</div>
-                            <div class="seat" data-seat="A2">A2</div>
-                            <div class="seat" data-seat="A3">A3</div>
-                            <div class="seat" data-seat="A4">A4</div>
-                            <div class="seat" data-seat="A5">A5</div>
-                            <div class="seat" data-seat="A6">A6</div>
-                            <div class="seat" data-seat="A7">A7</div>
-                            <div class="seat" data-seat="A8">A8</div>
-                        </div>
-                        <div class="seat-row">
-                            <div class="seat" data-seat="B1">B1</div>
-                            <div class="seat" data-seat="B2">B2</div>
-                            <div class="seat" data-seat="B3">B3</div>
-                            <div class="seat occupied" data-seat="B4">B4</div>
-                            <div class="seat occupied" data-seat="B5">B5</div>
-                            <div class="seat" data-seat="B6">B6</div>
-                            <div class="seat" data-seat="B7">B7</div>
-                            <div class="seat" data-seat="B8">B8</div>
-                        </div>
-                        <div class="seat-row">
-                            <div class="seat" data-seat="C1">C1</div>
-                            <div class="seat" data-seat="C2">C2</div>
-                            <div class="seat occupied" data-seat="C3">C3</div>
-                            <div class="seat occupied" data-seat="C4">C4</div>
-                            <div class="seat" data-seat="C5">C5</div>
-                            <div class="seat" data-seat="C6">C6</div>
-                            <div class="seat" data-seat="C7">C7</div>
-                            <div class="seat" data-seat="C8">C8</div>
-                        </div>
-                        <div class="seat-row">
-                            <div class="seat" data-seat="D1">D1</div>
-                            <div class="seat" data-seat="D2">D2</div>
-                            <div class="seat" data-seat="D3">D3</div>
-                            <div class="seat" data-seat="D4">D4</div>
-                            <div class="seat" data-seat="D5">D5</div>
-                            <div class="seat" data-seat="D6">D6</div>
-                            <div class="seat occupied" data-seat="D7">D7</div>
-                            <div class="seat occupied" data-seat="D8">D8</div>
-                        </div>
-                        <div class="seat-row">
-                            <div class="seat" data-seat="E1">E1</div>
-                            <div class="seat" data-seat="E2">E2</div>
-                            <div class="seat" data-seat="E3">E3</div>
-                            <div class="seat" data-seat="E4">E4</div>
-                            <div class="seat" data-seat="E5">E5</div>
-                            <div class="seat" data-seat="E6">E6</div>
-                            <div class="seat" data-seat="E7">E7</div>
-                            <div class="seat" data-seat="E8">E8</div>
-                        </div>
-                        <div class="seat-row">
-                            <div class="seat" data-seat="F1">F1</div>
-                            <div class="seat" data-seat="F2">F2</div>
-                            <div class="seat" data-seat="F3">F3</div>
-                            <div class="seat" data-seat="F4">F4</div>
-                            <div class="seat" data-seat="F5">F5</div>
-                            <div class="seat" data-seat="F6">F6</div>
-                            <div class="seat" data-seat="F7">F7</div>
-                            <div class="seat" data-seat="F8">F8</div>
-                        </div>
+                    <div class="seats-container" id="seatsContainer">
+                        <!-- Seats will be populated by JavaScript -->
                     </div>
 
                     <div class="seat-legend">
@@ -863,15 +747,15 @@
                         <h4>Booking Summary</h4>
                         <div class="summary-row">
                             <span>Movie:</span>
-                            <span id="summary-movie">Avengers: Endgame</span>
+                            <span id="summary-movie">None selected</span>
                         </div>
                         <div class="summary-row">
                             <span>Theater:</span>
-                            <span id="summary-theater">Cineplex Downtown</span>
+                            <span id="summary-theater">None selected</span>
                         </div>
                         <div class="summary-row">
                             <span>Showtime:</span>
-                            <span id="summary-showtime">10:00 AM</span>
+                            <span id="summary-showtime">None selected</span>
                         </div>
                         <div class="summary-row">
                             <span>Seats:</span>
@@ -879,7 +763,7 @@
                         </div>
                         <div class="summary-row">
                             <span>Price per ticket:</span>
-                            <span>$12.99</span>
+                            <span id="summary-price">$0.00</span>
                         </div>
                         <div class="summary-row total">
                             <span>Total:</span>
@@ -892,6 +776,58 @@
             </div>
         </div>
     </div>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="login-modal">
+        <div class="login-content">
+            <span class="login-close">&times;</span>
+            <h2>Sign In</h2>
+            <form class="login-form" id="loginForm">
+                <div class="form-group">
+                    <label for="loginEmail">Email</label>
+                    <input type="email" id="loginEmail" required>
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword">Password</label>
+                    <input type="password" id="loginPassword" required>
+                </div>
+                <div class="form-actions">
+                    <button type="button" id="forgotPassword" class="btn btn-outline" style="border-color: #0f4c81; color: #0f4c81;">Forgot Password?</button>
+                    <button type="submit" class="btn btn-primary">Login</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Register Modal -->
+    <div id="registerModal" class="login-modal">
+        <div class="login-content">
+            <span class="login-close">&times;</span>
+            <h2>Register</h2>
+            <form class="login-form" id="registerForm">
+                <div class="form-group">
+                    <label for="registerName">Full Name</label>
+                    <input type="text" id="registerName" required>
+                </div>
+                <div class="form-group">
+                    <label for="registerEmail">Email</label>
+                    <input type="email" id="registerEmail" required>
+                </div>
+                <div class="form-group">
+                    <label for="registerPassword">Password</label>
+                    <input type="password" id="registerPassword" required>
+                </div>
+                <div class="form-group">
+                    <label for="registerConfirm">Confirm Password</label>
+                    <input type="password" id="registerConfirm" required>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 1rem;">Register</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Notification -->
+    <div class="notification" id="notification"></div>
 
     <!-- Footer -->
     <footer>
@@ -936,88 +872,629 @@
     </footer>
 
     <script>
+        // Movie Data
+        const movies = [
+            {
+                id: 1,
+                title: "Akaal",
+                genre: "Action",
+                rating: 8.4,
+                price: 12.99,
+                poster: "https://th.bing.com/th/id/OIP.DYu1tC2Eiybn3ffHpnTJqgHaJL?w=154&h=191&c=7&r=0&o=5&dpr=1.1&pid=1.7",
+                description: "An intense action thriller about a man's quest for justice.",
+                duration: "2h 15m",
+                nowShowing: true
+            },
+            {
+                id: 2,
+                title: "Chhaava",
+                genre: "Action",
+                rating: 7.9,
+                price: 11.99,
+                poster: "https://th.bing.com/th/id/OIP.qrMAq5b-z643Gk5KBpJ3ZAHaJP?w=160&h=200&c=7&r=0&o=5&dpr=1.1&pid=1.7",
+                description: "A historical action drama set in ancient times.",
+                duration: "2h 30m",
+                nowShowing: true
+            },
+            {
+                id: 3,
+                title: "Jaat",
+                genre: "Sci-Fi",
+                rating: 8.0,
+                price: 10.99,
+                poster: "https://th.bing.com/th/id/OIP.0xeSbwlkgYICEP7Ct2FMrwAAAA?w=204&h=165&c=7&r=0&o=5&dpr=1.1&pid=1.7",
+                description: "A futuristic sci-fi adventure exploring human identity.",
+                duration: "1h 55m",
+                nowShowing: true
+            },
+            {
+                id: 4,
+                title: "The Diplomat",
+                genre: "Action",
+                rating: 7.3,
+                price: 9.99,
+                poster: "https://th.bing.com/th/id/OIP.RJCVBZIkZDDGNxk2h9zZmQHaJQ?w=141&h=180&c=7&r=0&o=5&dpr=1.1&pid=1.7",
+                description: "A political action thriller about international espionage.",
+                duration: "2h 5m",
+                nowShowing: true
+            },
+            {
+                id: 5,
+                title: "Deva",
+                genre: "Action",
+                rating: 8.6,
+                price: 13.99,
+                poster: "https://th.bing.com/th/id/OIP.3yrKyHjOaqn5WnNyE7bVOQHaEK?w=298&h=180&c=7&r=0&o=5&dpr=1.1&pid=1.7",
+                description: "A high-octane action film with supernatural elements.",
+                duration: "2h 25m",
+                nowShowing: true
+            },
+            {
+                id: 6,
+                title: "Azaad",
+                genre: "Action",
+                rating: 6.7,
+                price: 8.99,
+                poster: "https://th.bing.com/th/id/OIP.DyPCHC0GElG8vQho1KjUnwAAAA?w=117&h=180&c=7&r=0&o=5&dpr=1.1&pid=1.7",
+                description: "A story of freedom and rebellion in a dystopian world.",
+                duration: "1h 50m",
+                nowShowing: true
+            },
+            {
+                id: 7,
+                title: "Game Changer",
+                genre: "Sci-Fi",
+                rating: 6.7,
+                price: 8.99,
+                poster: "https://th.bing.com/th/id/OIP.upYBc5-oQdh-s1k8Vzec1wHaEK?w=333&h=187&c=7&r=0&o=5&dpr=1.1&pid=1.7",
+                description: "A sci-fi thriller about virtual reality gone wrong.",
+                duration: "2h 10m",
+                nowShowing: true
+            },
+            {
+                id: 8,
+                title: "Be Happy",
+                genre: "Drama",
+                rating: 7.5,
+                price: 9.50,
+                poster: "https://th.bing.com/th/id/OIP.2jAnW00x3noW_0KSqyGpPAHaFj?w=195&h=146&c=7&r=0&o=5&dpr=1.1&pid=1.7",
+                description: "An inspiring drama about finding happiness in small things.",
+                duration: "1h 45m",
+                nowShowing: true
+            },
+            {
+                id: 9,
+                title: "Kesari Chapter 2",
+                genre: "Action",
+                rating: 8.2,
+                price: 12.50,
+                poster: "https://th.bing.com/th/id/OIP.H3QSHDe8hF7d2X7p2j-lHgHaD4?w=344&h=180&c=7&r=0&o=5&dpr=1.1&pid=1.7",
+                description: "The sequel to the hit action film about bravery and sacrifice.",
+                duration: "2h 35m",
+                nowShowing: true
+            },
+            {
+                id: 10,
+                title: "Sikandar",
+                genre: "Action",
+                rating: 7.8,
+                price: 11.25,
+                poster: "https://th.bing.com/th/id/OIP.cpHfv7ACUJZK_JRY-IyN0AHaEK?w=307&h=180&c=7&r=0&o=5&dpr=1.1&pid=1.7",
+                description: "A historical action film about a legendary warrior.",
+                duration: "2h 20m",
+                nowShowing: true
+            },
+            {
+                id: 11,
+                title: "Bhool Chuk Maaf",
+                genre: "Comedy",
+                rating: null,
+                price: null,
+                poster: "https://tse3.mm.bing.net/th?id=OIP.T295t7H2kjRPLbm_3bAY8QAAAA&w=200&h=300&c=7",
+                description: "A hilarious comedy about mistaken identities.",
+                duration: "1h 50m",
+                releaseDate: "May 6, 2023",
+                nowShowing: false
+            },
+            {
+                id: 12,
+                title: "Baaghi 4",
+                genre: "Action",
+                rating: null,
+                price: null,
+                poster: "https://th.bing.com/th/id/OIP.1eHtFjPJwguTIgMh4LlhyQHaEL?w=297&h=180&c=7&r=0&o=5&dpr=1.1&pid=1.7",
+                description: "The sequel to the blockbuster action film about a daring heist.",
+                duration: "2h 15m",
+                releaseDate: "June 10, 2023",
+                nowShowing: false
+            }
+        ];
+
+        // Theater Data
+        const theaters = [
+            {
+                id: 1,
+                name: "PVR Cinemas",
+                location: "Elante Mall, Industrial Area Phase-I, Chandigarh",
+                showtimes: ["10:00 AM", "1:30 PM", "5:00 PM", "8:30 PM"]
+            },
+            {
+                id: 2,
+                name: "Cinépolis Jagat",
+                location: "TDI Mall, Sector 17, Chandigarh",
+                showtimes: ["11:00 AM", "2:30 PM", "6:00 PM", "9:30 PM"]
+            },
+            {
+                id: 3,
+                name: "Wave Cinemas",
+                location: "City Emporium Mall, Industrial Area Phase-I, Chandigarh",
+                showtimes: ["9:30 AM", "12:45 PM", "4:15 PM", "7:45 PM"]
+            },
+            {
+                id: 4,
+                name: "DT Cinemas",
+                location: "IT Park, Chandigarh",
+                showtimes: ["10:30 AM", "2:00 PM", "5:30 PM", "9:00 PM"]
+            },
+            {
+                id: 5,
+                name: "Fun Cinemas",
+                location: "Dhillon Complex, Manimajra, Chandigarh",
+                showtimes: ["11:30 AM", "3:00 PM", "6:30 PM", "10:00 PM"]
+            }
+        ];
+
+        // Offers Data
+        const offers = [
+            {
+                id: 1,
+                title: "Weekday Special",
+                description: "Get 20% off on all movie tickets from Monday to Thursday",
+                code: "WEEKDAY20",
+                validUntil: "December 31, 2023"
+            },
+            {
+                id: 2,
+                title: "Student Discount",
+                description: "Students get 25% off with valid ID",
+                code: "STUDENT25",
+                validUntil: "Ongoing"
+            },
+            {
+                id: 3,
+                title: "Family Package",
+                description: "Buy 3 tickets and get 1 free for family movies",
+                code: "FAMILY4",
+                validUntil: "December 31, 2023"
+            },
+            {
+                id: 4,
+                title: "Early Bird Special",
+                description: "50% off on shows before 12 PM",
+                code: "EARLY50",
+                validUntil: "November 30, 2023"
+            }
+        ];
+
         // DOM Elements
+        const nowShowingSection = document.getElementById('now-showing');
+        const comingSoonSection = document.getElementById('coming-soon');
+        const theatersSection = document.getElementById('theaters');
+        const offersSection = document.getElementById('offers');
+        const movieGrid = document.querySelector('#now-showing .movie-grid');
+        const comingSoonGrid = document.querySelector('#coming-soon .movie-grid');
+        const theaterList = document.getElementById('theaterList');
+        const offersList = document.getElementById('offersList');
         const modal = document.getElementById('bookingModal');
-        const closeBtn = document.querySelector('.close-btn');
+        const loginModal = document.getElementById('loginModal');
+        const registerModal = document.getElementById('registerModal');
+        const closeBtns = document.querySelectorAll('.close-btn, .login-close');
         const bookBtns = document.querySelectorAll('.book-btn');
-        const showtimes = document.querySelectorAll('.showtime');
-        const seats = document.querySelectorAll('.seat:not(.occupied)');
-        const seatSelection = document.getElementById('seatSelection');
+        const navLinks = document.querySelectorAll('.nav-link');
+        const searchBtn = document.getElementById('searchBtn');
+        const searchInput = document.getElementById('searchInput');
+        const loginBtn = document.getElementById('loginBtn');
+        const registerBtn = document.getElementById('registerBtn');
+        const loginForm = document.getElementById('loginForm');
+        const registerForm = document.getElementById('registerForm');
+        const forgotPassword = document.getElementById('forgotPassword');
+        const notification = document.getElementById('notification');
+        const theaterSelection = document.getElementById('theaterSelection');
+        const seatsContainer = document.getElementById('seatsContainer');
         const confirmBookingBtn = document.getElementById('confirmBooking');
-        
+
         // Booking data
         let bookingData = {
-            movie: '',
-            theater: '',
-            showtime: '',
+            movie: null,
+            theater: null,
+            showtime: null,
             seats: [],
-            pricePerTicket: 12.99,
+            pricePerTicket: 0,
             total: 0
         };
 
-        // Open modal when Book Now button is clicked
-        bookBtns.forEach(btn => {
-            btn.addEventListener('click', function() {
-                bookingData.movie = this.getAttribute('data-movie');
-                document.getElementById('modalMovieTitle').textContent = bookingData.movie;
-                document.getElementById('summary-movie').textContent = bookingData.movie;
-                modal.style.display = 'block';
-                seatSelection.style.display = 'none';
+        // Current user
+        let currentUser = null;
+
+        // Initialize the page
+        function init() {
+            renderMovies();
+            renderTheaters();
+            renderOffers();
+            setupEventListeners();
+        }
+
+        // Render movies
+        function renderMovies() {
+            // Clear existing content
+            movieGrid.innerHTML = '';
+            comingSoonGrid.innerHTML = '';
+            
+            // Render now showing movies
+            movies.filter(movie => movie.nowShowing).forEach(movie => {
+                movieGrid.appendChild(createMovieCard(movie));
             });
-        });
-
-        // Close modal
-        closeBtn.addEventListener('click', function() {
-            modal.style.display = 'none';
-            resetBookingData();
-        });
-
-        window.addEventListener('click', function(event) {
-            if (event.target === modal) {
-                modal.style.display = 'none';
-                resetBookingData();
-            }
-        });
-
-        // Theater and showtime selection
-        showtimes.forEach(showtime => {
-            showtime.addEventListener('click', function() {
-                // Set theater and showtime
-                const theaterItem = this.closest('.theater-item');
-                bookingData.theater = theaterItem.querySelector('h3').textContent;
-                bookingData.showtime = this.getAttribute('data-time');
-                
-                // Update summary
-                document.getElementById('summary-theater').textContent = bookingData.theater;
-                document.getElementById('summary-showtime').textContent = bookingData.showtime;
-                
-                // Show seat selection
-                seatSelection.style.display = 'block';
-                
-                // Scroll to seat selection
-                seatSelection.scrollIntoView({ behavior: 'smooth' });
+            
+            // Render coming soon movies
+            movies.filter(movie => !movie.nowShowing).forEach(movie => {
+                comingSoonGrid.appendChild(createComingSoonCard(movie));
             });
-        });
+        }
 
-        // Seat selection
-        seats.forEach(seat => {
-            seat.addEventListener('click', function() {
-                const seatNumber = this.getAttribute('data-seat');
+        // Create movie card
+        function createMovieCard(movie) {
+            const card = document.createElement('div');
+            card.className = 'movie-card';
+            
+            card.innerHTML = `
+                <img src="${movie.poster}" alt="${movie.title} Poster" class="movie-poster">
+                <div class="movie-info">
+                    <h3 class="movie-title">${movie.title}</h3>
+                    <div class="movie-meta">
+                        <span>${movie.genre}</span>
+                        <span class="movie-rating">★ ${movie.rating}</span>
+                    </div>
+                    <div class="movie-actions">
+                        <span class="price">$${movie.price.toFixed(2)}</span>
+                        <button class="btn btn-primary btn-sm book-btn" data-movie-id="${movie.id}">Book Now</button>
+                    </div>
+                </div>
+            `;
+            
+            return card;
+        }
+
+        // Create coming soon card
+        function createComingSoonCard(movie) {
+            const card = document.createElement('div');
+            card.className = 'movie-card';
+            
+            card.innerHTML = `
+                <img src="${movie.poster}" alt="${movie.title} Poster" class="movie-poster">
+                <div class="movie-info">
+                    <h3 class="movie-title">${movie.title}</h3>
+                    <div class="movie-meta">
+                        <span>${movie.genre}</span>
+                        <span>${movie.releaseDate}</span>
+                    </div>
+                    <div class="movie-actions">
+                        <button class="btn btn-outline btn-sm notify-btn" data-movie-id="${movie.id}" style="border-color: #0f4c81; color: #0f4c81;">Notify Me</button>
+                    </div>
+                </div>
+            `;
+            
+            return card;
+        }
+
+        // Render theaters
+        function renderTheaters() {
+            theaterList.innerHTML = '';
+            
+            theaters.forEach(theater => {
+                const theaterElement = document.createElement('div');
+                theaterElement.className = 'theater-card';
+                theaterElement.style.background = 'white';
+                theaterElement.style.padding = '1rem';
+                theaterElement.style.borderRadius = '8px';
+                theaterElement.style.boxShadow = '0 4px 8px rgba(0,0,0,0.1)';
+                theaterElement.style.marginBottom = '1rem';
                 
-                if (this.classList.contains('selected')) {
-                    // Deselect seat
-                    this.classList.remove('selected');
-                    bookingData.seats = bookingData.seats.filter(s => s !== seatNumber);
+                theaterElement.innerHTML = `
+                    <h3>${theater.name}</h3>
+                    <p>${theater.location}</p>
+                    <div class="showtimes" style="margin-top: 0.5rem;">
+                        ${theater.showtimes.map(time => `<span class="showtime" style="margin-right: 0.5rem; margin-bottom: 0.5rem;">${time}</span>`).join('')}
+                    </div>
+                `;
+                
+                theaterList.appendChild(theaterElement);
+            });
+        }
+
+        // Render offers
+        function renderOffers() {
+            offersList.innerHTML = '';
+            
+            offers.forEach(offer => {
+                const offerElement = document.createElement('div');
+                offerElement.className = 'offer-card';
+                offerElement.style.background = 'white';
+                offerElement.style.padding = '1rem';
+                offerElement.style.borderRadius = '8px';
+                offerElement.style.boxShadow = '0 4px 8px rgba(0,0,0,0.1)';
+                offerElement.style.marginBottom = '1rem';
+                
+                offerElement.innerHTML = `
+                    <h3>${offer.title}</h3>
+                    <p>${offer.description}</p>
+                    <div style="margin-top: 0.5rem;">
+                        <strong>Code:</strong> ${offer.code}<br>
+                        <strong>Valid Until:</strong> ${offer.validUntil}
+                    </div>
+                    <button class="btn btn-primary btn-sm" style="margin-top: 0.5rem;" data-offer-code="${offer.code}">Copy Code</button>
+                `;
+                
+                offersList.appendChild(offerElement);
+            });
+        }
+
+        // Setup event listeners
+        function setupEventListeners() {
+            // Navigation links
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const section = this.getAttribute('data-section');
+                    
+                    // Hide all sections
+                    nowShowingSection.style.display = 'none';
+                    comingSoonSection.style.display = 'none';
+                    theatersSection.style.display = 'none';
+                    offersSection.style.display = 'none';
+                    
+                    // Show selected section
+                    if (section === 'now-showing') {
+                        nowShowingSection.style.display = 'block';
+                        comingSoonSection.style.display = 'block';
+                    } else if (section === 'theaters') {
+                        theatersSection.style.display = 'block';
+                    } else if (section === 'offers') {
+                        offersSection.style.display = 'block';
+                    }
+                });
+            });
+            
+            // Search functionality
+            searchBtn.addEventListener('click', performSearch);
+            searchInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    performSearch();
+                }
+            });
+            
+            // Login/Register buttons
+            loginBtn.addEventListener('click', () => loginModal.style.display = 'block');
+            registerBtn.addEventListener('click', () => registerModal.style.display = 'block');
+            
+            // Close modals
+            closeBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    modal.style.display = 'none';
+                    loginModal.style.display = 'none';
+                    registerModal.style.display = 'none';
+                    resetBookingData();
+                });
+            });
+            
+            window.addEventListener('click', function(event) {
+                if (event.target === modal) {
+                    modal.style.display = 'none';
+                    resetBookingData();
+                }
+                if (event.target === loginModal) {
+                    loginModal.style.display = 'none';
+                }
+                if (event.target === registerModal) {
+                    registerModal.style.display = 'none';
+                }
+            });
+            
+            // Login form
+            loginForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const email = document.getElementById('loginEmail').value;
+                const password = document.getElementById('loginPassword').value;
+                
+                // Simple validation
+                if (email && password) {
+                    currentUser = { email };
+                    showNotification('Login successful!');
+                    loginModal.style.display = 'none';
+                    loginBtn.textContent = 'My Account';
+                    registerBtn.style.display = 'none';
                 } else {
-                    // Select seat
-                    this.classList.add('selected');
-                    bookingData.seats.push(seatNumber);
+                    showNotification('Please fill in all fields', 'error');
+                }
+            });
+            
+            // Register form
+            registerForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const name = document.getElementById('registerName').value;
+                const email = document.getElementById('registerEmail').value;
+                const password = document.getElementById('registerPassword').value;
+                const confirm = document.getElementById('registerConfirm').value;
+                
+                // Simple validation
+                if (!name || !email || !password || !confirm) {
+                    showNotification('Please fill in all fields', 'error');
+                    return;
                 }
                 
-                // Update summary
-                updateBookingSummary();
+                if (password !== confirm) {
+                    showNotification('Passwords do not match', 'error');
+                    return;
+                }
+                
+                currentUser = { name, email };
+                showNotification('Registration successful!');
+                registerModal.style.display = 'none';
+                loginBtn.textContent = 'My Account';
+                registerBtn.style.display = 'none';
             });
-        });
+            
+            // Forgot password
+            forgotPassword.addEventListener('click', function() {
+                showNotification('Password reset link sent to your email!');
+            });
+            
+            // Book now buttons (delegated event)
+            document.addEventListener('click', function(e) {
+                if (e.target.classList.contains('book-btn')) {
+                    const movieId = parseInt(e.target.getAttribute('data-movie-id'));
+                    const movie = movies.find(m => m.id === movieId);
+                    
+                    if (movie) {
+                        openBookingModal(movie);
+                    }
+                }
+                
+                if (e.target.classList.contains('notify-btn')) {
+                    const movieId = parseInt(e.target.getAttribute('data-movie-id'));
+                    const movie = movies.find(m => m.id === movieId);
+                    
+                    if (movie) {
+                        showNotification(`We'll notify you when "${movie.title}" is available!`);
+                    }
+                }
+                
+                if (e.target.hasAttribute('data-offer-code')) {
+                    const code = e.target.getAttribute('data-offer-code');
+                    navigator.clipboard.writeText(code);
+                    showNotification(`Copied code: ${code}`);
+                }
+            });
+            
+            // Confirm booking
+            confirmBookingBtn.addEventListener('click', confirmBooking);
+        }
+
+        // Open booking modal
+        function openBookingModal(movie) {
+            bookingData.movie = movie;
+            bookingData.pricePerTicket = movie.price;
+            
+            document.getElementById('modalMovieTitle').textContent = movie.title;
+            document.getElementById('summary-movie').textContent = movie.title;
+            document.getElementById('summary-price').textContent = `$${movie.price.toFixed(2)}`;
+            
+            // Populate theaters
+            theaterSelection.innerHTML = '';
+            
+            theaters.forEach(theater => {
+                const theaterItem = document.createElement('div');
+                theaterItem.className = 'theater-item';
+                
+                theaterItem.innerHTML = `
+                    <div class="theater-info">
+                        <h3>${theater.name}</h3>
+                        <p>${theater.location}</p>
+                    </div>
+                    <div class="showtimes">
+                        ${theater.showtimes.map(time => 
+                            `<div class="showtime" data-time="${time}" data-theater-id="${theater.id}">${time}</div>`
+                        ).join('')}
+                    </div>
+                `;
+                
+                theaterSelection.appendChild(theaterItem);
+            });
+            
+            // Show modal
+            modal.style.display = 'block';
+            seatSelection.style.display = 'none';
+            
+            // Setup showtime selection
+            document.querySelectorAll('.showtime').forEach(showtime => {
+                showtime.addEventListener('click', function() {
+                    // Remove previous selections
+                    document.querySelectorAll('.showtime.selected').forEach(el => {
+                        el.classList.remove('selected');
+                    });
+                    
+                    // Select this showtime
+                    this.classList.add('selected');
+                    
+                    const theaterId = parseInt(this.getAttribute('data-theater-id'));
+                    const theater = theaters.find(t => t.id === theaterId);
+                    
+                    if (theater) {
+                        bookingData.theater = theater.name;
+                        bookingData.showtime = this.getAttribute('data-time');
+                        
+                        document.getElementById('summary-theater').textContent = theater.name;
+                        document.getElementById('summary-showtime').textContent = this.getAttribute('data-time');
+                        
+                        // Generate seats
+                        generateSeats();
+                        
+                        // Show seat selection
+                        seatSelection.style.display = 'block';
+                        
+                        // Scroll to seat selection
+                        seatSelection.scrollIntoView({ behavior: 'smooth' });
+                    }
+                });
+            });
+        }
+
+        // Generate seats
+        function generateSeats() {
+            seatsContainer.innerHTML = '';
+            
+            // Create 6 rows (A-F)
+            for (let row = 0; row < 6; row++) {
+                const rowLetter = String.fromCharCode(65 + row);
+                const rowElement = document.createElement('div');
+                rowElement.className = 'seat-row';
+                
+                // Create 8 seats per row
+                for (let seatNum = 1; seatNum <= 8; seatNum++) {
+                    const seatId = `${rowLetter}${seatNum}`;
+                    const seatElement = document.createElement('div');
+                    seatElement.className = 'seat';
+                    seatElement.textContent = seatId;
+                    seatElement.setAttribute('data-seat', seatId);
+                    
+                    // Randomly occupy some seats (20% chance)
+                    if (Math.random() < 0.2) {
+                        seatElement.classList.add('occupied');
+                    }
+                    
+                    seatElement.addEventListener('click', function() {
+                        if (!this.classList.contains('occupied')) {
+                            this.classList.toggle('selected');
+                            
+                            // Update selected seats
+                            const seatId = this.getAttribute('data-seat');
+                            const index = bookingData.seats.indexOf(seatId);
+                            
+                            if (index === -1) {
+                                bookingData.seats.push(seatId);
+                            } else {
+                                bookingData.seats.splice(index, 1);
+                            }
+                            
+                            updateBookingSummary();
+                        }
+                    });
+                    
+                    rowElement.appendChild(seatElement);
+                }
+                
+                seatsContainer.appendChild(rowElement);
+            }
+        }
 
         // Update booking summary
         function updateBookingSummary() {
@@ -1035,38 +1512,114 @@
         }
 
         // Confirm booking
-        confirmBookingBtn.addEventListener('click', function() {
-            if (bookingData.seats.length === 0) {
-                alert('Please select at least one seat.');
+        function confirmBooking() {
+            if (!currentUser) {
+                showNotification('Please login to book tickets', 'error');
+                loginModal.style.display = 'block';
                 return;
             }
             
-            alert(`Booking confirmed!\n\nMovie: ${bookingData.movie}\nTheater: ${bookingData.theater}\nShowtime: ${bookingData.showtime}\nSeats: ${bookingData.seats.join(', ')}\nTotal: $${bookingData.total.toFixed(2)}`);
+            if (!bookingData.theater || !bookingData.showtime) {
+                showNotification('Please select a theater and showtime', 'error');
+                return;
+            }
             
+            if (bookingData.seats.length === 0) {
+                showNotification('Please select at least one seat', 'error');
+                return;
+            }
+            
+            const message = `
+                Booking confirmed!\n\n
+                Movie: ${bookingData.movie.title}\n
+                Theater: ${bookingData.theater}\n
+                Showtime: ${bookingData.showtime}\n
+                Seats: ${bookingData.seats.join(', ')}\n
+                Total: $${bookingData.total.toFixed(2)}\n\n
+                Thank you for your booking!
+            `;
+            
+            showNotification(message.replace(/\n/g, '<br>'));
             modal.style.display = 'none';
             resetBookingData();
-        });
+        }
 
         // Reset booking data
         function resetBookingData() {
             bookingData = {
-                movie: '',
-                theater: '',
-                showtime: '',
+                movie: null,
+                theater: null,
+                showtime: null,
                 seats: [],
-                pricePerTicket: 12.99,
+                pricePerTicket: 0,
                 total: 0
             };
             
             // Reset UI
-            document.querySelectorAll('.seat.selected').forEach(seat => {
-                seat.classList.remove('selected');
-            });
-            
+            document.getElementById('summary-movie').textContent = 'None selected';
+            document.getElementById('summary-theater').textContent = 'None selected';
+            document.getElementById('summary-showtime').textContent = 'None selected';
             document.getElementById('summary-seats').textContent = 'None selected';
             document.getElementById('summary-total').textContent = '$0.00';
             seatSelection.style.display = 'none';
         }
+
+        // Perform search
+        function performSearch() {
+            const query = searchInput.value.toLowerCase().trim();
+            
+            if (!query) {
+                showNotification('Please enter a search term', 'error');
+                return;
+            }
+            
+            // Search movies
+            const movieResults = movies.filter(movie => 
+                movie.title.toLowerCase().includes(query) || 
+                movie.genre.toLowerCase().includes(query)
+            );
+            
+            // Search theaters
+            const theaterResults = theaters.filter(theater => 
+                theater.name.toLowerCase().includes(query) || 
+                theater.location.toLowerCase().includes(query)
+            );
+            
+            // Show results
+            if (movieResults.length > 0 || theaterResults.length > 0) {
+                let message = '';
+                
+                if (movieResults.length > 0) {
+                    message += `<strong>Movies (${movieResults.length}):</strong><br>`;
+                    message += movieResults.map(m => m.title).join(', ');
+                    message += '<br><br>';
+                }
+                
+                if (theaterResults.length > 0) {
+                    message += `<strong>Theaters (${theaterResults.length}):</strong><br>`;
+                    message += theaterResults.map(t => t.name).join(', ');
+                }
+                
+                showNotification(message);
+            } else {
+                showNotification('No results found for your search', 'error');
+            }
+        }
+
+        // Show notification
+        function showNotification(message, type = 'success') {
+            notification.innerHTML = message;
+            notification.style.display = 'block';
+            notification.style.background = type === 'error' ? '#ff6b6b' : '#4CAF50';
+            
+            // Hide after 3 seconds
+            setTimeout(() => {
+                notification.style.display = 'none';
+            }, 3000);
+        }
+
+        // Initialize the app
+        init();
     </script>
 </body>
 </html>
