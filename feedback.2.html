@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Planr -  Feedback Portal</title>
+    <title>Planr - Feedback Management</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         /* CSS Reset & Base Styles */
@@ -61,13 +61,47 @@
             background-clip: text;
         }
         
-        /* Main Content */
+        /* Navigation Tabs */
+        .tabs {
+            display: flex;
+            margin-bottom: 30px;
+            border-bottom: 1px solid #333;
+        }
+        
+        .tab {
+            padding: 12px 24px;
+            cursor: pointer;
+            font-weight: 600;
+            color: #b0b0b0;
+            transition: all 0.3s;
+            border-bottom: 3px solid transparent;
+        }
+        
+        .tab.active {
+            color: #7c4dff;
+            border-bottom: 3px solid #7c4dff;
+        }
+        
+        .tab:hover:not(.active) {
+            color: #d0d0d0;
+        }
+        
+        /* Tab Content */
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        /* Feedback Form Styles */
         .feedback-section {
             background-color: #1e1e1e;
             border-radius: 12px;
             box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
             padding: 40px;
-            margin-top: 40px;
+            margin-top: 20px;
             border: 1px solid #333;
         }
         
@@ -277,6 +311,82 @@
             color: #a5d6a7;
         }
         
+        /* View Feedback Section */
+        .feedback-list {
+            margin-top: 30px;
+        }
+        
+        .feedback-item {
+            background-color: #1e1e1e;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border: 1px solid #333;
+            transition: all 0.3s;
+        }
+        
+        .feedback-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .feedback-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #333;
+        }
+        
+        .feedback-name {
+            font-weight: 600;
+            font-size: 18px;
+            color: #7c4dff;
+        }
+        
+        .feedback-date {
+            color: #b0b0b0;
+            font-size: 14px;
+        }
+        
+        .feedback-rating {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .feedback-rating-emoji {
+            font-size: 24px;
+            margin-right: 10px;
+        }
+        
+        .feedback-rating-text {
+            color: #d0d0d0;
+        }
+        
+        .feedback-type {
+            display: inline-block;
+            padding: 4px 10px;
+            background-color: #333;
+            border-radius: 20px;
+            font-size: 12px;
+            margin-bottom: 10px;
+            color: #b0b0b0;
+        }
+        
+        .feedback-message {
+            color: #e0e0e0;
+            line-height: 1.7;
+        }
+        
+        .no-feedback {
+            text-align: center;
+            padding: 40px;
+            color: #b0b0b0;
+            font-size: 16px;
+        }
+        
         /* Footer */
         footer {
             text-align: center;
@@ -323,6 +433,21 @@
             .section-title {
                 font-size: 28px;
             }
+            
+            .tabs {
+                justify-content: center;
+            }
+            
+            .tab {
+                padding: 10px 15px;
+                font-size: 14px;
+            }
+            
+            .feedback-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 8px;
+            }
         }
         
         @media (max-width: 480px) {
@@ -341,6 +466,10 @@
                 font-size: 16px;
                 left: 12px;
             }
+            
+            .footer-links {
+                flex-wrap: wrap;
+            }
         }
     </style>
 </head>
@@ -358,102 +487,127 @@
     </header>
     
     <main class="container">
-        <section class="feedback-section">
-            <h1 class="section-title">Feedback Portal</h1>
-            <p class="section-subtitle">We appreciate you taking the time to share your thoughts.</p>
-            
-            <form id="feedbackForm" class="feedback-form">
-                <div class="form-group">
-                    <label for="name">Full Name</label>
-                    <div class="input-wrapper">
-                        <i class="fas fa-user input-icon"></i>
-                        <input type="text" id="name" name="name" placeholder="Enter your name" required>
-                    </div>
-                </div>
+        <div class="tabs">
+            <div class="tab active" data-tab="submit-feedback">Submit Feedback</div>
+            <div class="tab" data-tab="view-feedback">View Feedback</div>
+        </div>
+        
+        <!-- Submit Feedback Tab -->
+        <div id="submit-feedback" class="tab-content active">
+            <section class="feedback-section">
+                <h1 class="section-title">Feedback Portal</h1>
+                <p class="section-subtitle">We appreciate you taking the time to share your thoughts.</p>
                 
-                <div class="form-group">
-                    <label for="email">Email Address</label>
-                    <div class="input-wrapper">
-                        <i class="fas fa-envelope input-icon"></i>
-                        <input type="email" id="email" name="email" placeholder="Enter your email" required>
-                    </div>
-                </div>
-                
-                <div class="form-group">
-                    <label>How would you rate your overall experience with Planr?</label>
-                    <div class="rating-container">
-                        <div class="rating-option">
-                            <input type="radio" id="rating-5" name="rating" value="5">
-                            <div class="rating-content">
-                                <span class="rating-emoji">😍</span>
-                                <span class="rating-text">Excellent</span>
-                            </div>
-                        </div>
-                        <div class="rating-option">
-                            <input type="radio" id="rating-4" name="rating" value="4">
-                            <div class="rating-content">
-                                <span class="rating-emoji">😊</span>
-                                <span class="rating-text">Good</span>
-                            </div>
-                        </div>
-                        <div class="rating-option">
-                            <input type="radio" id="rating-3" name="rating" value="3">
-                            <div class="rating-content">
-                                <span class="rating-emoji">😐</span>
-                                <span class="rating-text">Average</span>
-                            </div>
-                        </div>
-                        <div class="rating-option">
-                            <input type="radio" id="rating-2" name="rating" value="2">
-                            <div class="rating-content">
-                                <span class="rating-emoji">😕</span>
-                                <span class="rating-text">Below Avg</span>
-                            </div>
-                        </div>
-                        <div class="rating-option">
-                            <input type="radio" id="rating-1" name="rating" value="1">
-                            <div class="rating-content">
-                                <span class="rating-emoji">😞</span>
-                                <span class="rating-text">Poor</span>
-                            </div>
+                <form id="feedbackForm" class="feedback-form">
+                    <div class="form-group">
+                        <label for="name">Full Name</label>
+                        <div class="input-wrapper">
+                            <i class="fas fa-user input-icon"></i>
+                            <input type="text" id="name" name="name" placeholder="Enter your name" required>
                         </div>
                     </div>
-                </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <div class="input-wrapper">
+                            <i class="fas fa-envelope input-icon"></i>
+                            <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>How would you rate your overall experience with Planr?</label>
+                        <div class="rating-container">
+                            <div class="rating-option">
+                                <input type="radio" id="rating-5" name="rating" value="5">
+                                <div class="rating-content">
+                                    <span class="rating-emoji">😍</span>
+                                    <span class="rating-text">Excellent</span>
+                                </div>
+                            </div>
+                            <div class="rating-option">
+                                <input type="radio" id="rating-4" name="rating" value="4">
+                                <div class="rating-content">
+                                    <span class="rating-emoji">😊</span>
+                                    <span class="rating-text">Good</span>
+                                </div>
+                            </div>
+                            <div class="rating-option">
+                                <input type="radio" id="rating-3" name="rating" value="3">
+                                <div class="rating-content">
+                                    <span class="rating-emoji">😐</span>
+                                    <span class="rating-text">Average</span>
+                                </div>
+                            </div>
+                            <div class="rating-option">
+                                <input type="radio" id="rating-2" name="rating" value="2">
+                                <div class="rating-content">
+                                    <span class="rating-emoji">😕</span>
+                                    <span class="rating-text">Below Avg</span>
+                                </div>
+                            </div>
+                            <div class="rating-option">
+                                <input type="radio" id="rating-1" name="rating" value="1">
+                                <div class="rating-content">
+                                    <span class="rating-emoji">😞</span>
+                                    <span class="rating-text">Poor</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="feedback-type">Feedback Category</label>
+                        <div class="input-wrapper">
+                            <i class="fas fa-tag input-icon"></i>
+                            <select id="feedback-type" name="feedback-type">
+                                <option value="general">General Feedback</option>
+                                
+                                <option value="feature">Feature Request</option>
+                                <option value="event">Event Listing</option>
+                                <option value="ticketing">Ticketing System</option>
+                              
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="message">Detailed Feedback</label>
+                        <textarea id="message" name="message" placeholder="Please provide specific details about your experience, suggestions for improvement, or any issues you encountered..." required></textarea>
+                    </div>
+                    
+                    <button type="submit" class="submit-btn">
+                        <i class="fas fa-paper-plane" style="margin-right: 8px;"></i> Submit Feedback
+                    </button>
+                </form>
                 
-                <div class="form-group">
-                    <label for="feedback-type">Feedback Category</label>
-                    <div class="input-wrapper">
-                        <i class="fas fa-tag input-icon"></i>
-                        <select id="feedback-type" name="feedback-type">
-                            <option value="general">General Feedback</option>
-                            
-                            <option value="feature">Feature Request</option>
-                            <option value="event">Event Listing</option>
-                            <option value="ticketing">Ticketing System</option>
-                            
-                        </select>
+                <div id="confirmationMessage" class="confirmation-message">
+                    <div class="confirmation-icon">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <h3>Thank You for Your Valuable Feedback!</h3>
+                    <p>We sincerely appreciate you taking the time to share your experience with Planr.</p>
+                    
+                </div>
+            </section>
+        </div>
+        
+        <!-- View Feedback Tab -->
+        <div id="view-feedback" class="tab-content">
+            <section class="feedback-section">
+                <h1 class="section-title">Feedback History</h1>
+                <p class="section-subtitle">Review all submitted feedback entries below.</p>
+                
+                <div id="feedbackList" class="feedback-list">
+                    <!-- Feedback items will be dynamically inserted here -->
+                    <div class="no-feedback">
+                        <i class="fas fa-comment-slash" style="font-size: 48px; margin-bottom: 20px; color: #444;"></i>
+                        <p>No feedback submissions yet.</p>
+                        <p>Submit your first feedback using the "Submit Feedback" tab.</p>
                     </div>
                 </div>
-                
-                <div class="form-group">
-                    <label for="message">Detailed Feedback</label>
-                    <textarea id="message" name="message" placeholder="Please provide specific details about your experience, suggestions for improvement, or any issues you encountered..." required></textarea>
-                </div>
-                
-                <button type="submit" class="submit-btn">
-                    <i class="fas fa-paper-plane" style="margin-right: 8px;"></i> Submit Feedback
-                </button>
-            </form>
-            
-            <div id="confirmationMessage" class="confirmation-message">
-                <div class="confirmation-icon">
-                    <i class="fas fa-check-circle"></i>
-                </div>
-                <h3>Thank You for Your Valuable Feedback!</h3>
-                <p>We sincerely appreciate you taking the time to share your experience with Planr.</p>
-                
-            </div>
-        </section>
+            </section>
+        </div>
     </main>
     
     <footer>
@@ -470,6 +624,46 @@
     </footer>
     
     <script>
+        // Tab Switching Functionality
+        document.querySelectorAll('.tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                // Remove active class from all tabs and contents
+                document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+                
+                // Add active class to clicked tab and corresponding content
+                tab.classList.add('active');
+                const tabId = tab.getAttribute('data-tab');
+                document.getElementById(tabId).classList.add('active');
+                
+                // If viewing feedback tab, refresh the list
+                if (tabId === 'view-feedback') {
+                    displayFeedbackList();
+                }
+            });
+        });
+        
+        // Rating Option Click Handlers
+        document.querySelectorAll('.rating-option').forEach(option => {
+            option.addEventListener('click', function() {
+                const radio = this.querySelector('input[type="radio"]');
+                radio.checked = true;
+                
+                // Update styles for all options
+                document.querySelectorAll('.rating-option').forEach(opt => {
+                    opt.style.backgroundColor = '#252525';
+                    opt.querySelector('.rating-emoji').style.transform = 'scale(1)';
+                    opt.querySelector('.rating-text').style.color = '';
+                });
+                
+                // Style the selected option
+                this.style.backgroundColor = '#333';
+                this.querySelector('.rating-emoji').style.transform = 'scale(1.2)';
+                this.querySelector('.rating-text').style.color = '#7c4dff';
+            });
+        });
+        
+        // Form Submission
         document.getElementById('feedbackForm').addEventListener('submit', function(e) {
             e.preventDefault();
             
@@ -491,17 +685,18 @@
             }
             
             // Get form values
-            const formData = {
+            const feedbackData = {
+                id: Date.now().toString(),
                 name,
                 email,
                 rating: document.querySelector('input[name="rating"]:checked')?.value || 'Not specified',
                 feedbackType: document.getElementById('feedback-type').value,
                 message,
-                timestamp: new Date().toISOString()
+                date: new Date().toLocaleString()
             };
             
-            // In a real application, you would send the data to your backend
-            console.log('Feedback submitted:', formData);
+            // Save feedback to localStorage
+            saveFeedback(feedbackData);
             
             // Simulate API call with timeout
             document.querySelector('.submit-btn').innerHTML = '<i class="fas fa-spinner fa-spin" style="margin-right: 8px;"></i> Processing...';
@@ -524,29 +719,99 @@
                     block: 'center'
                 });
                 
-                // Analytics event (in a real app)
-                console.log('Feedback successfully recorded.');
+                console.log('Feedback successfully saved.');
             }, 1500);
         });
-
-        // Add click handlers for rating options to improve UX
-        document.querySelectorAll('.rating-option').forEach(option => {
-            option.addEventListener('click', function() {
-                const radio = this.querySelector('input[type="radio"]');
-                radio.checked = true;
+        
+        // Save feedback to localStorage
+        function saveFeedback(feedback) {
+            let feedbacks = JSON.parse(localStorage.getItem('planrFeedbacks')) || [];
+            feedbacks.unshift(feedback); // Add new feedback at beginning of array
+            localStorage.setItem('planrFeedbacks', JSON.stringify(feedbacks));
+        }
+        
+        // Display feedback list
+        function displayFeedbackList() {
+            const feedbackList = document.getElementById('feedbackList');
+            const feedbacks = JSON.parse(localStorage.getItem('planrFeedbacks')) || [];
+            
+            if (feedbacks.length === 0) {
+                feedbackList.innerHTML = `
+                    <div class="no-feedback">
+                        <i class="fas fa-comment-slash" style="font-size: 48px; margin-bottom: 20px; color: #444;"></i>
+                        <p>No feedback submissions yet.</p>
+                        <p>Submit your first feedback using the "Submit Feedback" tab.</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            feedbackList.innerHTML = '';
+            
+            feedbacks.forEach(feedback => {
+                const emoji = getRatingEmoji(feedback.rating);
+                const typeClass = getTypeClass(feedback.feedbackType);
                 
-                // Update styles for all options
-                document.querySelectorAll('.rating-option').forEach(opt => {
-                    opt.style.backgroundColor = '#252525';
-                    opt.querySelector('.rating-emoji').style.transform = 'scale(1)';
-                    opt.querySelector('.rating-text').style.color = '';
-                });
+                const feedbackItem = document.createElement('div');
+                feedbackItem.className = 'feedback-item';
+                feedbackItem.innerHTML = `
+                    <div class="feedback-header">
+                        <div class="feedback-name">${feedback.name}</div>
+                        <div class="feedback-date">${feedback.date}</div>
+                    </div>
+                    <div class="feedback-rating">
+                        <div class="feedback-rating-emoji">${emoji}</div>
+                        <div class="feedback-rating-text">Rating: ${feedback.rating}/5</div>
+                    </div>
+                    <div class="feedback-type ${typeClass}">${formatFeedbackType(feedback.feedbackType)}</div>
+                    <div class="feedback-message">${feedback.message}</div>
+                `;
                 
-                // Style the selected option
-                this.style.backgroundColor = '#333';
-                this.querySelector('.rating-emoji').style.transform = 'scale(1.2)';
-                this.querySelector('.rating-text').style.color = '#7c4dff';
+                feedbackList.appendChild(feedbackItem);
             });
+        }
+        
+        // Helper function to get emoji for rating
+        function getRatingEmoji(rating) {
+            const emojis = {
+                '1': '😞',
+                '2': '😕',
+                '3': '😐',
+                '4': '😊',
+                '5': '😍'
+            };
+            return emojis[rating] || '❓';
+        }
+        
+        // Helper function to format feedback type
+        function formatFeedbackType(type) {
+            const types = {
+                'general': 'General Feedback',
+                'bug': 'Bug Report',
+                'feature': 'Feature Request',
+                'event': 'Event Management',
+                'ticketing': 'Ticketing System',
+                'uiux': 'UI/UX Experience'
+            };
+            return types[type] || type;
+        }
+        
+        // Helper function to get CSS class for feedback type
+        function getTypeClass(type) {
+            const classes = {
+                'general': 'type-general',
+                'bug': 'type-bug',
+                'feature': 'type-feature',
+                'event': 'type-event',
+                'ticketing': 'type-ticketing',
+                'uiux': 'type-uiux'
+            };
+            return classes[type] || '';
+        }
+        
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', () => {
+            // Add any initialization code here if needed
         });
     </script>
 </body>
