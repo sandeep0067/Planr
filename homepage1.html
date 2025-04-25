@@ -2,8 +2,11 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    
     <script src="https://accounts.google.com/gsi/client" async defer></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=">
+
     <title>Planr - Ticket Booking</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
@@ -2379,7 +2382,7 @@ footer {
                 <h2 class="fw-bold mb-4">Never Miss an Event</h2>
                 <p class="mb-4">Subscribe to our newsletter and be the first to know about upcoming events and exclusive offers.</p>
                 <div class="input-group mb-3 mx-auto" style="max-width: 500px;">
-                    <input type="email" class="form-control newsletter-input" placeholder="Your email address" >
+                    <input type="email" class="form-control newsletter-input" placeholder="Your email address"name="email" >
                     <button class="btn btn-primary newsletter-btn" type="button">Subscribe</button>
                 </div>
             </div>
@@ -2475,10 +2478,10 @@ footer {
                     <div class="divider">or continue with email</div>
                     <form>
                         <div class="form-group">
-                            <input type="email" class="form-control" placeholder="Email Address" required>
+                            <input type="email" class="form-control" placeholder="Email Address" required name="email">
                         </div>
                         <div class="form-group">
-                            <input type="password" class="form-control" placeholder="Password" required>
+                            <input type="password" class="form-control" placeholder="Password" required name="email">
                         </div>
                         <div class="forgot-password">
                             <a href="#">Forgot password?</a>
@@ -2498,13 +2501,13 @@ footer {
                     <div class="divider">or register with email</div>
                     <form>
                         <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Full Name" required>
+                            <input type="text" class="form-control" placeholder="Full Name" required name="email">
                         </div>
                         <div class="form-group">
-                            <input type="email" class="form-control" placeholder="Email Address" required>
+                            <input type="email" class="form-control" placeholder="Email Address" required name="email">
                         </div>
                         <div class="form-group">
-                            <input type="password" class="form-control" placeholder="Password" required>
+                            <input type="password" class="form-control" placeholder="Password" required name="email">
                         </div>
                         <button type="submit" class="auth-btn">Create Account</button>
                     </form>
@@ -2515,6 +2518,7 @@ footer {
                 <!-- Login Welcome Content -->
                 <!-- Login Welcome Content -->
 <div class="welcome-content login-welcome">
+    
     <h2>New Here?</h2>
     <p>Sign up and discover a great amount of new opportunities!</p>
     <button class="toggle-auth-btn" id="show-signup">Sign Up</button>
@@ -2608,97 +2612,86 @@ footer {
           <p class="feedback-subtitle">Help us improve your experience by sharing your thoughts.</p>
       </div>
       
-      <form class="feedback-form" id="feedbackForm">
-          <div class="form-group">
-              <label class="form-label" for="feedbackName">
-                  Your Name
-                  <span class="required-label">Required</span>
-              </label>
-              <input type="text" id="feedbackName" class="form-input" placeholder="Enter your name">
-              <div class="error-message" id="nameError">Please enter your name</div>
-          </div>
-          
-          <div class="form-group">
-              <label class="form-label" for="feedbackEmail">
-                  Email Address
-                  <span class="required-label">Required</span>
-              </label>
-              <input type="email" id="feedbackEmail" class="form-input" placeholder="Enter your email address">
-              <div class="error-message" id="emailError">Please enter a valid email address</div>
-          </div>
-          
-          <div class="form-group">
-              <label class="form-label">
-                  How would you rate your experience?
-                  <span class="required-label">Required</span>
-              </label>
-              <div class="rating-group">
-                  <div class="rating-option">
-                      <input type="radio" name="feedbackRating" id="rating1" value="1" class="rating-input">
-                      <label for="rating1" class="rating-label">1</label>
-                  </div>
-                  <div class="rating-option">
-                      <input type="radio" name="feedbackRating" id="rating2" value="2" class="rating-input">
-                      <label for="rating2" class="rating-label">2</label>
-                  </div>
-                  <div class="rating-option">
-                      <input type="radio" name="feedbackRating" id="rating3" value="3" class="rating-input">
-                      <label for="rating3" class="rating-label">3</label>
-                  </div>
-                  <div class="rating-option">
-                      <input type="radio" name="feedbackRating" id="rating4" value="4" class="rating-input">
-                      <label for="rating4" class="rating-label">4</label>
-                  </div>
-                  <div class="rating-option">
-                      <input type="radio" name="feedbackRating" id="rating5" value="5" class="rating-input">
-                      <label for="rating5" class="rating-label">5</label>
-                  </div>
-              </div>
-              <div class="rating-text" id="feedbackRatingText"></div>
-              <div class="error-message" id="ratingError">Please select a rating</div>
-          </div>
-          
-          <div class="form-group">
-              <label class="form-label" for="feedbackType">
-                  Feedback Type
-                  <span class="required-label">Required</span>
-              </label>
-              <select id="feedbackType" class="form-select">
-                  <option value="">Select feedback type</option>
-                  <option value="suggestion">Suggestion</option>
-                  <option value="bug">Bug Report</option>
-                  <option value="compliment">Compliment</option>
-                  <option value="complaint">Complaint</option>
-                  <option value="other">Other</option>
-              </select>
-              <div class="error-message" id="typeError">Please select a feedback type</div>
-          </div>
-          
-          <div class="form-group">
-              <label class="form-label" for="feedbackText">
-                  Your Feedback
-                  <span class="required-label">Required</span>
-              </label>
-              <textarea id="feedbackText" class="form-textarea" placeholder="Please share your thoughts, suggestions, or issues..." maxlength="500"></textarea>
-              <div class="char-count"><span id="feedbackCurrentCount">0</span>/500</div>
-              <div class="error-message" id="feedbackError">Please enter your feedback</div>
-          </div>
-          
-          <button type="submit" class="feedback-submit" id="feedbackSubmitBtn">
-              <span class="feedback-spinner" id="feedbackSpinner"></span>
-              Submit Feedback
-          </button>
-      </form>
+      <form class="feedback-form" id="feedbackForm" action="https://formspree.io/f/meogojly" method="POST">
+        <!-- Name Field -->
+        <div class="form-group">
+            <label class="form-label" for="feedbackName">
+                Your Name <span class="required-label">Required</span>
+            </label>
+            <input type="text" id="feedbackName" name="name" class="form-input" placeholder="Enter your name" required>
+            <div class="error-message" id="nameError"></div>
+        </div>
+        
+        <!-- Email Field -->
+        <div class="form-group">
+            <label class="form-label" for="feedbackEmail">
+                Email Address <span class="required-label">Required</span>
+            </label>
+            <input type="email" id="feedbackEmail" name="email" class="form-input" placeholder="Enter your email address" required>
+            <div class="error-message" id="emailError"></div>
+        </div>
+        
+        <!-- Rating Field -->
+        <div class="form-group">
+            <label class="form-label">
+                How would you rate your experience? <span class="required-label">Required</span>
+            </label>
+            <div class="rating-group">
+                <div class="rating-option">
+                    <input type="radio" name="rating" id="rating1" value="1" class="rating-input" required>
+                    <label for="rating1" class="rating-label">1</label>
+                </div>
+                <div class="rating-option">
+                    <input type="radio" name="rating" id="rating2" value="2" class="rating-input" name="email">
+                    <label for="rating2" class="rating-label">2</label>
+                </div>
+                <div class="rating-option">
+                    <input type="radio" name="rating" id="rating3" value="3" class="rating-input"name="email">
+                    <label for="rating3" class="rating-label">3</label>
+                </div>
+                <div class="rating-option">
+                    <input type="radio" name="rating" id="rating4" value="4" class="rating-input"name="email">
+                    <label for="rating4" class="rating-label">4</label>
+                </div>
+                <div class="rating-option">
+                    <input type="radio" name="rating" id="rating5" value="5" class="rating-input"name="email">
+                    <label for="rating5" class="rating-label">5</label>
+                </div>
+                <!-- Repeat for 2-5 with same name="rating" -->
+            </div>
+            <div class="error-message" id="ratingError"></div>
+        </div>
+        
+        <!-- Feedback Type -->
+        <div class="form-group">
+            <label class="form-label" for="feedbackType">
+                Feedback Type <span class="required-label">Required</span>
+            </label>
+            <select id="feedbackType" name="feedback_type" class="form-select" required>
+                <option value="">Select feedback type</option>
+                <option value="suggestion">Suggestion</option>
+                <!-- Other options -->
+            </select>
+            <div class="error-message" id="typeError"></div>
+        </div>
+        
+        <!-- Feedback Text -->
+        <div class="form-group">
+            <label class="form-label" for="feedbackText">
+                Your Feedback <span class="required-label">Required</span>
+            </label>
+            <textarea id="feedbackText" name="feedback" class="form-textarea" placeholder="Share your thoughts..." maxlength="500" required></textarea>
+            <div class="error-message" id="feedbackError"></div>
+        </div>
+        
+        <button type="submit" class="feedback-submit">
+            <span class="feedback-spinner" id="feedbackSpinner"></span>
+            Submit Feedback
+        </button>
+    </form>
       
       <div class="feedback-thank-you" id="feedbackThankYouMessage">
-          <div class="thank-you-icon">✓</div>
-          <h2 class="thank-you-title">Thank You!</h2>
-          <p class="thank-you-message">Your feedback has been submitted successfully.</p>
-      </div>
-  </div>
-
-  <!-- Enhanced submission confirmation screen -->
-  <div class="feedback-container submission-confirmation" id="submissionConfirmation" style="display: none;">
+         
       <!-- Success circle with checkmark -->
       <div class="success-circle">
           <svg class="checkmark" viewBox="0 0 52 52">
@@ -3115,7 +3108,34 @@ document.getElementById('newFeedbackBtn').addEventListener('click', function() {
     feedbackCurrentCount.textContent = '0';
     feedbackRatingText.textContent = '';
 });
-
+// Form submission handler
+document.getElementById("feedbackForm").addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const submitBtn = form.querySelector("button[type='submit']");
+    
+    submitBtn.disabled = true;
+    
+    try {
+        const response = await fetch(form.action, {
+            method: "POST",
+            body: new FormData(form),
+            headers: { "Accept": "application/json" }
+        });
+        
+        if (response.ok) {
+            // Show success message
+            document.getElementById("feedbackThankYouMessage").style.display = "block";
+            form.style.display = "none";
+        } else {
+            alert("Error submitting form. Please try again.");
+        }
+    } catch (error) {
+        alert("Network error. Please check your connection.");
+    } finally {
+        submitBtn.disabled = false;
+    }
+});
 document.getElementById('closeFeedbackModalBtn').addEventListener('click', function() {
     // Close the entire feedback overlay
     feedbackOverlay.classList.remove('active');
