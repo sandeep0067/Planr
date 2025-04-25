@@ -2,8 +2,11 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    
     <script src="https://accounts.google.com/gsi/client" async defer></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=">
+
     <title>Planr - Ticket Booking</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
@@ -66,6 +69,86 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             letter-spacing: 1px;
+        }
+        .cursor{
+            position: fixed;
+            z-index: 999;
+            background: #2696E8;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            pointer-events: none;
+            box-shadow: 0 0 15px 3px rgba(38, 150, 232, 0.5),
+                         0 0 40px 8px rgba(38, 150, 232, 0.3),
+                         0 0 70px 10px rgba(38, 150, 232, 0.1);
+            animation: colors 5s infinite, pulse 2s infinite alternate;
+            transform: translate(-50%, -50%);
+            transition: width 0.3s, height 0.3s, box-shadow 0.3s;
+        }
+        @keyframes colors{
+            0%{
+                filter: hue-rotate(0deg);
+            }
+            100%{
+                filter: hue-rotate(360deg);
+            }
+        }
+        @keyframes pulse {
+            0% {
+                transform: translate(-50%, -50%) scale(0.8);
+            }
+            100% {
+                transform: translate(-50%, -50%) scale(1.2);
+            }
+        }
+        .cursor::before{
+            content: '';
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background: rgba(38, 150, 232, 0.3);
+            border-radius: 50%;
+            transform: translate(-30%, -30%);
+            animation: pulseOuter 1.5s infinite alternate;
+        }
+        @keyframes pulseOuter {
+            0% {
+                transform: translate(-30%, -30%) scale(1);
+                opacity: 0.2;
+            }
+            100% {
+                transform: translate(-30%, -30%) scale(1.7);
+                opacity: 0;
+            }
+        }
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap');
+        *{
+            font-family: "Poppins", sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            }
+            /* Add these styles instead */
+body {
+    cursor: none;
+}/* Add cursor styles for interactive elements */
+button, a, input, select, textarea, .modal-overlay, .feedback-overlay, .profile-sidebar {
+    cursor: pointer !important;
+}
+
+.form-control, .form-input, .form-textarea {
+    cursor: text !important;
+}
+        .cursor-trail {
+            position: fixed;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: rgba(38, 150, 232, 0.3);
+            pointer-events: none;
+            transition: transform 0.1s, opacity 0.7s;
+            z-index: 998;
+            
         }
         
         /* Navigation hover effects */
@@ -293,7 +376,525 @@
             opacity: 1;
             transform: scale(1);
         }
-        
+        /* Feedback Form Styles */
+:root {
+  --error-color: #e74c3c;
+  --success-color: #2ecc71;
+}
+footer .nav-link::after,
+footer .nav-item .nav-link::after {
+    display: none;
+}
+
+footer .nav-link:hover::after,
+footer .nav-item .nav-link:hover::after {
+    width: 0;
+}
+
+/* Additional selectors to ensure all footer links are covered */
+footer ul.nav .nav-link::after,
+footer ul.nav .nav-link:hover::after {
+    display: none;
+}
+
+
+.feedback-button {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  background: linear-gradient(135deg, var(--primary-accent), #fd79a8);
+  color: white;
+  border: none;
+  border-radius: 50px;
+  padding: 12px 24px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 4px 20px rgba(67, 97, 238, 0.3);
+  display: flex;
+  align-items: center;
+  transition: all 0.3s ease;
+  z-index: 999;
+}
+
+.feedback-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 25px rgba(67, 97, 238, 0.4);
+}
+
+.feedback-button svg {
+  margin-right: 8px;
+  width: 20px;
+  height: 20px;
+}
+
+.feedback-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(5px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+  color-scheme: dark;
+}
+
+.feedback-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.feedback-container {
+  background-color: var(--dark-card);
+  border-radius: 12px;
+  width: 90%;
+  max-width: 550px;
+  padding: 30px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+  position: relative;
+  overflow: hidden;
+  transform: translateY(20px);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  max-height: 80vh;
+  overflow-y: auto;
+  padding-right: 10px;
+}
+
+.feedback-container::-webkit-scrollbar {
+  width: 10px;
+}
+
+.feedback-container::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+}
+
+.feedback-container::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+}
+
+.feedback-container::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.feedback-container {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.2) rgba(255, 255, 255, 0.05);
+}
+
+.feedback-overlay.active .feedback-container {
+  transform: translateY(0);
+}
+
+.feedback-close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: rgba(255, 255, 255, 0.05);
+  border: none;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.feedback-close:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  transform: rotate(90deg);
+}
+
+.feedback-header {
+  margin-bottom: 25px;
+  text-align: center;
+}
+
+.feedback-title {
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+  background: linear-gradient(135deg, var(--primary-accent), #fd79a8);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.feedback-subtitle {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 1rem;
+}
+
+.feedback-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-label {
+  font-weight: 600;
+  font-size: 0.95rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.required-label {
+  color: #fd79a8;
+  font-size: 0.8rem;
+}
+
+.form-input, .form-select, .form-textarea {
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  padding: 12px 16px;
+  color: var(--text-light);
+  font-size: 1rem;
+  transition: all 0.2s ease;
+}
+
+.form-input:focus, .form-select:focus, .form-textarea:focus {
+  border-color: var(--primary-accent);
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(67, 97, 238, 0.2);
+}
+
+.form-textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+.char-count {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 0.85rem;
+  text-align: right;
+  margin-top: 4px;
+}
+
+.rating-group {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.rating-option {
+  flex: 1;
+}
+
+.rating-input {
+  display: none;
+}
+
+.rating-label {
+  display: block;
+  padding: 12px;
+  text-align: center;
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.rating-input:checked + .rating-label {
+  background-color: rgba(67, 97, 238, 0.2);
+  border-color: var(--primary-accent);
+  box-shadow: 0 0 0 2px rgba(67, 97, 238, 0.2);
+}
+
+.rating-text {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.7);
+  text-align: center;
+  margin-top: 8px;
+  min-height: 20px;
+}
+
+.error-message {
+  color: var(--error-color);
+  font-size: 0.85rem;
+  margin-top: 4px;
+  display: none;
+}
+
+.feedback-submit {
+  background: linear-gradient(135deg, var(--primary-accent), #fd79a8);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 14px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+  position: sticky;
+  bottom: 0;
+  z-index: 5;
+}
+
+.feedback-submit:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(67, 97, 238, 0.3);
+}
+
+.feedback-submit:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.feedback-spinner {
+  width: 20px;
+  height: 20px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top: 2px solid white;
+  border-radius: 50%;
+  margin-right: 10px;
+  animation: spin 0.8s linear infinite;
+  display: none;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.feedback-thank-you {
+  text-align: center;
+  display: none;
+}
+
+.thank-you-icon {
+  font-size: 3rem;
+  margin-bottom: 20px;
+  color: var(--success-color);
+}
+
+.thank-you-title {
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.thank-you-message {
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 20px;
+}
+
+/* Submission confirmation styles */
+.submission-confirmation {
+  display: none;
+  text-align: center;
+  animation: fadeIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.feedback-overlay.active .feedback-container.submission-confirmation {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+}
+
+/* Enhanced success circle */
+.success-circle {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  background: var(--primary-accent);
+  margin: 0 auto 35px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 0 40px rgba(108, 92, 231, 0.6);
+  animation: pulseIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+  background: linear-gradient(135deg, #6c5ce7, #fd79a8);
+  overflow: hidden;
+}
+
+.success-circle::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0) 70%);
+  opacity: 0;
+  animation: circleSweep 2s ease-in-out infinite alternate 0.8s;
+}
+
+@keyframes circleSweep {
+  0% { opacity: 0; transform: rotate(0deg); }
+  50% { opacity: 0.3; }
+  100% { opacity: 0; transform: rotate(360deg); }
+}
+
+/* Enhanced checkmark animation */
+.checkmark {
+  width: 80px;
+  height: 80px;
+  position: relative;
+}
+
+.checkmark-path {
+  stroke-dasharray: 100;
+  stroke-dashoffset: 100;
+  stroke: white;
+  stroke-width: 6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  fill: none;
+  animation: drawCheck 0.8s ease-in-out forwards 0.4s;
+}
+
+@keyframes drawCheck {
+  0% { stroke-dashoffset: 100; opacity: 0; }
+  30% { opacity: 1; }
+  100% { stroke-dashoffset: 0; opacity: 1; }
+}
+
+@keyframes pulseIn {
+  0% { transform: scale(0); opacity: 0; }
+  70% { transform: scale(1.1); opacity: 1; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.response-submitted-text {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #fd79a8;
+  margin: 0 0 10px;
+  animation: fadeInText 0.5s ease forwards 0.6s;
+  opacity: 0;
+}
+
+.submission-message {
+  font-size: 1.1rem;
+  margin: 0 0 25px;
+  line-height: 1.5;
+  color: rgba(255,255,255,0.8);
+  animation: fadeInText 0.5s ease forwards 0.7s;
+  opacity: 0;
+}
+
+.info-box {
+  background: rgba(108, 92, 231, 0.08);
+  border-left: 4px solid #6c5ce7;
+  padding: 20px;
+  text-align: left;
+  margin: 25px 0;
+  border-radius: 0 8px 8px 0;
+  animation: fadeInText 0.5s ease forwards 0.8s;
+  opacity: 0;
+}
+
+.info-title {
+  display: flex;
+  align-items: center;
+  color: #6c5ce7;
+  font-weight: 600;
+  margin-bottom: 8px;
+  font-size: 1.1rem;
+}
+
+.info-icon {
+  margin-right: 10px;
+  font-size: 1.3em;
+}
+
+.info-content {
+  font-size: 1rem;
+  color: rgba(255,255,255,0.9);
+  line-height: 1.6;
+}
+
+.action-buttons {
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  animation: fadeInText 0.5s ease forwards 0.9s;
+  opacity: 0;
+}
+
+.action-button {
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  font-size: 1rem;
+}
+
+.new-feedback-btn {
+  background: rgba(108, 92, 231, 0.08);
+  border: 1px solid rgba(108, 92, 231, 0.5);
+  color: #6c5ce7;
+}
+
+.new-feedback-btn:hover {
+  background: rgba(108, 92, 231, 0.15);
+  transform: translateY(-2px);
+}
+
+.close-btn {
+  background: linear-gradient(135deg, #6c5ce7, #fd79a8);
+  border: none;
+  color: white;
+  box-shadow: 0 5px 15px rgba(108, 92, 231, 0.3);
+}
+
+.close-btn:hover {
+  background: linear-gradient(135deg, #5b4bd4, #fc6aa0);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(108, 92, 231, 0.4);
+}
+
+.feedback-id {
+  display: inline-block;
+  background: rgba(255,255,255,0.04);
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-weight: 500;
+  margin-top: 25px;
+  color: rgba(255,255,255,0.5);
+  font-size: 0.9rem;
+  animation: fadeInText 0.5s ease forwards 1s;
+  opacity: 0;
+  border: 1px solid rgba(255,255,255,0.08);
+}
+
+@keyframes fadeInText {
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
         /* Slide Controls */
         .slide-controls {
             position: absolute;
@@ -990,19 +1591,24 @@
         .form-control {
             width: 100%;
             padding: 15px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(161, 109, 109, 0.1);
             border-radius: 8px;
-            background: rgba(255, 255, 255, 0.05);
+            
             font-size: 1rem;
-            color: var(--text-light);
+            color: #6b6b80;
             transition: all 0.3s ease;
+            input::placeholder,
+textarea::placeholder {
+  color: rgb(69, 101, 189); /* Or any color you want */
+  opacity: 1;  /* Make sure it's fully visible */
+}
         }
         
         .form-control:focus {
             outline: none;
             border-color: var(--primary-accent);
             box-shadow: 0 0 0 3px rgba(13, 110, 253, 0.2);
-            background: rgba(255, 255, 255, 0.1);
+            
         }
         
         .forgot-password {
@@ -1157,6 +1763,280 @@
   box-shadow: 0 5px 15px rgba(77, 124, 254, 0.3);
 }
 
+.profile-sidebar {
+    position: fixed;
+    top: 0;
+    right: -400px;
+    width: 400px;
+    height: 100vh;
+    background-color: var(--dark-card);
+    z-index: 1100;
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: -10px 0 30px rgba(0, 0, 0, 0.3);
+    overflow-y: auto;
+    border-left: 1px solid var(--dark-border);
+}
+
+.profile-sidebar.active {
+    transform: translateX(-400px);
+}
+
+.profile-header {
+    padding: 30px;
+    background: var(--gradient-primary);
+    color: white;
+    position: relative;
+    text-align: center;
+}
+
+.profile-close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.profile-close:hover {
+    transform: rotate(90deg);
+}
+
+.profile-avatar {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 3px solid white;
+    object-fit: cover;
+    margin-bottom: 15px;
+}
+
+.profile-name {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.profile-email {
+    opacity: 0.8;
+    font-size: 0.9rem;
+}
+
+.profile-body {
+    padding: 25px;
+}
+
+.profile-section {
+    margin-bottom: 30px;
+}
+
+.profile-section-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 15px;
+    color: var(--primary-accent);
+    display: flex;
+    align-items: center;
+}
+
+.profile-section-title i {
+    margin-right: 10px;
+}
+
+.profile-menu {
+    list-style: none;
+    padding: 0;
+}
+
+.profile-menu li {
+    margin-bottom: 10px;
+}
+
+.profile-menu a {
+    display: flex;
+    align-items: center;
+    padding: 10px 15px;
+    color: var(--text-light);
+    text-decoration: none;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.profile-menu a:hover {
+    background-color: rgba(77, 124, 254, 0.1);
+    transform: translateX(5px);
+}
+
+.profile-menu a i {
+    margin-right: 10px;
+    color: var(--primary-accent);
+}
+
+.tickets-list {
+    list-style: none;
+    padding: 0;
+}
+
+.ticket-item {
+    display: flex;
+    margin-bottom: 15px;
+    background-color: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.ticket-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.ticket-image {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+}
+
+.ticket-details {
+    padding: 10px 15px;
+    flex: 1;
+}
+
+.ticket-event {
+    font-weight: 500;
+    margin-bottom: 5px;
+}
+
+.ticket-date {
+    font-size: 0.8rem;
+    opacity: 0.7;
+    margin-bottom: 5px;
+}
+
+.ticket-status {
+    display: inline-block;
+    padding: 3px 8px;
+    font-size: 0.7rem;
+    border-radius: 4px;
+    background-color: var(--primary-accent);
+    color: white;
+}
+
+.ticket-qr {
+    width: 60px;
+    height: 60px;
+    margin: 10px;
+    background-color: white;
+    padding: 5px;
+    border-radius: 4px;
+}
+
+.membership-card {
+    background: var(--gradient-primary);
+    border-radius: 10px;
+    padding: 15px;
+    margin-bottom: 20px;
+    color: white;
+    position: relative;
+    overflow: hidden;
+}
+
+.membership-card::before {
+    content: "";
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 100%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%);
+}
+
+.membership-tier {
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.membership-points {
+    font-size: 0.9rem;
+    opacity: 0.9;
+}
+
+.progress-container {
+    background-color: rgba(0,0,0,0.2);
+    height: 6px;
+    border-radius: 3px;
+    margin: 10px 0;
+    overflow: hidden;
+}
+
+.progress-bar {
+    height: 100%;
+    background-color: white;
+    width: 65%;
+}
+
+/* Profile button in navbar */
+.profile-btn {
+    margin-left: auto;
+    margin-right: 20px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+
+.profile-btn img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.profile-btn span {
+    font-weight: 500;
+    color: var(--text-light);
+}
+
+@media (max-width: 576px) {
+    .profile-sidebar {
+        width: 100%;
+        right: -100%;
+    }
+    
+    .profile-sidebar.active {
+        transform: translateX(-100%);
+    }
+}
+
+.carousel-control-prev, 
+.carousel-control-next {
+    width: 40px;
+    height: 40px;
+    background-color: rgba(0,0,0,0.5);
+    border-radius: 50%;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+footer {
+    background-color: #000;
+    border-top: 1px solid var(--dark-border);
+    padding: 60px 0 40px;
+    margin-top: 80px;
+}
+
+.category-icon {
+    transform: perspective(800px) rotateY(15deg);
+    transition: transform 0.5s ease;
+}
+
+.card:hover .category-icon {
+    transform: perspective(800px) rotateY(0deg) scale(1.2);
+}
 
         
         @media (max-width: 768px) {
@@ -1411,7 +2291,7 @@
             </div>
         </div>
     </section>
-
+    <div class="cursor"></div>
     <!-- Categories Section -->
     <section class="container mb-5 browse-categories">
       <h2 class="text-center mb-5 fw-bold">Browse Categories</h2>
@@ -1517,7 +2397,7 @@
                 <h2 class="fw-bold mb-4">Never Miss an Event</h2>
                 <p class="mb-4">Subscribe to our newsletter and be the first to know about upcoming events and exclusive offers.</p>
                 <div class="input-group mb-3 mx-auto" style="max-width: 500px;">
-                    <input type="email" class="form-control newsletter-input" placeholder="Your email address">
+                    <input type="email" class="form-control newsletter-input" placeholder="Your email address"name="email" >
                     <button class="btn btn-primary newsletter-btn" type="button">Subscribe</button>
                 </div>
             </div>
@@ -1613,10 +2493,10 @@
                     <div class="divider">or continue with email</div>
                     <form>
                         <div class="form-group">
-                            <input type="email" class="form-control" placeholder="Email Address" required>
+                            <input type="email" class="form-control" placeholder="Email Address" required name="email">
                         </div>
                         <div class="form-group">
-                            <input type="password" class="form-control" placeholder="Password" required>
+                            <input type="password" class="form-control" placeholder="Password" required name="email">
                         </div>
                         <div class="forgot-password">
                             <a href="#">Forgot password?</a>
@@ -1636,13 +2516,13 @@
                     <div class="divider">or register with email</div>
                     <form>
                         <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Full Name" required>
+                            <input type="text" class="form-control" placeholder="Full Name" required name="email">
                         </div>
                         <div class="form-group">
-                            <input type="email" class="form-control" placeholder="Email Address" required>
+                            <input type="email" class="form-control" placeholder="Email Address" required name="email">
                         </div>
                         <div class="form-group">
-                            <input type="password" class="form-control" placeholder="Password" required>
+                            <input type="password" class="form-control" placeholder="Password" required name="email">
                         </div>
                         <button type="submit" class="auth-btn">Create Account</button>
                     </form>
@@ -1651,18 +2531,20 @@
             
             <div class="welcome-panel">
                 <!-- Login Welcome Content -->
-                <div class="welcome-content login-welcome">
-                    <h2>New Here?</h2>
-                    <p>Sign up and discover a great amount of new opportunities!</p>
-                    <button class="toggle-auth-btn" id="show-signup">Sign Up</button>
-                </div>
-                
-                <!-- Signup Welcome Content -->
-                <div class="welcome-content signup-welcome">
-                    <h2>One of Us?</h2>
-                    <p>If you already have an account, just sign in. We've missed you!</p>
-                    <button class="toggle-auth-btn" id="show-login">Sign In</button>
-                </div>
+                <!-- Login Welcome Content -->
+<div class="welcome-content login-welcome">
+    
+    <h2>New Here?</h2>
+    <p>Sign up and discover a great amount of new opportunities!</p>
+    <button class="toggle-auth-btn" id="show-signup">Sign Up</button>
+</div>
+
+<!-- Signup Welcome Content -->
+<div class="welcome-content signup-welcome">
+    <h2>One of Us?</h2>
+    <p>If you already have an account, just sign in. We've missed you!</p>
+    <button class="toggle-auth-btn" id="show-login">Sign In</button>
+</div>
             </div>
             <button class="close-button" id="close-auth-modal" style="color: white; top: 15px; right: 15px;">×</button>
         </div>
@@ -1726,9 +2608,209 @@
             </div>
         </div>
     </div>
+    <!-- Feedback Button and Form -->
+<button class="feedback-button" id="feedbackButton">
+  <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="white" stroke-width="2"/>
+      <path d="M8 12H16" stroke="white" stroke-width="2" stroke-linecap="round"/>
+      <path d="M12 8L12 16" stroke="white" stroke-width="2" stroke-linecap="round"/>
+  </svg>
+  Feedback
+</button>
+
+<div class="feedback-overlay" id="feedbackOverlay">
+  <div class="feedback-container">
+      <button class="feedback-close" id="feedbackClose">✕</button>
+      
+      <div class="feedback-header">
+          <h2 class="feedback-title">We Value Your Feedback</h2>
+          <p class="feedback-subtitle">Help us improve your experience by sharing your thoughts.</p>
+      </div>
+      
+      <form class="feedback-form" id="feedbackForm" action="https://formspree.io/f/meogojly" method="POST">
+        <!-- Name Field -->
+        <div class="form-group">
+            <label class="form-label" for="feedbackName">
+                Your Name <span class="required-label">Required</span>
+            </label>
+            <input type="text" id="feedbackName" name="name" class="form-input" placeholder="Enter your name" required>
+            <div class="error-message" id="nameError"></div>
+        </div>
+        
+        <!-- Email Field -->
+        <div class="form-group">
+            <label class="form-label" for="feedbackEmail">
+                Email Address <span class="required-label">Required</span>
+            </label>
+            <input type="email" id="feedbackEmail" name="email" class="form-input" placeholder="Enter your email address" required>
+            <div class="error-message" id="emailError"></div>
+        </div>
+        
+        <!-- Rating Field -->
+        <div class="form-group">
+            <label class="form-label">
+                How would you rate your experience? <span class="required-label">Required</span>
+            </label>
+            <div class="rating-group">
+                <div class="rating-option">
+                    <input type="radio" name="rating" id="rating1" value="1" class="rating-input" required>
+                    <label for="rating1" class="rating-label">1</label>
+                </div>
+                <div class="rating-option">
+                    <input type="radio" name="rating" id="rating2" value="2" class="rating-input" name="email">
+                    <label for="rating2" class="rating-label">2</label>
+                </div>
+                <div class="rating-option">
+                    <input type="radio" name="rating" id="rating3" value="3" class="rating-input"name="email">
+                    <label for="rating3" class="rating-label">3</label>
+                </div>
+                <div class="rating-option">
+                    <input type="radio" name="rating" id="rating4" value="4" class="rating-input"name="email">
+                    <label for="rating4" class="rating-label">4</label>
+                </div>
+                <div class="rating-option">
+                    <input type="radio" name="rating" id="rating5" value="5" class="rating-input"name="email">
+                    <label for="rating5" class="rating-label">5</label>
+                </div>
+                <!-- Repeat for 2-5 with same name="rating" -->
+            </div>
+            <div class="error-message" id="ratingError"></div>
+        </div>
+        
+        <!-- Feedback Type -->
+        <div class="form-group">
+            <label class="form-label" for="feedbackType">
+                Feedback Type <span class="required-label">Required</span>
+            </label>
+            <select id="feedbackType" name="feedback_type" class="form-select" required>
+                <option value="">Select feedback type</option>
+                <option value="suggestion">Suggestion</option>
+                <!-- Other options -->
+            </select>
+            <div class="error-message" id="typeError"></div>
+        </div>
+        
+        <!-- Feedback Text -->
+        <div class="form-group">
+            <label class="form-label" for="feedbackText">
+                Your Feedback <span class="required-label">Required</span>
+            </label>
+            <textarea id="feedbackText" name="feedback" class="form-textarea" placeholder="Share your thoughts..." maxlength="500" required></textarea>
+            <div class="error-message" id="feedbackError"></div>
+        </div>
+        
+        <button type="submit" class="feedback-submit">
+            <span class="feedback-spinner" id="feedbackSpinner"></span>
+            Submit Feedback
+        </button>
+    </form>
+      
+      <div class="feedback-thank-you" id="feedbackThankYouMessage">
+         
+      <!-- Success circle with checkmark -->
+      <div class="success-circle">
+          <svg class="checkmark" viewBox="0 0 52 52">
+              <path class="checkmark-path" d="M14,27 L22,35 L38,15"></path>
+          </svg>
+      </div>
+      
+      <h2 class="response-submitted-text">Response Submitted</h2>
+      
+      <p class="submission-message">
+          Your feedback has been submitted successfully.
+      </p>
+      
+      <!-- Enhanced info box -->
+      <div class="info-box">
+          <div class="info-title">
+              <span class="info-icon">ℹ️</span>
+              What happens next?
+          </div>
+          <div class="info-content">
+              Our team reviews all feedback carefully. If you've provided your email, we'll get back to you within 48 hours.
+          </div>
+      </div>
+      
+      <div class="action-buttons">
+          <button class="action-button new-feedback-btn" id="newFeedbackBtn">New Feedback</button>
+          <button class="action-button close-btn" id="closeFeedbackModalBtn">Close</button>
+      </div>
+      
+      <div class="feedback-id">Feedback ID: FBK-2025-04-23-8742</div>
+  </div>
+</div>
+
+</div>
+</div>
+
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
+             const cursor = document.querySelector('.cursor');
+        let trailElements = [];
+        
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+            
+            // Create trail effect
+            createTrailElement(e.clientX, e.clientY);
+        });
+
+        // Add hover effect for elements
+        document.querySelectorAll('h1').forEach(element => {
+            element.addEventListener('mouseenter', () => {
+                cursor.style.width = '18px';
+                cursor.style.height = '18px';
+                cursor.style.boxShadow = '0 0 20px 6px rgba(38, 150, 232, 0.5), 0 0 50px 10px rgba(38, 150, 232, 0.3), 0 0 80px 15px rgba(38, 150, 232, 0.1)';
+            });
+            
+            element.addEventListener('mouseleave', () => {
+                cursor.style.width = '12px';
+                cursor.style.height = '12px';
+                cursor.style.boxShadow = '0 0 15px 3px rgba(38, 150, 232, 0.5), 0 0 40px 8px rgba(38, 150, 232, 0.3), 0 0 70px 10px rgba(38, 150, 232, 0.1)';
+            });
+        });
+        
+        // Click animation
+        document.addEventListener('click', () => {
+            cursor.style.transform = 'translate(-50%, -50%) scale(0.8)';
+            setTimeout(() => {
+                cursor.style.transform = 'translate(-50%, -50%) scale(1)';
+            }, 100);
+        });
+        
+        // Create trail element
+        function createTrailElement(x, y) {
+            const trail = document.createElement('div');
+            trail.className = 'cursor-trail';
+            trail.style.left = x + 'px';
+            trail.style.top = y + 'px';
+            trail.style.transform = 'translate(-50%, -50%)';
+            document.body.appendChild(trail);
+            
+            // Store the trail element
+            trailElements.push(trail);
+            
+            // Handle removal of trail elements
+            setTimeout(() => {
+                trail.style.opacity = '0';
+                setTimeout(() => {
+                    if (trail.parentNode) {
+                        document.body.removeChild(trail);
+                    }
+                    trailElements = trailElements.filter(item => item !== trail);
+                }, 700);
+            }, 100);
+            
+            // Limit the number of trail elements
+            if (trailElements.length > 20) {
+                if (trailElements[0].parentNode) {
+                    document.body.removeChild(trailElements[0]);
+                }
+                trailElements.shift();
+            }
+        }
         // Slideshow functionality
         let slideIndex = 0;
         const slides = document.querySelectorAll('.slide');
@@ -1785,50 +2867,58 @@
         resetSlideInterval();
         
         // Modal functionality
-        const simpleLoginModal = document.getElementById('simple-login-modal');
-        const authModal = document.getElementById('auth-modal');
-        const authContainer = document.querySelector('.auth-container');
-        
-        document.getElementById('open-login').addEventListener('click', () => {
-            simpleLoginModal.classList.add('active');
-        });
-        
-        document.getElementById('open-signup').addEventListener('click', () => {
-            authModal.classList.add('active');
-            authContainer.classList.add('show-signup');
-        });
-        
-        document.getElementById('close-simple-login').addEventListener('click', () => {
-            simpleLoginModal.classList.remove('active');
-        });
-        
-        document.getElementById('open-full-login').addEventListener('click', () => {
-            simpleLoginModal.classList.remove('active');
-            authModal.classList.add('active');
-            authContainer.classList.remove('show-signup');
-        });
-        
-        document.getElementById('close-auth-modal').addEventListener('click', () => {
-            authModal.classList.remove('active');
-        });
-        
-        document.getElementById('show-signup').addEventListener('click', () => {
-            authContainer.classList.add('show-signup');
-        });
-        
-        document.getElementById('show-login').addEventListener('click', () => {
-            authContainer.classList.remove('show-signup');
-        });
-        
-        // Close modals when clicking outside
-        window.addEventListener('click', (e) => {
-            if (e.target === simpleLoginModal) {
-                simpleLoginModal.classList.remove('active');
-            }
-            if (e.target === authModal) {
-                authModal.classList.remove('active');
-            }
-        });
+const simpleLoginModal = document.getElementById('simple-login-modal');
+const authModal = document.getElementById('auth-modal');
+const authContainer = document.querySelector('.auth-container');
+
+// Open simple login modal
+document.getElementById('open-login').addEventListener('click', () => {
+    simpleLoginModal.classList.add('active');
+});
+
+// Open auth modal with signup form
+document.getElementById('open-signup').addEventListener('click', () => {
+    authModal.classList.add('active');
+    authContainer.classList.add('show-signup');
+});
+
+// Close simple login modal
+document.getElementById('close-simple-login').addEventListener('click', () => {
+    simpleLoginModal.classList.remove('active');
+});
+
+// Open full auth modal from simple login
+document.getElementById('open-full-login').addEventListener('click', () => {
+    simpleLoginModal.classList.remove('active');
+    authModal.classList.add('active');
+    authContainer.classList.remove('show-signup');
+});
+
+// Close auth modal
+document.getElementById('close-auth-modal').addEventListener('click', () => {
+    authModal.classList.remove('active');
+});
+
+// Toggle between login and signup forms
+document.getElementById('show-signup').addEventListener('click', (e) => {
+    e.preventDefault();
+    authContainer.classList.add('show-signup');
+});
+
+document.getElementById('show-login').addEventListener('click', (e) => {
+    e.preventDefault();
+    authContainer.classList.remove('show-signup');
+});
+
+// Close modals when clicking outside
+window.addEventListener('click', (e) => {
+    if (e.target === simpleLoginModal) {
+        simpleLoginModal.classList.remove('active');
+    }
+    if (e.target === authModal) {
+        authModal.classList.remove('active');
+    }
+});
         
         // Google Sign-In
         function handleCredentialResponse(response) {
@@ -1885,6 +2975,277 @@
             document.getElementById('profile-section').classList.add('d-none');
             google.accounts.id.disableAutoSelect();
         });
+        // Feedback Form Functionality
+const feedbackButton = document.getElementById('feedbackButton');
+const feedbackOverlay = document.getElementById('feedbackOverlay');
+const feedbackClose = document.getElementById('feedbackClose');
+const feedbackForm = document.getElementById('feedbackForm');
+const feedbackNameInput = document.getElementById('feedbackName');
+const feedbackEmail = document.getElementById('feedbackEmail');
+const feedbackType = document.getElementById('feedbackType');
+const feedbackText = document.getElementById('feedbackText');
+const feedbackCurrentCount = document.getElementById('feedbackCurrentCount');
+const feedbackRatingText = document.getElementById('feedbackRatingText');
+const feedbackThankYouMessage = document.getElementById('feedbackThankYouMessage');
+const feedbackSpinner = document.getElementById('feedbackSpinner');
+const feedbackSubmitBtn = document.getElementById('feedbackSubmitBtn');
+
+// Event Listeners for Feedback Form
+feedbackButton.addEventListener('click', () => {
+    feedbackOverlay.classList.add('active');
+    document.body.style.overflow = 'hidden';
+});
+
+feedbackClose.addEventListener('click', () => {
+    feedbackOverlay.classList.remove('active');
+    document.body.style.overflow = '';
+});
+
+// Close on outside click
+feedbackOverlay.addEventListener('click', (e) => {
+    if (e.target === feedbackOverlay) {
+        feedbackOverlay.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+});
+
+// Character counter for feedback text
+feedbackText.addEventListener('input', () => {
+    const currentLength = feedbackText.value.length;
+    feedbackCurrentCount.textContent = currentLength;
+});
+
+// Rating text update
+const ratingLabels = {
+    1: 'Very Dissatisfied',
+    2: 'Dissatisfied',
+    3: 'Neutral',
+    4: 'Satisfied',
+    5: 'Very Satisfied'
+};
+
+document.querySelectorAll('input[name="feedbackRating"]').forEach(radio => {
+    radio.addEventListener('change', () => {
+        const rating = radio.value;
+        feedbackRatingText.textContent = ratingLabels[rating];
+    });
+});
+
+// Form submission
+feedbackForm.addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    // Basic validation
+    let isValid = true;
+    
+    // Validate name
+    if (!feedbackNameInput.value.trim()) {
+        document.getElementById('nameError').style.display = 'block';
+        isValid = false;
+    } else {
+        document.getElementById('nameError').style.display = 'none';
+    }
+    
+    // Validate email
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(feedbackEmail.value.trim())) {
+        document.getElementById('emailError').style.display = 'block';
+        isValid = false;
+    } else {
+        document.getElementById('emailError').style.display = 'none';
+    }
+    
+    // Validate rating
+    if (!document.querySelector('input[name="feedbackRating"]:checked')) {
+        document.getElementById('ratingError').style.display = 'block';
+        isValid = false;
+    } else {
+        document.getElementById('ratingError').style.display = 'none';
+    }
+    
+    // Validate feedback type
+    if (!feedbackType.value) {
+        document.getElementById('typeError').style.display = 'block';
+        isValid = false;
+    } else {
+        document.getElementById('typeError').style.display = 'none';
+    }
+    
+    // Validate feedback text
+    if (!feedbackText.value.trim()) {
+        document.getElementById('feedbackError').style.display = 'block';
+        isValid = false;
+    } else {
+        document.getElementById('feedbackError').style.display = 'none';
+    }
+    
+    if (!isValid) return;
+    
+    // Show spinner
+    feedbackSpinner.style.display = 'inline-block';
+    feedbackSubmitBtn.disabled = true;
+    
+    // Generate a random feedback ID with current date
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = String(today.getMonth() + 1).padStart(2, '0');
+    const day = String(today.getDate()).padStart(2, '0');
+    const randomNum = Math.floor(1000 + Math.random() * 9000);
+    const feedbackId = `FBK-${year}-${month}-${day}-${randomNum}`;
+    
+    // Simulate API call with a delay
+    setTimeout(function() {
+        // Hide spinner
+        feedbackSpinner.style.display = 'none';
+        
+        // Hide the entire original container
+        document.querySelector('.feedback-container:not(.submission-confirmation)').style.display = 'none';
+        
+        // Update the feedback ID in the confirmation
+        document.querySelector('.feedback-id').textContent = `Feedback ID: ${feedbackId}`;
+        
+        // Show the submission confirmation
+        document.getElementById('submissionConfirmation').style.display = 'block';
+        
+        // Enable the submit button again
+        feedbackSubmitBtn.disabled = false;
+    }, 1500);
+});
+
+// Add event handlers for the confirmation buttons
+document.getElementById('newFeedbackBtn').addEventListener('click', function() {
+    // Hide confirmation and show form again
+    document.getElementById('submissionConfirmation').style.display = 'none';
+    document.querySelector('.feedback-container:not(.submission-confirmation)').style.display = 'block';
+    
+    // Reset form
+    feedbackForm.reset();
+    feedbackCurrentCount.textContent = '0';
+    feedbackRatingText.textContent = '';
+});
+// Form submission handler
+document.getElementById("feedbackForm").addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const submitBtn = form.querySelector("button[type='submit']");
+    
+    submitBtn.disabled = true;
+    
+    try {
+        const response = await fetch(form.action, {
+            method: "POST",
+            body: new FormData(form),
+            headers: { "Accept": "application/json" }
+        });
+        
+        if (response.ok) {
+            // Show success message
+            document.getElementById("feedbackThankYouMessage").style.display = "block";
+            form.style.display = "none";
+        } else {
+            alert("Error submitting form. Please try again.");
+        }
+    } catch (error) {
+        alert("Network error. Please check your connection.");
+    } finally {
+        submitBtn.disabled = false;
+    }
+});
+document.getElementById('closeFeedbackModalBtn').addEventListener('click', function() {
+    // Close the entire feedback overlay
+    feedbackOverlay.classList.remove('active');
+    document.body.style.overflow = '';
+    
+    // Reset for next time after animation completes
+    setTimeout(function() {
+        document.getElementById('submissionConfirmation').style.display = 'none';
+        document.querySelector('.feedback-container:not(.submission-confirmation)').style.display = 'block';
+        feedbackForm.reset();
+        feedbackCurrentCount.textContent = '0';
+        feedbackRatingText.textContent = '';
+    }, 300);
+});
+window.addEventListener('click', (e) => {
+    if (e.target === simpleLoginModal) {
+        simpleLoginModal.classList.remove('active');
+    }
+    if (e.target === authModal) {
+        authModal.classList.remove('active');
+    }
+});
+
+// Profile Sidebar Functionality
+const profileSidebar = document.getElementById('profile-sidebar');
+const openProfileBtn = document.getElementById('open-profile');
+const closeProfileBtn = document.getElementById('close-profile');
+
+// Add profile button to navbar
+const navbarNav = document.querySelector('.navbar-nav');
+const authButtons = document.getElementById('auth-buttons');
+
+// Create profile button
+const profileBtn = document.createElement('button');
+profileBtn.className = 'profile-btn d-none';
+profileBtn.id = 'profile-btn';
+profileBtn.innerHTML = `
+    <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="profile">
+    <span>John Doe</span>
+`;
+
+// Insert profile button before auth buttons
+authButtons.parentNode.insertBefore(profileBtn, authButtons);
+
+// Add event listener to profile button
+profileBtn.addEventListener('click', () => {
+    profileSidebar.classList.add('active');
+});
+
+// Add event listener to open profile from dropdown
+if (openProfileBtn) {
+    openProfileBtn.addEventListener('click', () => {
+        profileSidebar.classList.add('active');
+    });
+}
+
+// Close profile sidebar
+closeProfileBtn.addEventListener('click', () => {
+    profileSidebar.classList.remove('active');
+});
+
+// Simulating user login (for demo purposes)
+// In a real application, this would be handled by your authentication system
+function simulateLogin() {
+    // Hide auth buttons and show profile button
+    authButtons.classList.add('d-none');
+    profileBtn.classList.remove('d-none');
+}
+
+// For demo: Login when clicking any login button
+document.querySelectorAll('.auth-btn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        simulateLogin();
+        authModal.classList.remove('active');
+    });
+});
+
+// Logout functionality
+document.getElementById('sidebar-logout').addEventListener('click', (e) => {
+    e.preventDefault();
+    // Hide profile button and show auth buttons
+    profileBtn.classList.add('d-none');
+    authButtons.classList.remove('d-none');
+    // Close profile sidebar
+    profileSidebar.classList.remove('active');
+});
+
+// Close sidebar when clicking outside (optional)
+window.addEventListener('click', (e) => {
+    if (e.target === document.querySelector('body') && profileSidebar.classList.contains('active')) {
+        profileSidebar.classList.remove('active');
+    }
+});
+
     </script>
 </body>
 </html>
