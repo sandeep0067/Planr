@@ -858,14 +858,356 @@
             padding: 1rem 3rem;
             font-size: 1.1rem;
             }
+            .seat-booking-section {
+            margin: 2rem 0;
+        }
+        
+        .stage-display {
+            background: var(--secondary);
+            color: white;
+            text-align: center;
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+        
+        .seats-container {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
+        .seat-row {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+        
+        .seat {
+            width: 30px;
+            height: 30px;
+            background: var(--gray-dark);
+            border-radius: 5px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            transition: all 0.2s ease;
+        }
+        
+        .seat:hover {
+            transform: scale(1.1);
+        }
+        
+        .seat.selected {
+            background: var(--accent);
+            color: var(--darker);
+        }
+        
+        .seat.booked {
+            background: var(--primary);
+            cursor: not-allowed;
+        }
+        
+        .seat.aisle {
+            visibility: hidden;
+        }
+        
+        .seat-legend {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.8rem;
+        }
+        
+        .legend-color {
+            width: 15px;
+            height: 15px;
+            border-radius: 3px;
+        }
+        
+        .booking-summary {
+            background: var(--darker);
+            padding: 1rem;
+            border-radius: 5px;
+            margin-top: 1.5rem;
+        }
+        
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+        }
+        
+        .total-row {
+            font-weight: bold;
+            border-top: 1px solid var(--gray);
+            padding-top: 0.5rem;
+            margin-top: 0.5rem;
+        }
+        /* Meal Booking Styles */
+        .meal-options {
+            margin: 1rem 0;
+            border: 1px solid var(--gray-dark);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .meal-option {
+            padding: 1rem;
+            border-bottom: 1px solid var(--gray-dark);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .meal-option:last-child {
+            border-bottom: none;
+        }
+
+        .meal-select {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .meal-checkbox {
+            width: 18px;
+            height: 18px;
+            accent-color: var(--accent);
+        }
+
+        .meal-details {
+            text-align: right;
+        }
+
+        .meal-details p {
+            margin: 0.3rem 0;
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.6);
+        }
+
+        .meal-price {
+            color: var(--accent);
+            font-weight: bold;
+        }
+
+        .meal-summary {
+            background-color: var(--darker);
+            padding: 1rem;
+            border-radius: 8px;
+            margin-top: 1.5rem;
+        }
+
+        #selectedMealsList {
+            margin: 0.5rem 0;
+            padding-left: 1.5rem;
+        }
+
+        #selectedMealsList li {
+            margin-bottom: 0.3rem;
+        }
+
+        .meal-total {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 0.5rem;
+            padding-top: 0.5rem;
+            border-top: 1px solid var(--gray);
+            font-weight: bold;
+        }
+        /* Membership Section Styles */
+        .membership-tiers {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .tier-card {
+            background-color: var(--darker);
+            border-radius: 10px;
+            padding: 2rem;
+            position: relative;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .tier-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .tier-card.featured {
+            border: 2px solid var(--accent);
+            transform: scale(1.05);
+        }
+
+        .popular-badge {
+            position: absolute;
+            top: -10px;
+            right: 20px;
+            background-color: var(--primary);
+            color: white;
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        .tier-price {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin: 1rem 0;
+            color: var(--accent);
+        }
+
+        .tier-price span {
+            font-size: 1rem;
+            color: rgba(255,255,255,0.7);
+        }
+
+        .tier-benefits {
+            margin: 1.5rem 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .tier-benefits li {
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .tier-benefits i {
+            margin-right: 0.5rem;
+            width: 20px;
+        }
+
+        .tier-benefits .fa-check {
+            color: var(--accent);
+        }
+
+        .tier-benefits .fa-times {
+            color: var(--primary);
+        }
+
+        /* Payment Methods */
+        .payment-options {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .payment-method {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            background-color: var(--gray-dark);
+            cursor: pointer;
+        }
+
+        .payment-method input {
+            margin: 0;
+        }
+
+        .payment-details {
+            background-color: var(--gray-dark);
+            padding: 1rem;
+            border-radius: 5px;
+            margin-top: 1rem;
+        }
+
+        /* User Profile in Header */
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--secondary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        .user-menu {
+            position: absolute;
+            top: 50px;
+            right: 0;
+            background-color: var(--dark);
+            border-radius: 5px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            padding: 1rem;
+            width: 200px;
+            display: none;
+            z-index: 100;
+        }
+
+        .user-menu.active {
+            display: block;
+        }
+
+        .user-menu a {
+            display: block;
+            padding: 0.5rem 0;
+            transition: color 0.3s ease;
+        }
+
+        .user-menu a:hover {
+            color: var(--primary);
+        }
+
+        .user-menu a i {
+            margin-right: 0.5rem;
+            width: 20px;
+            text-align: center;
+        }
         
     </style>
 </head>
 <body>
+<<<<<<< HEAD
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <a href="#" class="logo">PLANR</a>
+                <ul class="nav-links">
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#comedians">Comedians</a></li>
+                    <li><a href="#shows">Shows</a></li>
+                    <li><a href="#testimonials">Reviews</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+                <div class="mobile-menu-btn">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </nav>
+        </div>
+    </header>
+=======
     <!-- Welcome Screen -->
 <div id="welcomeScreen" class="welcome-screen">
     <div class="welcome-content">
-      <h1>Welcome to LaughFactory</h1>
+      <h1>Welcome to PLANR</h1>
       <p>Help us personalize your comedy experience</p>
       
       <div class="preference-section">
@@ -925,6 +1267,7 @@
                 </nav>
             </div>
         </header>
+>>>>>>> ae5779076367ca7ba4b922efbfa9019ea079663f
 
         <!-- Hero Section -->
         <section class="hero" id="home">
@@ -1353,6 +1696,57 @@
                 </form>
             </div>
         </section>
+        <!-- Membership Section -->
+        <section class="membership section-padding" id="membership">
+            <div class="container">
+                <h2 class="section-title text-center">Become a Member</h2>
+                <p class="text-center">Unlock exclusive benefits and discounts on all comedy shows!</p>
+                
+                <div class="membership-tiers">
+                    <!-- Basic Tier -->
+                    <div class="tier-card">
+                        <h3>Basic</h3>
+                        <div class="tier-price">Free</div>
+                        <ul class="tier-benefits">
+                            <li><i class="fas fa-check"></i> Early access to show announcements</li>
+                            <li><i class="fas fa-check"></i> Newsletter with comedy news</li>
+                            <li><i class="fas fa-check"></i> Basic seat selection</li>
+                            <li><i class="fas fa-times"></i> No priority booking</li>
+                        </ul>
+                        <button class="btn btn-secondary join-btn" data-tier="basic">Join Free</button>
+                    </div>
+                    
+                    <!-- Premium Tier -->
+                    <div class="tier-card featured">
+                        <div class="popular-badge">Most Popular</div>
+                        <h3>Premium</h3>
+                        <div class="tier-price">₹499<span>/month</span></div>
+                        <ul class="tier-benefits">
+                            <li><i class="fas fa-check"></i> 15% off all tickets</li>
+                            <li><i class="fas fa-check"></i> Priority booking (48hr early access)</li>
+                            <li><i class="fas fa-check"></i> Premium seat selection</li>
+                            <li><i class="fas fa-check"></i> Free drink at every show</li>
+                            <li><i class="fas fa-check"></i> Exclusive member-only events</li>
+                        </ul>
+                        <button class="btn btn-primary join-btn" data-tier="premium">Get Premium</button>
+                    </div>
+                    
+                    <!-- VIP Tier -->
+                    <div class="tier-card">
+                        <h3>VIP</h3>
+                        <div class="tier-price">₹1,999<span>/month</span></div>
+                        <ul class="tier-benefits">
+                            <li><i class="fas fa-check"></i> 25% off all tickets</li>
+                            <li><i class="fas fa-check"></i> VIP seating at all shows</li>
+                            <li><i class="fas fa-check"></i> Meet & greet with comedians</li>
+                            <li><i class="fas fa-check"></i> Free premium food/drinks</li>
+                            <li><i class="fas fa-check"></i> Personal booking assistant</li>
+                        </ul>
+                        <button class="btn btn-secondary join-btn" data-tier="vip">Go VIP</button>
+                    </div>
+                </div>
+            </div>
+        </section>
 
         <!-- Footer -->
         <footer id="contact">
@@ -1408,7 +1802,6 @@
             </div>
         </footer>
 
-        <!-- Booking Modal -->
         <div class="modal" id="bookingModal">
             <div class="modal-content">
                 <div class="modal-header">
@@ -1457,22 +1850,195 @@
                             </div>
                         </div>
                         
-                        <div class="form-group">
-                            <label for="seating">Seating Preference</label>
-                            <select id="seating" required>
-                                <option value="">Select</option>
-                                <option value="front">Front Row</option>
-                                <option value="middle">Middle Section</option>
-                                <option value="back">Back Section</option>
-                                <option value="none">No Preference</option>
-                            </select>
+                        <!-- Seat Booking Section -->
+                        <div class="seat-booking-section">
+                            <h4>Select Your Seats</h4>
+                            <div class="stage-display">STAGE</div>
+                            
+                            <div class="seats-container">
+                                <!-- Row A -->
+                                <div class="seat-row">
+                                    <div class="seat" data-seat="A1">A1</div>
+                                    <div class="seat" data-seat="A2">A2</div>
+                                    <div class="seat" data-seat="A3">A3</div>
+                                    <div class="seat aisle"></div>
+                                    <div class="seat" data-seat="A4">A4</div>
+                                    <div class="seat" data-seat="A5">A5</div>
+                                    <div class="seat" data-seat="A6">A6</div>
+                                    <div class="seat aisle"></div>
+                                    <div class="seat" data-seat="A7">A7</div>
+                                    <div class="seat" data-seat="A8">A8</div>
+                                    <div class="seat" data-seat="A9">A9</div>
+                                </div>
+                                
+                                <!-- Row B -->
+                                <div class="seat-row">
+                                    <div class="seat" data-seat="B1">B1</div>
+                                    <div class="seat" data-seat="B2">B2</div>
+                                    <div class="seat" data-seat="B3">B3</div>
+                                    <div class="seat aisle"></div>
+                                    <div class="seat" data-seat="B4">B4</div>
+                                    <div class="seat" data-seat="B5">B5</div>
+                                    <div class="seat" data-seat="B6">B6</div>
+                                    <div class="seat aisle"></div>
+                                    <div class="seat" data-seat="B7">B7</div>
+                                    <div class="seat" data-seat="B8">B8</div>
+                                    <div class="seat" data-seat="B9">B9</div>
+                                </div>
+                                
+                                <!-- Row C -->
+                                <div class="seat-row">
+                                    <div class="seat" data-seat="C1">C1</div>
+                                    <div class="seat" data-seat="C2">C2</div>
+                                    <div class="seat" data-seat="C3">C3</div>
+                                    <div class="seat aisle"></div>
+                                    <div class="seat" data-seat="C4">C4</div>
+                                    <div class="seat" data-seat="C5">C5</div>
+                                    <div class="seat" data-seat="C6">C6</div>
+                                    <div class="seat aisle"></div>
+                                    <div class="seat" data-seat="C7">C7</div>
+                                    <div class="seat" data-seat="C8">C8</div>
+                                    <div class="seat" data-seat="C9">C9</div>
+                                </div>
+                                
+                                <!-- Row D -->
+                                <div class="seat-row">
+                                    <div class="seat" data-seat="D1">D1</div>
+                                    <div class="seat" data-seat="D2">D2</div>
+                                    <div class="seat" data-seat="D3">D3</div>
+                                    <div class="seat aisle"></div>
+                                    <div class="seat" data-seat="D4">D4</div>
+                                    <div class="seat" data-seat="D5">D5</div>
+                                    <div class="seat" data-seat="D6">D6</div>
+                                    <div class="seat aisle"></div>
+                                    <div class="seat" data-seat="D7">D7</div>
+                                    <div class="seat" data-seat="D8">D8</div>
+                                    <div class="seat" data-seat="D9">D9</div>
+                                </div>
+                                
+                                <!-- Row E -->
+                                <div class="seat-row">
+                                    <div class="seat" data-seat="E1">E1</div>
+                                    <div class="seat" data-seat="E2">E2</div>
+                                    <div class="seat" data-seat="E3">E3</div>
+                                    <div class="seat aisle"></div>
+                                    <div class="seat" data-seat="E4">E4</div>
+                                    <div class="seat" data-seat="E5">E5</div>
+                                    <div class="seat" data-seat="E6">E6</div>
+                                    <div class="seat aisle"></div>
+                                    <div class="seat" data-seat="E7">E7</div>
+                                    <div class="seat" data-seat="E8">E8</div>
+                                    <div class="seat" data-seat="E9">E9</div>
+                                </div>
+                                
+                                <!-- Row F -->
+                                <div class="seat-row">
+                                    <div class="seat" data-seat="F1">F1</div>
+                                    <div class="seat" data-seat="F2">F2</div>
+                                    <div class="seat" data-seat="F3">F3</div>
+                                    <div class="seat aisle"></div>
+                                    <div class="seat" data-seat="F4">F4</div>
+                                    <div class="seat" data-seat="F5">F5</div>
+                                    <div class="seat" data-seat="F6">F6</div>
+                                    <div class="seat aisle"></div>
+                                    <div class="seat" data-seat="F7">F7</div>
+                                    <div class="seat" data-seat="F8">F8</div>
+                                    <div class="seat" data-seat="F9">F9</div>
+                                </div>
+                            </div>
+                            
+                            <div class="seat-legend">
+                                <div class="legend-item">
+                                    <div class="legend-color" style="background: var(--gray-dark);"></div>
+                                    <span>Available</span>
+                                </div>
+                                <div class="legend-item">
+                                    <div class="legend-color" style="background: var(--accent);"></div>
+                                    <span>Selected</span>
+                                </div>
+                                <div class="legend-item">
+                                    <div class="legend-color" style="background: var(--primary);"></div>
+                                    <span>Booked</span>
+                                </div>
+                            </div>
+                            
+                            <div class="booking-summary">
+                                <div class="summary-row">
+                                    <span>Tickets:</span>
+                                    <span id="ticket-count">0</span>
+                                </div>
+                                <div class="summary-row">
+                                    <span>Price per ticket:</span>
+                                    <span>₹799</span>
+                                </div>
+                                <div class="summary-row total-row">
+                                    <span>Total:</span>
+                                    <span id="total-price">₹0</span>
+                                </div>
+                            </div>
                         </div>
-                        <!-- Add this to your booking modal form, before the special requirements textarea -->
                         <div class="form-group">
-                            <label for="giftCardCode">Gift Card Code (if applicable)</label>
-                            <input type="text" id="giftCardCode" placeholder="Enter gift card code">
-                            <button type="button" class="btn btn-accent" id="applyGiftCard" style="margin-top: 0.5rem;">Apply Gift Card</button>
-                            <div id="giftCardMessage" style="margin-top: 0.5rem; font-size: 0.9rem;"></div>
+                            <h4>Food & Beverage Options</h4>
+                            <p>Pre-order your snacks and drinks for the show (optional)</p>
+                            
+                            <div class="meal-options">
+                                <!-- Meal Option 1 -->
+                                <div class="meal-option">
+                                    <div class="meal-select">
+                                        <input type="checkbox" id="meal1" class="meal-checkbox" data-meal="popcorn-combo" data-price="250">
+                                        <label for="meal1">Popcorn Combo</label>
+                                    </div>
+                                    <div class="meal-details">
+                                        <p>Large popcorn + 1 soft drink</p>
+                                        <div class="meal-price">₹250</div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Meal Option 2 -->
+                                <div class="meal-option">
+                                    <div class="meal-select">
+                                        <input type="checkbox" id="meal2" class="meal-checkbox" data-meal="nachos-combo" data-price="350">
+                                        <label for="meal2">Nachos Combo</label>
+                                    </div>
+                                    <div class="meal-details">
+                                        <p>Loaded nachos + 1 beer/mocktail</p>
+                                        <div class="meal-price">₹350</div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Beverage Option 1 -->
+                                <div class="meal-option">
+                                    <div class="meal-select">
+                                        <input type="checkbox" id="drink1" class="meal-checkbox" data-meal="beer" data-price="200">
+                                        <label for="drink1">Beer (Pint)</label>
+                                    </div>
+                                    <div class="meal-details">
+                                        <p>Domestic beer (500ml)</p>
+                                        <div class="meal-price">₹200</div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Beverage Option 2 -->
+                                <div class="meal-option">
+                                    <div class="meal-select">
+                                        <input type="checkbox" id="drink2" class="meal-checkbox" data-meal="mocktail" data-price="180">
+                                        <label for="drink2">Mocktail</label>
+                                    </div>
+                                    <div class="meal-details">
+                                        <p>Fresh fruit mocktail</p>
+                                        <div class="meal-price">₹180</div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="meal-summary">
+                                <h5>Your Selections:</h5>
+                                <ul id="selectedMealsList"></ul>
+                                <div class="meal-total">
+                                    <span>Food & Beverage Total:</span>
+                                    <span id="mealTotalPrice">₹0</span>
+                                </div>
+                            </div>
                         </div>
                         
                         <div class="form-group">
@@ -1487,29 +2053,7 @@
                 </div>
             </div>
         </div>
-
-        <!-- Confirmation Modal -->
-        <div class="modal" id="confirmationModal">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h3>Booking Confirmed!</h3>
-                    <span class="close-modal">&times;</span>
-                </div>
-                <div class="modal-body">
-                    <div class="text-center">
-                        <i class="fas fa-check-circle" style="font-size: 5rem; color: var(--accent); margin-bottom: 1rem;"></i>
-                        <h4>Thank you for your booking!</h4>
-                        <p id="confirmationMessage">Your tickets have been booked successfully. A confirmation has been sent to your email.</p>
-                        <p>Your booking ID: <strong id="bookingId">LF2023XXXX</strong></p>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button class="btn btn-primary close-modal-btn">Done</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
+    
     <script>
         // Hide main content initially
     document.getElementById('mainContent').style.display = 'none';
@@ -1622,6 +2166,121 @@
                         card.style.display = 'none';
                     }
                 });
+            });
+        });
+        document.addEventListener('DOMContentLoaded', function() {
+            // Randomly book some seats (10 seats in this case)
+            const allSeats = document.querySelectorAll('.seat:not(.aisle)');
+            const bookedSeats = [];
+            
+            // Book random seats
+            for (let i = 0; i < 10; i++) {
+                const randomIndex = Math.floor(Math.random() * allSeats.length);
+                if (!allSeats[randomIndex].classList.contains('booked')) {
+                    allSeats[randomIndex].classList.add('booked');
+                    bookedSeats.push(allSeats[randomIndex].dataset.seat);
+                } else {
+                    i--; // Try again if seat was already booked
+                }
+            }
+            
+            // Seat selection logic
+            let selectedSeats = [];
+            const ticketCountElement = document.getElementById('ticket-count');
+            const totalPriceElement = document.getElementById('total-price');
+            const ticketSelect = document.getElementById('tickets');
+            const pricePerTicket = 799;
+            
+            // Update max tickets based on seat selection
+            function updateMaxTickets() {
+                const maxTickets = 5 - selectedSeats.length;
+                Array.from(ticketSelect.options).forEach(option => {
+                    if (option.value !== '') {
+                        option.disabled = parseInt(option.value) > maxTickets;
+                    }
+                });
+                
+                if (parseInt(ticketSelect.value) > maxTickets) {
+                    ticketSelect.value = '';
+                }
+            }
+            
+            // Handle seat clicks
+            allSeats.forEach(seat => {
+                seat.addEventListener('click', function() {
+                    if (this.classList.contains('booked')) return;
+                    
+                    if (this.classList.contains('selected')) {
+                        // Deselect seat
+                        this.classList.remove('selected');
+                        selectedSeats = selectedSeats.filter(s => s !== this.dataset.seat);
+                    } else {
+                        // Select seat if we haven't reached max
+                        if (selectedSeats.length < 5) {
+                            this.classList.add('selected');
+                            selectedSeats.push(this.dataset.seat);
+                        } else {
+                            alert('You can select a maximum of 5 seats');
+                        }
+                    }
+                    
+                    // Update ticket count and total
+                    ticketCountElement.textContent = selectedSeats.length;
+                    totalPriceElement.textContent = `₹${selectedSeats.length * pricePerTicket}`;
+                    
+                    // Update max tickets in dropdown
+                    updateMaxTickets();
+                });
+            });
+            
+            // Handle ticket dropdown changes
+            ticketSelect.addEventListener('change', function() {
+                const numTickets = parseInt(this.value) || 0;
+                
+                // Clear selections if number is reduced
+                while (selectedSeats.length > numTickets) {
+                    const seatToRemove = selectedSeats.pop();
+                    document.querySelector(`.seat[data-seat="${seatToRemove}"]`).classList.remove('selected');
+                }
+                
+                // Update display
+                ticketCountElement.textContent = selectedSeats.length;
+                totalPriceElement.textContent = `₹${selectedSeats.length * pricePerTicket}`;
+            });
+            
+            // Reset selections when modal is closed
+            document.querySelectorAll('.close-modal, .close-modal-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    // Clear selections
+                    selectedSeats.forEach(seat => {
+                        document.querySelector(`.seat[data-seat="${seat}"]`).classList.remove('selected');
+                    });
+                    selectedSeats = [];
+                    
+                    // Reset counters
+                    ticketCountElement.textContent = '0';
+                    totalPriceElement.textContent = '₹0';
+                    ticketSelect.value = '';
+                });
+            });
+            
+            // Include selected seats in booking confirmation
+            document.querySelector('.confirm-booking').addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                if (selectedSeats.length === 0) {
+                    alert('Please select at least one seat');
+                    return;
+                }
+                
+                // [Rest of your existing booking confirmation logic]
+                // Make sure to include the selectedSeats array in your confirmation message
+                const confirmationMessage = `Your tickets for ${showNameInput.value} have been booked successfully. 
+                    Seats: ${selectedSeats.join(', ')}. 
+                    A confirmation has been sent to your email.`;
+                document.getElementById('confirmationMessage').textContent = confirmationMessage;
+                
+                // [Rest of your existing confirmation logic]
             });
         });
         
@@ -1794,6 +2453,377 @@
                 giftCardMessage.style.color = 'var(--primary)';
             }
         });
+        // Meal Booking Functionality
+const mealCheckboxes = document.querySelectorAll('.meal-checkbox');
+const selectedMealsList = document.getElementById('selectedMealsList');
+const mealTotalPrice = document.getElementById('mealTotalPrice');
+let selectedMeals = [];
+
+// Handle meal selection
+mealCheckboxes.forEach(checkbox => {
+    checkbox.addEventListener('change', function() {
+        const mealName = this.dataset.meal;
+        const mealPrice = parseInt(this.dataset.price);
+        
+        if (this.checked) {
+            selectedMeals.push({
+                name: this.nextElementSibling.textContent,
+                price: mealPrice
+            });
+        } else {
+            selectedMeals = selectedMeals.filter(meal => 
+                meal.name !== this.nextElementSibling.textContent
+            );
+        }
+        
+        updateMealSummary();
+    });
+});
+
+// Update meal summary display
+function updateMealSummary() {
+    selectedMealsList.innerHTML = '';
+    let total = 0;
+    
+    selectedMeals.forEach(meal => {
+        const li = document.createElement('li');
+        li.textContent = `${meal.name} - ₹${meal.price}`;
+        selectedMealsList.appendChild(li);
+        total += meal.price;
+    });
+    
+    mealTotalPrice.textContent = `₹${total}`;
+    
+    // Update the overall total in the booking summary
+    updateBookingTotal();
+}
+
+// Update the overall booking total (combines seats and meals)
+function updateBookingTotal() {
+    const seatPrice = parseInt(document.getElementById('ticket-count').textContent) * 799 || 0;
+    const mealPrice = selectedMeals.reduce((sum, meal) => sum + meal.price, 0);
+    const totalPrice = seatPrice + mealPrice;
+    
+    document.getElementById('total-price').textContent = `₹${totalPrice}`;
+}
+
+// Reset meal selections when modal is closed
+document.querySelectorAll('.close-modal, .close-modal-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+        // Clear meal selections
+        mealCheckboxes.forEach(checkbox => {
+            checkbox.checked = false;
+        });
+        selectedMeals = [];
+        selectedMealsList.innerHTML = '';
+        mealTotalPrice.textContent = '₹0';
+    });
+});
+
+// Include meals in booking confirmation
+document.querySelector('.confirm-booking').addEventListener('click', function(e) {
+    e.preventDefault();
+    
+    // [Your existing validation code...]
+    
+    if (isValid) {
+        // Generate random booking ID
+        const bookingId = 'LF' + new Date().getFullYear() + Math.floor(1000 + Math.random() * 9000);
+        document.getElementById('bookingId').textContent = bookingId;
+        
+        // Build meal summary text
+        let mealSummary = 'No food/drinks selected';
+        if (selectedMeals.length > 0) {
+            mealSummary = selectedMeals.map(meal => 
+                `${meal.name} (₹${meal.price})`
+            ).join(', ');
+        }
+        
+        // Set confirmation message with meal info
+        const confirmationMessage = `Your tickets for ${showNameInput.value} have been booked successfully. 
+            Seats: ${selectedSeats.join(', ')}. 
+            Food/Drinks: ${mealSummary}.
+            A confirmation has been sent to your email.`;
+        document.getElementById('confirmationMessage').textContent = confirmationMessage;
+        
+        // Show confirmation modal
+        bookingModal.style.display = 'none';
+        confirmationModal.style.display = 'block';
+        
+        // Reset form
+        bookingForm.reset();
+    }
+});
+// Membership System
+document.addEventListener('DOMContentLoaded', function() {
+    // Open membership modal when join buttons are clicked
+    document.querySelectorAll('.join-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const tier = this.dataset.tier;
+            document.getElementById('selectedTier').value = tier;
+            document.getElementById('membershipModalTitle').textContent = 
+                `Join LaughFactory ${tier.charAt(0).toUpperCase() + tier.slice(1)} Membership`;
+            
+            // Show payment section for paid tiers
+            if (tier !== 'basic') {
+                document.getElementById('paymentSection').style.display = 'block';
+            } else {
+                document.getElementById('paymentSection').style.display = 'none';
+            }
+            
+            document.getElementById('membershipModal').style.display = 'block';
+        });
+    });
+    
+    // Handle payment method selection
+    document.querySelectorAll('input[name="payment"]').forEach(radio => {
+        radio.addEventListener('change', function() {
+            // Hide all payment details first
+            document.querySelectorAll('.payment-details').forEach(detail => {
+                detail.style.display = 'none';
+            });
+            
+            // Show selected payment method details
+            if (this.value === 'card') {
+                document.getElementById('cardDetails').style.display = 'block';
+            }
+            // Add other payment methods here as needed
+        });
+    });
+    
+    // Complete membership signup
+    document.getElementById('confirmMembership').addEventListener('click', function() {
+        const tier = document.getElementById('selectedTier').value;
+        const name = document.getElementById('mName').value;
+        const email = document.getElementById('mEmail').value;
+        
+        // Simple validation
+        if (!name || !email || !document.getElementById('agreeTerms').checked) {
+            alert('Please fill all required fields');
+            return;
+        }
+        
+        // In a real app, you would send this to your backend
+        localStorage.setItem('currentUser', JSON.stringify({
+            name: name,
+            email: email,
+            tier: tier,
+            joined: new Date().toISOString()
+        }));
+        
+        // Close modal and update UI
+        document.getElementById('membershipModal').style.display = 'none';
+        updateUserStatus();
+        alert(`Welcome to LaughFactory ${tier} membership, ${name}!`);
+    });
+    
+    // Login functionality
+    document.getElementById('loginBtn').addEventListener('click', function() {
+        const email = document.getElementById('loginEmail').value;
+        const password = document.getElementById('loginPassword').value;
+        
+        // Simple validation
+        if (!email || !password) {
+            alert('Please enter both email and password');
+            return;
+        }
+        
+        // In a real app, you would verify credentials with your backend
+        // For demo, we'll just check if the user exists in localStorage
+        const user = JSON.parse(localStorage.getItem('currentUser'));
+        
+        if (user && user.email === email) {
+            document.getElementById('loginModal').style.display = 'none';
+            updateUserStatus();
+            alert(`Welcome back, ${user.name}!`);
+        } else {
+            alert('Invalid credentials. Please try again or sign up.');
+        }
+    });
+    
+    // Update UI based on login state
+    function updateUserStatus() {
+        const user = JSON.parse(localStorage.getItem('currentUser'));
+        const nav = document.querySelector('.nav-links');
+        
+        if (user) {
+            // Remove login/signup buttons if they exist
+            const existingProfile = document.querySelector('.user-profile');
+            if (existingProfile) existingProfile.remove();
+            
+            // Add user profile to navbar
+            const profileHtml = `
+                <li class="user-profile">
+                    <div class="user-avatar">${user.name.charAt(0).toUpperCase()}</div>
+                    <span>${user.name.split(' ')[0]}</span>
+                    <div class="user-menu">
+                        <a href="#"><i class="fas fa-user"></i> My Profile</a>
+                        <a href="#"><i class="fas fa-ticket-alt"></i> My Tickets</a>
+                        <a href="#"><i class="fas fa-crown"></i> Membership (${user.tier})</a>
+                        <a href="#" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                    </div>
+                </li>
+            `;
+            
+            nav.insertAdjacentHTML('beforeend', profileHtml);
+            
+            // Add logout functionality
+            document.getElementById('logoutBtn').addEventListener('click', function(e) {
+                e.preventDefault();
+                localStorage.removeItem('currentUser');
+                location.reload();
+            });
+            
+            // Toggle user menu
+            document.querySelector('.user-profile').addEventListener('click', function() {
+                document.querySelector('.user-menu').classList.toggle('active');
+            });
+            
+            // Apply membership discounts to shows
+            applyMembershipDiscounts(user.tier);
+        }
+    }
+    
+    // Apply membership discounts to show prices
+    function applyMembershipDiscounts(tier) {
+        const discount = {
+            'basic': 0,
+            'premium': 15,
+            'vip': 25
+        }[tier];
+        
+        if (discount > 0) {
+            document.querySelectorAll('.price').forEach(priceElement => {
+                const originalPrice = parseInt(priceElement.textContent.replace(/[^\d]/g, ''));
+                const discountedPrice = originalPrice * (1 - discount/100);
+                priceElement.textContent = `₹${Math.floor(discountedPrice)} (${discount}% off)`;
+                priceElement.style.color = 'var(--accent)';
+            });
+        }
+    }
+    
+    // Initialize user status on page load
+    updateUserStatus();
+    
+    // Add login button to nav if not logged in
+    if (!localStorage.getItem('currentUser')) {
+        const nav = document.querySelector('.nav-links');
+        const loginHtml = `<li><a href="#" id="navLogin">Login</a></li>`;
+        nav.insertAdjacentHTML('beforeend', loginHtml);
+        
+        document.getElementById('navLogin').addEventListener('click', function(e) {
+            e.preventDefault();
+            document.getElementById('loginModal').style.display = 'block';
+        });
+    }
+});
     </script>
+    <!-- Membership Signup Modal -->
+<div class="modal" id="membershipModal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3 id="membershipModalTitle">Join LaughFactory</h3>
+            <span class="close-modal">&times;</span>
+        </div>
+        <div class="modal-body">
+            <form id="membershipForm">
+                <input type="hidden" id="selectedTier" value="">
+                
+                <div class="form-group">
+                    <label for="mName">Full Name</label>
+                    <input type="text" id="mName" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="mEmail">Email</label>
+                    <input type="email" id="mEmail" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="mPassword">Password</label>
+                    <input type="password" id="mPassword" required minlength="6">
+                </div>
+                
+                <div class="form-group" id="paymentSection" style="display: none;">
+                    <label>Payment Method</label>
+                    <div class="payment-options">
+                        <label class="payment-method">
+                            <input type="radio" name="payment" value="card" checked>
+                            <i class="fab fa-cc-visa"></i> Credit/Debit Card
+                        </label>
+                        <label class="payment-method">
+                            <input type="radio" name="payment" value="upi">
+                            <i class="fas fa-mobile-alt"></i> UPI
+                        </label>
+                        <label class="payment-method">
+                            <input type="radio" name="payment" value="wallet">
+                            <i class="fas fa-wallet"></i> Wallet
+                        </label>
+                    </div>
+                    
+                    <div id="cardDetails" class="payment-details">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="cardNumber">Card Number</label>
+                                <input type="text" id="cardNumber" placeholder="1234 5678 9012 3456">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="cardExpiry">Expiry Date</label>
+                                <input type="text" id="cardExpiry" placeholder="MM/YY">
+                            </div>
+                            <div class="form-group">
+                                <label for="cardCvv">CVV</label>
+                                <input type="text" id="cardCvv" placeholder="123">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <input type="checkbox" id="agreeTerms" required>
+                    <label for="agreeTerms">I agree to the Terms of Service and Privacy Policy</label>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-secondary close-modal-btn">Cancel</button>
+            <button class="btn btn-primary" id="confirmMembership">Complete Signup</button>
+        </div>
+    </div>
+</div>
+
+<!-- Membership Login Modal -->
+<div class="modal" id="loginModal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3>Member Login</h3>
+            <span class="close-modal">&times;</span>
+        </div>
+        <div class="modal-body">
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="loginEmail">Email</label>
+                    <input type="email" id="loginEmail" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="loginPassword">Password</label>
+                    <input type="password" id="loginPassword" required>
+                </div>
+                
+                <div class="form-group">
+                    <a href="#" id="forgotPassword">Forgot Password?</a>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-secondary close-modal-btn">Cancel</button>
+            <button class="btn btn-primary" id="loginBtn">Login</button>
+        </div>
+    </div>
+</div>
+
 </body>
 </html>
