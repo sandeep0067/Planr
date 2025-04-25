@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Planr - Customer Feedback Portal</title>
+    <title>Planr -  Feedback Portal</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         /* CSS Reset & Base Styles */
@@ -177,6 +177,7 @@
             background-color: #252525;
             border: 1px solid #383838;
             flex: 1;
+            position: relative;
         }
         
         .rating-option:hover {
@@ -184,36 +185,42 @@
             transform: translateY(-3px);
         }
         
-        .rating-option input {
-            display: none;
-        }
-        
-        .rating-option label {
+        .rating-option input[type="radio"] {
+            position: absolute;
+            opacity: 0;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
             cursor: pointer;
-            font-weight: normal;
-            margin-bottom: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 8px;
-        }
-        
-        .rating-option input:checked + label {
-            color: #7c4dff;
-        }
-        
-        .rating-option input:checked ~ .rating-emoji {
-            transform: scale(1.2);
         }
         
         .rating-emoji {
             font-size: 32px;
             transition: all 0.3s;
+            display: block;
+            margin-bottom: 8px;
         }
         
         .rating-text {
             font-size: 14px;
             font-weight: 500;
+            display: block;
+        }
+        
+        /* Style for checked rating */
+        .rating-option input[type="radio"]:checked + .rating-content {
+            color: #7c4dff;
+        }
+        
+        .rating-option input[type="radio"]:checked + .rating-content .rating-emoji {
+            transform: scale(1.2);
+        }
+        
+        .rating-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
         
         .submit-btn {
@@ -352,15 +359,15 @@
     
     <main class="container">
         <section class="feedback-section">
-            <h1 class="section-title">Customer Feedback Portal</h1>
-            <p class="section-subtitle">Your insights help us deliver exceptional event experiences. We appreciate you taking the time to share your thoughts.</p>
+            <h1 class="section-title">Feedback Portal</h1>
+            <p class="section-subtitle">We appreciate you taking the time to share your thoughts.</p>
             
             <form id="feedbackForm" class="feedback-form">
                 <div class="form-group">
                     <label for="name">Full Name</label>
                     <div class="input-wrapper">
                         <i class="fas fa-user input-icon"></i>
-                        <input type="text" id="name" name="name" placeholder="Enter your full name" required>
+                        <input type="text" id="name" name="name" placeholder="Enter your name" required>
                     </div>
                 </div>
                 
@@ -368,7 +375,7 @@
                     <label for="email">Email Address</label>
                     <div class="input-wrapper">
                         <i class="fas fa-envelope input-icon"></i>
-                        <input type="email" id="email" name="email" placeholder="Enter your professional email" required>
+                        <input type="email" id="email" name="email" placeholder="Enter your email" required>
                     </div>
                 </div>
                 
@@ -377,28 +384,38 @@
                     <div class="rating-container">
                         <div class="rating-option">
                             <input type="radio" id="rating-5" name="rating" value="5">
-                            <div class="rating-emoji">😍</div>
-                            <label for="rating-5"><span class="rating-text">Excellent</span></label>
+                            <div class="rating-content">
+                                <span class="rating-emoji">😍</span>
+                                <span class="rating-text">Excellent</span>
+                            </div>
                         </div>
                         <div class="rating-option">
                             <input type="radio" id="rating-4" name="rating" value="4">
-                            <div class="rating-emoji">😊</div>
-                            <label for="rating-4"><span class="rating-text">Good</span></label>
+                            <div class="rating-content">
+                                <span class="rating-emoji">😊</span>
+                                <span class="rating-text">Good</span>
+                            </div>
                         </div>
                         <div class="rating-option">
                             <input type="radio" id="rating-3" name="rating" value="3">
-                            <div class="rating-emoji">😐</div>
-                            <label for="rating-3"><span class="rating-text">Average</span></label>
+                            <div class="rating-content">
+                                <span class="rating-emoji">😐</span>
+                                <span class="rating-text">Average</span>
+                            </div>
                         </div>
                         <div class="rating-option">
                             <input type="radio" id="rating-2" name="rating" value="2">
-                            <div class="rating-emoji">😕</div>
-                            <label for="rating-2"><span class="rating-text">Below Avg</span></label>
+                            <div class="rating-content">
+                                <span class="rating-emoji">😕</span>
+                                <span class="rating-text">Below Avg</span>
+                            </div>
                         </div>
                         <div class="rating-option">
                             <input type="radio" id="rating-1" name="rating" value="1">
-                            <div class="rating-emoji">😞</div>
-                            <label for="rating-1"><span class="rating-text">Poor</span></label>
+                            <div class="rating-content">
+                                <span class="rating-emoji">😞</span>
+                                <span class="rating-text">Poor</span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -409,11 +426,11 @@
                         <i class="fas fa-tag input-icon"></i>
                         <select id="feedback-type" name="feedback-type">
                             <option value="general">General Feedback</option>
-                            <option value="bug">Bug Report</option>
+                            
                             <option value="feature">Feature Request</option>
-                            <option value="event">Event Management</option>
+                            <option value="event">Event Listing</option>
                             <option value="ticketing">Ticketing System</option>
-                            <option value="uiux">UI/UX Experience</option>
+                            
                         </select>
                     </div>
                 </div>
@@ -434,8 +451,7 @@
                 </div>
                 <h3>Thank You for Your Valuable Feedback!</h3>
                 <p>We sincerely appreciate you taking the time to share your experience with Planr.</p>
-                <p>Your feedback has been received by our team and will be carefully reviewed. We're committed to continuously improving our platform based on customer insights.</p>
-                <p>If you provided contact information, we may follow up for additional details.</p>
+                
             </div>
         </section>
     </main>
@@ -448,7 +464,7 @@
                 <a href="#">Support Center</a>
                 <a href="#">Contact Us</a>
             </div>
-            <p>&copy; 2023 Planr Event Management Platform. All rights reserved.</p>
+            <p>&copy; 2025 Planr Event Management Platform. All rights reserved.</p>
             <p style="margin-top: 10px; font-size: 12px; color: #555;">v3.2.1</p>
         </div>
     </footer>
@@ -511,6 +527,26 @@
                 // Analytics event (in a real app)
                 console.log('Feedback successfully recorded.');
             }, 1500);
+        });
+
+        // Add click handlers for rating options to improve UX
+        document.querySelectorAll('.rating-option').forEach(option => {
+            option.addEventListener('click', function() {
+                const radio = this.querySelector('input[type="radio"]');
+                radio.checked = true;
+                
+                // Update styles for all options
+                document.querySelectorAll('.rating-option').forEach(opt => {
+                    opt.style.backgroundColor = '#252525';
+                    opt.querySelector('.rating-emoji').style.transform = 'scale(1)';
+                    opt.querySelector('.rating-text').style.color = '';
+                });
+                
+                // Style the selected option
+                this.style.backgroundColor = '#333';
+                this.querySelector('.rating-emoji').style.transform = 'scale(1.2)';
+                this.querySelector('.rating-text').style.color = '#7c4dff';
+            });
         });
     </script>
 </body>
