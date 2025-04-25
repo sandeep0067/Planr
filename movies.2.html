@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CineBook - Movie Ticket Booking</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         /* Reset and Base Styles */
         * {
@@ -17,6 +18,12 @@
             background-color: #f5f5f5;
             color: #333;
             line-height: 1.6;
+            transition: all 0.3s ease;
+        }
+
+        body.dark-theme {
+            background-color: #121212;
+            color: #e0e0e0;
         }
 
         a {
@@ -35,6 +42,10 @@
             z-index: 100;
         }
 
+        .dark-theme header {
+            background-color: #0a2d4a;
+        }
+
         .navbar {
             display: flex;
             justify-content: space-between;
@@ -45,6 +56,13 @@
             font-size: 1.8rem;
             font-weight: bold;
             color: #fff;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo i {
+            color: #f5a623;
         }
 
         .logo span {
@@ -59,6 +77,9 @@
         .nav-links a {
             font-weight: 500;
             transition: color 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
 
         .nav-links a:hover {
@@ -77,6 +98,9 @@
             font-weight: 500;
             cursor: pointer;
             transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
 
         .btn-outline {
@@ -100,9 +124,28 @@
             background: #e0911a;
         }
 
+        .btn-danger {
+            background: #ff6b6b;
+            color: white;
+            border: none;
+        }
+
+        .btn-danger:hover {
+            background: #e05252;
+        }
+
+        .theme-toggle {
+            background: transparent;
+            border: none;
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+            margin-left: 1rem;
+        }
+
         /* Hero Section */
         .hero {
-            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://via.placeholder.com/1920x600') center/cover no-repeat;
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80') center/cover no-repeat;
             height: 400px;
             display: flex;
             flex-direction: column;
@@ -116,18 +159,21 @@
         .hero h1 {
             font-size: 3rem;
             margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
         }
 
         .hero p {
             font-size: 1.2rem;
             margin-bottom: 2rem;
             max-width: 700px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
         }
 
         .search-bar {
             display: flex;
             width: 100%;
             max-width: 600px;
+            position: relative;
         }
 
         .search-bar input {
@@ -136,6 +182,24 @@
             border: none;
             border-radius: 4px 0 0 4px;
             font-size: 1rem;
+            padding-left: 2.5rem;
+        }
+
+        .dark-theme .search-bar input {
+            background-color: #333;
+            color: #e0e0e0;
+        }
+
+        .search-bar i {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #666;
+        }
+
+        .dark-theme .search-bar i {
+            color: #aaa;
         }
 
         .search-bar button {
@@ -146,19 +210,39 @@
             border-radius: 0 4px 4px 0;
             cursor: pointer;
             font-weight: 500;
+            transition: background 0.3s;
+        }
+
+        .search-bar button:hover {
+            background: #e0911a;
         }
 
         /* Now Showing Section */
         .section {
             padding: 3rem 2rem;
+            transition: background-color 0.3s ease;
+        }
+
+        .dark-theme .section {
+            background-color: #1e1e1e;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
         }
 
         .section-title {
             font-size: 1.8rem;
-            margin-bottom: 2rem;
             color: #333;
             position: relative;
             display: inline-block;
+        }
+
+        .dark-theme .section-title {
+            color: #e0e0e0;
         }
 
         .section-title::after {
@@ -169,6 +253,22 @@
             width: 60px;
             height: 3px;
             background: #f5a623;
+        }
+
+        .view-all {
+            color: #0f4c81;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .dark-theme .view-all {
+            color: #6ba8e6;
+        }
+
+        .view-all:hover {
+            color: #f5a623;
         }
 
         .movie-grid {
@@ -183,11 +283,22 @@
             overflow: hidden;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             transition: transform 0.3s, box-shadow 0.3s;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .dark-theme .movie-card {
+            background: #2d2d2d;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
         }
 
         .movie-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .dark-theme .movie-card:hover {
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
         }
 
         .movie-poster {
@@ -198,12 +309,19 @@
 
         .movie-info {
             padding: 1rem;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
         }
 
         .movie-title {
             font-size: 1.1rem;
             font-weight: 600;
             margin-bottom: 0.5rem;
+        }
+
+        .dark-theme .movie-title {
+            color: #ffffff;
         }
 
         .movie-meta {
@@ -214,15 +332,23 @@
             margin-bottom: 1rem;
         }
 
+        .dark-theme .movie-meta {
+            color: #aaa;
+        }
+
         .movie-rating {
             color: #f5a623;
             font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.2rem;
         }
 
         .movie-actions {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            margin-top: auto;
         }
 
         .btn-sm {
@@ -233,6 +359,10 @@
         .price {
             font-weight: 600;
             color: #0f4c81;
+        }
+
+        .dark-theme .price {
+            color: #6ba8e6;
         }
 
         /* Theater Selection Modal */
@@ -258,6 +388,10 @@
             animation: modalFadeIn 0.3s;
         }
 
+        .dark-theme .modal-content {
+            background: #2d2d2d;
+        }
+
         @keyframes modalFadeIn {
             from {
                 opacity: 0;
@@ -276,6 +410,10 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+        }
+
+        .dark-theme .modal-header {
+            background: #0a2d4a;
         }
 
         .modal-title {
@@ -297,6 +435,114 @@
             padding: 1.5rem;
         }
 
+        .modal-step {
+            display: none;
+        }
+
+        .modal-step.active {
+            display: block;
+        }
+
+        .step-indicator {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 2rem;
+            gap: 1rem;
+        }
+
+        .step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            flex: 1;
+            max-width: 150px;
+        }
+
+        .step:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            top: 15px;
+            left: calc(50% + 20px);
+            width: calc(100% - 40px);
+            height: 2px;
+            background: #ddd;
+            z-index: 1;
+        }
+
+        .dark-theme .step:not(:last-child)::after {
+            background: #444;
+        }
+
+        .step.active:not(:last-child)::after {
+            background: #0f4c81;
+        }
+
+        .dark-theme .step.active:not(:last-child)::after {
+            background: #6ba8e6;
+        }
+
+        .step-number {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: #ddd;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 0.5rem;
+            z-index: 2;
+            font-weight: 600;
+        }
+
+        .dark-theme .step-number {
+            background: #444;
+            color: #e0e0e0;
+        }
+
+        .step.active .step-number {
+            background: #0f4c81;
+            color: white;
+        }
+
+        .dark-theme .step.active .step-number {
+            background: #6ba8e6;
+        }
+
+        .step.completed .step-number {
+            background: #0f4c81;
+            color: white;
+        }
+
+        .dark-theme .step.completed .step-number {
+            background: #6ba8e6;
+        }
+
+        .step.completed .step-number::after {
+            content: '\f00c';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+        }
+
+        .step-label {
+            font-size: 0.8rem;
+            text-align: center;
+            color: #666;
+        }
+
+        .dark-theme .step-label {
+            color: #aaa;
+        }
+
+        .step.active .step-label {
+            color: #0f4c81;
+            font-weight: 500;
+        }
+
+        .dark-theme .step.active .step-label {
+            color: #6ba8e6;
+        }
+
         .theater-list {
             margin-top: 1rem;
         }
@@ -308,6 +554,19 @@
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
+            transition: background 0.3s;
+        }
+
+        .dark-theme .theater-item {
+            border-bottom: 1px solid #444;
+        }
+
+        .theater-item:hover {
+            background: #f9f9f9;
+        }
+
+        .dark-theme .theater-item:hover {
+            background: #333;
         }
 
         .theater-info {
@@ -319,11 +578,25 @@
         .theater-info h3 {
             font-size: 1.1rem;
             margin-bottom: 0.3rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .dark-theme .theater-info h3 {
+            color: #ffffff;
         }
 
         .theater-info p {
             color: #666;
             font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .dark-theme .theater-info p {
+            color: #aaa;
         }
 
         .showtimes {
@@ -338,6 +611,12 @@
             border-radius: 4px;
             cursor: pointer;
             transition: all 0.3s;
+            font-size: 0.9rem;
+        }
+
+        .dark-theme .showtime {
+            background: #333;
+            color: #e0e0e0;
         }
 
         .showtime:hover {
@@ -345,9 +624,17 @@
             color: white;
         }
 
+        .dark-theme .showtime:hover {
+            background: #6ba8e6;
+        }
+
         .showtime.selected {
             background: #0f4c81;
             color: white;
+        }
+
+        .dark-theme .showtime.selected {
+            background: #6ba8e6;
         }
 
         /* Seats Selection */
@@ -362,6 +649,26 @@
             padding: 0.5rem;
             margin-bottom: 2rem;
             border-radius: 4px;
+            position: relative;
+        }
+
+        .dark-theme .screen {
+            background: #6ba8e6;
+        }
+
+        .screen::before {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 20%;
+            width: 60%;
+            height: 10px;
+            background: #0a3559;
+            border-radius: 0 0 5px 5px;
+        }
+
+        .dark-theme .screen::before {
+            background: #3d7bb3;
         }
 
         .seats-container {
@@ -371,6 +678,7 @@
             gap: 1rem;
             overflow-x: auto;
             width: 100%;
+            padding: 1rem 0;
         }
 
         .seat-row {
@@ -392,6 +700,11 @@
             flex-shrink: 0;
         }
 
+        .dark-theme .seat {
+            background: #444;
+            color: #e0e0e0;
+        }
+
         .seat:hover {
             background: #f5a623;
             color: white;
@@ -400,6 +713,10 @@
         .seat.selected {
             background: #0f4c81;
             color: white;
+        }
+
+        .dark-theme .seat.selected {
+            background: #6ba8e6;
         }
 
         .seat.occupied {
@@ -422,6 +739,10 @@
             font-size: 0.9rem;
         }
 
+        .dark-theme .legend-item {
+            color: #e0e0e0;
+        }
+
         .legend-color {
             width: 20px;
             height: 20px;
@@ -435,10 +756,18 @@
             border-radius: 8px;
         }
 
+        .dark-theme .booking-summary {
+            background: #333;
+        }
+
         .summary-row {
             display: flex;
             justify-content: space-between;
             margin-bottom: 0.5rem;
+        }
+
+        .dark-theme .summary-row {
+            color: #e0e0e0;
         }
 
         .total {
@@ -449,11 +778,30 @@
             border-top: 1px solid #ddd;
         }
 
+        .dark-theme .total {
+            border-top: 1px solid #444;
+        }
+
+        .modal-footer {
+            display: flex;
+            justify-content: space-between;
+            padding: 1rem 1.5rem;
+            border-top: 1px solid #eee;
+        }
+
+        .dark-theme .modal-footer {
+            border-top: 1px solid #444;
+        }
+
         /* Footer */
         footer {
             background: #222;
             color: #aaa;
             padding: 3rem 2rem;
+        }
+
+        .dark-theme footer {
+            background: #111;
         }
 
         .footer-content {
@@ -476,10 +824,38 @@
 
         .footer-column li {
             margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
 
         .footer-column a:hover {
             color: white;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: background 0.3s;
+        }
+
+        .dark-theme .social-links a {
+            background: #444;
+        }
+
+        .social-links a:hover {
+            background: #f5a623;
         }
 
         .copyright {
@@ -502,6 +878,11 @@
             z-index: 1001;
             display: none;
             animation: slideIn 0.3s, fadeOut 0.5s 2.5s forwards;
+            max-width: 350px;
+        }
+
+        .notification.error {
+            background: #ff6b6b;
         }
 
         @keyframes slideIn {
@@ -544,6 +925,11 @@
             max-width: 400px;
             border-radius: 8px;
             position: relative;
+            animation: modalFadeIn 0.3s;
+        }
+
+        .dark-theme .login-content {
+            background: #2d2d2d;
         }
 
         .login-close {
@@ -564,12 +950,40 @@
             display: flex;
             flex-direction: column;
             gap: 0.5rem;
+            position: relative;
+        }
+
+        .form-group label {
+            color: #333;
+        }
+
+        .dark-theme .form-group label {
+            color: #e0e0e0;
         }
 
         .form-group input {
             padding: 0.8rem;
             border: 1px solid #ddd;
             border-radius: 4px;
+            padding-left: 2.5rem;
+        }
+
+        .dark-theme .form-group input {
+            background: #333;
+            border: 1px solid #444;
+            color: #e0e0e0;
+        }
+
+        .form-group i {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #666;
+        }
+
+        .dark-theme .form-group i {
+            color: #aaa;
         }
 
         .form-actions {
@@ -579,22 +993,119 @@
             margin-top: 1rem;
         }
 
+        /* Loading Spinner */
+        .spinner {
+            display: none;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* User Dropdown */
+        .user-dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .user-dropdown-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+        }
+
+        .user-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: #f5a623;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            right: 0;
+            background-color: white;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .dark-theme .dropdown-content {
+            background: #2d2d2d;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.4);
+        }
+
+        .dropdown-content a {
+            color: #333;
+            padding: 0.75rem 1rem;
+            text-decoration: none;
+            display: block;
+            transition: background 0.3s;
+        }
+
+        .dark-theme .dropdown-content a {
+            color: #e0e0e0;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #f1f1f1;
+        }
+
+        .dark-theme .dropdown-content a:hover {
+            background-color: #444;
+        }
+
+        .user-dropdown:hover .dropdown-content {
+            display: block;
+        }
+
         /* Responsive Adjustments */
+        @media (max-width: 992px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .movie-grid {
+                grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            }
+        }
+
         @media (max-width: 768px) {
             .navbar {
                 flex-direction: column;
                 gap: 1rem;
+                align-items: flex-start;
             }
 
             .nav-links {
                 gap: 1rem;
                 flex-wrap: wrap;
-                justify-content: center;
+                justify-content: flex-start;
+                width: 100%;
             }
 
             .user-actions {
-                justify-content: center;
+                justify-content: flex-start;
                 width: 100%;
+            }
+
+            .hero {
+                height: 350px;
             }
 
             .hero h1 {
@@ -629,7 +1140,11 @@
             }
         }
 
-        @media (max-width: 480px) {
+        @media (max-width: 576px) {
+            header {
+                padding: 1rem;
+            }
+            
             .hero {
                 height: 300px;
                 padding: 0 1rem;
@@ -640,11 +1155,38 @@
             }
 
             .movie-grid {
-                grid-template-columns: 1fr;
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .movie-poster {
+                height: 250px;
             }
 
             .login-content {
                 margin: 20% auto;
+                padding: 1.5rem;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .movie-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .movie-poster {
+                height: 350px;
+            }
+            
+            .step-indicator {
+                gap: 0.5rem;
+            }
+            
+            .step-label {
+                font-size: 0.7rem;
             }
         }
     </style>
@@ -653,15 +1195,36 @@
     <!-- Header -->
     <header>
         <div class="navbar">
-            <div class="logo">Cine<span>Book</span></div>
-            <div class="nav-links">
-                <a href="#" class="nav-link" data-section="now-showing">Movies</a>
-                <a href="#" class="nav-link" data-section="theaters">Theaters</a>
-                <a href="#" class="nav-link" data-section="offers">Offers</a>
+            <div class="logo">
+                <i class="fas fa-film"></i>
+                <span>Cine</span>Book
             </div>
-            <div class="user-actions">
-                <button class="btn btn-outline" id="loginBtn">Sign In</button>
-                <button class="btn btn-primary" id="registerBtn">Register</button>
+            <div class="nav-links">
+                <a href="#" class="nav-link" data-section="now-showing">
+                    <i class="fas fa-ticket-alt"></i>
+                    Movies
+                </a>
+                <a href="#" class="nav-link" data-section="theaters">
+                    <i class="fas fa-map-marker-alt"></i>
+                    Theaters
+                </a>
+                <a href="#" class="nav-link" data-section="offers">
+                    <i class="fas fa-tag"></i>
+                    Offers
+                </a>
+            </div>
+            <div class="user-actions" id="userActions">
+                <button class="btn btn-outline" id="loginBtn">
+                    <i class="fas fa-sign-in-alt"></i>
+                    Sign In
+                </button>
+                <button class="btn btn-primary" id="registerBtn">
+                    <i class="fas fa-user-plus"></i>
+                    Register
+                </button>
+                <button class="theme-toggle" id="themeToggle">
+                    <i class="fas fa-moon"></i>
+                </button>
             </div>
         </div>
     </header>
@@ -671,6 +1234,7 @@
         <h1>Book Movie Tickets Online</h1>
         <p>Discover the latest movies and theaters near you. Get the best seats at the best prices!</p>
         <div class="search-bar">
+            <i class="fas fa-search"></i>
             <input type="text" id="searchInput" placeholder="Search for movies, theaters...">
             <button id="searchBtn">Search</button>
         </div>
@@ -678,7 +1242,13 @@
 
     <!-- Now Showing Section -->
     <section class="section" id="now-showing">
-        <h2 class="section-title">Now Showing</h2>
+        <div class="section-header">
+            <h2 class="section-title">Now Showing</h2>
+            <a href="#" class="view-all">
+                View All
+                <i class="fas fa-chevron-right"></i>
+            </a>
+        </div>
         <div class="movie-grid">
             <!-- Movie cards will be populated by JavaScript -->
         </div>
@@ -686,7 +1256,13 @@
 
     <!-- Coming Soon Section -->
     <section class="section" style="background-color: #f9f9f9;" id="coming-soon">
-        <h2 class="section-title">Coming Soon</h2>
+        <div class="section-header">
+            <h2 class="section-title">Coming Soon</h2>
+            <a href="#" class="view-all">
+                View All
+                <i class="fas fa-chevron-right"></i>
+            </a>
+        </div>
         <div class="movie-grid">
             <!-- Coming soon movies will be populated by JavaScript -->
         </div>
@@ -716,63 +1292,132 @@
                 <span class="close-btn">&times;</span>
             </div>
             <div class="modal-body">
-                <h4>Select Theater & Showtime</h4>
-                <div class="theater-list" id="theaterSelection">
-                    <!-- Theaters will be populated by JavaScript -->
+                <div class="step-indicator">
+                    <div class="step active" id="step1">
+                        <div class="step-number">1</div>
+                        <div class="step-label">Select Theater</div>
+                    </div>
+                    <div class="step" id="step2">
+                        <div class="step-number">2</div>
+                        <div class="step-label">Choose Seats</div>
+                    </div>
+                    <div class="step" id="step3">
+                        <div class="step-number">3</div>
+                        <div class="step-label">Confirm</div>
+                    </div>
+                </div>
+                
+                <div class="modal-step active" id="stepTheater">
+                    <h4>Select Theater & Showtime</h4>
+                    <div class="theater-list" id="theaterSelection">
+                        <!-- Theaters will be populated by JavaScript -->
+                    </div>
                 </div>
 
                 <!-- Seat Selection (hidden by default) -->
-                <div id="seatSelection" class="seat-selection" style="display: none;">
-                    <div class="screen">SCREEN</div>
-                    <div class="seats-container" id="seatsContainer">
-                        <!-- Seats will be populated by JavaScript -->
-                    </div>
-
-                    <div class="seat-legend">
-                        <div class="legend-item">
-                            <div class="legend-color" style="background: #ddd;"></div>
-                            <span>Available</span>
-                        </div>
-                        <div class="legend-item">
-                            <div class="legend-color" style="background: #0f4c81;"></div>
-                            <span>Selected</span>
-                        </div>
-                        <div class="legend-item">
-                            <div class="legend-color" style="background: #ff6b6b;"></div>
-                            <span>Occupied</span>
-                        </div>
-                    </div>
-
-                    <div class="booking-summary">
-                        <h4>Booking Summary</h4>
-                        <div class="summary-row">
-                            <span>Movie:</span>
-                            <span id="summary-movie">None selected</span>
-                        </div>
-                        <div class="summary-row">
-                            <span>Theater:</span>
-                            <span id="summary-theater">None selected</span>
-                        </div>
-                        <div class="summary-row">
-                            <span>Showtime:</span>
-                            <span id="summary-showtime">None selected</span>
-                        </div>
-                        <div class="summary-row">
-                            <span>Seats:</span>
-                            <span id="summary-seats">None selected</span>
-                        </div>
-                        <div class="summary-row">
-                            <span>Price per ticket:</span>
-                            <span id="summary-price">$0.00</span>
-                        </div>
-                        <div class="summary-row total">
-                            <span>Total:</span>
-                            <span id="summary-total">$0.00</span>
+                <div class="modal-step" id="stepSeats">
+                    <div class="seat-selection">
+                        <div class="screen">SCREEN</div>
+                        <div class="seats-container" id="seatsContainer">
+                            <!-- Seats will be populated by JavaScript -->
                         </div>
 
-                        <button id="confirmBooking" class="btn btn-primary" style="width: 100%; margin-top: 1rem;">Confirm Booking</button>
+                        <div class="seat-legend">
+                            <div class="legend-item">
+                                <div class="legend-color" style="background: #ddd;"></div>
+                                <span>Available</span>
+                            </div>
+                            <div class="legend-item">
+                                <div class="legend-color" style="background: #0f4c81;"></div>
+                                <span>Selected</span>
+                            </div>
+                            <div class="legend-item">
+                                <div class="legend-color" style="background: #ff6b6b;"></div>
+                                <span>Occupied</span>
+                            </div>
+                        </div>
+
+                        <div class="booking-summary">
+                            <h4>Booking Summary</h4>
+                            <div class="summary-row">
+                                <span>Movie:</span>
+                                <span id="summary-movie">None selected</span>
+                            </div>
+                            <div class="summary-row">
+                                <span>Theater:</span>
+                                <span id="summary-theater">None selected</span>
+                            </div>
+                            <div class="summary-row">
+                                <span>Showtime:</span>
+                                <span id="summary-showtime">None selected</span>
+                            </div>
+                            <div class="summary-row">
+                                <span>Seats:</span>
+                                <span id="summary-seats">None selected</span>
+                            </div>
+                            <div class="summary-row">
+                                <span>Price per ticket:</span>
+                                <span id="summary-price">₹0.00</span>
+                            </div>
+                            <div class="summary-row total">
+                                <span>Total:</span>
+                                <span id="summary-total">₹0.00</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
+                
+                <!-- Confirmation Step (hidden by default) -->
+                <div class="modal-step" id="stepConfirm">
+                    <div class="booking-confirmation">
+                        <div style="text-align: center; margin-bottom: 2rem;">
+                            <i class="fas fa-check-circle" style="font-size: 4rem; color: #4CAF50; margin-bottom: 1rem;"></i>
+                            <h3>Booking Confirmation</h3>
+                        </div>
+                        
+                        <div class="booking-summary">
+                            <h4>Your Booking Details</h4>
+                            <div class="summary-row">
+                                <span>Movie:</span>
+                                <span id="confirm-movie">None selected</span>
+                            </div>
+                            <div class="summary-row">
+                                <span>Theater:</span>
+                                <span id="confirm-theater">None selected</span>
+                            </div>
+                            <div class="summary-row">
+                                <span>Showtime:</span>
+                                <span id="confirm-showtime">None selected</span>
+                            </div>
+                            <div class="summary-row">
+                                <span>Seats:</span>
+                                <span id="confirm-seats">None selected</span>
+                            </div>
+                            <div class="summary-row">
+                                <span>Price per ticket:</span>
+                                <span id="confirm-price">₹0.00</span>
+                            </div>
+                            <div class="summary-row total">
+                                <span>Total:</span>
+                                <span id="confirm-total">₹0.00</span>
+                            </div>
+                        </div>
+                        
+                        <div style="margin-top: 2rem; text-align: center;">
+                            <p>Your tickets will be sent to your email. Please arrive at least 30 minutes before the showtime.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline" id="prevBtn" style="display: none; border-color: #0f4c81; color: #0f4c81;">
+                    <i class="fas fa-arrow-left"></i>
+                    Previous
+                </button>
+                <button class="btn btn-primary" id="nextBtn">
+                    Next
+                    <i class="fas fa-arrow-right"></i>
+                </button>
             </div>
         </div>
     </div>
@@ -784,16 +1429,21 @@
             <h2>Sign In</h2>
             <form class="login-form" id="loginForm">
                 <div class="form-group">
+                    <i class="fas fa-envelope"></i>
                     <label for="loginEmail">Email</label>
                     <input type="email" id="loginEmail" required>
                 </div>
                 <div class="form-group">
+                    <i class="fas fa-lock"></i>
                     <label for="loginPassword">Password</label>
                     <input type="password" id="loginPassword" required>
                 </div>
                 <div class="form-actions">
                     <button type="button" id="forgotPassword" class="btn btn-outline" style="border-color: #0f4c81; color: #0f4c81;">Forgot Password?</button>
-                    <button type="submit" class="btn btn-primary">Login</button>
+                    <button type="submit" class="btn btn-primary">
+                        <span id="loginText">Login</span>
+                        <div class="spinner" id="loginSpinner"></div>
+                    </button>
                 </div>
             </form>
         </div>
@@ -806,22 +1456,29 @@
             <h2>Register</h2>
             <form class="login-form" id="registerForm">
                 <div class="form-group">
+                    <i class="fas fa-user"></i>
                     <label for="registerName">Full Name</label>
                     <input type="text" id="registerName" required>
                 </div>
                 <div class="form-group">
+                    <i class="fas fa-envelope"></i>
                     <label for="registerEmail">Email</label>
                     <input type="email" id="registerEmail" required>
                 </div>
                 <div class="form-group">
+                    <i class="fas fa-lock"></i>
                     <label for="registerPassword">Password</label>
                     <input type="password" id="registerPassword" required>
                 </div>
                 <div class="form-group">
+                    <i class="fas fa-lock"></i>
                     <label for="registerConfirm">Confirm Password</label>
                     <input type="password" id="registerConfirm" required>
                 </div>
-                <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 1rem;">Register</button>
+                <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 1rem;">
+                    <span id="registerText">Register</span>
+                    <div class="spinner" id="registerSpinner"></div>
+                </button>
             </form>
         </div>
     </div>
@@ -835,34 +1492,41 @@
             <div class="footer-column">
                 <h3>About CineBook</h3>
                 <ul>
-                    <li><a href="#">About Us</a></li>
-                    <li><a href="#">Contact Us</a></li>
-                    <li><a href="#">Careers</a></li>
-                    <li><a href="#">Blog</a></li>
+                    <li><i class="fas fa-chevron-right"></i> <a href="#">About Us</a></li>
+                    <li><i class="fas fa-chevron-right"></i> <a href="#">Contact Us</a></li>
+                    <li><i class="fas fa-chevron-right"></i> <a href="#">Careers</a></li>
+                    <li><i class="fas fa-chevron-right"></i> <a href="#">Blog</a></li>
                 </ul>
             </div>
             <div class="footer-column">
                 <h3>Help</h3>
                 <ul>
-                    <li><a href="#">FAQs</a></li>
-                    <li><a href="#">Privacy Policy</a></li>
-                    <li><a href="#">Terms & Conditions</a></li>
-                    <li><a href="#">Refund Policy</a></li>
+                    <li><i class="fas fa-chevron-right"></i> <a href="#">FAQs</a></li>
+                    <li><i class="fas fa-chevron-right"></i> <a href="#">Privacy Policy</a></li>
+                    <li><i class="fas fa-chevron-right"></i> <a href="#">Terms & Conditions</a></li>
+                    <li><i class="fas fa-chevron-right"></i> <a href="#">Refund Policy</a></li>
                 </ul>
             </div>
             <div class="footer-column">
                 <h3>Partner With Us</h3>
                 <ul>
-                    <li><a href="#">List Your Theater</a></li>
-                    <li><a href="#">Business Offers</a></li>
-                    <li><a href="#">Advertise With Us</a></li>
+                    <li><i class="fas fa-chevron-right"></i> <a href="#">List Your Theater</a></li>
+                    <li><i class="fas fa-chevron-right"></i> <a href="#">Business Offers</a></li>
+                    <li><i class="fas fa-chevron-right"></i> <a href="#">Advertise With Us</a></li>
                 </ul>
             </div>
             <div class="footer-column">
-                <h3>Download App</h3>
+                <h3>Connect With Us</h3>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+                <h3 style="margin-top: 1.5rem;">Download App</h3>
                 <ul>
-                    <li><a href="#">Android App</a></li>
-                    <li><a href="#">iOS App</a></li>
+                    <li><i class="fas fa-chevron-right"></i> <a href="#">Android App</a></li>
+                    <li><i class="fas fa-chevron-right"></i> <a href="#">iOS App</a></li>
                 </ul>
             </div>
         </div>
@@ -872,14 +1536,14 @@
     </footer>
 
     <script>
-        // Movie Data
+        // Movie Data with Indian prices (in Rupees)
         const movies = [
             {
                 id: 1,
                 title: "Akaal",
                 genre: "Action",
                 rating: 8.4,
-                price: 12.99,
+                price: 180,
                 poster: "https://th.bing.com/th/id/OIP.DYu1tC2Eiybn3ffHpnTJqgHaJL?w=154&h=191&c=7&r=0&o=5&dpr=1.1&pid=1.7",
                 description: "An intense action thriller about a man's quest for justice.",
                 duration: "2h 15m",
@@ -890,7 +1554,7 @@
                 title: "Chhaava",
                 genre: "Action",
                 rating: 7.9,
-                price: 11.99,
+                price: 200,
                 poster: "https://th.bing.com/th/id/OIP.qrMAq5b-z643Gk5KBpJ3ZAHaJP?w=160&h=200&c=7&r=0&o=5&dpr=1.1&pid=1.7",
                 description: "A historical action drama set in ancient times.",
                 duration: "2h 30m",
@@ -901,7 +1565,7 @@
                 title: "Jaat",
                 genre: "Sci-Fi",
                 rating: 8.0,
-                price: 10.99,
+                price: 150,
                 poster: "https://th.bing.com/th/id/OIP.0xeSbwlkgYICEP7Ct2FMrwAAAA?w=204&h=165&c=7&r=0&o=5&dpr=1.1&pid=1.7",
                 description: "A futuristic sci-fi adventure exploring human identity.",
                 duration: "1h 55m",
@@ -912,7 +1576,7 @@
                 title: "The Diplomat",
                 genre: "Action",
                 rating: 7.3,
-                price: 9.99,
+                price: 220,
                 poster: "https://th.bing.com/th/id/OIP.RJCVBZIkZDDGNxk2h9zZmQHaJQ?w=141&h=180&c=7&r=0&o=5&dpr=1.1&pid=1.7",
                 description: "A political action thriller about international espionage.",
                 duration: "2h 5m",
@@ -923,7 +1587,7 @@
                 title: "Deva",
                 genre: "Action",
                 rating: 8.6,
-                price: 13.99,
+                price: 250,
                 poster: "https://th.bing.com/th/id/OIP.3yrKyHjOaqn5WnNyE7bVOQHaEK?w=298&h=180&c=7&r=0&o=5&dpr=1.1&pid=1.7",
                 description: "A high-octane action film with supernatural elements.",
                 duration: "2h 25m",
@@ -934,7 +1598,7 @@
                 title: "Azaad",
                 genre: "Action",
                 rating: 6.7,
-                price: 8.99,
+                price: 120,
                 poster: "https://th.bing.com/th/id/OIP.DyPCHC0GElG8vQho1KjUnwAAAA?w=117&h=180&c=7&r=0&o=5&dpr=1.1&pid=1.7",
                 description: "A story of freedom and rebellion in a dystopian world.",
                 duration: "1h 50m",
@@ -945,7 +1609,7 @@
                 title: "Game Changer",
                 genre: "Sci-Fi",
                 rating: 6.7,
-                price: 8.99,
+                price: 170,
                 poster: "https://th.bing.com/th/id/OIP.upYBc5-oQdh-s1k8Vzec1wHaEK?w=333&h=187&c=7&r=0&o=5&dpr=1.1&pid=1.7",
                 description: "A sci-fi thriller about virtual reality gone wrong.",
                 duration: "2h 10m",
@@ -956,7 +1620,7 @@
                 title: "Be Happy",
                 genre: "Drama",
                 rating: 7.5,
-                price: 9.50,
+                price: 130,
                 poster: "https://th.bing.com/th/id/OIP.2jAnW00x3noW_0KSqyGpPAHaFj?w=195&h=146&c=7&r=0&o=5&dpr=1.1&pid=1.7",
                 description: "An inspiring drama about finding happiness in small things.",
                 duration: "1h 45m",
@@ -967,7 +1631,7 @@
                 title: "Kesari Chapter 2",
                 genre: "Action",
                 rating: 8.2,
-                price: 12.50,
+                price: 280,
                 poster: "https://th.bing.com/th/id/OIP.H3QSHDe8hF7d2X7p2j-lHgHaD4?w=344&h=180&c=7&r=0&o=5&dpr=1.1&pid=1.7",
                 description: "The sequel to the hit action film about bravery and sacrifice.",
                 duration: "2h 35m",
@@ -978,7 +1642,7 @@
                 title: "Sikandar",
                 genre: "Action",
                 rating: 7.8,
-                price: 11.25,
+                price: 210,
                 poster: "https://th.bing.com/th/id/OIP.cpHfv7ACUJZK_JRY-IyN0AHaEK?w=307&h=180&c=7&r=0&o=5&dpr=1.1&pid=1.7",
                 description: "A historical action film about a legendary warrior.",
                 duration: "2h 20m",
@@ -1101,7 +1765,20 @@
         const notification = document.getElementById('notification');
         const theaterSelection = document.getElementById('theaterSelection');
         const seatsContainer = document.getElementById('seatsContainer');
-        const confirmBookingBtn = document.getElementById('confirmBooking');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const stepTheater = document.getElementById('stepTheater');
+        const stepSeats = document.getElementById('stepSeats');
+        const stepConfirm = document.getElementById('stepConfirm');
+        const step1 = document.getElementById('step1');
+        const step2 = document.getElementById('step2');
+        const step3 = document.getElementById('step3');
+        const userActions = document.getElementById('userActions');
+        const loginSpinner = document.getElementById('loginSpinner');
+        const loginText = document.getElementById('loginText');
+        const registerSpinner = document.getElementById('registerSpinner');
+        const registerText = document.getElementById('registerText');
+        const themeToggle = document.getElementById('themeToggle');
 
         // Booking data
         let bookingData = {
@@ -1110,7 +1787,8 @@
             showtime: null,
             seats: [],
             pricePerTicket: 0,
-            total: 0
+            total: 0,
+            currentStep: 1
         };
 
         // Current user
@@ -1122,6 +1800,84 @@
             renderTheaters();
             renderOffers();
             setupEventListeners();
+            checkUser();
+            
+            // Check for saved theme preference
+            if (localStorage.getItem('theme') === 'dark') {
+                document.body.classList.add('dark-theme');
+                themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+            }
+        }
+
+        // Check if user is logged in
+        function checkUser() {
+            // In a real app, this would check localStorage or cookies
+            if (currentUser) {
+                renderUserDropdown();
+            }
+        }
+
+        // Render user dropdown
+        function renderUserDropdown() {
+            userActions.innerHTML = `
+                <div class="user-dropdown">
+                    <div class="user-dropdown-btn">
+                        <div class="user-avatar">${currentUser.name.charAt(0).toUpperCase()}</div>
+                        <span>${currentUser.name.split(' ')[0]}</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="dropdown-content">
+                        <a href="#"><i class="fas fa-user"></i> My Profile</a>
+                        <a href="#"><i class="fas fa-ticket-alt"></i> My Bookings</a>
+                        <a href="#" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                    </div>
+                </div>
+                <button class="theme-toggle" id="themeToggle">
+                    ${document.body.classList.contains('dark-theme') ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>'}
+                </button>
+            `;
+            
+            // Add logout event listener
+            document.getElementById('logoutBtn').addEventListener('click', logout);
+            document.getElementById('themeToggle').addEventListener('click', toggleTheme);
+        }
+
+        // Logout function
+        function logout() {
+            currentUser = null;
+            userActions.innerHTML = `
+                <button class="btn btn-outline" id="loginBtn">
+                    <i class="fas fa-sign-in-alt"></i>
+                    Sign In
+                </button>
+                <button class="btn btn-primary" id="registerBtn">
+                    <i class="fas fa-user-plus"></i>
+                    Register
+                </button>
+                <button class="theme-toggle" id="themeToggle">
+                    ${document.body.classList.contains('dark-theme') ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>'}
+                </button>
+            `;
+            
+            // Reinitialize event listeners
+            document.getElementById('loginBtn').addEventListener('click', () => loginModal.style.display = 'block');
+            document.getElementById('registerBtn').addEventListener('click', () => registerModal.style.display = 'block');
+            document.getElementById('themeToggle').addEventListener('click', toggleTheme);
+            
+            showNotification('You have been logged out');
+        }
+
+        // Toggle dark/light theme
+        function toggleTheme() {
+            document.body.classList.toggle('dark-theme');
+            
+            if (document.body.classList.contains('dark-theme')) {
+                themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+                localStorage.setItem('theme', 'dark');
+            } else {
+                themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+                localStorage.setItem('theme', 'light');
+            }
         }
 
         // Render movies
@@ -1151,12 +1907,18 @@
                 <div class="movie-info">
                     <h3 class="movie-title">${movie.title}</h3>
                     <div class="movie-meta">
-                        <span>${movie.genre}</span>
-                        <span class="movie-rating">★ ${movie.rating}</span>
+                        <span>${movie.genre} • ${movie.duration}</span>
+                        <span class="movie-rating">
+                            <i class="fas fa-star"></i>
+                            ${movie.rating}
+                        </span>
                     </div>
                     <div class="movie-actions">
-                        <span class="price">$${movie.price.toFixed(2)}</span>
-                        <button class="btn btn-primary btn-sm book-btn" data-movie-id="${movie.id}">Book Now</button>
+                        <span class="price">₹${movie.price}</span>
+                        <button class="btn btn-primary btn-sm book-btn" data-movie-id="${movie.id}">
+                            <i class="fas fa-ticket-alt"></i>
+                            Book Now
+                        </button>
                     </div>
                 </div>
             `;
@@ -1174,11 +1936,14 @@
                 <div class="movie-info">
                     <h3 class="movie-title">${movie.title}</h3>
                     <div class="movie-meta">
-                        <span>${movie.genre}</span>
+                        <span>${movie.genre} • ${movie.duration}</span>
                         <span>${movie.releaseDate}</span>
                     </div>
                     <div class="movie-actions">
-                        <button class="btn btn-outline btn-sm notify-btn" data-movie-id="${movie.id}" style="border-color: #0f4c81; color: #0f4c81;">Notify Me</button>
+                        <button class="btn btn-outline btn-sm notify-btn" data-movie-id="${movie.id}" style="border-color: #0f4c81; color: #0f4c81;">
+                            <i class="fas fa-bell"></i>
+                            Notify Me
+                        </button>
                     </div>
                 </div>
             `;
@@ -1199,11 +1964,20 @@
                 theaterElement.style.boxShadow = '0 4px 8px rgba(0,0,0,0.1)';
                 theaterElement.style.marginBottom = '1rem';
                 
+                if (document.body.classList.contains('dark-theme')) {
+                    theaterElement.style.background = '#2d2d2d';
+                    theaterElement.style.boxShadow = '0 4px 8px rgba(0,0,0,0.3)';
+                }
+                
                 theaterElement.innerHTML = `
-                    <h3>${theater.name}</h3>
-                    <p>${theater.location}</p>
+                    <h3><i class="fas fa-map-marker-alt"></i> ${theater.name}</h3>
+                    <p><i class="fas fa-location-arrow"></i> ${theater.location}</p>
                     <div class="showtimes" style="margin-top: 0.5rem;">
-                        ${theater.showtimes.map(time => `<span class="showtime" style="margin-right: 0.5rem; margin-bottom: 0.5rem;">${time}</span>`).join('')}
+                        ${theater.showtimes.map(time => `
+                            <span class="showtime" style="margin-right: 0.5rem; margin-bottom: 0.5rem;">
+                                <i class="far fa-clock"></i> ${time}
+                            </span>
+                        `).join('')}
                     </div>
                 `;
                 
@@ -1224,14 +1998,21 @@
                 offerElement.style.boxShadow = '0 4px 8px rgba(0,0,0,0.1)';
                 offerElement.style.marginBottom = '1rem';
                 
+                if (document.body.classList.contains('dark-theme')) {
+                    offerElement.style.background = '#2d2d2d';
+                    offerElement.style.boxShadow = '0 4px 8px rgba(0,0,0,0.3)';
+                }
+                
                 offerElement.innerHTML = `
-                    <h3>${offer.title}</h3>
+                    <h3><i class="fas fa-tag"></i> ${offer.title}</h3>
                     <p>${offer.description}</p>
                     <div style="margin-top: 0.5rem;">
-                        <strong>Code:</strong> ${offer.code}<br>
-                        <strong>Valid Until:</strong> ${offer.validUntil}
+                        <strong><i class="fas fa-ticket-alt"></i> Code:</strong> ${offer.code}<br>
+                        <strong><i class="far fa-calendar-alt"></i> Valid Until:</strong> ${offer.validUntil}
                     </div>
-                    <button class="btn btn-primary btn-sm" style="margin-top: 0.5rem;" data-offer-code="${offer.code}">Copy Code</button>
+                    <button class="btn btn-primary btn-sm" style="margin-top: 0.5rem;" data-offer-code="${offer.code}">
+                        <i class="far fa-copy"></i> Copy Code
+                    </button>
                 `;
                 
                 offersList.appendChild(offerElement);
@@ -1276,6 +2057,9 @@
             loginBtn.addEventListener('click', () => loginModal.style.display = 'block');
             registerBtn.addEventListener('click', () => registerModal.style.display = 'block');
             
+            // Theme toggle
+            themeToggle.addEventListener('click', toggleTheme);
+            
             // Close modals
             closeBtns.forEach(btn => {
                 btn.addEventListener('click', function() {
@@ -1305,16 +2089,29 @@
                 const email = document.getElementById('loginEmail').value;
                 const password = document.getElementById('loginPassword').value;
                 
-                // Simple validation
-                if (email && password) {
-                    currentUser = { email };
-                    showNotification('Login successful!');
-                    loginModal.style.display = 'none';
-                    loginBtn.textContent = 'My Account';
-                    registerBtn.style.display = 'none';
-                } else {
-                    showNotification('Please fill in all fields', 'error');
-                }
+                // Show loading spinner
+                loginText.style.display = 'none';
+                loginSpinner.style.display = 'block';
+                
+                // Simulate API call
+                setTimeout(() => {
+                    // Simple validation
+                    if (email && password) {
+                        currentUser = { 
+                            email,
+                            name: email.split('@')[0] // Generate a simple name from email
+                        };
+                        showNotification('Login successful!');
+                        loginModal.style.display = 'none';
+                        renderUserDropdown();
+                    } else {
+                        showNotification('Please fill in all fields', 'error');
+                    }
+                    
+                    // Hide loading spinner
+                    loginText.style.display = 'inline';
+                    loginSpinner.style.display = 'none';
+                }, 1000);
             });
             
             // Register form
@@ -1325,22 +2122,36 @@
                 const password = document.getElementById('registerPassword').value;
                 const confirm = document.getElementById('registerConfirm').value;
                 
-                // Simple validation
-                if (!name || !email || !password || !confirm) {
-                    showNotification('Please fill in all fields', 'error');
-                    return;
-                }
+                // Show loading spinner
+                registerText.style.display = 'none';
+                registerSpinner.style.display = 'block';
                 
-                if (password !== confirm) {
-                    showNotification('Passwords do not match', 'error');
-                    return;
-                }
-                
-                currentUser = { name, email };
-                showNotification('Registration successful!');
-                registerModal.style.display = 'none';
-                loginBtn.textContent = 'My Account';
-                registerBtn.style.display = 'none';
+                // Simulate API call
+                setTimeout(() => {
+                    // Simple validation
+                    if (!name || !email || !password || !confirm) {
+                        showNotification('Please fill in all fields', 'error');
+                        registerText.style.display = 'inline';
+                        registerSpinner.style.display = 'none';
+                        return;
+                    }
+                    
+                    if (password !== confirm) {
+                        showNotification('Passwords do not match', 'error');
+                        registerText.style.display = 'inline';
+                        registerSpinner.style.display = 'none';
+                        return;
+                    }
+                    
+                    currentUser = { name, email };
+                    showNotification('Registration successful!');
+                    registerModal.style.display = 'none';
+                    renderUserDropdown();
+                    
+                    // Hide loading spinner
+                    registerText.style.display = 'inline';
+                    registerSpinner.style.display = 'none';
+                }, 1000);
             });
             
             // Forgot password
@@ -1350,8 +2161,10 @@
             
             // Book now buttons (delegated event)
             document.addEventListener('click', function(e) {
-                if (e.target.classList.contains('book-btn')) {
-                    const movieId = parseInt(e.target.getAttribute('data-movie-id'));
+                if (e.target.classList.contains('book-btn') || 
+                    (e.target.parentElement && e.target.parentElement.classList.contains('book-btn'))) {
+                    const btn = e.target.classList.contains('book-btn') ? e.target : e.target.parentElement;
+                    const movieId = parseInt(btn.getAttribute('data-movie-id'));
                     const movie = movies.find(m => m.id === movieId);
                     
                     if (movie) {
@@ -1359,8 +2172,10 @@
                     }
                 }
                 
-                if (e.target.classList.contains('notify-btn')) {
-                    const movieId = parseInt(e.target.getAttribute('data-movie-id'));
+                if (e.target.classList.contains('notify-btn') || 
+                    (e.target.parentElement && e.target.parentElement.classList.contains('notify-btn'))) {
+                    const btn = e.target.classList.contains('notify-btn') ? e.target : e.target.parentElement;
+                    const movieId = parseInt(btn.getAttribute('data-movie-id'));
                     const movie = movies.find(m => m.id === movieId);
                     
                     if (movie) {
@@ -1368,15 +2183,92 @@
                     }
                 }
                 
-                if (e.target.hasAttribute('data-offer-code')) {
-                    const code = e.target.getAttribute('data-offer-code');
+                if (e.target.hasAttribute('data-offer-code') || 
+                    (e.target.parentElement && e.target.parentElement.hasAttribute('data-offer-code'))) {
+                    const btn = e.target.hasAttribute('data-offer-code') ? e.target : e.target.parentElement;
+                    const code = btn.getAttribute('data-offer-code');
                     navigator.clipboard.writeText(code);
                     showNotification(`Copied code: ${code}`);
                 }
             });
             
-            // Confirm booking
-            confirmBookingBtn.addEventListener('click', confirmBooking);
+            // Booking modal navigation
+            prevBtn.addEventListener('click', goToPreviousStep);
+            nextBtn.addEventListener('click', goToNextStep);
+        }
+
+        // Go to next step in booking process
+        function goToNextStep() {
+            if (bookingData.currentStep === 1) {
+                // Validate theater and showtime selection
+                if (!bookingData.theater || !bookingData.showtime) {
+                    showNotification('Please select a theater and showtime', 'error');
+                    return;
+                }
+                
+                // Generate seats
+                generateSeats();
+                
+                // Update UI
+                stepTheater.classList.remove('active');
+                stepSeats.classList.add('active');
+                step1.classList.remove('active');
+                step1.classList.add('completed');
+                step2.classList.add('active');
+                prevBtn.style.display = 'block';
+                nextBtn.textContent = 'Confirm Booking';
+                bookingData.currentStep = 2;
+            } else if (bookingData.currentStep === 2) {
+                // Validate seat selection
+                if (bookingData.seats.length === 0) {
+                    showNotification('Please select at least one seat', 'error');
+                    return;
+                }
+                
+                // Update confirmation details
+                document.getElementById('confirm-movie').textContent = bookingData.movie.title;
+                document.getElementById('confirm-theater').textContent = bookingData.theater;
+                document.getElementById('confirm-showtime').textContent = bookingData.showtime;
+                document.getElementById('confirm-seats').textContent = bookingData.seats.join(', ');
+                document.getElementById('confirm-price').textContent = `₹${bookingData.pricePerTicket}`;
+                document.getElementById('confirm-total').textContent = `₹${bookingData.total}`;
+                
+                // Update UI
+                stepSeats.classList.remove('active');
+                stepConfirm.classList.add('active');
+                step2.classList.remove('active');
+                step2.classList.add('completed');
+                step3.classList.add('active');
+                nextBtn.textContent = 'Complete Booking';
+                bookingData.currentStep = 3;
+            } else if (bookingData.currentStep === 3) {
+                // Complete booking
+                confirmBooking();
+            }
+        }
+
+        // Go to previous step in booking process
+        function goToPreviousStep() {
+            if (bookingData.currentStep === 2) {
+                // Back to theater selection
+                stepSeats.classList.remove('active');
+                stepTheater.classList.add('active');
+                step2.classList.remove('active');
+                step1.classList.remove('completed');
+                step1.classList.add('active');
+                prevBtn.style.display = 'none';
+                nextBtn.textContent = 'Next';
+                bookingData.currentStep = 1;
+            } else if (bookingData.currentStep === 3) {
+                // Back to seat selection
+                stepConfirm.classList.remove('active');
+                stepSeats.classList.add('active');
+                step3.classList.remove('active');
+                step2.classList.remove('completed');
+                step2.classList.add('active');
+                nextBtn.textContent = 'Confirm Booking';
+                bookingData.currentStep = 2;
+            }
         }
 
         // Open booking modal
@@ -1386,7 +2278,20 @@
             
             document.getElementById('modalMovieTitle').textContent = movie.title;
             document.getElementById('summary-movie').textContent = movie.title;
-            document.getElementById('summary-price').textContent = `$${movie.price.toFixed(2)}`;
+            document.getElementById('summary-price').textContent = `₹${movie.price}`;
+            
+            // Reset steps
+            stepTheater.classList.add('active');
+            stepSeats.classList.remove('active');
+            stepConfirm.classList.remove('active');
+            step1.classList.add('active');
+            step2.classList.remove('active');
+            step3.classList.remove('active');
+            step1.classList.remove('completed');
+            step2.classList.remove('completed');
+            prevBtn.style.display = 'none';
+            nextBtn.textContent = 'Next';
+            bookingData.currentStep = 1;
             
             // Populate theaters
             theaterSelection.innerHTML = '';
@@ -1397,12 +2302,14 @@
                 
                 theaterItem.innerHTML = `
                     <div class="theater-info">
-                        <h3>${theater.name}</h3>
-                        <p>${theater.location}</p>
+                        <h3><i class="fas fa-map-marker-alt"></i> ${theater.name}</h3>
+                        <p><i class="fas fa-location-arrow"></i> ${theater.location}</p>
                     </div>
                     <div class="showtimes">
                         ${theater.showtimes.map(time => 
-                            `<div class="showtime" data-time="${time}" data-theater-id="${theater.id}">${time}</div>`
+                            `<div class="showtime" data-time="${time}" data-theater-id="${theater.id}">
+                                <i class="far fa-clock"></i> ${time}
+                            </div>`
                         ).join('')}
                     </div>
                 `;
@@ -1412,7 +2319,6 @@
             
             // Show modal
             modal.style.display = 'block';
-            seatSelection.style.display = 'none';
             
             // Setup showtime selection
             document.querySelectorAll('.showtime').forEach(showtime => {
@@ -1434,15 +2340,6 @@
                         
                         document.getElementById('summary-theater').textContent = theater.name;
                         document.getElementById('summary-showtime').textContent = this.getAttribute('data-time');
-                        
-                        // Generate seats
-                        generateSeats();
-                        
-                        // Show seat selection
-                        seatSelection.style.display = 'block';
-                        
-                        // Scroll to seat selection
-                        seatSelection.scrollIntoView({ behavior: 'smooth' });
                     }
                 });
             });
@@ -1504,10 +2401,10 @@
             if (bookingData.seats.length > 0) {
                 seatsElement.textContent = bookingData.seats.join(', ');
                 bookingData.total = bookingData.seats.length * bookingData.pricePerTicket;
-                totalElement.textContent = `$${bookingData.total.toFixed(2)}`;
+                totalElement.textContent = `₹${bookingData.total}`;
             } else {
                 seatsElement.textContent = 'None selected';
-                totalElement.textContent = '$0.00';
+                totalElement.textContent = '₹0';
             }
         }
 
@@ -1519,27 +2416,18 @@
                 return;
             }
             
-            if (!bookingData.theater || !bookingData.showtime) {
-                showNotification('Please select a theater and showtime', 'error');
-                return;
-            }
-            
-            if (bookingData.seats.length === 0) {
-                showNotification('Please select at least one seat', 'error');
-                return;
-            }
-            
             const message = `
-                Booking confirmed!\n\n
-                Movie: ${bookingData.movie.title}\n
-                Theater: ${bookingData.theater}\n
-                Showtime: ${bookingData.showtime}\n
-                Seats: ${bookingData.seats.join(', ')}\n
-                Total: $${bookingData.total.toFixed(2)}\n\n
-                Thank you for your booking!
+                Booking confirmed!<br><br>
+                <strong>${bookingData.movie.title}</strong><br>
+                ${bookingData.theater}<br>
+                ${bookingData.showtime}<br>
+                Seats: ${bookingData.seats.join(', ')}<br>
+                Total: ₹${bookingData.total}<br><br>
+                Tickets have been sent to ${currentUser.email}.<br>
+                Enjoy your movie!
             `;
             
-            showNotification(message.replace(/\n/g, '<br>'));
+            showNotification(message);
             modal.style.display = 'none';
             resetBookingData();
         }
@@ -1552,7 +2440,8 @@
                 showtime: null,
                 seats: [],
                 pricePerTicket: 0,
-                total: 0
+                total: 0,
+                currentStep: 1
             };
             
             // Reset UI
@@ -1560,15 +2449,14 @@
             document.getElementById('summary-theater').textContent = 'None selected';
             document.getElementById('summary-showtime').textContent = 'None selected';
             document.getElementById('summary-seats').textContent = 'None selected';
-            document.getElementById('summary-total').textContent = '$0.00';
-            seatSelection.style.display = 'none';
+            document.getElementById('summary-total').textContent = '₹0';
         }
 
         // Perform search
         function performSearch() {
             const query = searchInput.value.toLowerCase().trim();
             
-            if (!query) {
+            if(!query) {
                 showNotification('Please enter a search term', 'error');
                 return;
             }
