@@ -20,9 +20,10 @@ Upon completion, the page will serve as a key component of the digital platform,
 | Saurav | movies page manager | [@sauravchauhan-18GH](https://github.com/sauravchauhan-18) |
 
 ## 🛠️ Technologies Used
-- C/Framework 1
-- html/Framework 2
-- CSS/Framework 3
+
+- html/Framework 1
+- CSS/Framework 2
+- Js/Framework 3
 - Git (e.g. Git, Postman, Figma)
 
   
