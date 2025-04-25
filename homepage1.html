@@ -1282,7 +1282,21 @@ footer ul.nav .nav-link:hover::after {
         .card:hover .category-icon {
             transform: perspective(800px) rotateY(0deg) scale(1.2);
         }
+        .checkmark {
+            display: inline-block;
+            transform: rotate(45deg);
+            height: 12px;
+            width: 6px;
+            margin-left: 5px;
+            border-bottom: 2px solid #fff;
+            border-right: 2px solid #fff;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
         
+        .checkmark.show {
+            opacity: 1;
+        }
         .search-container {
             position: relative;
             z-index: 10;
@@ -2397,8 +2411,11 @@ footer {
                 <h2 class="fw-bold mb-4">Never Miss an Event</h2>
                 <p class="mb-4">Subscribe to our newsletter and be the first to know about upcoming events and exclusive offers.</p>
                 <div class="input-group mb-3 mx-auto" style="max-width: 500px;">
-                    <input type="email" class="form-control newsletter-input" placeholder="Your email address"name="email" >
-                    <button class="btn btn-primary newsletter-btn" type="button">Subscribe</button>
+                    <input type="email" class="form-control newsletter-input" placeholder="Your email address" name="email">
+                    <button class="btn btn-primary newsletter-btn" type="button">
+                        <span class="button-text">Subscribe</span>
+                        <span class="checkmark"></span>
+                    </button>
                 </div>
             </div>
         </div>
@@ -3245,7 +3262,34 @@ window.addEventListener('click', (e) => {
         profileSidebar.classList.remove('active');
     }
 });
-
+document.addEventListener('DOMContentLoaded', function() {
+    const subscribeBtn = document.querySelector('.newsletter-btn');
+    const buttonText = document.querySelector('.button-text');
+    const checkmark = document.querySelector('.checkmark');
+    const emailInput = document.querySelector('.newsletter-input');
+    
+    subscribeBtn.addEventListener('click', function() {
+        if (emailInput.value.trim() === '') {
+            alert('Please enter an email address');
+            return;
+        }
+        
+        // Add animation classes
+        subscribeBtn.classList.add('btn-animation');
+        
+        // After a short delay, change text and add checkmark
+        setTimeout(() => {
+            buttonText.textContent = 'Subscribed';
+            subscribeBtn.classList.add('subscribed');
+            checkmark.classList.add('show');
+            
+            // Remove animation class after it completes
+            setTimeout(() => {
+                subscribeBtn.classList.remove('btn-animation');
+            }, 500);
+        }, 300);
+    });
+});
     </script>
 </body>
 </html>
