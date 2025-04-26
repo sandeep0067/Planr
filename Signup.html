@@ -320,6 +320,58 @@
             font-size: 18px;
         }
 
+        /* Error messages */
+        .error-message {
+            color: var(--error-color);
+            font-size: 13px;
+            margin-top: 5px;
+            display: none;
+        }
+
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: var(--bg-white);
+            padding: 30px;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: var(--shadow-lg);
+            position: relative;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 24px;
+            color: var(--text-light);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .close-modal:hover {
+            color: var(--error-color);
+        }
+
+        .modal-title {
+            font-size: 20px;
+            margin-bottom: 20px;
+            color: var(--primary-color);
+        }
+
         /* Responsive adjustments */
         @media (max-width: 768px) {
             .auth-box {
@@ -384,6 +436,7 @@
                             <div class="form-group">
                                 <label for="login-email">Email or Username</label>
                                 <input type="text" id="login-email" class="form-control" placeholder="Enter your email or username" required>
+                                <div class="error-message" id="login-email-error"></div>
                             </div>
 
                             <div class="form-group">
@@ -392,11 +445,12 @@
                                     <input type="password" id="login-password" class="form-control" placeholder="Enter your password" required>
                                     <i class="far fa-eye toggle-password" id="toggleLoginPassword"></i>
                                 </div>
+                                <div class="error-message" id="login-password-error"></div>
                             </div>
 
                             <div class="form-group">
                                 <div class="forgot-password">
-                                    <a href="#">Forgot Password?</a>
+                                    <a href="#" id="forgotPasswordLink">Forgot Password?</a>
                                 </div>
                             </div>
 
@@ -408,13 +462,13 @@
                             <div class="social-login">
                                 <p>or continue with</p>
                                 <div class="social-icons">
-                                    <div class="social-icon google">
+                                    <div class="social-icon google" id="googleLogin">
                                         <i class="fab fa-google"></i>
                                     </div>
-                                    <div class="social-icon instagram">
+                                    <div class="social-icon instagram" id="instagramLogin">
                                         <i class="fab fa-instagram"></i>
                                     </div>
-                                    <div class="social-icon whatsapp">
+                                    <div class="social-icon whatsapp" id="whatsappLogin">
                                         <i class="fab fa-whatsapp"></i>
                                     </div>
                                 </div>
@@ -428,16 +482,19 @@
                             <div class="form-group">
                                 <label for="signup-name">Full Name</label>
                                 <input type="text" id="signup-name" class="form-control" placeholder="Enter your full name" required>
+                                <div class="error-message" id="signup-name-error"></div>
                             </div>
 
                             <div class="form-group">
                                 <label for="signup-email">Email Address</label>
                                 <input type="email" id="signup-email" class="form-control" placeholder="Enter your email" required>
+                                <div class="error-message" id="signup-email-error"></div>
                             </div>
 
                             <div class="form-group">
                                 <label for="signup-username">Username</label>
                                 <input type="text" id="signup-username" class="form-control" placeholder="Choose a username" required>
+                                <div class="error-message" id="signup-username-error"></div>
                             </div>
 
                             <div class="form-group">
@@ -449,6 +506,7 @@
                                 <div class="password-strength" style="margin-top: 8px; font-size: 12px; color: var(--text-light);">
                                     Password strength: <span id="password-strength-text">Weak</span>
                                 </div>
+                                <div class="error-message" id="signup-password-error"></div>
                             </div>
 
                             <button type="submit" class="btn">
@@ -457,11 +515,58 @@
                             </button>
 
                             <div class="terms">
-                                By continuing, you agree to our <a href="#">Terms of Service</a> and acknowledge that you have read our <a href="#">Privacy Policy</a>.
+                                By continuing, you agree to our <a href="#" id="termsLink">Terms of Service</a> and acknowledge that you have read our <a href="#" id="privacyLink">Privacy Policy</a>.
                             </div>
                         </form>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Forgot Password Modal -->
+    <div class="modal" id="forgotPasswordModal">
+        <div class="modal-content">
+            <span class="close-modal" id="closeForgotPasswordModal">&times;</span>
+            <h3 class="modal-title">Reset Password</h3>
+            <form id="forgotPasswordForm">
+                <div class="form-group">
+                    <label for="reset-email">Email Address</label>
+                    <input type="email" id="reset-email" class="form-control" placeholder="Enter your email" required>
+                    <div class="error-message" id="reset-email-error"></div>
+                </div>
+                <button type="submit" class="btn">
+                    <span class="btn-text">Send Reset Link</span>
+                    <i class="fas fa-spinner fa-spin btn-loader" style="display: none;"></i>
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Terms Modal -->
+    <div class="modal" id="termsModal">
+        <div class="modal-content">
+            <span class="close-modal" id="closeTermsModal">&times;</span>
+            <h3 class="modal-title">Terms of Service</h3>
+            <div style="max-height: 400px; overflow-y: auto; padding-right: 10px;">
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nisl eget ultricies tincidunt, nisl nisl aliquam nisl, eget ultricies nisl nisl eget nisl.</p>
+                <p>Nullam auctor, nisl eget ultricies tincidunt, nisl nisl aliquam nisl, eget ultricies nisl nisl eget nisl.</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nisl eget ultricies tincidunt, nisl nisl aliquam nisl, eget ultricies nisl nisl eget nisl.</p>
+                <p>Nullam auctor, nisl eget ultricies tincidunt, nisl nisl aliquam nisl, eget ultricies nisl nisl eget nisl.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Privacy Policy Modal -->
+    <div class="modal" id="privacyModal">
+        <div class="modal-content">
+            <span class="close-modal" id="closePrivacyModal">&times;</span>
+            <h3 class="modal-title">Privacy Policy</h3>
+            <div style="max-height: 400px; overflow-y: auto; padding-right: 10px;">
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nisl eget ultricies tincidunt, nisl nisl aliquam nisl, eget ultricies nisl nisl eget nisl.</p>
+                <p>Nullam auctor, nisl eget ultricies tincidunt, nisl nisl aliquam nisl, eget ultricies nisl nisl eget nisl.</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nisl eget ultricies tincidunt, nisl nisl aliquam nisl, eget ultricies nisl nisl eget nisl.</p>
+                <p>Nullam auctor, nisl eget ultricies tincidunt, nisl nisl aliquam nisl, eget ultricies nisl nisl eget nisl.</p>
             </div>
         </div>
     </div>
@@ -478,7 +583,25 @@
             const loginForm = document.getElementById('loginForm');
             const signupForm = document.getElementById('signupForm');
             const passwordStrengthText = document.getElementById('password-strength-text');
+            const forgotPasswordLink = document.getElementById('forgotPasswordLink');
+            const forgotPasswordModal = document.getElementById('forgotPasswordModal');
+            const closeForgotPasswordModal = document.getElementById('closeForgotPasswordModal');
+            const forgotPasswordForm = document.getElementById('forgotPasswordForm');
+            const termsLink = document.getElementById('termsLink');
+            const privacyLink = document.getElementById('privacyLink');
+            const termsModal = document.getElementById('termsModal');
+            const privacyModal = document.getElementById('privacyModal');
+            const closeTermsModal = document.getElementById('closeTermsModal');
+            const closePrivacyModal = document.getElementById('closePrivacyModal');
+            const googleLogin = document.getElementById('googleLogin');
+            const instagramLogin = document.getElementById('instagramLogin');
+            const whatsappLogin = document.getElementById('whatsappLogin');
             
+            // Sample user database (in a real app, this would be server-side)
+            const userDatabase = [
+                { email: 'user@example.com', username: 'user1', password: 'Password123!', name: 'Test User' }
+            ];
+
             // Tab switching functionality
             tabs.forEach(tab => {
                 tab.addEventListener('click', function() {
@@ -538,52 +661,294 @@
                 passwordStrengthText.style.color = strengthColor;
             });
 
-            // Form submission handling with loading state
-            function handleFormSubmit(form, isLogin = true) {
-                const btn = form.querySelector('.btn');
-                const btnText = form.querySelector('.btn-text');
-                const btnLoader = form.querySelector('.btn-loader');
-                
-                form.addEventListener('submit', function(e) {
-                    e.preventDefault();
-                    
-                    // Show loading state
-                    btnText.style.display = 'none';
-                    btnLoader.style.display = 'inline-block';
-                    btn.disabled = true;
-                    
-                    // Simulate API call
-                    setTimeout(() => {
-                        // Hide loading state
-                        btnText.style.display = 'inline-block';
-                        btnLoader.style.display = 'none';
-                        btn.disabled = false;
-                        
-                        if (isLogin) {
-                            // Login success/failure handling would go here
-                            console.log('Login submitted');
-                        } else {
-                            // Signup success/failure handling would go here
-                            console.log('Signup submitted');
-                        }
-                    }, 1500);
-                });
+            // Form validation helper
+            function validateEmail(email) {
+                const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                return re.test(email);
             }
 
-            handleFormSubmit(loginForm, true);
-            handleFormSubmit(signupForm, false);
+            function validatePassword(password) {
+                // At least 8 characters, 1 uppercase, 1 number, 1 special character
+                const re = /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+])[A-Za-z\d!@#$%^&*()_+]{8,}$/;
+                return re.test(password);
+            }
 
-            // Social login button functionality
-            document.querySelector('.instagram').addEventListener('click', function() {
-                alert('Instagram login would be implemented here');
+            // Show error message
+            function showError(elementId, message) {
+                const errorElement = document.getElementById(elementId);
+                errorElement.textContent = message;
+                errorElement.style.display = 'block';
+            }
+
+            // Hide error message
+            function hideError(elementId) {
+                const errorElement = document.getElementById(elementId);
+                errorElement.style.display = 'none';
+            }
+
+            // Login form submission
+            loginForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Get form values
+                const emailOrUsername = document.getElementById('login-email').value.trim();
+                const password = document.getElementById('login-password').value;
+                
+                // Reset errors
+                hideError('login-email-error');
+                hideError('login-password-error');
+                
+                // Validate inputs
+                let isValid = true;
+                
+                if (!emailOrUsername) {
+                    showError('login-email-error', 'Email or username is required');
+                    isValid = false;
+                }
+                
+                if (!password) {
+                    showError('login-password-error', 'Password is required');
+                    isValid = false;
+                }
+                
+                if (!isValid) return;
+                
+                // Show loading state
+                const btn = this.querySelector('.btn');
+                const btnText = this.querySelector('.btn-text');
+                const btnLoader = this.querySelector('.btn-loader');
+                
+                btnText.style.display = 'none';
+                btnLoader.style.display = 'inline-block';
+                btn.disabled = true;
+                
+                // Simulate API call
+                setTimeout(() => {
+                    // Check credentials against our sample database
+                    const user = userDatabase.find(u => 
+                        (u.email === emailOrUsername || u.username === emailOrUsername) && 
+                        u.password === password
+                    );
+                    
+                    if (user) {
+                        // Successful login
+                        alert(`Welcome back, ${user.name}! Redirecting to dashboard...`);
+                        // In a real app, you would redirect or set authentication state
+                        // window.location.href = 'dashboard.html';
+                    } else {
+                        // Failed login
+                        showError('login-password-error', 'Invalid email/username or password');
+                    }
+                    
+                    // Hide loading state
+                    btnText.style.display = 'inline-block';
+                    btnLoader.style.display = 'none';
+                    btn.disabled = false;
+                }, 1500);
             });
 
-            document.querySelector('.whatsapp').addEventListener('click', function() {
-                alert('WhatsApp login would be implemented here');
+            // Signup form submission
+            signupForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Get form values
+                const name = document.getElementById('signup-name').value.trim();
+                const email = document.getElementById('signup-email').value.trim();
+                const username = document.getElementById('signup-username').value.trim();
+                const password = document.getElementById('signup-password').value;
+                
+                // Reset errors
+                hideError('signup-name-error');
+                hideError('signup-email-error');
+                hideError('signup-username-error');
+                hideError('signup-password-error');
+                
+                // Validate inputs
+                let isValid = true;
+                
+                if (!name) {
+                    showError('signup-name-error', 'Full name is required');
+                    isValid = false;
+                }
+                
+                if (!email) {
+                    showError('signup-email-error', 'Email is required');
+                    isValid = false;
+                } else if (!validateEmail(email)) {
+                    showError('signup-email-error', 'Please enter a valid email');
+                    isValid = false;
+                }
+                
+                if (!username) {
+                    showError('signup-username-error', 'Username is required');
+                    isValid = false;
+                } else if (username.length < 4) {
+                    showError('signup-username-error', 'Username must be at least 4 characters');
+                    isValid = false;
+                }
+                
+                if (!password) {
+                    showError('signup-password-error', 'Password is required');
+                    isValid = false;
+                } else if (!validatePassword(password)) {
+                    showError('signup-password-error', 'Password must be at least 8 characters with 1 uppercase, 1 number, and 1 special character');
+                    isValid = false;
+                }
+                
+                if (!isValid) return;
+                
+                // Check if email or username already exists
+                const emailExists = userDatabase.some(u => u.email === email);
+                const usernameExists = userDatabase.some(u => u.username === username);
+                
+                if (emailExists) {
+                    showError('signup-email-error', 'Email already registered');
+                    return;
+                }
+                
+                if (usernameExists) {
+                    showError('signup-username-error', 'Username already taken');
+                    return;
+                }
+                
+                // Show loading state
+                const btn = this.querySelector('.btn');
+                const btnText = this.querySelector('.btn-text');
+                const btnLoader = this.querySelector('.btn-loader');
+                
+                btnText.style.display = 'none';
+                btnLoader.style.display = 'inline-block';
+                btn.disabled = true;
+                
+                // Simulate API call
+                setTimeout(() => {
+                    // Add new user to our sample database
+                    userDatabase.push({
+                        name,
+                        email,
+                        username,
+                        password
+                    });
+                    
+                    // Successful signup
+                    alert(`Welcome, ${name}! Your account has been created. Redirecting to login...`);
+                    
+                    // Switch to login tab
+                    document.querySelector('[data-tab="login"]').click();
+                    document.getElementById('login-email').value = email;
+                    document.getElementById('login-password').value = '';
+                    
+                    // Hide loading state
+                    btnText.style.display = 'inline-block';
+                    btnLoader.style.display = 'none';
+                    btn.disabled = false;
+                }, 1500);
             });
 
-            document.querySelector('.google').addEventListener('click', function() {
-                alert('Google login would be implemented here');
+            // Forgot password functionality
+            forgotPasswordLink.addEventListener('click', function(e) {
+                e.preventDefault();
+                forgotPasswordModal.style.display = 'flex';
+            });
+
+            closeForgotPasswordModal.addEventListener('click', function() {
+                forgotPasswordModal.style.display = 'none';
+            });
+
+            forgotPasswordForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const email = document.getElementById('reset-email').value.trim();
+                
+                // Reset error
+                hideError('reset-email-error');
+                
+                // Validate email
+                if (!email) {
+                    showError('reset-email-error', 'Email is required');
+                    return;
+                } else if (!validateEmail(email)) {
+                    showError('reset-email-error', 'Please enter a valid email');
+                    return;
+                }
+                
+                // Show loading state
+                const btn = this.querySelector('.btn');
+                const btnText = this.querySelector('.btn-text');
+                const btnLoader = this.querySelector('.btn-loader');
+                
+                btnText.style.display = 'none';
+                btnLoader.style.display = 'inline-block';
+                btn.disabled = true;
+                
+                // Simulate API call
+                setTimeout(() => {
+                    // Check if email exists
+                    const userExists = userDatabase.some(u => u.email === email);
+                    
+                    if (userExists) {
+                        alert(`Password reset link has been sent to ${email}`);
+                        forgotPasswordModal.style.display = 'none';
+                    } else {
+                        showError('reset-email-error', 'Email not found in our system');
+                    }
+                    
+                    // Hide loading state
+                    btnText.style.display = 'inline-block';
+                    btnLoader.style.display = 'none';
+                    btn.disabled = false;
+                }, 1500);
+            });
+
+            // Terms and Privacy modals
+            termsLink.addEventListener('click', function(e) {
+                e.preventDefault();
+                termsModal.style.display = 'flex';
+            });
+
+            privacyLink.addEventListener('click', function(e) {
+                e.preventDefault();
+                privacyModal.style.display = 'flex';
+            });
+
+            closeTermsModal.addEventListener('click', function() {
+                termsModal.style.display = 'none';
+            });
+
+            closePrivacyModal.addEventListener('click', function() {
+                privacyModal.style.display = 'none';
+            });
+
+            // Close modals when clicking outside
+            window.addEventListener('click', function(e) {
+                if (e.target === forgotPasswordModal) {
+                    forgotPasswordModal.style.display = 'none';
+                }
+                if (e.target === termsModal) {
+                    termsModal.style.display = 'none';
+                }
+                if (e.target === privacyModal) {
+                    privacyModal.style.display = 'none';
+                }
+            });
+
+            // Social login functionality
+            googleLogin.addEventListener('click', function() {
+                alert('Redirecting to Google login...');
+                // In a real app, this would redirect to Google OAuth
+                // window.location.href = '/auth/google';
+            });
+
+            instagramLogin.addEventListener('click', function() {
+                alert('Redirecting to Instagram login...');
+                // In a real app, this would redirect to Instagram OAuth
+                // window.location.href = '/auth/instagram';
+            });
+
+            whatsappLogin.addEventListener('click', function() {
+                alert('Redirecting to WhatsApp login...');
+                // In a real app, this would redirect to WhatsApp OAuth
+                // window.location.href = '/auth/whatsapp';
             });
         });
     </script>
