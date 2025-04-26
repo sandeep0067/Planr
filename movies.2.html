@@ -15,15 +15,9 @@
         }
 
         body {
-            background-color: #f5f5f5;
-            color: #333;
-            line-height: 1.6;
-            transition: all 0.3s ease;
-        }
-
-        body.dark-theme {
             background-color: #121212;
             color: #e0e0e0;
+            line-height: 1.6;
         }
 
         a {
@@ -33,17 +27,13 @@
 
         /* Header Styles */
         header {
-            background-color: #0f4c81;
+            background-color: #0a2d4a;
             color: white;
             padding: 1rem 2rem;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
             position: sticky;
             top: 0;
             z-index: 100;
-        }
-
-        .dark-theme header {
-            background-color: #0a2d4a;
         }
 
         .navbar {
@@ -111,7 +101,7 @@
 
         .btn-outline:hover {
             background: white;
-            color: #0f4c81;
+            color: #0a2d4a;
         }
 
         .btn-primary {
@@ -132,15 +122,6 @@
 
         .btn-danger:hover {
             background: #e05252;
-        }
-
-        .theme-toggle {
-            background: transparent;
-            border: none;
-            color: white;
-            font-size: 1.2rem;
-            cursor: pointer;
-            margin-left: 1rem;
         }
 
         /* Hero Section */
@@ -183,9 +164,6 @@
             border-radius: 4px 0 0 4px;
             font-size: 1rem;
             padding-left: 2.5rem;
-        }
-
-        .dark-theme .search-bar input {
             background-color: #333;
             color: #e0e0e0;
         }
@@ -195,10 +173,6 @@
             left: 1rem;
             top: 50%;
             transform: translateY(-50%);
-            color: #666;
-        }
-
-        .dark-theme .search-bar i {
             color: #aaa;
         }
 
@@ -220,10 +194,6 @@
         /* Now Showing Section */
         .section {
             padding: 3rem 2rem;
-            transition: background-color 0.3s ease;
-        }
-
-        .dark-theme .section {
             background-color: #1e1e1e;
         }
 
@@ -236,13 +206,9 @@
 
         .section-title {
             font-size: 1.8rem;
-            color: #333;
+            color: #e0e0e0;
             position: relative;
             display: inline-block;
-        }
-
-        .dark-theme .section-title {
-            color: #e0e0e0;
         }
 
         .section-title::after {
@@ -256,15 +222,11 @@
         }
 
         .view-all {
-            color: #0f4c81;
+            color: #6ba8e6;
             font-weight: 500;
             display: flex;
             align-items: center;
             gap: 0.5rem;
-        }
-
-        .dark-theme .view-all {
-            color: #6ba8e6;
         }
 
         .view-all:hover {
@@ -278,26 +240,17 @@
         }
 
         .movie-card {
-            background: white;
+            background: #2d2d2d;
             border-radius: 8px;
             overflow: hidden;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
             transition: transform 0.3s, box-shadow 0.3s;
             display: flex;
             flex-direction: column;
         }
 
-        .dark-theme .movie-card {
-            background: #2d2d2d;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-        }
-
         .movie-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-        }
-
-        .dark-theme .movie-card:hover {
             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
         }
 
@@ -318,22 +271,15 @@
             font-size: 1.1rem;
             font-weight: 600;
             margin-bottom: 0.5rem;
-        }
-
-        .dark-theme .movie-title {
             color: #ffffff;
         }
 
         .movie-meta {
             display: flex;
             justify-content: space-between;
-            color: #666;
+            color: #aaa;
             font-size: 0.9rem;
             margin-bottom: 1rem;
-        }
-
-        .dark-theme .movie-meta {
-            color: #aaa;
         }
 
         .movie-rating {
@@ -358,10 +304,6 @@
 
         .price {
             font-weight: 600;
-            color: #0f4c81;
-        }
-
-        .dark-theme .price {
             color: #6ba8e6;
         }
 
@@ -379,17 +321,13 @@
         }
 
         .modal-content {
-            background: white;
+            background: #2d2d2d;
             margin: 2rem auto;
             width: 90%;
             max-width: 800px;
             border-radius: 8px;
             overflow: hidden;
             animation: modalFadeIn 0.3s;
-        }
-
-        .dark-theme .modal-content {
-            background: #2d2d2d;
         }
 
         @keyframes modalFadeIn {
@@ -405,15 +343,11 @@
 
         .modal-header {
             padding: 1rem 1.5rem;
-            background: #0f4c81;
+            background: #0a2d4a;
             color: white;
             display: flex;
             justify-content: space-between;
             align-items: center;
-        }
-
-        .dark-theme .modal-header {
-            background: #0a2d4a;
         }
 
         .modal-title {
@@ -466,19 +400,11 @@
             left: calc(50% + 20px);
             width: calc(100% - 40px);
             height: 2px;
-            background: #ddd;
+            background: #444;
             z-index: 1;
         }
 
-        .dark-theme .step:not(:last-child)::after {
-            background: #444;
-        }
-
         .step.active:not(:last-child)::after {
-            background: #0f4c81;
-        }
-
-        .dark-theme .step.active:not(:last-child)::after {
             background: #6ba8e6;
         }
 
@@ -486,7 +412,8 @@
             width: 30px;
             height: 30px;
             border-radius: 50%;
-            background: #ddd;
+            background: #444;
+            color: #e0e0e0;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -495,27 +422,14 @@
             font-weight: 600;
         }
 
-        .dark-theme .step-number {
-            background: #444;
-            color: #e0e0e0;
-        }
-
         .step.active .step-number {
-            background: #0f4c81;
-            color: white;
-        }
-
-        .dark-theme .step.active .step-number {
             background: #6ba8e6;
+            color: white;
         }
 
         .step.completed .step-number {
-            background: #0f4c81;
-            color: white;
-        }
-
-        .dark-theme .step.completed .step-number {
             background: #6ba8e6;
+            color: white;
         }
 
         .step.completed .step-number::after {
@@ -527,20 +441,12 @@
         .step-label {
             font-size: 0.8rem;
             text-align: center;
-            color: #666;
-        }
-
-        .dark-theme .step-label {
             color: #aaa;
         }
 
         .step.active .step-label {
-            color: #0f4c81;
-            font-weight: 500;
-        }
-
-        .dark-theme .step.active .step-label {
             color: #6ba8e6;
+            font-weight: 500;
         }
 
         .theater-list {
@@ -549,7 +455,7 @@
 
         .theater-item {
             padding: 1rem;
-            border-bottom: 1px solid #eee;
+            border-bottom: 1px solid #444;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -557,15 +463,7 @@
             transition: background 0.3s;
         }
 
-        .dark-theme .theater-item {
-            border-bottom: 1px solid #444;
-        }
-
         .theater-item:hover {
-            background: #f9f9f9;
-        }
-
-        .dark-theme .theater-item:hover {
             background: #333;
         }
 
@@ -581,22 +479,15 @@
             display: flex;
             align-items: center;
             gap: 0.5rem;
-        }
-
-        .dark-theme .theater-info h3 {
             color: #ffffff;
         }
 
         .theater-info p {
-            color: #666;
+            color: #aaa;
             font-size: 0.9rem;
             display: flex;
             align-items: center;
             gap: 0.5rem;
-        }
-
-        .dark-theme .theater-info p {
-            color: #aaa;
         }
 
         .showtimes {
@@ -607,34 +498,22 @@
 
         .showtime {
             padding: 0.5rem 1rem;
-            background: #f5f5f5;
+            background: #333;
             border-radius: 4px;
             cursor: pointer;
             transition: all 0.3s;
             font-size: 0.9rem;
-        }
-
-        .dark-theme .showtime {
-            background: #333;
             color: #e0e0e0;
         }
 
         .showtime:hover {
-            background: #0f4c81;
-            color: white;
-        }
-
-        .dark-theme .showtime:hover {
             background: #6ba8e6;
+            color: white;
         }
 
         .showtime.selected {
-            background: #0f4c81;
-            color: white;
-        }
-
-        .dark-theme .showtime.selected {
             background: #6ba8e6;
+            color: white;
         }
 
         /* Seats Selection */
@@ -643,17 +522,13 @@
         }
 
         .screen {
-            background: #0f4c81;
+            background: #6ba8e6;
             color: white;
             text-align: center;
             padding: 0.5rem;
             margin-bottom: 2rem;
             border-radius: 4px;
             position: relative;
-        }
-
-        .dark-theme .screen {
-            background: #6ba8e6;
         }
 
         .screen::before {
@@ -663,12 +538,8 @@
             left: 20%;
             width: 60%;
             height: 10px;
-            background: #0a3559;
-            border-radius: 0 0 5px 5px;
-        }
-
-        .dark-theme .screen::before {
             background: #3d7bb3;
+            border-radius: 0 0 5px 5px;
         }
 
         .seats-container {
@@ -689,7 +560,7 @@
         .seat {
             width: 30px;
             height: 30px;
-            background: #ddd;
+            background: #444;
             border-radius: 4px;
             display: flex;
             justify-content: center;
@@ -698,10 +569,6 @@
             font-size: 0.7rem;
             transition: all 0.3s;
             flex-shrink: 0;
-        }
-
-        .dark-theme .seat {
-            background: #444;
             color: #e0e0e0;
         }
 
@@ -711,12 +578,8 @@
         }
 
         .seat.selected {
-            background: #0f4c81;
-            color: white;
-        }
-
-        .dark-theme .seat.selected {
             background: #6ba8e6;
+            color: white;
         }
 
         .seat.occupied {
@@ -737,9 +600,6 @@
             align-items: center;
             gap: 0.5rem;
             font-size: 0.9rem;
-        }
-
-        .dark-theme .legend-item {
             color: #e0e0e0;
         }
 
@@ -752,21 +612,14 @@
         .booking-summary {
             margin-top: 2rem;
             padding: 1rem;
-            background: #f9f9f9;
-            border-radius: 8px;
-        }
-
-        .dark-theme .booking-summary {
             background: #333;
+            border-radius: 8px;
         }
 
         .summary-row {
             display: flex;
             justify-content: space-between;
             margin-bottom: 0.5rem;
-        }
-
-        .dark-theme .summary-row {
             color: #e0e0e0;
         }
 
@@ -775,33 +628,22 @@
             font-size: 1.1rem;
             margin-top: 0.5rem;
             padding-top: 0.5rem;
-            border-top: 1px solid #ddd;
-        }
-
-        .dark-theme .total {
             border-top: 1px solid #444;
+            color: #e0e0e0;
         }
 
         .modal-footer {
             display: flex;
             justify-content: space-between;
             padding: 1rem 1.5rem;
-            border-top: 1px solid #eee;
-        }
-
-        .dark-theme .modal-footer {
             border-top: 1px solid #444;
         }
 
         /* Footer */
         footer {
-            background: #222;
+            background: #111;
             color: #aaa;
             padding: 3rem 2rem;
-        }
-
-        .dark-theme footer {
-            background: #111;
         }
 
         .footer-content {
@@ -843,15 +685,11 @@
             width: 40px;
             height: 40px;
             border-radius: 50%;
-            background: #333;
+            background: #444;
             display: flex;
             justify-content: center;
             align-items: center;
             transition: background 0.3s;
-        }
-
-        .dark-theme .social-links a {
-            background: #444;
         }
 
         .social-links a:hover {
@@ -918,7 +756,7 @@
         }
 
         .login-content {
-            background: white;
+            background: #2d2d2d;
             margin: 10% auto;
             padding: 2rem;
             width: 90%;
@@ -926,10 +764,6 @@
             border-radius: 8px;
             position: relative;
             animation: modalFadeIn 0.3s;
-        }
-
-        .dark-theme .login-content {
-            background: #2d2d2d;
         }
 
         .login-close {
@@ -954,23 +788,15 @@
         }
 
         .form-group label {
-            color: #333;
-        }
-
-        .dark-theme .form-group label {
             color: #e0e0e0;
         }
 
         .form-group input {
             padding: 0.8rem;
-            border: 1px solid #ddd;
+            border: 1px solid #444;
             border-radius: 4px;
             padding-left: 2.5rem;
-        }
-
-        .dark-theme .form-group input {
             background: #333;
-            border: 1px solid #444;
             color: #e0e0e0;
         }
 
@@ -979,10 +805,6 @@
             left: 1rem;
             top: 50%;
             transform: translateY(-50%);
-            color: #666;
-        }
-
-        .dark-theme .form-group i {
             color: #aaa;
         }
 
@@ -1037,36 +859,23 @@
             display: none;
             position: absolute;
             right: 0;
-            background-color: white;
+            background: #2d2d2d;
             min-width: 160px;
-            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.4);
             z-index: 1;
             border-radius: 4px;
             overflow: hidden;
         }
 
-        .dark-theme .dropdown-content {
-            background: #2d2d2d;
-            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.4);
-        }
-
         .dropdown-content a {
-            color: #333;
+            color: #e0e0e0;
             padding: 0.75rem 1rem;
             text-decoration: none;
             display: block;
             transition: background 0.3s;
         }
 
-        .dark-theme .dropdown-content a {
-            color: #e0e0e0;
-        }
-
         .dropdown-content a:hover {
-            background-color: #f1f1f1;
-        }
-
-        .dark-theme .dropdown-content a:hover {
             background-color: #444;
         }
 
@@ -1222,9 +1031,6 @@
                     <i class="fas fa-user-plus"></i>
                     Register
                 </button>
-                <button class="theme-toggle" id="themeToggle">
-                    <i class="fas fa-moon"></i>
-                </button>
             </div>
         </div>
     </header>
@@ -1255,7 +1061,7 @@
     </section>
 
     <!-- Coming Soon Section -->
-    <section class="section" style="background-color: #f9f9f9;" id="coming-soon">
+    <section class="section" id="coming-soon">
         <div class="section-header">
             <h2 class="section-title">Coming Soon</h2>
             <a href="#" class="view-all">
@@ -1277,7 +1083,7 @@
     </section>
 
     <!-- Offers Section (hidden by default) -->
-    <section class="section" id="offers" style="display: none; background-color: #f9f9f9;">
+    <section class="section" id="offers" style="display: none;">
         <h2 class="section-title">Special Offers</h2>
         <div class="offers-grid" id="offersList">
             <!-- Offers will be populated by JavaScript -->
@@ -1324,11 +1130,11 @@
 
                         <div class="seat-legend">
                             <div class="legend-item">
-                                <div class="legend-color" style="background: #ddd;"></div>
+                                <div class="legend-color" style="background: #444;"></div>
                                 <span>Available</span>
                             </div>
                             <div class="legend-item">
-                                <div class="legend-color" style="background: #0f4c81;"></div>
+                                <div class="legend-color" style="background: #6ba8e6;"></div>
                                 <span>Selected</span>
                             </div>
                             <div class="legend-item">
@@ -1410,7 +1216,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button class="btn btn-outline" id="prevBtn" style="display: none; border-color: #0f4c81; color: #0f4c81;">
+                <button class="btn btn-outline" id="prevBtn" style="display: none; border-color: #6ba8e6; color: #6ba8e6;">
                     <i class="fas fa-arrow-left"></i>
                     Previous
                 </button>
@@ -1439,7 +1245,7 @@
                     <input type="password" id="loginPassword" required>
                 </div>
                 <div class="form-actions">
-                    <button type="button" id="forgotPassword" class="btn btn-outline" style="border-color: #0f4c81; color: #0f4c81;">Forgot Password?</button>
+                    <button type="button" id="forgotPassword" class="btn btn-outline" style="border-color: #6ba8e6; color: #6ba8e6;">Forgot Password?</button>
                     <button type="submit" class="btn btn-primary">
                         <span id="loginText">Login</span>
                         <div class="spinner" id="loginSpinner"></div>
@@ -1778,7 +1584,6 @@
         const loginText = document.getElementById('loginText');
         const registerSpinner = document.getElementById('registerSpinner');
         const registerText = document.getElementById('registerText');
-        const themeToggle = document.getElementById('themeToggle');
 
         // Booking data
         let bookingData = {
@@ -1801,12 +1606,6 @@
             renderOffers();
             setupEventListeners();
             checkUser();
-            
-            // Check for saved theme preference
-            if (localStorage.getItem('theme') === 'dark') {
-                document.body.classList.add('dark-theme');
-                themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
-            }
         }
 
         // Check if user is logged in
@@ -1832,14 +1631,10 @@
                         <a href="#" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Logout</a>
                     </div>
                 </div>
-                <button class="theme-toggle" id="themeToggle">
-                    ${document.body.classList.contains('dark-theme') ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>'}
-                </button>
             `;
             
             // Add logout event listener
             document.getElementById('logoutBtn').addEventListener('click', logout);
-            document.getElementById('themeToggle').addEventListener('click', toggleTheme);
         }
 
         // Logout function
@@ -1854,30 +1649,13 @@
                     <i class="fas fa-user-plus"></i>
                     Register
                 </button>
-                <button class="theme-toggle" id="themeToggle">
-                    ${document.body.classList.contains('dark-theme') ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>'}
-                </button>
             `;
             
             // Reinitialize event listeners
             document.getElementById('loginBtn').addEventListener('click', () => loginModal.style.display = 'block');
             document.getElementById('registerBtn').addEventListener('click', () => registerModal.style.display = 'block');
-            document.getElementById('themeToggle').addEventListener('click', toggleTheme);
             
             showNotification('You have been logged out');
-        }
-
-        // Toggle dark/light theme
-        function toggleTheme() {
-            document.body.classList.toggle('dark-theme');
-            
-            if (document.body.classList.contains('dark-theme')) {
-                themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
-                localStorage.setItem('theme', 'dark');
-            } else {
-                themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
-                localStorage.setItem('theme', 'light');
-            }
         }
 
         // Render movies
@@ -1940,7 +1718,7 @@
                         <span>${movie.releaseDate}</span>
                     </div>
                     <div class="movie-actions">
-                        <button class="btn btn-outline btn-sm notify-btn" data-movie-id="${movie.id}" style="border-color: #0f4c81; color: #0f4c81;">
+                        <button class="btn btn-outline btn-sm notify-btn" data-movie-id="${movie.id}" style="border-color: #6ba8e6; color: #6ba8e6;">
                             <i class="fas fa-bell"></i>
                             Notify Me
                         </button>
@@ -1958,16 +1736,11 @@
             theaters.forEach(theater => {
                 const theaterElement = document.createElement('div');
                 theaterElement.className = 'theater-card';
-                theaterElement.style.background = 'white';
+                theaterElement.style.background = '#2d2d2d';
                 theaterElement.style.padding = '1rem';
                 theaterElement.style.borderRadius = '8px';
-                theaterElement.style.boxShadow = '0 4px 8px rgba(0,0,0,0.1)';
+                theaterElement.style.boxShadow = '0 4px 8px rgba(0,0,0,0.3)';
                 theaterElement.style.marginBottom = '1rem';
-                
-                if (document.body.classList.contains('dark-theme')) {
-                    theaterElement.style.background = '#2d2d2d';
-                    theaterElement.style.boxShadow = '0 4px 8px rgba(0,0,0,0.3)';
-                }
                 
                 theaterElement.innerHTML = `
                     <h3><i class="fas fa-map-marker-alt"></i> ${theater.name}</h3>
@@ -1992,16 +1765,11 @@
             offers.forEach(offer => {
                 const offerElement = document.createElement('div');
                 offerElement.className = 'offer-card';
-                offerElement.style.background = 'white';
+                offerElement.style.background = '#2d2d2d';
                 offerElement.style.padding = '1rem';
                 offerElement.style.borderRadius = '8px';
-                offerElement.style.boxShadow = '0 4px 8px rgba(0,0,0,0.1)';
+                offerElement.style.boxShadow = '0 4px 8px rgba(0,0,0,0.3)';
                 offerElement.style.marginBottom = '1rem';
-                
-                if (document.body.classList.contains('dark-theme')) {
-                    offerElement.style.background = '#2d2d2d';
-                    offerElement.style.boxShadow = '0 4px 8px rgba(0,0,0,0.3)';
-                }
                 
                 offerElement.innerHTML = `
                     <h3><i class="fas fa-tag"></i> ${offer.title}</h3>
@@ -2056,9 +1824,6 @@
             // Login/Register buttons
             loginBtn.addEventListener('click', () => loginModal.style.display = 'block');
             registerBtn.addEventListener('click', () => registerModal.style.display = 'block');
-            
-            // Theme toggle
-            themeToggle.addEventListener('click', toggleTheme);
             
             // Close modals
             closeBtns.forEach(btn => {
