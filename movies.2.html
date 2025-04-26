@@ -150,10 +150,15 @@
             text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
         }
 
+        .search-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+        }
+
         .search-bar {
             display: flex;
             width: 100%;
-            max-width: 600px;
             position: relative;
         }
 
@@ -161,11 +166,11 @@
             flex: 1;
             padding: 0.8rem 1rem;
             border: none;
-            border-radius: 4px 0 0 4px;
-            font-size: 1rem;
+            border-radius: 4px;
             padding-left: 2.5rem;
             background-color: #333;
             color: #e0e0e0;
+            font-size: 1rem;
         }
 
         .search-bar i {
@@ -189,6 +194,76 @@
 
         .search-bar button:hover {
             background: #e0911a;
+        }
+
+        .search-results {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            background: #2d2d2d;
+            border-radius: 0 0 4px 4px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            z-index: 10;
+            max-height: 400px;
+            overflow-y: auto;
+            display: none;
+        }
+
+        .search-results.active {
+            display: block;
+        }
+
+        .search-result-item {
+            padding: 0.8rem 1rem;
+            border-bottom: 1px solid #444;
+            cursor: pointer;
+            transition: background 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .search-result-item:hover {
+            background: #444;
+        }
+
+        .search-result-item img {
+            width: 50px;
+            height: 70px;
+            object-fit: cover;
+            border-radius: 4px;
+        }
+
+        .search-result-item .info {
+            flex: 1;
+        }
+
+        .search-result-item .title {
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+        }
+
+        .search-result-item .meta {
+            font-size: 0.8rem;
+            color: #aaa;
+            display: flex;
+            gap: 1rem;
+        }
+
+        .search-result-item .type {
+            background: #f5a623;
+            color: white;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+        }
+
+        .no-results {
+            padding: 1rem;
+            text-align: center;
+            color: #aaa;
         }
 
         /* Now Showing Section */
@@ -1039,10 +1114,13 @@
     <section class="hero">
         <h1>Book Movie Tickets Online</h1>
         <p>Discover the latest movies and theaters near you. Get the best seats at the best prices!</p>
-        <div class="search-bar">
-            <i class="fas fa-search"></i>
-            <input type="text" id="searchInput" placeholder="Search for movies, theaters...">
-            <button id="searchBtn">Search</button>
+        <div class="search-container">
+            <div class="search-bar">
+                <i class="fas fa-search"></i>
+                <input type="text" id="searchInput" placeholder="Search for movies, theaters...">
+                <button id="searchBtn">Search</button>
+            </div>
+            <div class="search-results" id="searchResults"></div>
         </div>
     </section>
 
@@ -1563,6 +1641,7 @@
         const navLinks = document.querySelectorAll('.nav-link');
         const searchBtn = document.getElementById('searchBtn');
         const searchInput = document.getElementById('searchInput');
+        const searchResults = document.getElementById('searchResults');
         const loginBtn = document.getElementById('loginBtn');
         const registerBtn = document.getElementById('registerBtn');
         const loginForm = document.getElementById('loginForm');
@@ -1815,9 +1894,17 @@
             
             // Search functionality
             searchBtn.addEventListener('click', performSearch);
+            searchInput.addEventListener('input', handleSearchInput);
             searchInput.addEventListener('keypress', function(e) {
                 if (e.key === 'Enter') {
                     performSearch();
+                }
+            });
+            
+            // Close search results when clicking outside
+            document.addEventListener('click', function(e) {
+                if (!searchResults.contains(e.target) && e.target !== searchInput) {
+                    searchResults.classList.remove('active');
                 }
             });
             
@@ -1962,6 +2049,145 @@
             nextBtn.addEventListener('click', goToNextStep);
         }
 
+        // Handle search input
+        function handleSearchInput() {
+            const query = searchInput.value.toLowerCase().trim();
+            
+            if (query.length < 2) {
+                searchResults.classList.remove('active');
+                return;
+            }
+            
+            // Search movies
+            const movieResults = movies.filter(movie => 
+                movie.title.toLowerCase().includes(query) || 
+                movie.genre.toLowerCase().includes(query)
+            );
+            
+            // Search theaters
+            const theaterResults = theaters.filter(theater => 
+                theater.name.toLowerCase().includes(query) || 
+                theater.location.toLowerCase().includes(query)
+            );
+            
+            // Display results
+            displaySearchResults(movieResults, theaterResults);
+        }
+
+        // Display search results
+        function displaySearchResults(movieResults, theaterResults) {
+            searchResults.innerHTML = '';
+            
+            if (movieResults.length === 0 && theaterResults.length === 0) {
+                searchResults.innerHTML = '<div class="no-results">No results found</div>';
+            } else {
+                if (movieResults.length > 0) {
+                    movieResults.forEach(movie => {
+                        const item = document.createElement('div');
+                        item.className = 'search-result-item';
+                        item.innerHTML = `
+                            <img src="${movie.poster}" alt="${movie.title}">
+                            <div class="info">
+                                <div class="title">${movie.title}</div>
+                                <div class="meta">
+                                    <span>${movie.genre}</span>
+                                    <span>${movie.duration}</span>
+                                </div>
+                            </div>
+                            <span class="type">Movie</span>
+                        `;
+                        item.addEventListener('click', () => {
+                            if (movie.nowShowing) {
+                                openBookingModal(movie);
+                            } else {
+                                showNotification(`"${movie.title}" is coming soon on ${movie.releaseDate}`);
+                            }
+                            searchResults.classList.remove('active');
+                            searchInput.value = '';
+                        });
+                        searchResults.appendChild(item);
+                    });
+                }
+                
+                if (theaterResults.length > 0) {
+                    theaterResults.forEach(theater => {
+                        const item = document.createElement('div');
+                        item.className = 'search-result-item';
+                        item.innerHTML = `
+                            <i class="fas fa-map-marker-alt" style="font-size: 2rem; color: #f5a623;"></i>
+                            <div class="info">
+                                <div class="title">${theater.name}</div>
+                                <div class="meta">${theater.location}</div>
+                            </div>
+                            <span class="type">Theater</span>
+                        `;
+                        item.addEventListener('click', () => {
+                            showNotification(`Showing theaters for ${theater.name}`);
+                            searchResults.classList.remove('active');
+                            searchInput.value = '';
+                            
+                            // Show theaters section
+                            nowShowingSection.style.display = 'none';
+                            comingSoonSection.style.display = 'none';
+                            theatersSection.style.display = 'block';
+                            offersSection.style.display = 'none';
+                            
+                            // Scroll to theaters section
+                            theatersSection.scrollIntoView({ behavior: 'smooth' });
+                        });
+                        searchResults.appendChild(item);
+                    });
+                }
+            }
+            
+            searchResults.classList.add('active');
+        }
+
+        // Perform search
+        function performSearch() {
+            const query = searchInput.value.toLowerCase().trim();
+            
+            if(!query) {
+                showNotification('Please enter a search term', 'error');
+                return;
+            }
+            
+            // Search movies
+            const movieResults = movies.filter(movie => 
+                movie.title.toLowerCase().includes(query) || 
+                movie.genre.toLowerCase().includes(query)
+            );
+            
+            // Search theaters
+            const theaterResults = theaters.filter(theater => 
+                theater.name.toLowerCase().includes(query) || 
+                theater.location.toLowerCase().includes(query)
+            );
+            
+            // Show results
+            if (movieResults.length > 0 || theaterResults.length > 0) {
+                let message = '';
+                
+                if (movieResults.length > 0) {
+                    message += `<strong>Movies (${movieResults.length}):</strong><br>`;
+                    message += movieResults.map(m => m.title).join(', ');
+                    message += '<br><br>';
+                }
+                
+                if (theaterResults.length > 0) {
+                    message += `<strong>Theaters (${theaterResults.length}):</strong><br>`;
+                    message += theaterResults.map(t => t.name).join(', ');
+                }
+                
+                showNotification(message);
+            } else {
+                showNotification('No results found for your search', 'error');
+            }
+            
+            searchResults.classList.remove('active');
+            searchInput.value = '';
+        }
+
         // Go to next step in booking process
         function goToNextStep() {
             if (bookingData.currentStep === 1) {
@@ -2038,6 +2264,12 @@
 
         // Open booking modal
         function openBookingModal(movie) {
+            if (!currentUser) {
+                showNotification('Please login to book tickets', 'error');
+                loginModal.style.display = 'block';
+                return;
+            }
+            
             bookingData.movie = movie;
             bookingData.pricePerTicket = movie.price;
             
@@ -2215,48 +2447,6 @@
             document.getElementById('summary-showtime').textContent = 'None selected';
             document.getElementById('summary-seats').textContent = 'None selected';
             document.getElementById('summary-total').textContent = '₹0';
-        }
-
-        // Perform search
-        function performSearch() {
-            const query = searchInput.value.toLowerCase().trim();
-            
-            if(!query) {
-                showNotification('Please enter a search term', 'error');
-                return;
-            }
-            
-            // Search movies
-            const movieResults = movies.filter(movie => 
-                movie.title.toLowerCase().includes(query) || 
-                movie.genre.toLowerCase().includes(query)
-            );
-            
-            // Search theaters
-            const theaterResults = theaters.filter(theater => 
-                theater.name.toLowerCase().includes(query) || 
-                theater.location.toLowerCase().includes(query)
-            );
-            
-            // Show results
-            if (movieResults.length > 0 || theaterResults.length > 0) {
-                let message = '';
-                
-                if (movieResults.length > 0) {
-                    message += `<strong>Movies (${movieResults.length}):</strong><br>`;
-                    message += movieResults.map(m => m.title).join(', ');
-                    message += '<br><br>';
-                }
-                
-                if (theaterResults.length > 0) {
-                    message += `<strong>Theaters (${theaterResults.length}):</strong><br>`;
-                    message += theaterResults.map(t => t.name).join(', ');
-                }
-                
-                showNotification(message);
-            } else {
-                showNotification('No results found for your search', 'error');
-            }
         }
 
         // Show notification
