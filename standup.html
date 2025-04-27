@@ -1,0 +1,2829 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laugh Factory India | Premium Standup Comedy</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Dark Theme Base Styles */
+        :root {
+            --primary: #ff4757; /* Dark red */
+            --secondary: #6c5ce7; /* Purple */
+            --secondary-dark: #4834d4;
+            --accent: #1dd1a1; /* Green */
+            --dark: #1e272e;
+            --darker: #0f1519;
+            --light: #f8f9fa;
+            --gray: #57606f;
+            --gray-dark: #2f3542;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: var(--darker);
+            color: var(--light);
+            line-height: 1.6;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        /* Typography */
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+        }
+
+        h1 {
+            font-size: 3rem;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+        }
+
+        h3 {
+            font-size: 2rem;
+        }
+
+        p {
+            margin-bottom: 1rem;
+            color: rgba(255,255,255,0.8);
+        }
+
+        /* Utility Classes */
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 1.8rem;
+            border-radius: 50px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+            outline: none;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: var(--light);
+        }
+
+        .btn-primary:hover {
+            background-color: #ff6b81;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(255, 71, 87, 0.3);
+        }
+
+        .btn-secondary {
+            background-color: var(--secondary);
+            color: var(--light);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--secondary-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(108, 92, 231, 0.3);
+        }
+
+        .btn-accent {
+            background-color: var(--accent);
+            color: var(--darker);
+        }
+
+        .btn-accent:hover {
+            background-color: #2ecc71;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(29, 209, 161, 0.3);
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .section-padding {
+            padding: 5rem 0;
+        }
+
+        .section-title {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 3rem;
+        }
+
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background-color: var(--primary);
+            border-radius: 2px;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: var(--dark);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .logo span {
+            color: var(--accent);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(30, 39, 46, 0.9), rgba(30, 39, 46, 0.9)), url('https://images.unsplash.com/photo-1505373877841-8d25f7d46678?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80') no-repeat center center/cover;
+            height: 100vh;
+            color: var(--light);
+            display: flex;
+            align-items: center;
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            animation: fadeInDown 1s ease;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero-btns {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            animation: fadeIn 1.5s ease;
+        }
+
+        /* Featured Comedians Section */
+        .featured-comedians {
+            background-color: var(--dark);
+        }
+
+        .comedians-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .comedian-card {
+            background-color: var(--darker);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .comedian-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+        }
+
+        .comedian-img {
+            height: 300px;
+            overflow: hidden;
+        }
+
+        .comedian-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .comedian-card:hover .comedian-img img {
+            transform: scale(1.1);
+        }
+
+        .comedian-info {
+            padding: 1.5rem;
+        }
+
+        .comedian-info h3 {
+            margin-bottom: 0.5rem;
+        }
+
+        .comedian-info p {
+            color: rgba(255,255,255,0.7);
+            margin-bottom: 1rem;
+        }
+
+        .rating {
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+
+        /* Shows Section */
+        .shows {
+            background-color: var(--darker);
+        }
+
+        .shows-filter {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .filter-btn {
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            background-color: var(--dark);
+            border: 1px solid var(--gray-dark);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: var(--light);
+        }
+
+        .filter-btn.active, .filter-btn:hover {
+            background-color: var(--secondary);
+            color: var(--light);
+            border-color: var(--secondary);
+        }
+
+        .shows-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .show-card {
+            background-color: var(--dark);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .show-img {
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .show-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .show-details {
+            padding: 1.5rem;
+        }
+
+        .show-date {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+        }
+
+        .show-location {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: rgba(255,255,255,0.7);
+            margin-bottom: 1rem;
+        }
+
+        .show-price {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 1.5rem;
+        }
+
+        .price {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--secondary);
+        }
+
+        /* Testimonials Section */
+        .testimonials {
+            background-color: var(--dark);
+        }
+
+        .testimonials-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .testimonial-card {
+            background-color: var(--darker);
+            padding: 2rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .testimonial-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .testimonial-img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-right: 1rem;
+        }
+
+        .testimonial-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .testimonial-rating {
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+        }
+
+        /* Newsletter Section */
+        .newsletter {
+            background: linear-gradient(135deg, var(--secondary), var(--secondary-dark));
+            color: var(--light);
+            text-align: center;
+        }
+
+        .newsletter-form {
+            max-width: 600px;
+            margin: 0 auto;
+            display: flex;
+            gap: 1rem;
+        }
+
+        .newsletter-form input {
+            flex: 1;
+            padding: 1rem;
+            border-radius: 50px;
+            border: none;
+            outline: none;
+            font-size: 1rem;
+            background-color: rgba(255,255,255,0.9);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: var(--light);
+            padding: 4rem 0 2rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-column h3 {
+            position: relative;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+        }
+
+        .footer-column h3:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background-color: var(--primary);
+        }
+
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-links a {
+            transition: color 0.3s ease;
+            color: rgba(255,255,255,0.7);
+        }
+
+        .footer-links a:hover {
+            color: var(--primary);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background-color: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Booking Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 2000;
+            overflow-y: auto;
+        }
+
+        .modal-content {
+            background-color: var(--dark);
+            max-width: 800px;
+            margin: 3rem auto;
+            border-radius: 10px;
+            overflow: hidden;
+            animation: modalFadeIn 0.5s ease;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem;
+            background-color: var(--secondary);
+            color: var(--light);
+        }
+
+        .close-modal {
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .close-modal:hover {
+            transform: rotate(90deg);
+        }
+
+        .modal-body {
+            padding: 2rem;
+        }
+
+        .booking-form .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .booking-form label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .booking-form input,
+        .booking-form select,
+        .booking-form textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid var(--gray-dark);
+            border-radius: 5px;
+            font-size: 1rem;
+            background-color: var(--darker);
+            color: var(--light);
+        }
+
+        .booking-form textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .form-row .form-group {
+            flex: 1;
+        }
+
+        .modal-footer {
+            padding: 1.5rem;
+            text-align: right;
+            border-top: 1px solid var(--gray-dark);
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes modalFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            h2 {
+                font-size: 2rem;
+            }
+            
+            .hero h1 {
+                font-size: 3rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 80px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 80px);
+                background-color: var(--dark);
+                flex-direction: column;
+                align-items: center;
+                padding: 2rem 0;
+                transition: left 0.3s ease;
+            }
+
+            .nav-links.active {
+                left: 0;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .hero-btns {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .newsletter-form {
+                flex-direction: column;
+            }
+
+            .form-row {
+                flex-direction: column;
+                gap: 0;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .section-padding {
+                padding: 3rem 0;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            h2 {
+                font-size: 1.8rem;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .shows-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+            /* Add to your existing CSS */
+            .gift-cards-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                gap: 2rem;
+                margin-top: 3rem;
+            }
+
+            .gift-card-option {
+                background-color: var(--dark);
+                border-radius: 10px;
+                padding: 2rem;
+                text-align: center;
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+                transition: transform 0.3s ease;
+            }
+
+            .gift-card-option:hover {
+                transform: translateY(-5px);
+            }
+
+            .gift-card-value {
+                font-size: 2rem;
+                font-weight: 700;
+                color: var(--accent);
+                margin-bottom: 0.5rem;
+            }
+
+            .gift-card-price {
+                font-size: 1.2rem;
+                margin-bottom: 1.5rem;
+            }
+
+            .custom-amount {
+                background-color: var(--secondary);
+                color: var(--light);
+            }
+
+            .custom-amount h4 {
+                margin-bottom: 1.5rem;
+            }
+
+            .custom-amount .form-group {
+                margin-bottom: 1.5rem;
+            }
+
+            .custom-amount input {
+                width: 100%;
+                padding: 0.8rem;
+                border-radius: 5px;
+                border: none;
+                text-align: center;
+                font-size: 1.2rem;
+                background-color: rgba(255,255,255,0.9);
+            }
+            /* Welcome Screen Styles */
+            .welcome-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--secondary), var(--secondary-dark));
+            color: var(--light);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            overflow-y: auto;
+            padding: 2rem;
+            }
+
+            .welcome-content {
+            max-width: 800px;
+            text-align: center;
+            animation: fadeIn 0.5s ease;
+            }
+
+            .preference-section {
+            margin: 2rem 0;
+            }
+
+            .comedian-options {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+            margin: 1.5rem 0;
+            }
+
+            .option-card {
+            width: 120px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            border-radius: 8px;
+            overflow: hidden;
+            background: rgba(255,255,255,0.1);
+            }
+
+            .option-card:hover {
+            transform: scale(1.05);
+            }
+
+            .option-card.selected {
+            box-shadow: 0 0 0 3px var(--accent);
+            }
+
+            .option-card img {
+            width: 100%;
+            height: 120px;
+            object-fit: cover;
+            }
+
+            .option-card p {
+            padding: 0.5rem;
+            margin: 0;
+            }
+
+            .genre-options {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.8rem;
+            margin: 1.5rem 0;
+            }
+
+            .genre-btn {
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            background: rgba(255,255,255,0.1);
+            border: none;
+            color: var(--light);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            }
+
+            .genre-btn:hover, .genre-btn.selected {
+            background: var(--accent);
+            color: var(--darker);
+            }
+
+            #continueBtn {
+            margin-top: 2rem;
+            padding: 1rem 3rem;
+            font-size: 1.1rem;
+            }
+            .seat-booking-section {
+            margin: 2rem 0;
+        }
+        
+        .stage-display {
+            background: var(--secondary);
+            color: white;
+            text-align: center;
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+        
+        .seats-container {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
+        .seat-row {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+        
+        .seat {
+            width: 30px;
+            height: 30px;
+            background: var(--gray-dark);
+            border-radius: 5px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            transition: all 0.2s ease;
+        }
+        
+        .seat:hover {
+            transform: scale(1.1);
+        }
+        
+        .seat.selected {
+            background: var(--accent);
+            color: var(--darker);
+        }
+        
+        .seat.booked {
+            background: var(--primary);
+            cursor: not-allowed;
+        }
+        
+        .seat.aisle {
+            visibility: hidden;
+        }
+        
+        .seat-legend {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.8rem;
+        }
+        
+        .legend-color {
+            width: 15px;
+            height: 15px;
+            border-radius: 3px;
+        }
+        
+        .booking-summary {
+            background: var(--darker);
+            padding: 1rem;
+            border-radius: 5px;
+            margin-top: 1.5rem;
+        }
+        
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+        }
+        
+        .total-row {
+            font-weight: bold;
+            border-top: 1px solid var(--gray);
+            padding-top: 0.5rem;
+            margin-top: 0.5rem;
+        }
+        /* Meal Booking Styles */
+        .meal-options {
+            margin: 1rem 0;
+            border: 1px solid var(--gray-dark);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .meal-option {
+            padding: 1rem;
+            border-bottom: 1px solid var(--gray-dark);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .meal-option:last-child {
+            border-bottom: none;
+        }
+
+        .meal-select {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .meal-checkbox {
+            width: 18px;
+            height: 18px;
+            accent-color: var(--accent);
+        }
+
+        .meal-details {
+            text-align: right;
+        }
+
+        .meal-details p {
+            margin: 0.3rem 0;
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.6);
+        }
+
+        .meal-price {
+            color: var(--accent);
+            font-weight: bold;
+        }
+
+        .meal-summary {
+            background-color: var(--darker);
+            padding: 1rem;
+            border-radius: 8px;
+            margin-top: 1.5rem;
+        }
+
+        #selectedMealsList {
+            margin: 0.5rem 0;
+            padding-left: 1.5rem;
+        }
+
+        #selectedMealsList li {
+            margin-bottom: 0.3rem;
+        }
+
+        .meal-total {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 0.5rem;
+            padding-top: 0.5rem;
+            border-top: 1px solid var(--gray);
+            font-weight: bold;
+        }
+        /* Membership Section Styles */
+        .membership-tiers {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .tier-card {
+            background-color: var(--darker);
+            border-radius: 10px;
+            padding: 2rem;
+            position: relative;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .tier-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .tier-card.featured {
+            border: 2px solid var(--accent);
+            transform: scale(1.05);
+        }
+
+        .popular-badge {
+            position: absolute;
+            top: -10px;
+            right: 20px;
+            background-color: var(--primary);
+            color: white;
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        .tier-price {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin: 1rem 0;
+            color: var(--accent);
+        }
+
+        .tier-price span {
+            font-size: 1rem;
+            color: rgba(255,255,255,0.7);
+        }
+
+        .tier-benefits {
+            margin: 1.5rem 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .tier-benefits li {
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .tier-benefits i {
+            margin-right: 0.5rem;
+            width: 20px;
+        }
+
+        .tier-benefits .fa-check {
+            color: var(--accent);
+        }
+
+        .tier-benefits .fa-times {
+            color: var(--primary);
+        }
+
+        /* Payment Methods */
+        .payment-options {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .payment-method {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            background-color: var(--gray-dark);
+            cursor: pointer;
+        }
+
+        .payment-method input {
+            margin: 0;
+        }
+
+        .payment-details {
+            background-color: var(--gray-dark);
+            padding: 1rem;
+            border-radius: 5px;
+            margin-top: 1rem;
+        }
+
+        /* User Profile in Header */
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--secondary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        .user-menu {
+            position: absolute;
+            top: 50px;
+            right: 0;
+            background-color: var(--dark);
+            border-radius: 5px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            padding: 1rem;
+            width: 200px;
+            display: none;
+            z-index: 100;
+        }
+
+        .user-menu.active {
+            display: block;
+        }
+
+        .user-menu a {
+            display: block;
+            padding: 0.5rem 0;
+            transition: color 0.3s ease;
+        }
+
+        .user-menu a:hover {
+            color: var(--primary);
+        }
+
+        .user-menu a i {
+            margin-right: 0.5rem;
+            width: 20px;
+            text-align: center;
+        }
+        
+    </style>
+</head>
+<body>
+<<<<<<< HEAD
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <a href="#" class="logo">PLANR</a>
+                <ul class="nav-links">
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#comedians">Comedians</a></li>
+                    <li><a href="#shows">Shows</a></li>
+                    <li><a href="#testimonials">Reviews</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+                <div class="mobile-menu-btn">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </nav>
+        </div>
+    </header>
+=======
+    <!-- Welcome Screen -->
+<div id="welcomeScreen" class="welcome-screen">
+    <div class="welcome-content">
+      <h1>Welcome to PLANR</h1>
+      <p>Help us personalize your comedy experience</p>
+      
+      <div class="preference-section">
+        <h2>Choose your favorite comedians</h2>
+        <div class="comedian-options">
+          <div class="option-card" data-comedian="zakir">
+            <img src="https://www.bollywoodhungama.com/wp-content/uploads/2021/10/Zakir-Khan-1.jpg" alt="Zakir Khan">
+            <p>Zakir Khan</p>
+          </div>
+          <div class="option-card" data-comedian="bassi">
+            <img src="https://i0.wp.com/www.urbanasian.com/wp-content/uploads/2022/05/Anubhav-Singh-Bassi.jpg" alt="Anubhav Bassi">
+            <p>Anubhav Bassi</p>
+          </div>
+          <div class="option-card" data-comedian="kaneez">
+            <img src="https://www.mumbaitheatreguide.com/dramas/wp-content/uploads/2019/12/Kaneez-Surka-1.jpg" alt="Kaneez Surka">
+            <p>Kaneez Surka</p>
+          </div>
+          <div class="option-card" data-comedian="ravi">
+            <img src="https://www.mumbaitheatreguide.com/dramas/wp-content/uploads/2021/04/Ravi-Gupta.jpg" alt="Ravi Gupta">
+            <p>Ravi Gupta</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="preference-section">
+        <h2>Select your favorite comedy genres</h2>
+        <div class="genre-options">
+          <button class="genre-btn" data-genre="observational">Observational</button>
+          <button class="genre-btn" data-genre="satire">Satire</button>
+          <button class="genre-btn" data-genre="improv">Improv</button>
+          <button class="genre-btn" data-genre="storytelling">Storytelling</button>
+          <button class="genre-btn" data-genre="dark">Dark Humor</button>
+        </div>
+      </div>
+      
+      <button id="continueBtn" class="btn btn-primary">Continue to LaughFactory</button>
+    </div>
+  </div>
+    <!-- Main Website Content -->
+    <div id="mainContent">
+        <!-- Header -->
+        <header>
+            <div class="container">
+                <nav class="navbar">
+                    <a href="homepage1.html" class="logo">PL<span>ANR</span></a>
+                    <ul class="nav-links">
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#comedians">Comedians</a></li>
+                        <li><a href="#shows">Shows</a></li>
+                        <li><a href="#gift-cards">Gift Cards</a></li>
+                        <li><a href="#testimonials">Reviews</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                    <div class="mobile-menu-btn">
+                        <i class="fas fa-bars"></i>
+                    </div>
+                </nav>
+            </div>
+        </header>
+>>>>>>> ae5779076367ca7ba4b922efbfa9019ea079663f
+
+        <!-- Hero Section -->
+        <section class="hero" id="home">
+            <div class="container">
+                <div class="hero-content">
+                    <h1>India's Finest Standup Comedy Shows</h1>
+                    <p>Book tickets for the hottest standup comedy shows featuring India's top comedians. Laugh your heart out with our curated selection of hilarious performances.</p>
+                    <div class="hero-btns">
+                        <a href="#shows" class="btn btn-primary">Book Tickets</a>
+                        <a href="#comedians" class="btn btn-secondary">View Comedians</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Featured Comedians Section -->
+        <section class="featured-comedians section-padding" id="comedians">
+            <div class="container">
+                <h2 class="section-title text-center">Featured Comedians</h2>
+                <p class="text-center">Discover India's most talented standup comedians who will leave you in splits</p>
+                
+                <div class="comedians-grid">
+                    <!-- Comedian 1 - Anubhav Singh Bassi -->
+                    <div class="comedian-card">
+                        <div class="comedian-img">
+                            <img src="Images\download (2).webp" alt="Anubhav Singh Bassi">
+                        </div>
+                        <div class="comedian-info">
+                            <h3>Anubhav Singh Bassi</h3>
+                            <p>Known for his relatable college and life stories</p>
+                            <div class="rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                                <span>4.7</span>
+                            </div>
+                            <a href="#" class="btn btn-primary book-btn" data-comedian="Anubhav Singh Bassi">Book Show</a>
+                        </div>
+                    </div>
+                    
+                    <!-- Comedian 2 - Vipul Goyal -->
+                    <div class="comedian-card">
+                        <div class="comedian-img">
+                            <img src="Images\download (3).webp" alt="Vipul Goyal">
+                        </div>
+                        <div class="comedian-info">
+                            <h3>Vipul Goyal</h3>
+                            <p>Engineer-turned-comedian with sharp observations</p>
+                            <div class="rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                                <span>4.2</span>
+                            </div>
+                            <a href="#" class="btn btn-primary book-btn" data-comedian="Vipul Goyal">Book Show</a>
+                        </div>
+                    </div>
+                    
+                    <!-- Comedian 3 - Ravi Gupta -->
+                    <div class="comedian-card">
+                        <div class="comedian-img">
+                            <img src="Images\download (5).jpeg" alt="Ravi Gupta">
+                        </div>
+                        <div class="comedian-info">
+                            <h3>Ravi Gupta</h3>
+                            <p>Delhi's favorite with hilarious family humor</p>
+                            <div class="rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <span>5.0</span>
+                            </div>
+                            <a href="#" class="btn btn-primary book-btn" data-comedian="Ravi Gupta">Book Show</a>
+                        </div>
+                    </div>
+                    
+                    <!-- Comedian 4 - Nayab Midha -->
+                    <div class="comedian-card">
+                        <div class="comedian-img">
+                            <img src="Images\download (6).jpeg" alt="Nayab Midha">
+                        </div>
+                        <div class="comedian-info">
+                            <h3>Nayab Midha</h3>
+                            <p>Fresh perspective with millennial humor</p>
+                            <div class="rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                                <span>4.5</span>
+                            </div>
+                            <a href="#" class="btn btn-primary book-btn" data-comedian="Nayab Midha">Book Show</a>
+                        </div>
+                    </div>
+
+                    <!-- Comedian 5 - Zakir Khan -->
+                    <div class="comedian-card">
+                        <div class="comedian-img">
+                            <img src="Images\download (1).webp" alt="Zakir Khan">
+                        </div>
+                        <div class="comedian-info">
+                            <h3>Zakir Khan</h3>
+                            <p>The original "Sakht Launda"</p>
+                            <div class="rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <span>5.0</span>
+                            </div>
+                            <a href="#" class="btn btn-primary book-btn" data-comedian="Zakir Khan">Book Show</a>
+                        </div>
+                    </div>
+
+                    <!-- Comedian 6 - Kaneez Surka -->
+                    <div class="comedian-card">
+                        <div class="comedian-img">
+                            <img src="Images\download (7).jpeg" alt="Kaneez Surka">
+                        </div>
+                        <div class="comedian-info">
+                            <h3>Kaneez Surka</h3>
+                            <p>Queen of improv and musical comedy</p>
+                            <div class="rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                                <span>4.7</span>
+                            </div>
+                            <a href="#" class="btn btn-primary book-btn" data-comedian="Kaneez Surka">Book Show</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Shows Section -->
+        <section class="shows section-padding" id="shows">
+            <div class="container">
+                <h2 class="section-title text-center">Upcoming Shows</h2>
+                <p class="text-center">Book your tickets for these hilarious shows happening near you</p>
+                
+                <div class="shows-filter">
+                    <button class="filter-btn active" data-filter="all">All Shows</button>
+                    <button class="filter-btn" data-filter="delhi">Delhi</button>
+                    <button class="filter-btn" data-filter="mumbai">Mumbai</button>
+                    <button class="filter-btn" data-filter="bangalore">Bangalore</button>
+                </div>
+                
+                <div class="shows-grid">
+                    <!-- Show 1 -->
+                    <div class="show-card" data-location="delhi">
+                        <div class="show-img">
+                            <img src="https://images.unsplash.com/photo-1501281668745-f7f57925c3b4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Comedy Night">
+                        </div>
+                        <div class="show-details">
+                            <h3>Laugh Riot Delhi</h3>
+                            <div class="show-date">
+                                <i class="far fa-calendar-alt"></i>
+                                <span>June 15, 2023 | 8:00 PM</span>
+                            </div>
+                            <div class="show-location">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>Kingdom of Dreams, Gurugram</span>
+                            </div>
+                            <p>An evening of non-stop laughter with Zakir Khan, Kaneez Surka and special guests.</p>
+                            <div class="show-price">
+                                <span class="price">₹799 onwards</span>
+                                <a href="#" class="btn btn-secondary book-btn" data-show="Laugh Riot Delhi">Book Now</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Show 2 -->
+                    <div class="show-card" data-location="mumbai">
+                        <div class="show-img">
+                            <img src="https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6a3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Standup Special">
+                        </div>
+                        <div class="show-details">
+                            <h3>Anubhav Bassi: Mumbai Special</h3>
+                            <div class="show-date">
+                                <i class="far fa-calendar-alt"></i>
+                                <span>June 18, 2023 | 7:30 PM</span>
+                            </div>
+                            <div class="show-location">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>Jamshed Bhabha Theatre, Mumbai</span>
+                            </div>
+                            <p>Anubhav Singh Bassi brings his hilarious college stories to Mumbai.</p>
+                            <div class="show-price">
+                                <span class="price">₹1,299 onwards</span>
+                                <a href="#" class="btn btn-secondary book-btn" data-show="Anubhav Bassi: Mumbai Special">Book Now</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Show 3 -->
+                    <div class="show-card" data-location="bangalore">
+                        <div class="show-img">
+                            <img src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Comedy Festival">
+                        </div>
+                        <div class="show-details">
+                            <h3>Bangalore Comedy Festival</h3>
+                            <div class="show-date">
+                                <i class="far fa-calendar-alt"></i>
+                                <span>June 22-25, 2023 | 6:00 PM</span>
+                            </div>
+                            <div class="show-location">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>Palace Grounds, Bangalore</span>
+                            </div>
+                            <p>4 days of unlimited laughter with all the top Indian comedians at one place.</p>
+                            <div class="show-price">
+                                <span class="price">₹2,499 onwards</span>
+                                <a href="#" class="btn btn-secondary book-btn" data-show="Bangalore Comedy Festival">Book Now</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Show 4 -->
+                    <div class="show-card" data-location="delhi">
+                        <div class="show-img">
+                            <img src="https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Comedy Club">
+                        </div>
+                        <div class="show-details">
+                            <h3>Weekend Comedy Club</h3>
+                            <div class="show-date">
+                                <i class="far fa-calendar-alt"></i>
+                                <span>Every Saturday | 9:00 PM</span>
+                            </div>
+                            <div class="show-location">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>Hauz Khas Social, Delhi</span>
+                            </div>
+                            <p>Weekly standup comedy show featuring new and established comedians.</p>
+                            <div class="show-price">
+                                <span class="price">₹499 onwards</span>
+                                <a href="#" class="btn btn-secondary book-btn" data-show="Weekend Comedy Club">Book Now</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Show 5 -->
+                    <div class="show-card" data-location="mumbai">
+                        <div class="show-img">
+                            <img src="https://images.unsplash.com/photo-1540039155733-5bb30b53aa14?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Comedy Night">
+                        </div>
+                        <div class="show-details">
+                            <h3>Ravi Gupta: Family Tales</h3>
+                            <div class="show-date">
+                                <i class="far fa-calendar-alt"></i>
+                                <span>June 28, 2023 | 8:30 PM</span>
+                            </div>
+                            <div class="show-location">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>NCPA, Mumbai</span>
+                            </div>
+                            <p>Ravi Gupta presents his new solo special about hilarious family dynamics.</p>
+                            <div class="show-price">
+                                <span class="price">₹999 onwards</span>
+                                <a href="#" class="btn btn-secondary book-btn" data-show="Ravi Gupta: Family Tales">Book Now</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Show 6 -->
+                    <div class="show-card" data-location="bangalore">
+                        <div class="show-img">
+                            <img src="https://images.unsplash.com/photo-1472653431158-6364773b2a56?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Open Mic">
+                        </div>
+                        <div class="show-details">
+                            <h3>New Talent Night</h3>
+                            <div class="show-date">
+                                <i class="far fa-calendar-alt"></i>
+                                <span>Every Thursday | 7:00 PM</span>
+                            </div>
+                            <div class="show-location">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>The Humming Tree, Bangalore</span>
+                            </div>
+                            <p>Discover fresh comedy talent at our weekly open mic night featuring Nayab Midha and others.</p>
+                            <div class="show-price">
+                                <span class="price">₹299 onwards</span>
+                                <a href="#" class="btn btn-secondary book-btn" data-show="New Talent Night">Book Now</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Gift Cards Section -->
+        <section class="gift-cards section-padding" id="gift-cards">
+            <div class="container">
+                <h2 class="section-title text-center">Give the Gift of Laughter</h2>
+                <p class="text-center">Perfect for birthdays, anniversaries, or just because! Our gift cards never expire.</p>
+                
+                <div class="gift-cards-grid">
+                    <!-- Gift Card Option 1 -->
+                    <div class="gift-card-option">
+                        <div class="gift-card-value">₹1,000</div>
+                        <div class="gift-card-price">₹1,000</div>
+                        <button class="btn btn-secondary add-to-cart" data-value="1000">Add to Cart</button>
+                    </div>
+                    
+                    <!-- Gift Card Option 2 -->
+                    <div class="gift-card-option">
+                        <div class="gift-card-value">₹2,500</div>
+                        <div class="gift-card-price">₹2,500</div>
+                        <button class="btn btn-secondary add-to-cart" data-value="2500">Add to Cart</button>
+                    </div>
+                    
+                    <!-- Gift Card Option 3 -->
+                    <div class="gift-card-option">
+                        <div class="gift-card-value">₹5,000</div>
+                        <div class="gift-card-price">₹5,000</div>
+                        <button class="btn btn-secondary add-to-cart" data-value="5000">Add to Cart</button>
+                    </div>
+                    
+                    <!-- Custom Amount Option -->
+                    <div class="gift-card-option custom-amount">
+                        <h4>Custom Amount</h4>
+                        <div class="form-group">
+                            <label for="custom-amount">Enter Amount (₹500 minimum)</label>
+                            <input type="number" id="custom-amount" min="500" step="100" placeholder="₹">
+                        </div>
+                        <button class="btn btn-primary add-to-cart" id="add-custom-amount">Add to Cart</button>
+                    </div>
+                </div>
+                
+                <!-- Checkout Button -->
+                <div class="text-center" style="margin-top: 3rem;">
+                    <button class="btn btn-primary" id="checkout-gift-card">Proceed to Checkout</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials Section -->
+        <section class="testimonials section-padding" id="testimonials">
+            <div class="container">
+                <h2 class="section-title text-center">What People Say</h2>
+                <p class="text-center">Don't just take our word for it - hear from our happy customers</p>
+                
+                <div class="testimonials-container">
+                    <!-- Testimonial 1 -->
+                    <div class="testimonial-card">
+                        <div class="testimonial-header">
+                            <div class="testimonial-img">
+                                <img src="https://randomuser.me/api/portraits/women/32.jpg" alt="Priya Sharma">
+                            </div>
+                            <div>
+                                <h4>Priya Sharma</h4>
+                                <div class="testimonial-rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <p>"I attended Zakir Khan's show in Delhi and it was absolutely hilarious! The booking process was so smooth and the seats were great. Will definitely book through LaughFactory again!"</p>
+                    </div>
+                    
+                    <!-- Testimonial 2 -->
+                    <div class="testimonial-card">
+                        <div class="testimonial-header">
+                            <div class="testimonial-img">
+                                <img src="https://randomuser.me/api/portraits/men/45.jpg" alt="Rahul Mehta">
+                            </div>
+                            <div>
+                                <h4>Rahul Mehta</h4>
+                                <div class="testimonial-rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star-half-alt"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <p>"The Bangalore Comedy Festival was worth every penny! So many great comedians in one place. The app notifications kept me updated about timing changes. Great service!"</p>
+                    </div>
+                    
+                    <!-- Testimonial 3 -->
+                    <div class="testimonial-card">
+                        <div class="testimonial-header">
+                            <div class="testimonial-img">
+                                <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Ananya Patel">
+                            </div>
+                            <div>
+                                <h4>Ananya Patel</h4>
+                                <div class="testimonial-rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <p>"I've been to 3 shows booked through LaughFactory and each experience has been flawless. The customer support helped me quickly when I had a query about my tickets. Highly recommend!"</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Newsletter Section -->
+        <section class="newsletter section-padding">
+            <div class="container">
+                <h2 class="text-center">Stay Updated</h2>
+                <p class="text-center">Subscribe to our newsletter for show announcements, early bird discounts and more!</p>
+                
+                <form class="newsletter-form">
+                    <input type="email" placeholder="Enter your email address" required>
+                    <button type="submit" class="btn btn-primary">Subscribe</button>
+                </form>
+            </div>
+        </section>
+        <!-- Membership Section -->
+        <section class="membership section-padding" id="membership">
+            <div class="container">
+                <h2 class="section-title text-center">Become a Member</h2>
+                <p class="text-center">Unlock exclusive benefits and discounts on all comedy shows!</p>
+                
+                <div class="membership-tiers">
+                    <!-- Basic Tier -->
+                    <div class="tier-card">
+                        <h3>Basic</h3>
+                        <div class="tier-price">Free</div>
+                        <ul class="tier-benefits">
+                            <li><i class="fas fa-check"></i> Early access to show announcements</li>
+                            <li><i class="fas fa-check"></i> Newsletter with comedy news</li>
+                            <li><i class="fas fa-check"></i> Basic seat selection</li>
+                            <li><i class="fas fa-times"></i> No priority booking</li>
+                        </ul>
+                        <button class="btn btn-secondary join-btn" data-tier="basic">Join Free</button>
+                    </div>
+                    
+                    <!-- Premium Tier -->
+                    <div class="tier-card featured">
+                        <div class="popular-badge">Most Popular</div>
+                        <h3>Premium</h3>
+                        <div class="tier-price">₹499<span>/month</span></div>
+                        <ul class="tier-benefits">
+                            <li><i class="fas fa-check"></i> 15% off all tickets</li>
+                            <li><i class="fas fa-check"></i> Priority booking (48hr early access)</li>
+                            <li><i class="fas fa-check"></i> Premium seat selection</li>
+                            <li><i class="fas fa-check"></i> Free drink at every show</li>
+                            <li><i class="fas fa-check"></i> Exclusive member-only events</li>
+                        </ul>
+                        <button class="btn btn-primary join-btn" data-tier="premium">Get Premium</button>
+                    </div>
+                    
+                    <!-- VIP Tier -->
+                    <div class="tier-card">
+                        <h3>VIP</h3>
+                        <div class="tier-price">₹1,999<span>/month</span></div>
+                        <ul class="tier-benefits">
+                            <li><i class="fas fa-check"></i> 25% off all tickets</li>
+                            <li><i class="fas fa-check"></i> VIP seating at all shows</li>
+                            <li><i class="fas fa-check"></i> Meet & greet with comedians</li>
+                            <li><i class="fas fa-check"></i> Free premium food/drinks</li>
+                            <li><i class="fas fa-check"></i> Personal booking assistant</li>
+                        </ul>
+                        <button class="btn btn-secondary join-btn" data-tier="vip">Go VIP</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer id="contact">
+            <div class="container">
+                <div class="footer-content">
+                    <div class="footer-column">
+                        <h3>LaughFactory</h3>
+                        <p>India's premier platform for booking standup comedy shows featuring the best Indian comedians.</p>
+                        <div class="social-links">
+                            <a href="#"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fab fa-instagram"></i></a>
+                            <a href="#"><i class="fab fa-youtube"></i></a>
+                        </div>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h3>Quick Links</h3>
+                        <ul class="footer-links">
+                            <li><a href="#home">Home</a></li>
+                            <li><a href="#comedians">Comedians</a></li>
+                            <li><a href="#shows">Shows</a></li>
+                            <li><a href="#testimonials">Reviews</a></li>
+                            <li><a href="#">About Us</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h3>Support</h3>
+                        <ul class="footer-links">
+                            <li><a href="#">FAQs</a></li>
+                            <li><a href="#">Privacy Policy</a></li>
+                            <li><a href="#">Terms & Conditions</a></li>
+                            <li><a href="#">Refund Policy</a></li>
+                            <li><a href="#">Contact Us</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h3>Contact Info</h3>
+                        <ul class="footer-links">
+                            <li><i class="fas fa-map-marker-alt"></i> 123 Comedy Street, Mumbai, India</li>
+                            <li><i class="fas fa-phone"></i> +91 9876543210</li>
+                            <li><i class="fas fa-envelope"></i> info@laughfactory.in</li>
+                            <li><i class="fas fa-user-tie"></i> Event Manager: Shivoy Budhiraja</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="footer-bottom">
+                    <p>&copy; 2025 LaughFactory India. All Rights Reserved.</p>
+                </div>
+            </div>
+        </footer>
+
+        <div class="modal" id="bookingModal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 id="modalTitle">Book Tickets</h3>
+                    <span class="close-modal">&times;</span>
+                </div>
+                <div class="modal-body">
+                    <form class="booking-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="showName">Show Name</label>
+                                <input type="text" id="showName" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label for="showDate">Show Date</label>
+                                <input type="text" id="showDate" readonly>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="name">Full Name</label>
+                                <input type="text" id="name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input type="email" id="email" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="phone">Phone Number</label>
+                                <input type="tel" id="phone" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="tickets">Number of Tickets</label>
+                                <select id="tickets" required>
+                                    <option value="">Select</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <!-- Seat Booking Section -->
+                        <div class="seat-booking-section">
+                            <h4>Select Your Seats</h4>
+                            <div class="stage-display">STAGE</div>
+                            
+                            <div class="seats-container">
+                                <!-- Row A -->
+                                <div class="seat-row">
+                                    <div class="seat" data-seat="A1">A1</div>
+                                    <div class="seat" data-seat="A2">A2</div>
+                                    <div class="seat" data-seat="A3">A3</div>
+                                    <div class="seat aisle"></div>
+                                    <div class="seat" data-seat="A4">A4</div>
+                                    <div class="seat" data-seat="A5">A5</div>
+                                    <div class="seat" data-seat="A6">A6</div>
+                                    <div class="seat aisle"></div>
+                                    <div class="seat" data-seat="A7">A7</div>
+                                    <div class="seat" data-seat="A8">A8</div>
+                                    <div class="seat" data-seat="A9">A9</div>
+                                </div>
+                                
+                                <!-- Row B -->
+                                <div class="seat-row">
+                                    <div class="seat" data-seat="B1">B1</div>
+                                    <div class="seat" data-seat="B2">B2</div>
+                                    <div class="seat" data-seat="B3">B3</div>
+                                    <div class="seat aisle"></div>
+                                    <div class="seat" data-seat="B4">B4</div>
+                                    <div class="seat" data-seat="B5">B5</div>
+                                    <div class="seat" data-seat="B6">B6</div>
+                                    <div class="seat aisle"></div>
+                                    <div class="seat" data-seat="B7">B7</div>
+                                    <div class="seat" data-seat="B8">B8</div>
+                                    <div class="seat" data-seat="B9">B9</div>
+                                </div>
+                                
+                                <!-- Row C -->
+                                <div class="seat-row">
+                                    <div class="seat" data-seat="C1">C1</div>
+                                    <div class="seat" data-seat="C2">C2</div>
+                                    <div class="seat" data-seat="C3">C3</div>
+                                    <div class="seat aisle"></div>
+                                    <div class="seat" data-seat="C4">C4</div>
+                                    <div class="seat" data-seat="C5">C5</div>
+                                    <div class="seat" data-seat="C6">C6</div>
+                                    <div class="seat aisle"></div>
+                                    <div class="seat" data-seat="C7">C7</div>
+                                    <div class="seat" data-seat="C8">C8</div>
+                                    <div class="seat" data-seat="C9">C9</div>
+                                </div>
+                                
+                                <!-- Row D -->
+                                <div class="seat-row">
+                                    <div class="seat" data-seat="D1">D1</div>
+                                    <div class="seat" data-seat="D2">D2</div>
+                                    <div class="seat" data-seat="D3">D3</div>
+                                    <div class="seat aisle"></div>
+                                    <div class="seat" data-seat="D4">D4</div>
+                                    <div class="seat" data-seat="D5">D5</div>
+                                    <div class="seat" data-seat="D6">D6</div>
+                                    <div class="seat aisle"></div>
+                                    <div class="seat" data-seat="D7">D7</div>
+                                    <div class="seat" data-seat="D8">D8</div>
+                                    <div class="seat" data-seat="D9">D9</div>
+                                </div>
+                                
+                                <!-- Row E -->
+                                <div class="seat-row">
+                                    <div class="seat" data-seat="E1">E1</div>
+                                    <div class="seat" data-seat="E2">E2</div>
+                                    <div class="seat" data-seat="E3">E3</div>
+                                    <div class="seat aisle"></div>
+                                    <div class="seat" data-seat="E4">E4</div>
+                                    <div class="seat" data-seat="E5">E5</div>
+                                    <div class="seat" data-seat="E6">E6</div>
+                                    <div class="seat aisle"></div>
+                                    <div class="seat" data-seat="E7">E7</div>
+                                    <div class="seat" data-seat="E8">E8</div>
+                                    <div class="seat" data-seat="E9">E9</div>
+                                </div>
+                                
+                                <!-- Row F -->
+                                <div class="seat-row">
+                                    <div class="seat" data-seat="F1">F1</div>
+                                    <div class="seat" data-seat="F2">F2</div>
+                                    <div class="seat" data-seat="F3">F3</div>
+                                    <div class="seat aisle"></div>
+                                    <div class="seat" data-seat="F4">F4</div>
+                                    <div class="seat" data-seat="F5">F5</div>
+                                    <div class="seat" data-seat="F6">F6</div>
+                                    <div class="seat aisle"></div>
+                                    <div class="seat" data-seat="F7">F7</div>
+                                    <div class="seat" data-seat="F8">F8</div>
+                                    <div class="seat" data-seat="F9">F9</div>
+                                </div>
+                            </div>
+                            
+                            <div class="seat-legend">
+                                <div class="legend-item">
+                                    <div class="legend-color" style="background: var(--gray-dark);"></div>
+                                    <span>Available</span>
+                                </div>
+                                <div class="legend-item">
+                                    <div class="legend-color" style="background: var(--accent);"></div>
+                                    <span>Selected</span>
+                                </div>
+                                <div class="legend-item">
+                                    <div class="legend-color" style="background: var(--primary);"></div>
+                                    <span>Booked</span>
+                                </div>
+                            </div>
+                            
+                            <div class="booking-summary">
+                                <div class="summary-row">
+                                    <span>Tickets:</span>
+                                    <span id="ticket-count">0</span>
+                                </div>
+                                <div class="summary-row">
+                                    <span>Price per ticket:</span>
+                                    <span>₹799</span>
+                                </div>
+                                <div class="summary-row total-row">
+                                    <span>Total:</span>
+                                    <span id="total-price">₹0</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <h4>Food & Beverage Options</h4>
+                            <p>Pre-order your snacks and drinks for the show (optional)</p>
+                            
+                            <div class="meal-options">
+                                <!-- Meal Option 1 -->
+                                <div class="meal-option">
+                                    <div class="meal-select">
+                                        <input type="checkbox" id="meal1" class="meal-checkbox" data-meal="popcorn-combo" data-price="250">
+                                        <label for="meal1">Popcorn Combo</label>
+                                    </div>
+                                    <div class="meal-details">
+                                        <p>Large popcorn + 1 soft drink</p>
+                                        <div class="meal-price">₹250</div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Meal Option 2 -->
+                                <div class="meal-option">
+                                    <div class="meal-select">
+                                        <input type="checkbox" id="meal2" class="meal-checkbox" data-meal="nachos-combo" data-price="350">
+                                        <label for="meal2">Nachos Combo</label>
+                                    </div>
+                                    <div class="meal-details">
+                                        <p>Loaded nachos + 1 beer/mocktail</p>
+                                        <div class="meal-price">₹350</div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Beverage Option 1 -->
+                                <div class="meal-option">
+                                    <div class="meal-select">
+                                        <input type="checkbox" id="drink1" class="meal-checkbox" data-meal="beer" data-price="200">
+                                        <label for="drink1">Beer (Pint)</label>
+                                    </div>
+                                    <div class="meal-details">
+                                        <p>Domestic beer (500ml)</p>
+                                        <div class="meal-price">₹200</div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Beverage Option 2 -->
+                                <div class="meal-option">
+                                    <div class="meal-select">
+                                        <input type="checkbox" id="drink2" class="meal-checkbox" data-meal="mocktail" data-price="180">
+                                        <label for="drink2">Mocktail</label>
+                                    </div>
+                                    <div class="meal-details">
+                                        <p>Fresh fruit mocktail</p>
+                                        <div class="meal-price">₹180</div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="meal-summary">
+                                <h5>Your Selections:</h5>
+                                <ul id="selectedMealsList"></ul>
+                                <div class="meal-total">
+                                    <span>Food & Beverage Total:</span>
+                                    <span id="mealTotalPrice">₹0</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="special">Special Requirements</label>
+                            <textarea id="special" placeholder="Any special requirements or notes..."></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary close-modal-btn">Cancel</button>
+                    <button class="btn btn-primary confirm-booking">Confirm Booking</button>
+                </div>
+            </div>
+        </div>
+    
+    <script>
+        // Hide main content initially
+    document.getElementById('mainContent').style.display = 'none';
+        // Welcome Screen Functionality
+    document.addEventListener('DOMContentLoaded', function() {
+    const welcomeScreen = document.getElementById('welcomeScreen');
+    const continueBtn = document.getElementById('continueBtn');
+    const optionCards = document.querySelectorAll('.option-card');
+    const genreBtns = document.querySelectorAll('.genre-btn');
+    
+    let selectedComedians = [];
+    let selectedGenres = [];
+    
+    // Hide main content initially
+    document.getElementById('mainContent').style.display = 'none';
+    
+    // Comedian selection
+    optionCards.forEach(card => {
+        card.addEventListener('click', function() {
+        const comedian = this.dataset.comedian;
+        
+        if (this.classList.contains('selected')) {
+            this.classList.remove('selected');
+            selectedComedians = selectedComedians.filter(c => c !== comedian);
+        } else {
+            this.classList.add('selected');
+            selectedComedians.push(comedian);
+        }
+        });
+    });
+    
+    // Genre selection
+    genreBtns.forEach(btn => {
+        btn.addEventListener('click', function() {
+        const genre = this.dataset.genre;
+        
+        if (this.classList.contains('selected')) {
+            this.classList.remove('selected');
+            selectedGenres = selectedGenres.filter(g => g !== genre);
+        } else {
+            this.classList.add('selected');
+            selectedGenres.push(genre);
+        }
+        });
+    });
+    
+    // Continue to main site
+    continueBtn.addEventListener('click', function() {
+        // Save preferences (in a real app, you might send to server)
+        localStorage.setItem('comedyPreferences', JSON.stringify({
+        comedians: selectedComedians,
+        genres: selectedGenres
+        }));
+        
+        // Hide welcome screen
+        welcomeScreen.style.opacity = '0';
+        welcomeScreen.style.pointerEvents = 'none';
+        welcomeScreen.style.transition = 'opacity 0.5s ease';
+        
+        // Show main content
+        document.getElementById('mainContent').style.display = 'block';
+        
+        // In a real app, you could use these preferences to:
+        // - Highlight recommended shows
+        // - Filter comedians
+        // - Personalize the experience
+    });
+    
+    // Optional: Skip if they've done this before
+    if (localStorage.getItem('comedyPreferences')) {
+        welcomeScreen.style.display = 'none';
+        document.getElementById('mainContent').style.display = 'block';
+    }
+    });
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const navLinks = document.querySelector('.nav-links');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            mobileMenuBtn.innerHTML = navLinks.classList.contains('active') ? 
+                '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+        });
+        
+        // Close mobile menu when clicking a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+            });
+        });
+        
+        // Show Filter
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const showCards = document.querySelectorAll('.show-card');
+        
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Remove active class from all buttons
+                filterBtns.forEach(btn => btn.classList.remove('active'));
+                // Add active class to clicked button
+                btn.classList.add('active');
+                
+                const filter = btn.dataset.filter;
+                
+                showCards.forEach(card => {
+                    if (filter === 'all' || card.dataset.location === filter) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+        document.addEventListener('DOMContentLoaded', function() {
+            // Randomly book some seats (10 seats in this case)
+            const allSeats = document.querySelectorAll('.seat:not(.aisle)');
+            const bookedSeats = [];
+            
+            // Book random seats
+            for (let i = 0; i < 10; i++) {
+                const randomIndex = Math.floor(Math.random() * allSeats.length);
+                if (!allSeats[randomIndex].classList.contains('booked')) {
+                    allSeats[randomIndex].classList.add('booked');
+                    bookedSeats.push(allSeats[randomIndex].dataset.seat);
+                } else {
+                    i--; // Try again if seat was already booked
+                }
+            }
+            
+            // Seat selection logic
+            let selectedSeats = [];
+            const ticketCountElement = document.getElementById('ticket-count');
+            const totalPriceElement = document.getElementById('total-price');
+            const ticketSelect = document.getElementById('tickets');
+            const pricePerTicket = 799;
+            
+            // Update max tickets based on seat selection
+            function updateMaxTickets() {
+                const maxTickets = 5 - selectedSeats.length;
+                Array.from(ticketSelect.options).forEach(option => {
+                    if (option.value !== '') {
+                        option.disabled = parseInt(option.value) > maxTickets;
+                    }
+                });
+                
+                if (parseInt(ticketSelect.value) > maxTickets) {
+                    ticketSelect.value = '';
+                }
+            }
+            
+            // Handle seat clicks
+            allSeats.forEach(seat => {
+                seat.addEventListener('click', function() {
+                    if (this.classList.contains('booked')) return;
+                    
+                    if (this.classList.contains('selected')) {
+                        // Deselect seat
+                        this.classList.remove('selected');
+                        selectedSeats = selectedSeats.filter(s => s !== this.dataset.seat);
+                    } else {
+                        // Select seat if we haven't reached max
+                        if (selectedSeats.length < 5) {
+                            this.classList.add('selected');
+                            selectedSeats.push(this.dataset.seat);
+                        } else {
+                            alert('You can select a maximum of 5 seats');
+                        }
+                    }
+                    
+                    // Update ticket count and total
+                    ticketCountElement.textContent = selectedSeats.length;
+                    totalPriceElement.textContent = `₹${selectedSeats.length * pricePerTicket}`;
+                    
+                    // Update max tickets in dropdown
+                    updateMaxTickets();
+                });
+            });
+            
+            // Handle ticket dropdown changes
+            ticketSelect.addEventListener('change', function() {
+                const numTickets = parseInt(this.value) || 0;
+                
+                // Clear selections if number is reduced
+                while (selectedSeats.length > numTickets) {
+                    const seatToRemove = selectedSeats.pop();
+                    document.querySelector(`.seat[data-seat="${seatToRemove}"]`).classList.remove('selected');
+                }
+                
+                // Update display
+                ticketCountElement.textContent = selectedSeats.length;
+                totalPriceElement.textContent = `₹${selectedSeats.length * pricePerTicket}`;
+            });
+            
+            // Reset selections when modal is closed
+            document.querySelectorAll('.close-modal, .close-modal-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    // Clear selections
+                    selectedSeats.forEach(seat => {
+                        document.querySelector(`.seat[data-seat="${seat}"]`).classList.remove('selected');
+                    });
+                    selectedSeats = [];
+                    
+                    // Reset counters
+                    ticketCountElement.textContent = '0';
+                    totalPriceElement.textContent = '₹0';
+                    ticketSelect.value = '';
+                });
+            });
+            
+            // Include selected seats in booking confirmation
+            document.querySelector('.confirm-booking').addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                if (selectedSeats.length === 0) {
+                    alert('Please select at least one seat');
+                    return;
+                }
+                
+                // [Rest of your existing booking confirmation logic]
+                // Make sure to include the selectedSeats array in your confirmation message
+                const confirmationMessage = `Your tickets for ${showNameInput.value} have been booked successfully. 
+                    Seats: ${selectedSeats.join(', ')}. 
+                    A confirmation has been sent to your email.`;
+                document.getElementById('confirmationMessage').textContent = confirmationMessage;
+                
+                // [Rest of your existing confirmation logic]
+            });
+        });
+        
+        // Booking Modal
+        const bookingModal = document.getElementById('bookingModal');
+        const confirmationModal = document.getElementById('confirmationModal');
+        const bookBtns = document.querySelectorAll('.book-btn');
+        const closeModalBtns = document.querySelectorAll('.close-modal, .close-modal-btn');
+        const showNameInput = document.getElementById('showName');
+        const showDateInput = document.getElementById('showDate');
+        const confirmBookingBtn = document.querySelector('.confirm-booking');
+        const bookingForm = document.querySelector('.booking-form');
+        
+        // Open booking modal
+        bookBtns.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                
+                // Set show name in modal
+                const showName = btn.dataset.show || btn.dataset.comedian;
+                showNameInput.value = showName;
+                
+                // For show cards, get the date as well
+                if (btn.dataset.show) {
+                    const showCard = btn.closest('.show-card');
+                    const showDate = showCard.querySelector('.show-date span').textContent;
+                    showDateInput.value = showDate;
+                } else {
+                    showDateInput.value = 'Date to be selected';
+                }
+                
+                bookingModal.style.display = 'block';
+                document.body.style.overflow = 'hidden';
+            });
+        });
+        
+        // Close modals
+        closeModalBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                bookingModal.style.display = 'none';
+                confirmationModal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            });
+        });
+        
+        // Close modal when clicking outside
+        window.addEventListener('click', (e) => {
+            if (e.target === bookingModal) {
+                bookingModal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+            if (e.target === confirmationModal) {
+                confirmationModal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+        });
+        
+        // Form submission
+        confirmBookingBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            
+            // Simple validation
+            let isValid = true;
+            const inputs = bookingForm.querySelectorAll('input, select');
+            
+            inputs.forEach(input => {
+                if (input.required && !input.value) {
+                    input.style.borderColor = 'red';
+                    isValid = false;
+                } else {
+                    input.style.borderColor = '';
+                }
+            });
+            
+            if (isValid) {
+                // Generate random booking ID
+                const bookingId = 'LF' + new Date().getFullYear() + Math.floor(1000 + Math.random() * 9000);
+                document.getElementById('bookingId').textContent = bookingId;
+                
+                // Set confirmation message
+                const confirmationMessage = `Your tickets for ${showNameInput.value} have been booked successfully. A confirmation has been sent to your email.`;
+                document.getElementById('confirmationMessage').textContent = confirmationMessage;
+                
+                // Show confirmation modal
+                bookingModal.style.display = 'none';
+                confirmationModal.style.display = 'block';
+                
+                // Reset form
+                bookingForm.reset();
+            }
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Gift Card Purchase Functionality
+        const addToCartBtns = document.querySelectorAll('.add-to-cart');
+        const customAmountBtn = document.getElementById('add-custom-amount');
+        const customAmountInput = document.getElementById('custom-amount');
+        const checkoutBtn = document.getElementById('checkout-gift-card');
+        let selectedGiftCardAmount = 0;
+
+        // Standard gift card amounts
+        addToCartBtns.forEach(btn => {
+            if (btn.id !== 'add-custom-amount') {
+                btn.addEventListener('click', () => {
+                    selectedGiftCardAmount = parseInt(btn.dataset.value);
+                    alert(`₹${selectedGiftCardAmount} gift card added to cart!`);
+                });
+            }
+        });
+
+        // Custom amount
+        customAmountBtn.addEventListener('click', () => {
+            const amount = parseInt(customAmountInput.value);
+            if (amount >= 500) {
+                selectedGiftCardAmount = amount;
+                alert(`₹${selectedGiftCardAmount} gift card added to cart!`);
+            } else {
+                alert('Minimum amount is ₹500');
+            }
+        });
+
+        // Checkout
+        checkoutBtn.addEventListener('click', () => {
+            if (selectedGiftCardAmount > 0) {
+                alert(`Proceeding to checkout with ₹${selectedGiftCardAmount} gift card`);
+                // In a real implementation, this would redirect to payment page
+            } else {
+                alert('Please select a gift card amount first');
+            }
+        });
+
+        // Gift Card Redemption in Booking Modal
+        const applyGiftCardBtn = document.getElementById('applyGiftCard');
+        const giftCardCodeInput = document.getElementById('giftCardCode');
+        const giftCardMessage = document.getElementById('giftCardMessage');
+
+        applyGiftCardBtn.addEventListener('click', () => {
+            const code = giftCardCodeInput.value.trim();
+            
+            if (code === '') {
+                giftCardMessage.textContent = 'Please enter a gift card code';
+                giftCardMessage.style.color = 'var(--primary)';
+                return;
+            }
+            
+            // In a real implementation, you would validate with your backend
+            // This is just a simulation
+            if (code.length === 16 && code.startsWith('LFGC')) {
+                giftCardMessage.textContent = 'Gift card applied successfully! ₹1000 credit added.';
+                giftCardMessage.style.color = 'var(--accent)';
+            } else {
+                giftCardMessage.textContent = 'Invalid gift card code. Please try again.';
+                giftCardMessage.style.color = 'var(--primary)';
+            }
+        });
+        // Meal Booking Functionality
+const mealCheckboxes = document.querySelectorAll('.meal-checkbox');
+const selectedMealsList = document.getElementById('selectedMealsList');
+const mealTotalPrice = document.getElementById('mealTotalPrice');
+let selectedMeals = [];
+
+// Handle meal selection
+mealCheckboxes.forEach(checkbox => {
+    checkbox.addEventListener('change', function() {
+        const mealName = this.dataset.meal;
+        const mealPrice = parseInt(this.dataset.price);
+        
+        if (this.checked) {
+            selectedMeals.push({
+                name: this.nextElementSibling.textContent,
+                price: mealPrice
+            });
+        } else {
+            selectedMeals = selectedMeals.filter(meal => 
+                meal.name !== this.nextElementSibling.textContent
+            );
+        }
+        
+        updateMealSummary();
+    });
+});
+
+// Update meal summary display
+function updateMealSummary() {
+    selectedMealsList.innerHTML = '';
+    let total = 0;
+    
+    selectedMeals.forEach(meal => {
+        const li = document.createElement('li');
+        li.textContent = `${meal.name} - ₹${meal.price}`;
+        selectedMealsList.appendChild(li);
+        total += meal.price;
+    });
+    
+    mealTotalPrice.textContent = `₹${total}`;
+    
+    // Update the overall total in the booking summary
+    updateBookingTotal();
+}
+
+// Update the overall booking total (combines seats and meals)
+function updateBookingTotal() {
+    const seatPrice = parseInt(document.getElementById('ticket-count').textContent) * 799 || 0;
+    const mealPrice = selectedMeals.reduce((sum, meal) => sum + meal.price, 0);
+    const totalPrice = seatPrice + mealPrice;
+    
+    document.getElementById('total-price').textContent = `₹${totalPrice}`;
+}
+
+// Reset meal selections when modal is closed
+document.querySelectorAll('.close-modal, .close-modal-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+        // Clear meal selections
+        mealCheckboxes.forEach(checkbox => {
+            checkbox.checked = false;
+        });
+        selectedMeals = [];
+        selectedMealsList.innerHTML = '';
+        mealTotalPrice.textContent = '₹0';
+    });
+});
+
+// Include meals in booking confirmation
+document.querySelector('.confirm-booking').addEventListener('click', function(e) {
+    e.preventDefault();
+    
+    // [Your existing validation code...]
+    
+    if (isValid) {
+        // Generate random booking ID
+        const bookingId = 'LF' + new Date().getFullYear() + Math.floor(1000 + Math.random() * 9000);
+        document.getElementById('bookingId').textContent = bookingId;
+        
+        // Build meal summary text
+        let mealSummary = 'No food/drinks selected';
+        if (selectedMeals.length > 0) {
+            mealSummary = selectedMeals.map(meal => 
+                `${meal.name} (₹${meal.price})`
+            ).join(', ');
+        }
+        
+        // Set confirmation message with meal info
+        const confirmationMessage = `Your tickets for ${showNameInput.value} have been booked successfully. 
+            Seats: ${selectedSeats.join(', ')}. 
+            Food/Drinks: ${mealSummary}.
+            A confirmation has been sent to your email.`;
+        document.getElementById('confirmationMessage').textContent = confirmationMessage;
+        
+        // Show confirmation modal
+        bookingModal.style.display = 'none';
+        confirmationModal.style.display = 'block';
+        
+        // Reset form
+        bookingForm.reset();
+    }
+});
+// Membership System
+document.addEventListener('DOMContentLoaded', function() {
+    // Open membership modal when join buttons are clicked
+    document.querySelectorAll('.join-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const tier = this.dataset.tier;
+            document.getElementById('selectedTier').value = tier;
+            document.getElementById('membershipModalTitle').textContent = 
+                `Join LaughFactory ${tier.charAt(0).toUpperCase() + tier.slice(1)} Membership`;
+            
+            // Show payment section for paid tiers
+            if (tier !== 'basic') {
+                document.getElementById('paymentSection').style.display = 'block';
+            } else {
+                document.getElementById('paymentSection').style.display = 'none';
+            }
+            
+            document.getElementById('membershipModal').style.display = 'block';
+        });
+    });
+    
+    // Handle payment method selection
+    document.querySelectorAll('input[name="payment"]').forEach(radio => {
+        radio.addEventListener('change', function() {
+            // Hide all payment details first
+            document.querySelectorAll('.payment-details').forEach(detail => {
+                detail.style.display = 'none';
+            });
+            
+            // Show selected payment method details
+            if (this.value === 'card') {
+                document.getElementById('cardDetails').style.display = 'block';
+            }
+            // Add other payment methods here as needed
+        });
+    });
+    
+    // Complete membership signup
+    document.getElementById('confirmMembership').addEventListener('click', function() {
+        const tier = document.getElementById('selectedTier').value;
+        const name = document.getElementById('mName').value;
+        const email = document.getElementById('mEmail').value;
+        
+        // Simple validation
+        if (!name || !email || !document.getElementById('agreeTerms').checked) {
+            alert('Please fill all required fields');
+            return;
+        }
+        
+        // In a real app, you would send this to your backend
+        localStorage.setItem('currentUser', JSON.stringify({
+            name: name,
+            email: email,
+            tier: tier,
+            joined: new Date().toISOString()
+        }));
+        
+        // Close modal and update UI
+        document.getElementById('membershipModal').style.display = 'none';
+        updateUserStatus();
+        alert(`Welcome to LaughFactory ${tier} membership, ${name}!`);
+    });
+    
+    // Login functionality
+    document.getElementById('loginBtn').addEventListener('click', function() {
+        const email = document.getElementById('loginEmail').value;
+        const password = document.getElementById('loginPassword').value;
+        
+        // Simple validation
+        if (!email || !password) {
+            alert('Please enter both email and password');
+            return;
+        }
+        
+        // In a real app, you would verify credentials with your backend
+        // For demo, we'll just check if the user exists in localStorage
+        const user = JSON.parse(localStorage.getItem('currentUser'));
+        
+        if (user && user.email === email) {
+            document.getElementById('loginModal').style.display = 'none';
+            updateUserStatus();
+            alert(`Welcome back, ${user.name}!`);
+        } else {
+            alert('Invalid credentials. Please try again or sign up.');
+        }
+    });
+    
+    // Update UI based on login state
+    function updateUserStatus() {
+        const user = JSON.parse(localStorage.getItem('currentUser'));
+        const nav = document.querySelector('.nav-links');
+        
+        if (user) {
+            // Remove login/signup buttons if they exist
+            const existingProfile = document.querySelector('.user-profile');
+            if (existingProfile) existingProfile.remove();
+            
+            // Add user profile to navbar
+            const profileHtml = `
+                <li class="user-profile">
+                    <div class="user-avatar">${user.name.charAt(0).toUpperCase()}</div>
+                    <span>${user.name.split(' ')[0]}</span>
+                    <div class="user-menu">
+                        <a href="#"><i class="fas fa-user"></i> My Profile</a>
+                        <a href="#"><i class="fas fa-ticket-alt"></i> My Tickets</a>
+                        <a href="#"><i class="fas fa-crown"></i> Membership (${user.tier})</a>
+                        <a href="#" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                    </div>
+                </li>
+            `;
+            
+            nav.insertAdjacentHTML('beforeend', profileHtml);
+            
+            // Add logout functionality
+            document.getElementById('logoutBtn').addEventListener('click', function(e) {
+                e.preventDefault();
+                localStorage.removeItem('currentUser');
+                location.reload();
+            });
+            
+            // Toggle user menu
+            document.querySelector('.user-profile').addEventListener('click', function() {
+                document.querySelector('.user-menu').classList.toggle('active');
+            });
+            
+            // Apply membership discounts to shows
+            applyMembershipDiscounts(user.tier);
+        }
+    }
+    
+    // Apply membership discounts to show prices
+    function applyMembershipDiscounts(tier) {
+        const discount = {
+            'basic': 0,
+            'premium': 15,
+            'vip': 25
+        }[tier];
+        
+        if (discount > 0) {
+            document.querySelectorAll('.price').forEach(priceElement => {
+                const originalPrice = parseInt(priceElement.textContent.replace(/[^\d]/g, ''));
+                const discountedPrice = originalPrice * (1 - discount/100);
+                priceElement.textContent = `₹${Math.floor(discountedPrice)} (${discount}% off)`;
+                priceElement.style.color = 'var(--accent)';
+            });
+        }
+    }
+    
+    // Initialize user status on page load
+    updateUserStatus();
+    
+    // Add login button to nav if not logged in
+    if (!localStorage.getItem('currentUser')) {
+        const nav = document.querySelector('.nav-links');
+        const loginHtml = `<li><a href="#" id="navLogin">Login</a></li>`;
+        nav.insertAdjacentHTML('beforeend', loginHtml);
+        
+        document.getElementById('navLogin').addEventListener('click', function(e) {
+            e.preventDefault();
+            document.getElementById('loginModal').style.display = 'block';
+        });
+    }
+});
+    </script>
+    <!-- Membership Signup Modal -->
+<div class="modal" id="membershipModal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3 id="membershipModalTitle">Join LaughFactory</h3>
+            <span class="close-modal">&times;</span>
+        </div>
+        <div class="modal-body">
+            <form id="membershipForm">
+                <input type="hidden" id="selectedTier" value="">
+                
+                <div class="form-group">
+                    <label for="mName">Full Name</label>
+                    <input type="text" id="mName" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="mEmail">Email</label>
+                    <input type="email" id="mEmail" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="mPassword">Password</label>
+                    <input type="password" id="mPassword" required minlength="6">
+                </div>
+                
+                <div class="form-group" id="paymentSection" style="display: none;">
+                    <label>Payment Method</label>
+                    <div class="payment-options">
+                        <label class="payment-method">
+                            <input type="radio" name="payment" value="card" checked>
+                            <i class="fab fa-cc-visa"></i> Credit/Debit Card
+                        </label>
+                        <label class="payment-method">
+                            <input type="radio" name="payment" value="upi">
+                            <i class="fas fa-mobile-alt"></i> UPI
+                        </label>
+                        <label class="payment-method">
+                            <input type="radio" name="payment" value="wallet">
+                            <i class="fas fa-wallet"></i> Wallet
+                        </label>
+                    </div>
+                    
+                    <div id="cardDetails" class="payment-details">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="cardNumber">Card Number</label>
+                                <input type="text" id="cardNumber" placeholder="1234 5678 9012 3456">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="cardExpiry">Expiry Date</label>
+                                <input type="text" id="cardExpiry" placeholder="MM/YY">
+                            </div>
+                            <div class="form-group">
+                                <label for="cardCvv">CVV</label>
+                                <input type="text" id="cardCvv" placeholder="123">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <input type="checkbox" id="agreeTerms" required>
+                    <label for="agreeTerms">I agree to the Terms of Service and Privacy Policy</label>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-secondary close-modal-btn">Cancel</button>
+            <button class="btn btn-primary" id="confirmMembership">Complete Signup</button>
+        </div>
+    </div>
+</div>
+
+<!-- Membership Login Modal -->
+<div class="modal" id="loginModal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3>Member Login</h3>
+            <span class="close-modal">&times;</span>
+        </div>
+        <div class="modal-body">
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="loginEmail">Email</label>
+                    <input type="email" id="loginEmail" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="loginPassword">Password</label>
+                    <input type="password" id="loginPassword" required>
+                </div>
+                
+                <div class="form-group">
+                    <a href="#" id="forgotPassword">Forgot Password?</a>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-secondary close-modal-btn">Cancel</button>
+            <button class="btn btn-primary" id="loginBtn">Login</button>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

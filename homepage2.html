@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planr - Ticket Booking</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <style>
+        /* Existing CSS variables and base styles */
+        :root {
+            --dark-bg: #121212;
+            --dark-card: #1e1e1e;
+            --dark-border: #333;
+            --text-light: #e0e0e0;
+            --primary-accent: #0d6efd;
+            --primary-accent-hover: #0b5ed7;
+            --gradient-primary: linear-gradient(135deg, #0d6efd, #0b5ed7);
+            --gradient-primary-hover: linear-gradient(135deg, #0b5ed7, #094bbd);
+            --gradient-hero: linear-gradient(rgba(0, 0, 0, 0.7), rgba(13, 110, 253, 0.1));
+            --gradient-card-hover: linear-gradient(135deg, rgba(13, 110, 253, 0.05), rgba(11, 94, 215, 0.1));
+            --gradient-login: linear-gradient(135deg, #0d6efd, #0052cc);
+            --gradient-welcome: linear-gradient(135deg, rgba(13, 110, 253, 0.7), rgba(11, 94, 215, 0.7));
+        }
+
+        * {
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: var(--dark-bg);
+            color: var(--text-light);
+            padding-top: 80px;
+        }
+
+        /* Enhanced Navbar */
+        .navbar {
+            background: rgba(0, 0, 0, 0.9) !important;
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--dark-border);
+            padding: 12px 0;
+        }
+
+        /* Animated Hero Section */
+        .hero-section {
+            background: var(--gradient-hero), url('https://source.unsplash.com/random/1200x600/?concert-crowd');
+            background-size: cover;
+            background-position: center;
+            padding: 150px 0 200px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-title {
+            font-size: 4rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 25px;
+            animation: slideUp 1s ease;
+        }
+
+        .gradient-text {
+            background: linear-gradient(45deg, #0d6efd, #00ff88);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: gradientShift 5s ease infinite;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Enhanced Event Cards */
+        .card {
+            background-color: var(--dark-card);
+            border: 1px solid var(--dark-border);
+            transition: transform 0.3s, box-shadow 0.3s;
+            border-radius: 15px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .card-badge {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: rgba(0,0,0,0.7);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            z-index: 2;
+        }
+
+        .price-tag {
+            position: absolute;
+            bottom: 15px;
+            right: 15px;
+            background: var(--gradient-primary);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: 600;
+            z-index: 2;
+        }
+
+        /* New Timeline Section */
+        .event-timeline {
+            position: relative;
+            padding-left: 30px;
+            border-left: 2px solid var(--primary-accent);
+            margin: 50px 0;
+        }
+
+        .timeline-item {
+            position: relative;
+            padding: 20px;
+            margin-bottom: 30px;
+            background: var(--dark-card);
+            border-radius: 10px;
+            opacity: 0;
+            transform: translateX(-20px);
+            transition: all 0.5s ease;
+        }
+
+        .timeline-item.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -36px;
+            top: 24px;
+            width: 12px;
+            height: 12px;
+            background: var(--primary-accent);
+            border-radius: 50%;
+        }
+
+        /* Testimonials Section */
+        .testimonial-card {
+            background: var(--dark-card);
+            border: 1px solid var(--dark-border);
+            border-radius: 15px;
+            padding: 30px;
+            position: relative;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.5s ease;
+        }
+
+        .testimonial-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .testimonial-quote {
+            position: absolute;
+            font-size: 3rem;
+            opacity: 0.1;
+            top: -10px;
+            left: 15px;
+        }
+
+        /* Pricing Cards */
+        .pricing-card {
+            border: 2px solid var(--primary-accent);
+            transition: transform 0.3s;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-10px);
+        }
+
+        /* Existing styles remain... */
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .event-timeline {
+                padding-left: 15px;
+            }
+            
+            .timeline-item::before {
+                left: -26px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Enhanced Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">PLANR</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Movies</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Comedy</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Concerts</a>
+                    </li>
+                </ul>
+                <div class="d-flex">
+                    <button class="btn btn-outline-light me-2" id="open-login">Login</button>
+                    <button class="btn btn-primary" id="open-signup">Sign Up</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Enhanced Hero Section -->
+    <section class="hero-section text-center">
+        <div class="container">
+            <h1 class="hero-title gradient-text">EXPERIENCE LIVE</h1>
+            <p class="hero-subtitle">Book tickets for unforgettable moments</p>
+            <div class="row justify-content-center">
+                <div class="col-md-8 search-container">
+                    <div class="input-group">
+                        <input type="text" class="form-control form-control-lg rounded-start" placeholder="Search events...">
+                        <button class="btn btn-primary btn-lg" type="button">
+                            <i class="bi bi-search"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Event Timeline Section -->
+    <section class="container py-5">
+        <h2 class="text-center mb-5 fw-bold">Upcoming Events</h2>
+        <div class="event-timeline">
+            <div class="timeline-item">
+                <div class="d-flex justify-content-between">
+                    <h5>Travis Scott Live in Mumbai</h5>
+                    <span class="text-primary">July 15</span>
+                </div>
+                <p class="text-muted">Iconic Stadium • 8:00 PM</p>
+                <span class="badge bg-dark">VIP Tickets Available</span>
+            </div>
+            <!-- Add more timeline items -->
+        </div>
+    </section>
+
+    <!-- Enhanced Trending Section -->
+    <section class="container mb-5">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2 class="fw-bold">Trending Now</h2>
+            <a href="#" class="btn btn-outline-light">
+                View All <i class="bi bi-chevron-right"></i>
+            </a>
+        </div>
+        
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
+            <!-- Enhanced Movie Card -->
+            <div class="col">
+                <div class="card h-100">
+                    <span class="card-badge">3D Available</span>
+                    <img src="movie-poster.jpg" class="card-img-top" alt="Minecraft 3D">
+                    <div class="card-body">
+                        <h5 class="card-title fw-bold text-primary">Minecraft 3D</h5>
+                        <p class="card-text text-white-50">Immersive cinematic experience</p>
+                        <span class="price-tag">₹499</span>
+                    </div>
+                </div>
+            </div>
+            <!-- Add more enhanced cards -->
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="container py-5">
+        <h2 class="text-center mb-5 fw-bold">What People Say</h2>
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="testimonial-card">
+                    <div class="testimonial-quote">“</div>
+                    <p class="mb-3">"Flawless booking experience and amazing customer support!"</p>
+                    <div class="d-flex align-items-center">
+                        <img src="user-avatar.jpg" class="rounded-circle me-2" width="40" alt="User">
+                        <div>
+                            <h6 class="mb-0">Sarah Johnson</h6>
+                            <small class="text-muted">Verified Buyer</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Add more testimonials -->
+        </div>
+    </section>
+
+    <!-- Existing sections (Categories, Newsletter) remain -->
+
+    <!-- New Pricing Section -->
+    <section class="container py-5">
+        <h2 class="text-center mb-5 fw-bold">Ticket Packages</h2>
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="card pricing-card h-100">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">VIP Experience</h5>
+                        <div class="price-display my-4">
+                            <span class="h1 text-primary">₹7999</span>
+                            <small class="text-muted">/person</small>
+                        </div>
+                        <ul class="list-unstyled">
+                            <li class="mb-3">✔ Premium Seating</li>
+                            <li class="mb-3">✔ Backstage Access</li>
+                            <li class="mb-3">✔ Meet & Greet</li>
+                        </ul>
+                        <button class="btn btn-primary w-100">Book Now</button>
+                    </div>
+                </div>
+            </div>
+            <!-- Add more pricing cards -->
+        </div>
+    </section>
+
+    <!-- Existing Footer -->
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Scroll Animation Logic
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        // Animate timeline items
+        document.querySelectorAll('.timeline-item').forEach((el) => {
+            observer.observe(el);
+        });
+
+        // Animate testimonials
+        document.querySelectorAll('.testimonial-card').forEach((el) => {
+            observer.observe(el);
+        });
+
+        // Existing modal logic remains
+    </script>
+</body>
+</html>
