@@ -13,10 +13,10 @@ Our objective is to deliver a seamless user experience, reduce booking time, and
 | Name | Role | GitHub |
 |------|------|--------|
 | Sandeep | Project manager | [@sandeep0067GH](https://github.com/sandeep0067) |
-| Sahil | Websitelook manager | [@Sahil792006GH](https://github.com/Sahil792006) |
-| Tushar | concert page manager | [@Tushar-max-cmdGH](https://github.com/Tushar-max-cmd) |
-| Shivoy | standupcomedy page manager | [@shivoybudhiraja886GH](https://github.com/shivoybudhiraja886) |
-| Saurav | movies page manager | [@sauravchauhan-18GH](https://github.com/sauravchauhan-18) |
+| Sahil | Website Design Manager | [@Sahil792006GH](https://github.com/Sahil792006) |
+| Tushar | Concert Page Development Lead | [@Tushar-max-cmdGH](https://github.com/Tushar-max-cmd) |
+| Shivoy | Stand-Up Comedy Page Lead | [@shivoybudhiraja886GH](https://github.com/shivoybudhiraja886) |
+| Saurav |Movies Page Development Lead | [@sauravchauhan-18GH](https://github.com/sauravchauhan-18) |
 
 🛠️ Technologies and Tools<br>
 •	Frontend: HTML, CSS, JavaScript (Frameworks 1, 2, 3)<br>
