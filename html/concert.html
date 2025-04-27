@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Concerts in Chandigarh | PLANR</title>
+    <link rel="icon" type="image/jpg" href="./Images/concertfavicon.jpg">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="concert.css">
+
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="homepage1.html" class="logo">
+                <i class="fas fa-calendar-alt logo-icon"></i>
+                PLANR concerts
+            </a>
+            
+            <div class="nav-links">
+                <a href="./concertpage.html" class="active">Concerts</a>
+                <a href="./movies.2.html">Movies</a>
+                <a href="./standup.html">Comedy</a>
+            </div>
+            
+            <div class="user-actions">
+                <div class="search-bar">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Search events...">
+                </div>
+                <a href="#"><i class="far fa-user"></i></a>
+                <a href="#"><i class="far fa-heart"></i></a>
+            </div>
+        </div>
+    </nav>
+    
+    <div class="container">
+        <aside class="filters">
+            <div class="filter-section">
+                <h3>Date <i class="fas fa-calendar-day"></i></h3>
+                <ul class="filter-options">
+                    <li class="active"><i class="far fa-dot-circle"></i> Today</li>
+                    <li><i class="far fa-circle"></i> This Weekend</li>
+                    <li><i class="far fa-circle"></i> Next 7 Days</li>
+                    <li><i class="far fa-circle"></i> Next 30 Days</li>
+                </ul>
+            </div>
+            
+            <div class="filter-section">
+                <h3>Date Range <i class="fas fa-calendar-week"></i></h3>
+                <div class="date-range-picker">
+                    <input type="date" id="start-date" placeholder="Start Date">
+                    <input type="date" id="end-date" placeholder="End Date">
+                </div>
+            </div>
+            
+         
+            
+            <div class="filter-section">
+                <h3>Price <i class="fas fa-indian-rupee-sign"></i></h3>
+                <input type="range" class="price-range" min="0" max="10000" step="500" value="5000">
+                <div class="price-labels">
+                    <span>₹0</span>
+                    <span>₹10,000+</span>
+                </div>
+            </div>
+            
+            <div class="filter-section">
+                <h3>More Filters <i class="fas fa-filter"></i></h3>
+                <ul class="filter-options">
+                    <li><i class="far fa-circle"></i> Family Friendly</li>
+                    <li><i class="far fa-circle"></i> Outdoor Events</li>
+                    <li><i class="far fa-circle"></i> Popular Events</li>
+                    <li><i class="far fa-circle"></i> Newly Added</li>
+                </ul>
+            </div>
+            
+            <button class="btn btn-primary" style="width: 100%; margin-top: 10px;">
+                Apply Filters
+            </button>
+        </aside>
+        
+        <main class="main-content">
+            <div class="page-header">
+                <h1 class="page-title">Concerts In Chandigarh</h1>
+                <select class="sort-options">
+                    <option>Sort by: Recommended</option>
+                    <option>Sort by: Date (Soonest)</option>
+                    <option>Sort by: Price (Low to High)</option>
+                    <option>Sort by: Price (High to Low)</option>
+                    <option>Sort by: Popularity</option>
+                </select>
+            </div>
+            
+            <div class="event-tabs">
+                <div class="event-tab active">All Concerts</div>
+                <div class="event-tab">Rock</div>
+                <div class="event-tab">Pop</div>
+                <div class="event-tab">Electronic</div>
+                <div class="event-tab">Hip-Hop</div>
+            </div>
+            
+            <div class="event-list">
+                <!-- Event 1 -->
+                <div class="event-card">
+                    <div class="event-badge">Popular</div>
+                    <div class="event-image" style="background-image: url('Images/gunsnroses.jpeg');"></div>
+                    <div class="event-details">
+                        <div class="event-date"><i class="far fa-calendar-alt"></i> Sat. 17 May 2025 | 7:00 PM</div>
+                        <h3 class="event-title">Guns N' Roses: Not In This Lifetime... Tour 2025</h3>
+                        <div class="event-venue"><i class="fas fa-map-marker-alt"></i> Mahalaxmi Race Course, Mumbai</div>
+                        <div class="event-price">From ₹2,500</div>
+                        <div class="event-category">Rock Concert • International Artist</div>
+                        <div class="event-actions">
+                            <button class="btn btn-primary">Book Now</button>
+                            <button class="btn btn-secondary">More Info</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Event 2 -->
+                <div class="event-card">
+                    <div class="event-badge">Coming Soon</div>
+                    <div class="event-image" style="background-image: url('./Images/vilen.jpg');"></div>
+                    <div class="event-details">
+                        <div class="event-date"><i class="far fa-calendar-alt"></i> Coming Soon</div>
+                        <h3 class="event-title">VILEN LIVE - CHANDIGARH</h3>
+                        <div class="event-venue"><i class="fas fa-map-marker-alt"></i> Venue To Be Announced</div>
+                        <div class="event-price">Price TBA</div>
+                        <div class="event-category">Pop Concert • Punjabi Artist</div>
+                        <div class="event-actions">
+                            <button class="btn btn-secondary" style="width: 100%;">Notify Me</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Event 3 -->
+                <div class="event-card">
+                    <div class="event-image" style="background-image: url('./Images/djoshnin&jeez.jpg');"></div>
+                    <div class="event-details">
+                        <div class="event-date"><i class="far fa-calendar-alt"></i> Sun, 11 May | Sat, 19 Apr | 9:00 PM</div>
+                        <h3 class="event-title">Saturday's Vibe with DJ OSHIN x SHEZZ</h3>
+                        <div class="event-venue"><i class="fas fa-map-marker-alt"></i> Pyramid Elante, Chandigarh</div>
+                        <div class="event-price">From ₹1,200</div>
+                        <div class="event-category">Club Gig • Electronic Dance Music</div>
+                        <div class="event-actions">
+                            <button class="btn btn-primary">Book Now</button>
+                            <button class="btn btn-secondary">More Info</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Event 4 -->
+                <div class="event-card">
+                    <div class="event-badge">Last Few Tickets</div>
+                    <div class="event-image" style="background-image: url('https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80');"></div>
+                    <div class="event-details">
+                        <div class="event-date"><i class="far fa-calendar-alt"></i> Fri, 24 May 2025 | 6:30 PM</div>
+                        <h3 class="event-title">Sunburn Arena with Martin Garrix</h3>
+                        <div class="event-venue"><i class="fas fa-map-marker-alt"></i> Sector 34 Grounds, Chandigarh</div>
+                        <div class="event-price">From ₹3,500</div>
+                        <div class="event-category">EDM Festival • International DJ</div>
+                        <div class="event-actions">
+                            <button class="btn btn-primary">Book Now</button>
+                            <button class="btn btn-secondary">More Info</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Event 5 -->
+                <div class="event-card">
+                    <div class="event-image" style="background-image: url('https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80');"></div>
+                    <div class="event-details">
+                        <div class="event-date"><i class="far fa-calendar-alt"></i> Sat, 8 Jun 2025 | 7:30 PM</div>
+                        <h3 class="event-title">Chandigarh Jazz Festival 2025</h3>
+                        <div class="event-venue"><i class="fas fa-map-marker-alt"></i> Tagore Theatre, Chandigarh</div>
+                        <div class="event-price">From ₹800</div>
+                        <div class="event-category">Jazz Concert • Multiple Artists</div>
+                        <div class="event-actions">
+                            <button class="btn btn-primary">Book Now</button>
+                            <button class="btn btn-secondary">More Info</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Event 6 -->
+                <div class="event-card">
+                    <div class="event-badge">Early Bird</div>
+                    <div class="event-image" style="background-image: url('https://images.unsplash.com/photo-1470225620780-dba8ba36b745?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80');"></div>
+                    <div class="event-details">
+                        <div class="event-date"><i class="far fa-calendar-alt"></i> Sat, 15 Jun 2025 | 8:00 PM</div>
+                        <h3 class="event-title">Bollywood Night with Arijit Singh</h3>
+                        <div class="event-venue"><i class="fas fa-map-marker-alt"></i> Rock Garden, Chandigarh</div>
+                        <div class="event-price">From ₹1,800</div>
+                        <div class="event-category">Bollywood Concert • Live Performance</div>
+                        <div class="event-actions">
+                            <button class="btn btn-primary">Book Now</button>
+                            <button class="btn btn-secondary">More Info</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="pagination">
+                <button><i class="fas fa-chevron-left"></i></button>
+                <button class="active">1</button>
+                <button>2</button>
+                <button>3</button>
+                <button><i class="fas fa-chevron-right"></i></button>
+            </div>
+        </main>
+    </div>
+    
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-column">
+                <h3>PLANR</h3>
+                <ul class="footer-links">
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Careers</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="#">Blog</a></li>
+                    <li><a href="#">Press</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Events</h3>
+                <ul class="footer-links">
+                    <li><a href="#">Concerts</a></li>
+                    <li><a href="#">Theater</a></li>
+                    <li><a href="#">Comedy</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Support</h3>
+                <ul class="footer-links">
+                    <li><a href="#">Help Center</a></li>
+                    <li><a href="#">FAQs</a></li>
+                    <li><a href="#">Terms of Use</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Refund Policy</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Connect With Us</h3>
+                <p>Subscribe to our newsletter for the latest events and offers</p>
+                <div class="search-bar" style="width: 100%; margin: 10px 0;">
+                    <input type="text" placeholder="Your email address">
+                    <i class="fas fa-paper-plane"></i>
+                </div>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            &copy; 2025 PLANR. All Rights Reserved.
+        </div>
+</body>
+</html>

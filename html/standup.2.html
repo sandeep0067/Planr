@@ -1,0 +1,969 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laugh Factory India | Premium Standup Comedy</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="standup.css">
+
+</head>
+<body>
+    <!-- Welcome Screen -->
+<div id="welcomeScreen" class="welcome-screen">
+    <div class="welcome-content">
+      <h1>Welcome to PLANR</h1>
+      <p>Help us personalize your comedy experience</p>
+      
+      <div class="preference-section">
+        <h2>Choose your favorite comedians</h2>
+        <div class="comedian-options">
+          <div class="option-card" data-comedian="zakir">
+            <img src="https://www.bollywoodhungama.com/wp-content/uploads/2021/10/Zakir-Khan-1.jpg" alt="Zakir Khan">
+            <p>Zakir Khan</p>
+          </div>
+          <div class="option-card" data-comedian="bassi">
+            <img src="https://i0.wp.com/www.urbanasian.com/wp-content/uploads/2022/05/Anubhav-Singh-Bassi.jpg" alt="Anubhav Bassi">
+            <p>Anubhav Bassi</p>
+          </div>
+          <div class="option-card" data-comedian="kaneez">
+            <img src="https://www.mumbaitheatreguide.com/dramas/wp-content/uploads/2019/12/Kaneez-Surka-1.jpg" alt="Kaneez Surka">
+            <p>Kaneez Surka</p>
+          </div>
+          <div class="option-card" data-comedian="ravi">
+            <img src="https://www.mumbaitheatreguide.com/dramas/wp-content/uploads/2021/04/Ravi-Gupta.jpg" alt="Ravi Gupta">
+            <p>Ravi Gupta</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="preference-section">
+        <h2>Select your favorite comedy genres</h2>
+        <div class="genre-options">
+          <button class="genre-btn" data-genre="observational">Observational</button>
+          <button class="genre-btn" data-genre="satire">Satire</button>
+          <button class="genre-btn" data-genre="improv">Improv</button>
+          <button class="genre-btn" data-genre="storytelling">Storytelling</button>
+          <button class="genre-btn" data-genre="dark">Dark Humor</button>
+        </div>
+      </div>
+      
+      <button id="continueBtn" class="btn btn-primary">Continue to LaughFactory</button>
+    </div>
+  </div>
+    <!-- Main Website Content -->
+    <div id="mainContent">
+        <!-- Header -->
+        <header>
+            <div class="container">
+                <nav class="navbar">
+                    <a href="homepage1.html" class="logo">PL<span>ANR</span></a>
+                    <ul class="nav-links">
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#comedians">Comedians</a></li>
+                        <li><a href="#shows">Shows</a></li>
+                        <li><a href="#gift-cards">Gift Cards</a></li>
+                        <li><a href="#testimonials">Reviews</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                    <div class="mobile-menu-btn">
+                        <i class="fas fa-bars"></i>
+                    </div>
+                </nav>
+            </div>
+        </header>
+
+        <!-- Hero Section -->
+        <section class="hero" id="home">
+            <div class="container">
+                <div class="hero-content">
+                    <h1>India's Finest Standup Comedy Shows</h1>
+                    <p>Book tickets for the hottest standup comedy shows featuring India's top comedians. Laugh your heart out with our curated selection of hilarious performances.</p>
+                    <div class="hero-btns">
+                        <a href="#shows" class="btn btn-primary">Book Tickets</a>
+                        <a href="#comedians" class="btn btn-secondary">View Comedians</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Featured Comedians Section -->
+        <section class="featured-comedians section-padding" id="comedians">
+            <div class="container">
+                <h2 class="section-title text-center">Featured Comedians</h2>
+                <p class="text-center">Discover India's most talented standup comedians who will leave you in splits</p>
+                
+                <div class="comedians-grid">
+                    <!-- Comedian 1 - Anubhav Singh Bassi -->
+                    <div class="comedian-card">
+                        <div class="comedian-img">
+                            <img src="./Images/anubhavbassi.jpg" alt="Anubhav Singh Bassi">
+                        </div>
+                        <div class="comedian-info">
+                            <h3>Anubhav Singh Bassi</h3>
+                            <p>Known for his relatable college and life stories</p>
+                            <div class="rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                                <span>4.7</span>
+                            </div>
+                            <a href="#" class="btn btn-primary book-btn" data-comedian="Anubhav Singh Bassi">Book Show</a>
+                        </div>
+                    </div>
+                    
+                    <!-- Comedian 2 - Vipul Goyal -->
+                    <div class="comedian-card">
+                        <div class="comedian-img">
+                            <img src="./Images/vipulgoyal.jpg" alt="Vipul Goyal">
+                        </div>
+                        <div class="comedian-info">
+                            <h3>Vipul Goyal</h3>
+                            <p>Engineer-turned-comedian with sharp observations</p>
+                            <div class="rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                                <span>4.2</span>
+                            </div>
+                            <a href="#" class="btn btn-primary book-btn" data-comedian="Vipul Goyal">Book Show</a>
+                        </div>
+                    </div>
+                    
+                    <!-- Comedian 3 - Ravi Gupta -->
+                    <div class="comedian-card">
+                        <div class="comedian-img">
+                            <img src="./Images/ravigupta.jpg" alt="Ravi Gupta">
+                        </div>
+                        <div class="comedian-info">
+                            <h3>Ravi Gupta</h3>
+                            <p>Delhi's favorite with hilarious family humor</p>
+                            <div class="rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <span>5.0</span>
+                            </div>
+                            <a href="#" class="btn btn-primary book-btn" data-comedian="Ravi Gupta">Book Show</a>
+                        </div>
+                    </div>
+                    
+                    <!-- Comedian 4 - Nayab Midha -->
+                    <div class="comedian-card">
+                        <div class="comedian-img">
+                            <img src="./Images/nayabmidha.jpg" alt="Nayab Midha">
+                        </div>
+                        <div class="comedian-info">
+                            <h3>Nayab Midha</h3>
+                            <p>Fresh perspective with millennial humor</p>
+                            <div class="rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                                <span>4.5</span>
+                            </div>
+                            <a href="#" class="btn btn-primary book-btn" data-comedian="Nayab Midha">Book Show</a>
+                        </div>
+                    </div>
+
+                    <!-- Comedian 5 - Zakir Khan -->
+                    <div class="comedian-card">
+                        <div class="comedian-img">
+                            <img src="./Images/zakirkhan.jpg" alt="Zakir Khan">
+                        </div>
+                        <div class="comedian-info">
+                            <h3>Zakir Khan</h3>
+                            <p>The original "Sakht Launda"</p>
+                            <div class="rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <span>5.0</span>
+                            </div>
+                            <a href="#" class="btn btn-primary book-btn" data-comedian="Zakir Khan">Book Show</a>
+                        </div>
+                    </div>
+
+                    <!-- Comedian 6 - Kaneez Surka -->
+                    <div class="comedian-card">
+                        <div class="comedian-img">
+                            <img src="./Images/kaneezsurka.jpg" alt="Kaneez Surka">
+                        </div>
+                        <div class="comedian-info">
+                            <h3>Kaneez Surka</h3>
+                            <p>Queen of improv and musical comedy</p>
+                            <div class="rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                                <span>4.7</span>
+                            </div>
+                            <a href="#" class="btn btn-primary book-btn" data-comedian="Kaneez Surka">Book Show</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Shows Section -->
+        <section class="shows section-padding" id="shows">
+            <div class="container">
+                <h2 class="section-title text-center">Upcoming Shows</h2>
+                <p class="text-center">Book your tickets for these hilarious shows happening near you</p>
+                
+                <div class="shows-filter">
+                    <button class="filter-btn active" data-filter="all">All Shows</button>
+                    <button class="filter-btn" data-filter="delhi">Delhi</button>
+                    <button class="filter-btn" data-filter="mumbai">Mumbai</button>
+                    <button class="filter-btn" data-filter="bangalore">Bangalore</button>
+                </div>
+                
+                <div class="shows-grid">
+                    <!-- Show 1 -->
+                    <div class="show-card" data-location="delhi">
+                        <div class="show-img">
+                            <img src="https://images.unsplash.com/photo-1501281668745-f7f57925c3b4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Comedy Night">
+                        </div>
+                        <div class="show-details">
+                            <h3>Laugh Riot Delhi</h3>
+                            <div class="show-date">
+                                <i class="far fa-calendar-alt"></i>
+                                <span>June 15, 2023 | 8:00 PM</span>
+                            </div>
+                            <div class="show-location">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>Kingdom of Dreams, Gurugram</span>
+                            </div>
+                            <p>An evening of non-stop laughter with Zakir Khan, Kaneez Surka and special guests.</p>
+                            <div class="show-price">
+                                <span class="price">₹799 onwards</span>
+                                <a href="#" class="btn btn-secondary book-btn" data-show="Laugh Riot Delhi">Book Now</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Show 2 -->
+                    <div class="show-card" data-location="mumbai">
+                        <div class="show-img">
+                            <img src="./Images/anubhavbassi.jpg" alt="Standup Special">
+                        </div>
+                        <div class="show-details">
+                            <h3>Anubhav Bassi: Mumbai Special</h3>
+                            <div class="show-date">
+                                <i class="far fa-calendar-alt"></i>
+                                <span>June 18, 2023 | 7:30 PM</span>
+                            </div>
+                            <div class="show-location">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>Jamshed Bhabha Theatre, Mumbai</span>
+                            </div>
+                            <p>Anubhav Singh Bassi brings his hilarious college stories to Mumbai.</p>
+                            <div class="show-price">
+                                <span class="price">₹1,299 onwards</span>
+                                <a href="#" class="btn btn-secondary book-btn" data-show="Anubhav Bassi: Mumbai Special">Book Now</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Show 3 -->
+                    <div class="show-card" data-location="bangalore">
+                        <div class="show-img">
+                            <img src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Comedy Festival">
+                        </div>
+                        <div class="show-details">
+                            <h3>Bangalore Comedy Festival</h3>
+                            <div class="show-date">
+                                <i class="far fa-calendar-alt"></i>
+                                <span>June 22-25, 2023 | 6:00 PM</span>
+                            </div>
+                            <div class="show-location">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>Palace Grounds, Bangalore</span>
+                            </div>
+                            <p>4 days of unlimited laughter with all the top Indian comedians at one place.</p>
+                            <div class="show-price">
+                                <span class="price">₹2,499 onwards</span>
+                                <a href="#" class="btn btn-secondary book-btn" data-show="Bangalore Comedy Festival">Book Now</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Show 4 -->
+                    <div class="show-card" data-location="delhi">
+                        <div class="show-img">
+                            <img src="https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Comedy Club">
+                        </div>
+                        <div class="show-details">
+                            <h3>Weekend Comedy Club</h3>
+                            <div class="show-date">
+                                <i class="far fa-calendar-alt"></i>
+                                <span>Every Saturday | 9:00 PM</span>
+                            </div>
+                            <div class="show-location">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>Hauz Khas Social, Delhi</span>
+                            </div>
+                            <p>Weekly standup comedy show featuring new and established comedians.</p>
+                            <div class="show-price">
+                                <span class="price">₹499 onwards</span>
+                                <a href="#" class="btn btn-secondary book-btn" data-show="Weekend Comedy Club">Book Now</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Show 5 -->
+                    <div class="show-card" data-location="mumbai">
+                        <div class="show-img">
+                            <img src="https://images.unsplash.com/photo-1540039155733-5bb30b53aa14?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Comedy Night">
+                        </div>
+                        <div class="show-details">
+                            <h3>Ravi Gupta: Family Tales</h3>
+                            <div class="show-date">
+                                <i class="far fa-calendar-alt"></i>
+                                <span>June 28, 2023 | 8:30 PM</span>
+                            </div>
+                            <div class="show-location">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>NCPA, Mumbai</span>
+                            </div>
+                            <p>Ravi Gupta presents his new solo special about hilarious family dynamics.</p>
+                            <div class="show-price">
+                                <span class="price">₹999 onwards</span>
+                                <a href="#" class="btn btn-secondary book-btn" data-show="Ravi Gupta: Family Tales">Book Now</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Show 6 -->
+                    <div class="show-card" data-location="bangalore">
+                        <div class="show-img">
+                            <img src="https://images.unsplash.com/photo-1472653431158-6364773b2a56?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Open Mic">
+                        </div>
+                        <div class="show-details">
+                            <h3>New Talent Night</h3>
+                            <div class="show-date">
+                                <i class="far fa-calendar-alt"></i>
+                                <span>Every Thursday | 7:00 PM</span>
+                            </div>
+                            <div class="show-location">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>The Humming Tree, Bangalore</span>
+                            </div>
+                            <p>Discover fresh comedy talent at our weekly open mic night featuring Nayab Midha and others.</p>
+                            <div class="show-price">
+                                <span class="price">₹299 onwards</span>
+                                <a href="#" class="btn btn-secondary book-btn" data-show="New Talent Night">Book Now</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Gift Cards Section -->
+        <section class="gift-cards section-padding" id="gift-cards">
+            <div class="container">
+                <h2 class="section-title text-center">Give the Gift of Laughter</h2>
+                <p class="text-center">Perfect for birthdays, anniversaries, or just because! Our gift cards never expire.</p>
+                
+                <div class="gift-cards-grid">
+                    <!-- Gift Card Option 1 -->
+                    <div class="gift-card-option">
+                        <div class="gift-card-value">₹1,000</div>
+                        <div class="gift-card-price">₹1,000</div>
+                        <button class="btn btn-secondary add-to-cart" data-value="1000">Add to Cart</button>
+                    </div>
+                    
+                    <!-- Gift Card Option 2 -->
+                    <div class="gift-card-option">
+                        <div class="gift-card-value">₹2,500</div>
+                        <div class="gift-card-price">₹2,500</div>
+                        <button class="btn btn-secondary add-to-cart" data-value="2500">Add to Cart</button>
+                    </div>
+                    
+                    <!-- Gift Card Option 3 -->
+                    <div class="gift-card-option">
+                        <div class="gift-card-value">₹5,000</div>
+                        <div class="gift-card-price">₹5,000</div>
+                        <button class="btn btn-secondary add-to-cart" data-value="5000">Add to Cart</button>
+                    </div>
+                    
+                    <!-- Custom Amount Option -->
+                    <div class="gift-card-option custom-amount">
+                        <h4>Custom Amount</h4>
+                        <div class="form-group">
+                            <label for="custom-amount">Enter Amount (₹500 minimum)</label>
+                            <input type="number" id="custom-amount" min="500" step="100" placeholder="₹">
+                        </div>
+                        <button class="btn btn-primary add-to-cart" id="add-custom-amount">Add to Cart</button>
+                    </div>
+                </div>
+                
+                <!-- Checkout Button -->
+                <div class="text-center" style="margin-top: 3rem;">
+                    <button class="btn btn-primary" id="checkout-gift-card">Proceed to Checkout</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials Section -->
+        <section class="testimonials section-padding" id="testimonials">
+            <div class="container">
+                <h2 class="section-title text-center">What People Say</h2>
+                <p class="text-center">Don't just take our word for it - hear from our happy customers</p>
+                
+                <div class="testimonials-container">
+                    <!-- Testimonial 1 -->
+                    <div class="testimonial-card">
+                        <div class="testimonial-header">
+                            <div class="testimonial-img">
+                                <img src="https://randomuser.me/api/portraits/women/32.jpg" alt="Priya Sharma">
+                            </div>
+                            <div>
+                                <h4>Priya Sharma</h4>
+                                <div class="testimonial-rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <p>"I attended Zakir Khan's show in Delhi and it was absolutely hilarious! The booking process was so smooth and the seats were great. Will definitely book through LaughFactory again!"</p>
+                    </div>
+                    
+                    <!-- Testimonial 2 -->
+                    <div class="testimonial-card">
+                        <div class="testimonial-header">
+                            <div class="testimonial-img">
+                                <img src="https://randomuser.me/api/portraits/men/45.jpg" alt="Rahul Mehta">
+                            </div>
+                            <div>
+                                <h4>Rahul Mehta</h4>
+                                <div class="testimonial-rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star-half-alt"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <p>"The Bangalore Comedy Festival was worth every penny! So many great comedians in one place. The app notifications kept me updated about timing changes. Great service!"</p>
+                    </div>
+                    
+                    <!-- Testimonial 3 -->
+                    <div class="testimonial-card">
+                        <div class="testimonial-header">
+                            <div class="testimonial-img">
+                                <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Ananya Patel">
+                            </div>
+                            <div>
+                                <h4>Ananya Patel</h4>
+                                <div class="testimonial-rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <p>"I've been to 3 shows booked through LaughFactory and each experience has been flawless. The customer support helped me quickly when I had a query about my tickets. Highly recommend!"</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Newsletter Section -->
+        <section class="newsletter section-padding">
+            <div class="container">
+                <h2 class="text-center">Stay Updated</h2>
+                <p class="text-center">Subscribe to our newsletter for show announcements, early bird discounts and more!</p>
+                
+                <form class="newsletter-form">
+                    <input type="email" placeholder="Enter your email address" required>
+                    <button type="submit" class="btn btn-primary">Subscribe</button>
+                </form>
+            </div>
+        </section>
+        <!-- Membership Section -->
+        <section class="membership section-padding" id="membership">
+            <div class="container">
+                <h2 class="section-title text-center">Become a Member</h2>
+                <p class="text-center">Unlock exclusive benefits and discounts on all comedy shows!</p>
+                
+                <div class="membership-tiers">
+                    <!-- Basic Tier -->
+                    <div class="tier-card">
+                        <h3>Basic</h3>
+                        <div class="tier-price">Free</div>
+                        <ul class="tier-benefits">
+                            <li><i class="fas fa-check"></i> Early access to show announcements</li>
+                            <li><i class="fas fa-check"></i> Newsletter with comedy news</li>
+                            <li><i class="fas fa-check"></i> Basic seat selection</li>
+                            <li><i class="fas fa-times"></i> No priority booking</li>
+                        </ul>
+                        <button class="btn btn-secondary join-btn" data-tier="basic">Join Free</button>
+                    </div>
+                    
+                    <!-- Premium Tier -->
+                    <div class="tier-card featured">
+                        <div class="popular-badge">Most Popular</div>
+                        <h3>Premium</h3>
+                        <div class="tier-price">₹499<span>/month</span></div>
+                        <ul class="tier-benefits">
+                            <li><i class="fas fa-check"></i> 15% off all tickets</li>
+                            <li><i class="fas fa-check"></i> Priority booking (48hr early access)</li>
+                            <li><i class="fas fa-check"></i> Premium seat selection</li>
+                            <li><i class="fas fa-check"></i> Free drink at every show</li>
+                            <li><i class="fas fa-check"></i> Exclusive member-only events</li>
+                        </ul>
+                        <button class="btn btn-primary join-btn" data-tier="premium">Get Premium</button>
+                    </div>
+                    
+                    <!-- VIP Tier -->
+                    <div class="tier-card">
+                        <h3>VIP</h3>
+                        <div class="tier-price">₹1,999<span>/month</span></div>
+                        <ul class="tier-benefits">
+                            <li><i class="fas fa-check"></i> 25% off all tickets</li>
+                            <li><i class="fas fa-check"></i> VIP seating at all shows</li>
+                            <li><i class="fas fa-check"></i> Meet & greet with comedians</li>
+                            <li><i class="fas fa-check"></i> Free premium food/drinks</li>
+                            <li><i class="fas fa-check"></i> Personal booking assistant</li>
+                        </ul>
+                        <button class="btn btn-secondary join-btn" data-tier="vip">Go VIP</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer id="contact">
+            <div class="container">
+                <div class="footer-content">
+                    <div class="footer-column">
+                        <h3>LaughFactory</h3>
+                        <p>India's premier platform for booking standup comedy shows featuring the best Indian comedians.</p>
+                        <div class="social-links">
+                            <a href="#"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fab fa-instagram"></i></a>
+                            <a href="#"><i class="fab fa-youtube"></i></a>
+                        </div>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h3>Quick Links</h3>
+                        <ul class="footer-links">
+                            <li><a href="#home">Home</a></li>
+                            <li><a href="#comedians">Comedians</a></li>
+                            <li><a href="#shows">Shows</a></li>
+                            <li><a href="#testimonials">Reviews</a></li>
+                            <li><a href="#">About Us</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h3>Support</h3>
+                        <ul class="footer-links">
+                            <li><a href="#">FAQs</a></li>
+                            <li><a href="#">Privacy Policy</a></li>
+                            <li><a href="#">Terms & Conditions</a></li>
+                            <li><a href="#">Refund Policy</a></li>
+                            <li><a href="#">Contact Us</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h3>Contact Info</h3>
+                        <ul class="footer-links">
+                            <li><i class="fas fa-map-marker-alt"></i> 123 Comedy Street, Mumbai, India</li>
+                            <li><i class="fas fa-phone"></i> +91 9876543210</li>
+                            <li><i class="fas fa-envelope"></i> info@laughfactory.in</li>
+                            <li><i class="fas fa-user-tie"></i> Event Manager: Shivoy Budhiraja</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="footer-bottom">
+                    <p>&copy; 2025 LaughFactory India. All Rights Reserved.</p>
+                </div>
+            </div>
+        </footer>
+
+        <div class="modal" id="bookingModal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 id="modalTitle">Book Tickets</h3>
+                    <span class="close-modal">&times;</span>
+                </div>
+                <div class="modal-body">
+                    <form class="booking-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="showName">Show Name</label>
+                                <input type="text" id="showName" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label for="showDate">Show Date</label>
+                                <input type="text" id="showDate" readonly>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="name">Full Name</label>
+                                <input type="text" id="name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input type="email" id="email" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="phone">Phone Number</label>
+                                <input type="tel" id="phone" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="tickets">Number of Tickets</label>
+                                <select id="tickets" required>
+                                    <option value="">Select</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <!-- Seat Booking Section -->
+                        <div class="seat-booking-section">
+                            <h4>Select Your Seats</h4>
+                            <div class="stage-display">STAGE</div>
+                            
+                            <div class="seats-container">
+                                <!-- Row A -->
+                                <div class="seat-row">
+                                    <div class="seat" data-seat="A1">A1</div>
+                                    <div class="seat" data-seat="A2">A2</div>
+                                    <div class="seat" data-seat="A3">A3</div>
+                                    <div class="seat aisle"></div>
+                                    <div class="seat" data-seat="A4">A4</div>
+                                    <div class="seat" data-seat="A5">A5</div>
+                                    <div class="seat" data-seat="A6">A6</div>
+                                    <div class="seat aisle"></div>
+                                    <div class="seat" data-seat="A7">A7</div>
+                                    <div class="seat" data-seat="A8">A8</div>
+                                    <div class="seat" data-seat="A9">A9</div>
+                                </div>
+                                
+                                <!-- Row B -->
+                                <div class="seat-row">
+                                    <div class="seat" data-seat="B1">B1</div>
+                                    <div class="seat" data-seat="B2">B2</div>
+                                    <div class="seat" data-seat="B3">B3</div>
+                                    <div class="seat aisle"></div>
+                                    <div class="seat" data-seat="B4">B4</div>
+                                    <div class="seat" data-seat="B5">B5</div>
+                                    <div class="seat" data-seat="B6">B6</div>
+                                    <div class="seat aisle"></div>
+                                    <div class="seat" data-seat="B7">B7</div>
+                                    <div class="seat" data-seat="B8">B8</div>
+                                    <div class="seat" data-seat="B9">B9</div>
+                                </div>
+                                
+                                <!-- Row C -->
+                                <div class="seat-row">
+                                    <div class="seat" data-seat="C1">C1</div>
+                                    <div class="seat" data-seat="C2">C2</div>
+                                    <div class="seat" data-seat="C3">C3</div>
+                                    <div class="seat aisle"></div>
+                                    <div class="seat" data-seat="C4">C4</div>
+                                    <div class="seat" data-seat="C5">C5</div>
+                                    <div class="seat" data-seat="C6">C6</div>
+                                    <div class="seat aisle"></div>
+                                    <div class="seat" data-seat="C7">C7</div>
+                                    <div class="seat" data-seat="C8">C8</div>
+                                    <div class="seat" data-seat="C9">C9</div>
+                                </div>
+                                
+                                <!-- Row D -->
+                                <div class="seat-row">
+                                    <div class="seat" data-seat="D1">D1</div>
+                                    <div class="seat" data-seat="D2">D2</div>
+                                    <div class="seat" data-seat="D3">D3</div>
+                                    <div class="seat aisle"></div>
+                                    <div class="seat" data-seat="D4">D4</div>
+                                    <div class="seat" data-seat="D5">D5</div>
+                                    <div class="seat" data-seat="D6">D6</div>
+                                    <div class="seat aisle"></div>
+                                    <div class="seat" data-seat="D7">D7</div>
+                                    <div class="seat" data-seat="D8">D8</div>
+                                    <div class="seat" data-seat="D9">D9</div>
+                                </div>
+                                
+                                <!-- Row E -->
+                                <div class="seat-row">
+                                    <div class="seat" data-seat="E1">E1</div>
+                                    <div class="seat" data-seat="E2">E2</div>
+                                    <div class="seat" data-seat="E3">E3</div>
+                                    <div class="seat aisle"></div>
+                                    <div class="seat" data-seat="E4">E4</div>
+                                    <div class="seat" data-seat="E5">E5</div>
+                                    <div class="seat" data-seat="E6">E6</div>
+                                    <div class="seat aisle"></div>
+                                    <div class="seat" data-seat="E7">E7</div>
+                                    <div class="seat" data-seat="E8">E8</div>
+                                    <div class="seat" data-seat="E9">E9</div>
+                                </div>
+                                
+                                <!-- Row F -->
+                                <div class="seat-row">
+                                    <div class="seat" data-seat="F1">F1</div>
+                                    <div class="seat" data-seat="F2">F2</div>
+                                    <div class="seat" data-seat="F3">F3</div>
+                                    <div class="seat aisle"></div>
+                                    <div class="seat" data-seat="F4">F4</div>
+                                    <div class="seat" data-seat="F5">F5</div>
+                                    <div class="seat" data-seat="F6">F6</div>
+                                    <div class="seat aisle"></div>
+                                    <div class="seat" data-seat="F7">F7</div>
+                                    <div class="seat" data-seat="F8">F8</div>
+                                    <div class="seat" data-seat="F9">F9</div>
+                                </div>
+                            </div>
+                            
+                            <div class="seat-legend">
+                                <div class="legend-item">
+                                    <div class="legend-color" style="background: var(--gray-dark);"></div>
+                                    <span>Available</span>
+                                </div>
+                                <div class="legend-item">
+                                    <div class="legend-color" style="background: var(--accent);"></div>
+                                    <span>Selected</span>
+                                </div>
+                                <div class="legend-item">
+                                    <div class="legend-color" style="background: var(--primary);"></div>
+                                    <span>Booked</span>
+                                </div>
+                            </div>
+                            
+                            <div class="booking-summary">
+                                <div class="summary-row">
+                                    <span>Tickets:</span>
+                                    <span id="ticket-count">0</span>
+                                </div>
+                                <div class="summary-row">
+                                    <span>Price per ticket:</span>
+                                    <span>₹799</span>
+                                </div>
+                                <div class="summary-row total-row">
+                                    <span>Total:</span>
+                                    <span id="total-price">₹0</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <h4>Food & Beverage Options</h4>
+                            <p>Pre-order your snacks and drinks for the show (optional)</p>
+                            
+                            <div class="meal-options">
+                                <!-- Meal Option 1 -->
+                                <div class="meal-option">
+                                    <div class="meal-select">
+                                        <input type="checkbox" id="meal1" class="meal-checkbox" data-meal="popcorn-combo" data-price="250">
+                                        <label for="meal1">Popcorn Combo</label>
+                                    </div>
+                                    <div class="meal-details">
+                                        <p>Large popcorn + 1 soft drink</p>
+                                        <div class="meal-price">₹250</div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Meal Option 2 -->
+                                <div class="meal-option">
+                                    <div class="meal-select">
+                                        <input type="checkbox" id="meal2" class="meal-checkbox" data-meal="nachos-combo" data-price="350">
+                                        <label for="meal2">Nachos Combo</label>
+                                    </div>
+                                    <div class="meal-details">
+                                        <p>Loaded nachos + 1 beer/mocktail</p>
+                                        <div class="meal-price">₹350</div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Beverage Option 1 -->
+                                <div class="meal-option">
+                                    <div class="meal-select">
+                                        <input type="checkbox" id="drink1" class="meal-checkbox" data-meal="beer" data-price="200">
+                                        <label for="drink1">Beer (Pint)</label>
+                                    </div>
+                                    <div class="meal-details">
+                                        <p>Domestic beer (500ml)</p>
+                                        <div class="meal-price">₹200</div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Beverage Option 2 -->
+                                <div class="meal-option">
+                                    <div class="meal-select">
+                                        <input type="checkbox" id="drink2" class="meal-checkbox" data-meal="mocktail" data-price="180">
+                                        <label for="drink2">Mocktail</label>
+                                    </div>
+                                    <div class="meal-details">
+                                        <p>Fresh fruit mocktail</p>
+                                        <div class="meal-price">₹180</div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="meal-summary">
+                                <h5>Your Selections:</h5>
+                                <ul id="selectedMealsList"></ul>
+                                <div class="meal-total">
+                                    <span>Food & Beverage Total:</span>
+                                    <span id="mealTotalPrice">₹0</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="special">Special Requirements</label>
+                            <textarea id="special" placeholder="Any special requirements or notes..."></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary close-modal-btn">Cancel</button>
+                    <button class="btn btn-primary confirm-booking">Confirm Booking</button>
+                </div>
+            </div>
+        </div>
+    
+    <!-- Membership Signup Modal -->
+<div class="modal" id="membershipModal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3 id="membershipModalTitle">Join LaughFactory</h3>
+            <span class="close-modal">&times;</span>
+        </div>
+        <div class="modal-body">
+            <form id="membershipForm">
+                <input type="hidden" id="selectedTier" value="">
+                
+                <div class="form-group">
+                    <label for="mName">Full Name</label>
+                    <input type="text" id="mName" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="mEmail">Email</label>
+                    <input type="email" id="mEmail" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="mPassword">Password</label>
+                    <input type="password" id="mPassword" required minlength="6">
+                </div>
+                
+                <div class="form-group" id="paymentSection" style="display: none;">
+                    <label>Payment Method</label>
+                    <div class="payment-options">
+                        <label class="payment-method">
+                            <input type="radio" name="payment" value="card" checked>
+                            <i class="fab fa-cc-visa"></i> Credit/Debit Card
+                        </label>
+                        <label class="payment-method">
+                            <input type="radio" name="payment" value="upi">
+                            <i class="fas fa-mobile-alt"></i> UPI
+                        </label>
+                        <label class="payment-method">
+                            <input type="radio" name="payment" value="wallet">
+                            <i class="fas fa-wallet"></i> Wallet
+                        </label>
+                    </div>
+                    
+                    <div id="cardDetails" class="payment-details">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="cardNumber">Card Number</label>
+                                <input type="text" id="cardNumber" placeholder="1234 5678 9012 3456">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="cardExpiry">Expiry Date</label>
+                                <input type="text" id="cardExpiry" placeholder="MM/YY">
+                            </div>
+                            <div class="form-group">
+                                <label for="cardCvv">CVV</label>
+                                <input type="text" id="cardCvv" placeholder="123">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <input type="checkbox" id="agreeTerms" required>
+                    <label for="agreeTerms">I agree to the Terms of Service and Privacy Policy</label>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-secondary close-modal-btn">Cancel</button>
+            <button class="btn btn-primary" id="confirmMembership">Complete Signup</button>
+        </div>
+    </div>
+</div>
+
+<!-- Membership Login Modal -->
+<div class="modal" id="loginModal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3>Member Login</h3>
+            <span class="close-modal">&times;</span>
+        </div>
+        <div class="modal-body">
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="loginEmail">Email</label>
+                    <input type="email" id="loginEmail" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="loginPassword">Password</label>
+                    <input type="password" id="loginPassword" required>
+                </div>
+                
+                <div class="form-group">
+                    <a href="#" id="forgotPassword">Forgot Password?</a>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-secondary close-modal-btn">Cancel</button>
+            <button class="btn btn-primary" id="loginBtn">Login</button>
+        </div>
+    </div>
+</div>
+<script src="standup.js"></script>
+</body>
+</html>
