@@ -144,7 +144,7 @@ button, a, input, select, textarea, .modal-overlay, .feedback-overlay, .profile-
             width: 6px;
             height: 6px;
             border-radius: 50%;
-            background: rgba(38, 150, 232, 0.3);
+            background: rgba(204, 212, 218, 0.3);
             pointer-events: none;
             transition: transform 0.1s, opacity 0.7s;
             z-index: 998;
@@ -561,8 +561,14 @@ footer ul.nav .nav-link:hover::after {
   color: #fd79a8;
   font-size: 0.8rem;
 }
-
-.form-input, .form-select, .form-textarea {
+.form-select{
+    color: var(--primary-accent);
+    background-color: rgba(255, 255, 255, 0.05);
+    font-size: 1rem;
+  transition: all 0.2s ease;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+.form-input, .form-textarea {
   background-color: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 8px;
@@ -1325,41 +1331,38 @@ footer ul.nav .nav-link:hover::after {
         .login-popup {
             background: var(--gradient-login);
             color: white;
-            width: 90%;
-            max-width: 450px;
-            padding: 40px 20px;
+            width: 450px;
+            padding: 40px;
             border-radius: 12px;
             text-align: center;
             position: relative;
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
             animation: fadeIn 0.3s ease;
-            margin: auto;
         }
         
         .login-popup h2 {
-            font-size: 2rem;
+            font-size: 2.5rem;
             margin-bottom: 20px;
             font-weight: 600;
         }
         
         .login-popup p {
             margin-bottom: 30px;
-            font-size: 1rem;
+            font-size: 1.1rem;
             opacity: 0.9;
         }
         
         .sign-in-btn {
-            background: var(--gradient-login);
-            color: white;
-            width: 90%;
-            max-width: 450px;
-            padding: 40px 20px;
-            border-radius: 12px;
-            text-align: center;
-            position: relative;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-            animation: fadeIn 0.3s ease;
-            margin: auto;
+            background-color: white;
+            color: #0d6efd;
+            border: none;
+            padding: 12px 35px;
+            border-radius: 30px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
         }
         
         .sign-in-btn:hover {
@@ -2093,15 +2096,9 @@ footer {
             }
             
             .login-popup {
-                padding: 30px 15px;
-            }
-
-            .login-popup h2 {
-                font-size: 1.5rem;
-            }
-
-            .login-popup p {
-                font-size: 0.95rem;
+                width: 90%;
+                max-width: 400px;
+                padding: 30px;
             }
             
             .slide.prev, .slide.next {
@@ -2128,10 +2125,9 @@ footer {
                         <a class="nav-link" href="movies.2.html">Movies</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="standup.html">Comedy</a>
+                        <a class="nav-link" href="#">Comedy</a>
                     </li>
                     <li class="nav-item">
-                        
                         <a class="nav-link" href="concertpage.html">Concerts</a>
                     </li>
                 </ul>
@@ -2232,9 +2228,7 @@ footer {
             <!-- Movie Card -->
             <div class="col">
                 <div class="card h-100">
-
-                    <img src="Images\heres-all-the-new-movie-posters-that-were-released-v0-qrjiokeggsle1.webp" class="card-img-top" alt="Minecraft 3D">
-
+                    <img src="https://www.gap.com/webcontent/0058/022/077/cn58022077.jpg" class="card-img-top" alt="Minecraft 3D">
                     <div class="card-body d-flex flex-column">
                         <h5 class="card-title fw-bold" style="color: var(--primary-accent)">Minecraft 3D</h5>
                         <p class="card-text flex-grow-1 text-white-50">Four misfits are suddenly pulled through a mysterious portal into a bizarre cubic wonderland that thrives on imagination.</p>
@@ -2248,15 +2242,12 @@ footer {
             <!-- Comedy Card -->
             <div class="col">
                 <div class="card h-100">
-
-                    
                     <img src="https://assets-in.bmscdn.com/nmcms/events/banner/desktop/media-desktop-travis-scott-circus-maximus-stadium-tour-india-0-2025-4-7-t-12-15-0.jpg" class="card-img-top" alt="Travis Scott">
-
                     <div class="card-body d-flex flex-column">
                         <h5 class="card-title fw-bold" style="color: var(--primary-accent)">Travis Scott India Tour</h5>
                         <p class="card-text flex-grow-1 text-white-50">An evening with top comedians from around the country. Prepare for non-stop laughter!</p>
                         <div class="mt-auto">
-                            <a href="travis.html" class="btn btn-primary w-100 book-now-btn">Book Now</a>
+                            <a href="#" class="btn btn-primary w-100 book-now-btn">Book Now</a>
                         </div>
                     </div>
                 </div>
@@ -2376,10 +2367,10 @@ footer {
                   <span class="category-badge">Sports</span>
               </div>
               <div class="card-body d-flex flex-column">
-                  <h5 class="card-title">Championship Basketball</h5>
+                  <h5 class="card-title">Film Festival</h5>
                   <p class="event-date"><i class="bi bi-calendar-event"></i> May 25, 2025 &centerdot; 6:00 PM</p>
                   <p class="event-location"><i class="bi bi-geo-alt"></i> Madison Square Garden, New York</p>
-                  <p class="card-text">Witness the ultimate basketball showdown as top teams compete for the championship.</p>
+                  <p class="card-text">Where stories unfold beyond boundaries and imagination takes center stage-welcome to a celebration of cinema that will transform how you see the world.</p>
                   <div class="d-flex justify-content-between align-items-center mt-auto">
                       <span class="fw-bold">$79.99</span>
                       <a href="#" class="btn btn-primary book-now-btn">Book Now</a>
@@ -2397,8 +2388,11 @@ footer {
                 <h2 class="fw-bold mb-4">Never Miss an Event</h2>
                 <p class="mb-4">Subscribe to our newsletter and be the first to know about upcoming events and exclusive offers.</p>
                 <div class="input-group mb-3 mx-auto" style="max-width: 500px;">
-                    <input type="email" class="form-control newsletter-input" placeholder="Your email address"name="email" >
-                    <button class="btn btn-primary newsletter-btn" type="button">Subscribe</button>
+                    <input type="email" class="form-control newsletter-input" placeholder="Your email address" name="email" style="color: #2696E8;">
+                    <button class="btn btn-primary newsletter-btn" type="button">
+                        <span class="button-text">Subscribe</span>
+                        
+                    </button>
                 </div>
             </div>
         </div>
@@ -2536,14 +2530,14 @@ footer {
     
     <h2>New Here?</h2>
     <p>Sign up and discover a great amount of new opportunities!</p>
-    <button class="toggle-auth-btn" id="show-signup">Sign Up</button>
+    <button class="toggle-auth-btn" id="welcome-show-signup">Sign Up</button>
 </div>
 
 <!-- Signup Welcome Content -->
 <div class="welcome-content signup-welcome">
     <h2>One of Us?</h2>
     <p>If you already have an account, just sign in. We've missed you!</p>
-    <button class="toggle-auth-btn" id="show-login">Sign In</button>
+    <button class="toggle-auth-btn" id="show-login-btn">Sign In</button>
 </div>
             </div>
             <button class="close-button" id="close-auth-modal" style="color: white; top: 15px; right: 15px;">×</button>
@@ -2564,7 +2558,7 @@ footer {
                 <h4 class="profile-section-title"><i class="bi bi-ticket-perforated"></i> My Tickets</h4>
                 <ul class="tickets-list">
                     <li class="ticket-item">
-                        <img src="https://i.pinimg.com/736x/36/e5/0e/36e50ef4bf1f749861ccf4dff9efae80.jpg" alt="Event" class="ticket-image">
+                        <img src="https://www.gap.com/webcontent/0058/022/077/cn58022077.jpg" alt="Event" class="ticket-image">
                         <div class="ticket-details">
                             <div class="ticket-event">Minecraft 3D</div>
                             <div class="ticket-date">Apr 28, 2025 • 7:30 PM</div>
@@ -2685,6 +2679,8 @@ footer {
             <select id="feedbackType" name="feedback_type" class="form-select" required>
                 <option value="">Select feedback type</option>
                 <option value="suggestion">Suggestion</option>
+                <option value="Bug">Bug</option>
+                <option value="Compliment">Compliment</option>
                 <!-- Other options -->
             </select>
             <div class="error-message" id="typeError"></div>
@@ -2900,12 +2896,13 @@ document.getElementById('close-auth-modal').addEventListener('click', () => {
 });
 
 // Toggle between login and signup forms
-document.getElementById('show-signup').addEventListener('click', (e) => {
+document.getElementById('welcome-show-signup').addEventListener('click', (e) => {
     e.preventDefault();
     authContainer.classList.add('show-signup');
 });
 
-document.getElementById('show-login').addEventListener('click', (e) => {
+
+document.getElementById('show-login-btn').addEventListener('click', (e) => {
     e.preventDefault();
     authContainer.classList.remove('show-signup');
 });
@@ -3245,6 +3242,35 @@ window.addEventListener('click', (e) => {
         profileSidebar.classList.remove('active');
     }
 });
+document.addEventListener('DOMContentLoaded', function() {
+    const subscribeBtn = document.querySelector('.newsletter-btn');
+    const buttonText = document.querySelector('.button-text');
+    const checkmark = document.querySelector('.checkmark');
+    const emailInput = document.querySelector('.newsletter-input');
+    
+    subscribeBtn.addEventListener('click', function() {
+        if (emailInput.value.trim() === '') {
+            alert('Please enter an email address');
+            return;
+        }
+        
+        // Add animation classes
+        subscribeBtn.classList.add('btn-animation');
+        
+        // After a short delay, change text and add checkmark
+        setTimeout(() => {
+            buttonText.textContent = 'Subscribed';
+            subscribeBtn.classList.add('subscribed');
+            checkmark.classList.add('show');
+            
+            // Remove animation class after it completes
+            setTimeout(() => {
+                subscribeBtn.classList.remove('btn-animation');
+            }, 500);
+        }, 300);
+    });
+});
+
 
     </script>
 </body>
