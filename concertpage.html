@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Concerts in Chandigarh | PLANR</title>
     <link rel="icon" type="image/jpg" href="./Images/concertfavicon.jpg">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
             margin: 0;
@@ -19,7 +20,7 @@
             line-height: 1.6;
         }
         
-        /* New Navigation Bar Styles */
+        /* Navigation Bar Styles */
         .navbar {
             background-color: #1a1a1a;
             padding: 15px 0;
@@ -43,6 +44,13 @@
             font-weight: bold;
             color: #bb86fc;
             text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .logo-icon {
+            font-size: 28px;
         }
         
         .nav-links {
@@ -83,6 +91,11 @@
             border-radius: 20px;
             padding: 8px 15px;
             width: 250px;
+            transition: all 0.3s ease;
+        }
+        
+        .search-bar:focus-within {
+            box-shadow: 0 0 0 2px #bb86fc;
         }
         
         .search-bar input {
@@ -91,11 +104,28 @@
             color: #e0e0e0;
             width: 100%;
             outline: none;
+            padding: 5px;
         }
         
         .search-bar i {
             color: #a0a0a0;
             margin-right: 10px;
+        }
+        
+        .user-actions {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .user-actions a {
+            color: #e0e0e0;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .user-actions a:hover {
+            color: #bb86fc;
         }
         
         .container {
@@ -106,18 +136,25 @@
         }
         
         .filters {
-            width: 250px;
+            width: 280px;
             padding-right: 20px;
         }
         
         .filter-section {
             margin-bottom: 25px;
+            background: #1e1e1e;
+            border-radius: 8px;
+            padding: 15px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
         }
         
         .filter-section h3 {
             font-size: 16px;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
             color: #bb86fc;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
         
         .filter-options {
@@ -129,6 +166,9 @@
             cursor: pointer;
             color: #e0e0e0;
             transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
         
         .filter-options li:hover {
@@ -140,14 +180,61 @@
             font-weight: bold;
         }
         
+        .filter-options li i {
+            font-size: 14px;
+        }
+        
+        .date-range-picker {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .date-range-picker input {
+            background: #2d2d2d;
+            border: 1px solid #333;
+            color: #e0e0e0;
+            padding: 8px;
+            border-radius: 4px;
+            outline: none;
+        }
+        
+        .price-range {
+            width: 100%;
+        }
+        
+        .price-labels {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 5px;
+            font-size: 12px;
+            color: #a0a0a0;
+        }
+        
         .main-content {
             flex: 1;
         }
         
-        .page-title {
-            font-size: 24px;
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             margin-bottom: 20px;
+        }
+        
+        .page-title {
+            font-size: 28px;
             color: #ffffff;
+        }
+        
+        .sort-options {
+            background: #2d2d2d;
+            border: none;
+            color: #e0e0e0;
+            padding: 8px 15px;
+            border-radius: 20px;
+            outline: none;
+            cursor: pointer;
         }
         
         .event-tabs {
@@ -161,6 +248,7 @@
             cursor: pointer;
             color: #e0e0e0;
             transition: all 0.3s ease;
+            position: relative;
         }
         
         .event-tab:hover {
@@ -168,15 +256,24 @@
         }
         
         .event-tab.active {
-            border-bottom: 2px solid #bb86fc;
             color: #bb86fc;
             font-weight: bold;
+        }
+        
+        .event-tab.active::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background-color: #bb86fc;
         }
         
         .event-list {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 20px;
+            gap: 25px;
         }
         
         .event-card {
@@ -185,6 +282,7 @@
             overflow: hidden;
             box-shadow: 0 4px 12px rgba(0,0,0,0.3);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
         }
         
         .event-card:hover {
@@ -210,6 +308,19 @@
             background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
         }
         
+        .event-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #bb86fc;
+            color: #121212;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: bold;
+            z-index: 1;
+        }
+        
         .event-details {
             padding: 15px;
         }
@@ -218,6 +329,9 @@
             font-size: 14px;
             color: #bb86fc;
             margin-bottom: 5px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
         }
         
         .event-title {
@@ -225,12 +339,28 @@
             font-weight: bold;
             margin-bottom: 8px;
             color: #ffffff;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            min-height: 44px;
         }
         
         .event-venue {
             font-size: 14px;
             color: #a0a0a0;
             margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .event-price {
+            font-size: 16px;
+            font-weight: bold;
+            color: #ffffff;
+            margin: 10px 0;
         }
         
         .event-category {
@@ -238,12 +368,76 @@
             color: #7a7a7a;
             text-transform: uppercase;
             letter-spacing: 1px;
+            margin-bottom: 12px;
+        }
+        
+        .event-actions {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 15px;
+        }
+        
+        .btn {
+            padding: 8px 16px;
+            border-radius: 4px;
+            border: none;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary {
+            background: #bb86fc;
+            color: #121212;
+        }
+        
+        .btn-primary:hover {
+            background: #9a67cb;
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: #bb86fc;
+            border: 1px solid #bb86fc;
+        }
+        
+        .btn-secondary:hover {
+            background: rgba(187, 134, 252, 0.1);
+        }
+        
+        .pagination {
+            display: flex;
+            justify-content: center;
+            margin-top: 30px;
+            gap: 10px;
+        }
+        
+        .pagination button {
+            background: #2d2d2d;
+            border: none;
+            color: #e0e0e0;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .pagination button:hover {
+            background: #bb86fc;
+            color: #121212;
+        }
+        
+        .pagination button.active {
+            background: #bb86fc;
+            color: #121212;
+            font-weight: bold;
         }
         
         .footer {
             background-color: #1a1a1a;
             color: #a0a0a0;
-            padding: 30px 0;
+            padding: 40px 0;
             margin-top: 40px;
             border-top: 1px solid #333;
         }
@@ -251,14 +445,24 @@
         .footer-container {
             max-width: 1200px;
             margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
             padding: 0 20px;
         }
         
+        .footer-column h3 {
+            color: #bb86fc;
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+        
         .footer-links {
-            display: flex;
-            gap: 30px;
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 10px;
         }
         
         .footer-links a {
@@ -269,7 +473,36 @@
         
         .footer-links a:hover {
             color: #bb86fc;
-            text-decoration: none;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .social-links a {
+            color: #a0a0a0;
+            font-size: 20px;
+            transition: color 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            color: #bb86fc;
+        }
+        
+        .copyright {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #333;
+            font-size: 14px;
+        }
+        
+        @media (max-width: 1024px) {
+            .footer-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
         }
         
         @media (max-width: 768px) {
@@ -281,6 +514,7 @@
             .nav-links {
                 width: 100%;
                 justify-content: space-around;
+                flex-wrap: wrap;
             }
             
             .search-bar {
@@ -300,26 +534,41 @@
             .event-list {
                 grid-template-columns: 1fr;
             }
+            
+            .footer-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .page-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- New Navigation Bar -->
+    <!-- Navigation Bar -->
     <nav class="navbar">
         <div class="nav-container">
-            <a href="#" class="logo">PLANR</a>
+            <a href="homepage1.html" class="logo">
+                <i class="fas fa-calendar-alt logo-icon"></i>
+                PLANR
+            </a>
             
             <div class="nav-links">
-                <a href="#" class="active">Concerts</a>
-                <a href="#">Festivals</a>
-                <a href="#">Sports</a>
-                <a href="#">Theater</a>
-                <a href="#">Comedy</a>
+                <a href="./concertpage.html" class="active">Concerts</a>
+                <a href="./movies.2.html">Movies</a>
+                <a href="./standup.html">Comedy</a>
             </div>
             
-            <div class="search-bar">
-                <i>🔍</i>
-                <input type="text" placeholder="Search events...">
+            <div class="user-actions">
+                <div class="search-bar">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Search events...">
+                </div>
+                <a href="#"><i class="far fa-user"></i></a>
+                <a href="#"><i class="far fa-heart"></i></a>
             </div>
         </div>
     </nav>
@@ -327,99 +576,231 @@
     <div class="container">
         <aside class="filters">
             <div class="filter-section">
-                <h3>Date</h3>
+                <h3>Date <i class="fas fa-calendar-day"></i></h3>
                 <ul class="filter-options">
-                    <li class="active">Today</li>
-                    <li>This Weekend</li>
+                    <li class="active"><i class="far fa-dot-circle"></i> Today</li>
+                    <li><i class="far fa-circle"></i> This Weekend</li>
+                    <li><i class="far fa-circle"></i> Next 7 Days</li>
+                    <li><i class="far fa-circle"></i> Next 30 Days</li>
                 </ul>
             </div>
             
             <div class="filter-section">
-                <h3>Date Range</h3>
-                <!-- Date range picker would go here -->
+                <h3>Date Range <i class="fas fa-calendar-week"></i></h3>
+                <div class="date-range-picker">
+                    <input type="date" id="start-date" placeholder="Start Date">
+                    <input type="date" id="end-date" placeholder="End Date">
+                </div>
+            </div>
+            
+         
+            
+            <div class="filter-section">
+                <h3>Price <i class="fas fa-indian-rupee-sign"></i></h3>
+                <input type="range" class="price-range" min="0" max="10000" step="500" value="5000">
+                <div class="price-labels">
+                    <span>₹0</span>
+                    <span>₹10,000+</span>
+                </div>
             </div>
             
             <div class="filter-section">
-                <h3>Languages</h3>
-                <!-- Language options would go here -->
-            </div>
-            
-            <div class="filter-section">
-                <h3>Categories</h3>
+                <h3>More Filters <i class="fas fa-filter"></i></h3>
                 <ul class="filter-options">
-                    <li class="active">Concerts</li>
-                    <li>Music Festivals</li>
-                    <li>Club Gigs</li>
+                    <li><i class="far fa-circle"></i> Family Friendly</li>
+                    <li><i class="far fa-circle"></i> Outdoor Events</li>
+                    <li><i class="far fa-circle"></i> Popular Events</li>
+                    <li><i class="far fa-circle"></i> Newly Added</li>
                 </ul>
             </div>
             
-            <div class="filter-section">
-                <h3>Price</h3>
-                <!-- Price range slider would go here -->
-            </div>
-            
-            <div class="filter-section">
-                <h3>More Filters</h3>
-                <!-- Additional filters would go here -->
-            </div>
+            <button class="btn btn-primary" style="width: 100%; margin-top: 10px;">
+                Apply Filters
+            </button>
         </aside>
         
         <main class="main-content">
-            <h1 class="page-title">Concerts In Chandigarh</h1>
+            <div class="page-header">
+                <h1 class="page-title">Concerts In Chandigarh</h1>
+                <select class="sort-options">
+                    <option>Sort by: Recommended</option>
+                    <option>Sort by: Date (Soonest)</option>
+                    <option>Sort by: Price (Low to High)</option>
+                    <option>Sort by: Price (High to Low)</option>
+                    <option>Sort by: Popularity</option>
+                </select>
+            </div>
             
             <div class="event-tabs">
-                <div class="event-tab active">Concerts</div>
-                <div class="event-tab">Music Festivals</div>
-                <div class="event-tab">Club Gigs</div>
+                <div class="event-tab active">All Concerts</div>
+                <div class="event-tab">Rock</div>
+                <div class="event-tab">Pop</div>
+                <div class="event-tab">Electronic</div>
+                <div class="event-tab">Hip-Hop</div>
             </div>
             
             <div class="event-list">
                 <!-- Event 1 -->
                 <div class="event-card">
+                    <div class="event-badge">Popular</div>
                     <div class="event-image" style="background-image: url('Images/gunsnroses.jpeg');"></div>
                     <div class="event-details">
-                        <div class="event-date">Sat. 17 May</div>
-                        <h3 class="event-title">Guns N' Roses: India 2025</h3>
-                        <div class="event-venue">Mahalaxmi Race Course, Mumbai</div>
-                        <div class="event-category">Concerts</div>
+                        <div class="event-date"><i class="far fa-calendar-alt"></i> Sat. 17 May 2025 | 7:00 PM</div>
+                        <h3 class="event-title">Guns N' Roses: Not In This Lifetime... Tour 2025</h3>
+                        <div class="event-venue"><i class="fas fa-map-marker-alt"></i> Mahalaxmi Race Course, Mumbai</div>
+                        <div class="event-price">From ₹2,500</div>
+                        <div class="event-category">Rock Concert • International Artist</div>
+                        <div class="event-actions">
+                            <button class="btn btn-primary">Book Now</button>
+                            <button class="btn btn-secondary">More Info</button>
+                        </div>
                     </div>
                 </div>
                 
                 <!-- Event 2 -->
                 <div class="event-card">
-                    <div class="event-image" style="background-image: url('./Images/vilen.jpg'); background-color: #2a2a2a;"></div>
+                    <div class="event-badge">Coming Soon</div>
+                    <div class="event-image" style="background-image: url('./Images/vilen.jpg');"></div>
                     <div class="event-details">
-                        <div class="event-date">Coming Soon</div>
+                        <div class="event-date"><i class="far fa-calendar-alt"></i> Coming Soon</div>
                         <h3 class="event-title">VILEN LIVE - CHANDIGARH</h3>
-                        <div class="event-venue">Venue To Be Announced</div>
-                        <div class="event-category">Concerts</div>
+                        <div class="event-venue"><i class="fas fa-map-marker-alt"></i> Venue To Be Announced</div>
+                        <div class="event-price">Price TBA</div>
+                        <div class="event-category">Pop Concert • Punjabi Artist</div>
+                        <div class="event-actions">
+                            <button class="btn btn-secondary" style="width: 100%;">Notify Me</button>
+                        </div>
                     </div>
                 </div>
                 
                 <!-- Event 3 -->
                 <div class="event-card">
-                    <div class="event-image" style="background-image: url('./Images/djoshnin&jeez.jpg'); background-color: #2a2a2a;"></div>
+                    <div class="event-image" style="background-image: url('./Images/djoshnin&jeez.jpg');"></div>
                     <div class="event-details">
-                        <div class="event-date">Sun, 11 May | Sat, 19 Apr</div>
+                        <div class="event-date"><i class="far fa-calendar-alt"></i> Sun, 11 May | Sat, 19 Apr | 9:00 PM</div>
                         <h3 class="event-title">Saturday's Vibe with DJ OSHIN x SHEZZ</h3>
-                        <div class="event-venue">Pyramid Elante, Chandigarh</div>
-                        <div class="event-category">Concerts</div>
+                        <div class="event-venue"><i class="fas fa-map-marker-alt"></i> Pyramid Elante, Chandigarh</div>
+                        <div class="event-price">From ₹1,200</div>
+                        <div class="event-category">Club Gig • Electronic Dance Music</div>
+                        <div class="event-actions">
+                            <button class="btn btn-primary">Book Now</button>
+                            <button class="btn btn-secondary">More Info</button>
+                        </div>
                     </div>
                 </div>
+                
+                <!-- Event 4 -->
+                <div class="event-card">
+                    <div class="event-badge">Last Few Tickets</div>
+                    <div class="event-image" style="background-image: url('https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80');"></div>
+                    <div class="event-details">
+                        <div class="event-date"><i class="far fa-calendar-alt"></i> Fri, 24 May 2025 | 6:30 PM</div>
+                        <h3 class="event-title">Sunburn Arena with Martin Garrix</h3>
+                        <div class="event-venue"><i class="fas fa-map-marker-alt"></i> Sector 34 Grounds, Chandigarh</div>
+                        <div class="event-price">From ₹3,500</div>
+                        <div class="event-category">EDM Festival • International DJ</div>
+                        <div class="event-actions">
+                            <button class="btn btn-primary">Book Now</button>
+                            <button class="btn btn-secondary">More Info</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Event 5 -->
+                <div class="event-card">
+                    <div class="event-image" style="background-image: url('https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80');"></div>
+                    <div class="event-details">
+                        <div class="event-date"><i class="far fa-calendar-alt"></i> Sat, 8 Jun 2025 | 7:30 PM</div>
+                        <h3 class="event-title">Chandigarh Jazz Festival 2025</h3>
+                        <div class="event-venue"><i class="fas fa-map-marker-alt"></i> Tagore Theatre, Chandigarh</div>
+                        <div class="event-price">From ₹800</div>
+                        <div class="event-category">Jazz Concert • Multiple Artists</div>
+                        <div class="event-actions">
+                            <button class="btn btn-primary">Book Now</button>
+                            <button class="btn btn-secondary">More Info</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Event 6 -->
+                <div class="event-card">
+                    <div class="event-badge">Early Bird</div>
+                    <div class="event-image" style="background-image: url('https://images.unsplash.com/photo-1470225620780-dba8ba36b745?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80');"></div>
+                    <div class="event-details">
+                        <div class="event-date"><i class="far fa-calendar-alt"></i> Sat, 15 Jun 2025 | 8:00 PM</div>
+                        <h3 class="event-title">Bollywood Night with Arijit Singh</h3>
+                        <div class="event-venue"><i class="fas fa-map-marker-alt"></i> Rock Garden, Chandigarh</div>
+                        <div class="event-price">From ₹1,800</div>
+                        <div class="event-category">Bollywood Concert • Live Performance</div>
+                        <div class="event-actions">
+                            <button class="btn btn-primary">Book Now</button>
+                            <button class="btn btn-secondary">More Info</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="pagination">
+                <button><i class="fas fa-chevron-left"></i></button>
+                <button class="active">1</button>
+                <button>2</button>
+                <button>3</button>
+                <button><i class="fas fa-chevron-right"></i></button>
             </div>
         </main>
     </div>
     
     <footer class="footer">
         <div class="footer-container">
-            <div style="color: #bb86fc;">Chandigarh</div>
-            <div class="footer-links">
-                <a href="#">ListYourShow</a>
-                <a href="#">Corporates</a>
-                <a href="#">Offers</a>
-                <a href="#">Gift Cards</a>
+            <div class="footer-column">
+                <h3>PLANR</h3>
+                <ul class="footer-links">
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Careers</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="#">Blog</a></li>
+                    <li><a href="#">Press</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Events</h3>
+                <ul class="footer-links">
+                    <li><a href="#">Concerts</a></li>
+                    <li><a href="#">Theater</a></li>
+                    <li><a href="#">Comedy</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Support</h3>
+                <ul class="footer-links">
+                    <li><a href="#">Help Center</a></li>
+                    <li><a href="#">FAQs</a></li>
+                    <li><a href="#">Terms of Use</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Refund Policy</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Connect With Us</h3>
+                <p>Subscribe to our newsletter for the latest events and offers</p>
+                <div class="search-bar" style="width: 100%; margin: 10px 0;">
+                    <input type="text" placeholder="Your email address">
+                    <i class="fas fa-paper-plane"></i>
+                </div>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
             </div>
         </div>
-    </footer>
+        
+        <div class="copyright">
+            &copy; 2025 PLANR. All Rights Reserved.
+        </div>
 </body>
 </html>

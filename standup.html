@@ -3,20 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Laugh Factory India | Book Standup Comedy Shows</title>
+    <title>Laugh Factory India | Premium Standup Comedy</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* Reset and Base Styles */
+        /* Dark Theme Base Styles */
         :root {
-            --primary: #ff6b6b;
-            --secondary: #794afa;
-            --secondary-dark: #4531a8;
-            --white: #ffffff;
-            --gray: #f8f9fa;
-            --gray-dark: #e9ecef;
-            --black: #212529;
-            --success: #20c997;
-            --warning: #ff922b;
+            --primary: #ff4757; /* Dark red */
+            --secondary: #6c5ce7; /* Purple */
+            --secondary-dark: #4834d4;
+            --accent: #1dd1a1; /* Green */
+            --dark: #1e272e;
+            --darker: #0f1519;
+            --light: #f8f9fa;
+            --gray: #57606f;
+            --gray-dark: #2f3542;
         }
 
         * {
@@ -24,11 +24,12 @@
             padding: 0;
             box-sizing: border-box;
             font-family: 'Poppins', sans-serif;
+            background-color: #121212;
         }
 
         body {
-            background-color: var(--gray);
-            color: var(--black);
+            background-color: var(--darker);
+            color: var(--light);
             line-height: 1.6;
         }
 
@@ -67,6 +68,7 @@
 
         p {
             margin-bottom: 1rem;
+            color: rgba(255,255,255,0.8);
         }
 
         /* Utility Classes */
@@ -92,24 +94,35 @@
 
         .btn-primary {
             background-color: var(--primary);
-            color: var(--white);
+            color: var(--light);
         }
 
         .btn-primary:hover {
-            background-color: #ff5252;
+            background-color: #ff6b81;
             transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(255, 107, 107, 0.3);
+            box-shadow: 0 10px 20px rgba(255, 71, 87, 0.3);
         }
 
         .btn-secondary {
             background-color: var(--secondary);
-            color: var(--white);
+            color: var(--light);
         }
 
         .btn-secondary:hover {
             background-color: var(--secondary-dark);
             transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(121, 74, 250, 0.3);
+            box-shadow: 0 10px 20px rgba(108, 92, 231, 0.3);
+        }
+
+        .btn-accent {
+            background-color: var(--accent);
+            color: var(--darker);
+        }
+
+        .btn-accent:hover {
+            background-color: #2ecc71;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(29, 209, 161, 0.3);
         }
 
         .text-center {
@@ -140,8 +153,8 @@
 
         /* Header Styles */
         header {
-            background-color: var(--white);
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            background-color: var(--dark);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
             position: fixed;
             width: 100%;
             top: 0;
@@ -158,11 +171,11 @@
         .logo {
             font-size: 1.8rem;
             font-weight: 700;
-            color: var(--secondary);
+            color: var(--primary);
         }
 
         .logo span {
-            color: var(--primary);
+            color: var(--accent);
         }
 
         .nav-links {
@@ -187,9 +200,9 @@
 
         /* Hero Section */
         .hero {
-            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1505373877841-8d25f7d46678?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80') no-repeat center center/cover;
+            background: linear-gradient(rgba(30, 39, 46, 0.9), rgba(30, 39, 46, 0.9)), url('https://images.unsplash.com/photo-1505373877841-8d25f7d46678?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80') no-repeat center center/cover;
             height: 100vh;
-            color: var(--white);
+            color: var(--light);
             display: flex;
             align-items: center;
             text-align: center;
@@ -221,7 +234,7 @@
 
         /* Featured Comedians Section */
         .featured-comedians {
-            background-color: var(--white);
+            background-color: var(--dark);
         }
 
         .comedians-grid {
@@ -232,16 +245,16 @@
         }
 
         .comedian-card {
-            background-color: var(--white);
+            background-color: var(--darker);
             border-radius: 10px;
             overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
         .comedian-card:hover {
             transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
         }
 
         .comedian-img {
@@ -269,18 +282,18 @@
         }
 
         .comedian-info p {
-            color: #666;
+            color: rgba(255,255,255,0.7);
             margin-bottom: 1rem;
         }
 
         .rating {
-            color: var(--warning);
+            color: var(--accent);
             margin-bottom: 1rem;
         }
 
         /* Shows Section */
         .shows {
-            background-color: var(--gray);
+            background-color: var(--darker);
         }
 
         .shows-filter {
@@ -293,15 +306,16 @@
         .filter-btn {
             padding: 0.5rem 1.5rem;
             border-radius: 50px;
-            background-color: var(--white);
+            background-color: var(--dark);
             border: 1px solid var(--gray-dark);
             cursor: pointer;
             transition: all 0.3s ease;
+            color: var(--light);
         }
 
         .filter-btn.active, .filter-btn:hover {
             background-color: var(--secondary);
-            color: var(--white);
+            color: var(--light);
             border-color: var(--secondary);
         }
 
@@ -312,10 +326,10 @@
         }
 
         .show-card {
-            background-color: var(--white);
+            background-color: var(--dark);
             border-radius: 10px;
             overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
         }
 
         .show-img {
@@ -337,7 +351,7 @@
             display: flex;
             align-items: center;
             gap: 0.5rem;
-            color: var(--secondary);
+            color: var(--accent);
             margin-bottom: 0.5rem;
         }
 
@@ -345,7 +359,7 @@
             display: flex;
             align-items: center;
             gap: 0.5rem;
-            color: #666;
+            color: rgba(255,255,255,0.7);
             margin-bottom: 1rem;
         }
 
@@ -364,7 +378,7 @@
 
         /* Testimonials Section */
         .testimonials {
-            background-color: var(--white);
+            background-color: var(--dark);
         }
 
         .testimonials-container {
@@ -373,11 +387,11 @@
         }
 
         .testimonial-card {
-            background-color: var(--gray);
+            background-color: var(--darker);
             padding: 2rem;
             border-radius: 10px;
             margin-bottom: 2rem;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
         }
 
         .testimonial-header {
@@ -401,14 +415,14 @@
         }
 
         .testimonial-rating {
-            color: var(--warning);
+            color: var(--accent);
             margin-bottom: 0.5rem;
         }
 
         /* Newsletter Section */
         .newsletter {
             background: linear-gradient(135deg, var(--secondary), var(--secondary-dark));
-            color: var(--white);
+            color: var(--light);
             text-align: center;
         }
 
@@ -426,12 +440,13 @@
             border: none;
             outline: none;
             font-size: 1rem;
+            background-color: rgba(255,255,255,0.9);
         }
 
         /* Footer */
         footer {
-            background-color: var(--black);
-            color: var(--white);
+            background-color: var(--dark);
+            color: var(--light);
             padding: 4rem 0 2rem;
         }
 
@@ -464,6 +479,7 @@
 
         .footer-links a {
             transition: color 0.3s ease;
+            color: rgba(255,255,255,0.7);
         }
 
         .footer-links a:hover {
@@ -512,7 +528,7 @@
         }
 
         .modal-content {
-            background-color: var(--white);
+            background-color: var(--dark);
             max-width: 800px;
             margin: 3rem auto;
             border-radius: 10px;
@@ -526,7 +542,7 @@
             align-items: center;
             padding: 1.5rem;
             background-color: var(--secondary);
-            color: var(--white);
+            color: var(--light);
         }
 
         .close-modal {
@@ -561,6 +577,8 @@
             border: 1px solid var(--gray-dark);
             border-radius: 5px;
             font-size: 1rem;
+            background-color: var(--darker);
+            color: var(--light);
         }
 
         .booking-form textarea {
@@ -644,7 +662,7 @@
                 left: -100%;
                 width: 100%;
                 height: calc(100vh - 80px);
-                background-color: var(--white);
+                background-color: var(--dark);
                 flex-direction: column;
                 align-items: center;
                 padding: 2rem 0;
@@ -695,558 +713,1401 @@
                 grid-template-columns: 1fr;
             }
         }
+            /* Add to your existing CSS */
+            .gift-cards-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                gap: 2rem;
+                margin-top: 3rem;
+            }
+
+            .gift-card-option {
+                background-color: var(--dark);
+                border-radius: 10px;
+                padding: 2rem;
+                text-align: center;
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+                transition: transform 0.3s ease;
+            }
+
+            .gift-card-option:hover {
+                transform: translateY(-5px);
+            }
+
+            .gift-card-value {
+                font-size: 2rem;
+                font-weight: 700;
+                color: var(--accent);
+                margin-bottom: 0.5rem;
+            }
+
+            .gift-card-price {
+                font-size: 1.2rem;
+                margin-bottom: 1.5rem;
+            }
+
+            .custom-amount {
+                background-color: var(--secondary);
+                color: var(--light);
+            }
+
+            .custom-amount h4 {
+                margin-bottom: 1.5rem;
+            }
+
+            .custom-amount .form-group {
+                margin-bottom: 1.5rem;
+            }
+
+            .custom-amount input {
+                width: 100%;
+                padding: 0.8rem;
+                border-radius: 5px;
+                border: none;
+                text-align: center;
+                font-size: 1.2rem;
+                background-color: rgba(255,255,255,0.9);
+            }
+            /* Welcome Screen Styles */
+            .welcome-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--secondary), var(--secondary-dark));
+            color: var(--light);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            overflow-y: auto;
+            padding: 2rem;
+            }
+
+            .welcome-content {
+            max-width: 800px;
+            text-align: center;
+            animation: fadeIn 0.5s ease;
+            }
+
+            .preference-section {
+            margin: 2rem 0;
+            }
+
+            .comedian-options {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+            margin: 1.5rem 0;
+            }
+
+            .option-card {
+            width: 120px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            border-radius: 8px;
+            overflow: hidden;
+            background: rgba(255,255,255,0.1);
+            }
+
+            .option-card:hover {
+            transform: scale(1.05);
+            }
+
+            .option-card.selected {
+            box-shadow: 0 0 0 3px var(--accent);
+            }
+
+            .option-card img {
+            width: 100%;
+            height: 120px;
+            object-fit: cover;
+            }
+
+            .option-card p {
+            padding: 0.5rem;
+            margin: 0;
+            }
+
+            .genre-options {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.8rem;
+            margin: 1.5rem 0;
+            }
+
+            .genre-btn {
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            background: rgba(255,255,255,0.1);
+            border: none;
+            color: var(--light);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            }
+
+            .genre-btn:hover, .genre-btn.selected {
+            background: var(--accent);
+            color: var(--darker);
+            }
+
+            #continueBtn {
+            margin-top: 2rem;
+            padding: 1rem 3rem;
+            font-size: 1.1rem;
+            }
+            .seat-booking-section {
+            margin: 2rem 0;
+        }
+        
+        .stage-display {
+            background: var(--secondary);
+            color: white;
+            text-align: center;
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+        
+        .seats-container {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
+        .seat-row {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+        
+        .seat {
+            width: 30px;
+            height: 30px;
+            background: var(--gray-dark);
+            border-radius: 5px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            transition: all 0.2s ease;
+        }
+        
+        .seat:hover {
+            transform: scale(1.1);
+        }
+        
+        .seat.selected {
+            background: var(--accent);
+            color: var(--darker);
+        }
+        
+        .seat.booked {
+            background: var(--primary);
+            cursor: not-allowed;
+        }
+        
+        .seat.aisle {
+            visibility: hidden;
+        }
+        
+        .seat-legend {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.8rem;
+        }
+        
+        .legend-color {
+            width: 15px;
+            height: 15px;
+            border-radius: 3px;
+        }
+        
+        .booking-summary {
+            background: var(--darker);
+            padding: 1rem;
+            border-radius: 5px;
+            margin-top: 1.5rem;
+        }
+        
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+        }
+        
+        .total-row {
+            font-weight: bold;
+            border-top: 1px solid var(--gray);
+            padding-top: 0.5rem;
+            margin-top: 0.5rem;
+        }
+        /* Meal Booking Styles */
+        .meal-options {
+            margin: 1rem 0;
+            border: 1px solid var(--gray-dark);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .meal-option {
+            padding: 1rem;
+            border-bottom: 1px solid var(--gray-dark);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .meal-option:last-child {
+            border-bottom: none;
+        }
+
+        .meal-select {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .meal-checkbox {
+            width: 18px;
+            height: 18px;
+            accent-color: var(--accent);
+        }
+
+        .meal-details {
+            text-align: right;
+        }
+
+        .meal-details p {
+            margin: 0.3rem 0;
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.6);
+        }
+
+        .meal-price {
+            color: var(--accent);
+            font-weight: bold;
+        }
+
+        .meal-summary {
+            background-color: var(--darker);
+            padding: 1rem;
+            border-radius: 8px;
+            margin-top: 1.5rem;
+        }
+
+        #selectedMealsList {
+            margin: 0.5rem 0;
+            padding-left: 1.5rem;
+        }
+
+        #selectedMealsList li {
+            margin-bottom: 0.3rem;
+        }
+
+        .meal-total {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 0.5rem;
+            padding-top: 0.5rem;
+            border-top: 1px solid var(--gray);
+            font-weight: bold;
+        }
+        /* Membership Section Styles */
+        .membership-tiers {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .tier-card {
+            background-color: var(--darker);
+            border-radius: 10px;
+            padding: 2rem;
+            position: relative;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .tier-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .tier-card.featured {
+            border: 2px solid var(--accent);
+            transform: scale(1.05);
+        }
+
+        .popular-badge {
+            position: absolute;
+            top: -10px;
+            right: 20px;
+            background-color: var(--primary);
+            color: white;
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        .tier-price {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin: 1rem 0;
+            color: var(--accent);
+        }
+
+        .tier-price span {
+            font-size: 1rem;
+            color: rgba(255,255,255,0.7);
+        }
+
+        .tier-benefits {
+            margin: 1.5rem 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .tier-benefits li {
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .tier-benefits i {
+            margin-right: 0.5rem;
+            width: 20px;
+        }
+
+        .tier-benefits .fa-check {
+            color: var(--accent);
+        }
+
+        .tier-benefits .fa-times {
+            color: var(--primary);
+        }
+
+        /* Payment Methods */
+        .payment-options {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .payment-method {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            background-color: var(--gray-dark);
+            cursor: pointer;
+        }
+
+        .payment-method input {
+            margin: 0;
+        }
+
+        .payment-details {
+            background-color: var(--gray-dark);
+            padding: 1rem;
+            border-radius: 5px;
+            margin-top: 1rem;
+        }
+
+        /* User Profile in Header */
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--secondary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        .user-menu {
+            position: absolute;
+            top: 50px;
+            right: 0;
+            background-color: var(--dark);
+            border-radius: 5px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            padding: 1rem;
+            width: 200px;
+            display: none;
+            z-index: 100;
+        }
+
+        .user-menu.active {
+            display: block;
+        }
+
+        .user-menu a {
+            display: block;
+            padding: 0.5rem 0;
+            transition: color 0.3s ease;
+        }
+
+        .user-menu a:hover {
+            color: var(--primary);
+        }
+
+        .user-menu a i {
+            margin-right: 0.5rem;
+            width: 20px;
+            text-align: center;
+        }
+        
     </style>
 </head>
 <body>
-    <!-- Header -->
-    <header>
-        <div class="container">
-            <nav class="navbar">
-                <a href="#" class="logo">Laugh<span>Factory</span></a>
-                <ul class="nav-links">
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#comedians">Comedians</a></li>
-                    <li><a href="#shows">Shows</a></li>
-                    <li><a href="#testimonials">Reviews</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
-                <div class="mobile-menu-btn">
-                    <i class="fas fa-bars"></i>
-                </div>
-            </nav>
+    <!-- Welcome Screen -->
+<div id="welcomeScreen" class="welcome-screen">
+    <div class="welcome-content">
+      <h1>Welcome to PLANR</h1>
+      <p>Help us personalize your comedy experience</p>
+      
+      <div class="preference-section">
+        <h2>Choose your favorite comedians</h2>
+        <div class="comedian-options">
+          <div class="option-card" data-comedian="zakir">
+            <img src="https://www.bollywoodhungama.com/wp-content/uploads/2021/10/Zakir-Khan-1.jpg" alt="Zakir Khan">
+            <p>Zakir Khan</p>
+          </div>
+          <div class="option-card" data-comedian="bassi">
+            <img src="https://i0.wp.com/www.urbanasian.com/wp-content/uploads/2022/05/Anubhav-Singh-Bassi.jpg" alt="Anubhav Bassi">
+            <p>Anubhav Bassi</p>
+          </div>
+          <div class="option-card" data-comedian="kaneez">
+            <img src="https://www.mumbaitheatreguide.com/dramas/wp-content/uploads/2019/12/Kaneez-Surka-1.jpg" alt="Kaneez Surka">
+            <p>Kaneez Surka</p>
+          </div>
+          <div class="option-card" data-comedian="ravi">
+            <img src="https://www.mumbaitheatreguide.com/dramas/wp-content/uploads/2021/04/Ravi-Gupta.jpg" alt="Ravi Gupta">
+            <p>Ravi Gupta</p>
+          </div>
         </div>
-    </header>
-
-    <!-- Hero Section -->
-    <section class="hero" id="home">
-        <div class="container">
-            <div class="hero-content">
-                <h1>India's Finest Standup Comedy Shows</h1>
-                <p>Book tickets for the hottest standup comedy shows featuring India's top comedians. Laugh your heart out with our curated selection of hilarious performances.</p>
-                <div class="hero-btns">
-                    <a href="#shows" class="btn btn-primary">Book Tickets</a>
-                    <a href="#comedians" class="btn btn-secondary">View Comedians</a>
-                </div>
+      </div>
+      
+      <div class="preference-section">
+        <h2>Select your favorite comedy genres</h2>
+        <div class="genre-options">
+          <button class="genre-btn" data-genre="observational">Observational</button>
+          <button class="genre-btn" data-genre="satire">Satire</button>
+          <button class="genre-btn" data-genre="improv">Improv</button>
+          <button class="genre-btn" data-genre="storytelling">Storytelling</button>
+          <button class="genre-btn" data-genre="dark">Dark Humor</button>
+        </div>
+      </div>
+      
+      <button id="continueBtn" class="btn btn-primary">Continue to LaughFactory</button>
+    </div>
+  </div>
+    <!-- Main Website Content -->
+    <div id="mainContent">
+        <!-- Header -->
+        <header>
+            <div class="container">
+                <nav class="navbar">
+                    <a href="homepage1.html" class="logo">PL<span>ANR</span></a>
+                    <ul class="nav-links">
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#comedians">Comedians</a></li>
+                        <li><a href="#shows">Shows</a></li>
+                        <li><a href="#gift-cards">Gift Cards</a></li>
+                        <li><a href="#testimonials">Reviews</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                    <div class="mobile-menu-btn">
+                        <i class="fas fa-bars"></i>
+                    </div>
+                </nav>
             </div>
-        </div>
-    </section>
+        </header>
 
-    <!-- Featured Comedians Section -->
-    <section class="featured-comedians section-padding" id="comedians">
-        <div class="container">
-            <h2 class="section-title text-center">Featured Comedians</h2>
-            <p class="text-center">Discover India's most talented standup comedians who will leave you in splits</p>
-            
-            <div class="comedians-grid">
-                <!-- Comedian 1 - Anubhav Singh Bassi -->
-                <div class="comedian-card">
-                    <div class="comedian-img">
-                        <img src="data:image/webp;base64,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" alt="Anubhav Singh Bassi">
-                    </div>
-                    <div class="comedian-info">
-                        <h3>Anubhav Singh Bassi</h3>
-                        <p>Known for his relatable college and life stories</p>
-                        <div class="rating">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star-half-alt"></i>
-                            <span>4.7</span>
-                        </div>
-                        <a href="#" class="btn btn-primary book-btn" data-comedian="Anubhav Singh Bassi">Book Show</a>
-                    </div>
-                </div>
-                
-                <!-- Comedian 2 - Vipul Goyal -->
-                <div class="comedian-card">
-                    <div class="comedian-img">
-                        <img src="data:image/webp;base64,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" alt="Vipul Goyal">
-                    </div>
-                    <div class="comedian-info">
-                        <h3>Vipul Goyal</h3>
-                        <p>Engineer-turned-comedian with sharp observations</p>
-                        <div class="rating">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="far fa-star"></i>
-                            <span>4.2</span>
-                        </div>
-                        <a href="#" class="btn btn-primary book-btn" data-comedian="Vipul Goyal">Book Show</a>
-                    </div>
-                </div>
-                
-                <!-- Comedian 3 - Ravi Gupta -->
-                <div class="comedian-card">
-                    <div class="comedian-img">
-                        <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBxMTEhUTExMWFRUXGBcaGBUYFxgYFxUaGBcXFhgYGBcaHSggGB0lGxUXITEhJSkrLi4uFx8zODMtNygtLisBCgoKDg0OFxAQGC0dHR0tLS0tLS0tLS0tLS0tKy0tLSstLS0tLS0tLS0tLS0tLS0tLS0tLS0tLSstLS0tLS0tLf/AABEIAOEA4QMBIgACEQEDEQH/xAAcAAACAgMBAQAAAAAAAAAAAAAEBQMGAAECBwj/xABLEAABAwEFBQMHCgMECQUAAAABAAIRAwQFEiExBkFRYXEigZETMqGxwdHwBxQjQlJicpKy4RWz8TNzgqIWJENEU1Rkk8I0NUVjg//EABkBAAMBAQEAAAAAAAAAAAAAAAABAwIEBf/EACERAQEAAgIDAQEBAQEAAAAAAAABAhEDEhMhMUFRIgQU/9oADAMBAAIRAxEAPwB7WGUxCgDzGZRdqY3LPog7ZWY0b8/ejZ6Y2qHcJQ1Qriwk9ok5T6ltzxxCNjQC0RJQT2TAAJO4DU9ArNc2zVW1nE3sUt9UjI/gH1uuiuthuOnZh9G3tb6hzee/6o5BEmyuUig3bsNXqQ6oRQb97N56MHtIVismxdjp5ua+seL3YW/lZHpJVgc1xK35AxJMAanQDqdAqTGJ3K1q6G2ei7s0adPm1oB8dVYmVARIMqgXttNYaOXl/KO4UmuqweBLAQPFK2/KQymYp2S1VOcU2A+Lp9CzdHNvVVi8rf8AK9UH/wAZW/7rPYCuB8tbG/2l32lvQsd7llt6s5oOREhI7z2PsVecdBgJ+szsO6ktie+VULN8tV3Pyca9A/8A2Up/QXJ5YNtbNXk0bRTqHgHCe8HNOTZW6V2+/kuc2XWati+5UgHueMvQqDed11qDsNam5h5jI9HDIr12verydVFXr+UaWvaHNOrXCQfFa6F2rxZ0LUr0G+dhm1AX2Xsu30nHI/gdu6FUW0Wd1NxY9pa4ZFrsiFizTcuwrlC5FOah31GzhkA8CYPpS20hcoii301E6mjYCPCgcjXU1C+kkegxUT0UaShfSRs9UMVwVM6kojTKCcrF15MrED29YpPry4HPWCo7VWrxmMoGXfCdNceIQtutIY1z3uhoEykC+02x4DDhOuGACcROQAA1JOgV92W2KlratsaJyIs+rRzqn6x+7oN87t7AbNPytlpaQ8/2NIj+xafruH/EcPyjmSr3K1IxaxrQBAEAbuChtdVlNpfUc1rRq4mAEvv/AGgpWVvaOJ5HZpg9o8z9kcz3SvML6v2taXYnnIeawea3oOPM5o3oTHazXzts0H/V6eLd5R8hvczU98dFTr3ttSuZq1HPz80+YOjB2R4Ic13cEPUtLkrla1MZBLWiMsgsIQDbWd8rp1tG9LbWhb2IYM0WeXUFS0DggacWm7qbxDmNPcklr2UYc6ZLHboOibutJ0XJqc0bGgFh2hvKxEAu8vTH1X55cnaj0r0PZ/bmzWkBpDqNT7D8h3O3yqDXrZwdOenVL7dbmN0lztwjU6QAVvHKp3GPar32ooWZgc4y7cwSSYn0c15Te+0tot1U1KwDGjzWgAOidAd+XMpBUtZaJkuJmIGRPPloJ3peK76YdqXEx0y10Tt2UmliqWuDDQJEZc43k7/jJF2W8nNlr8BnLsmTA5mFUaNSqDicYk6mc+PPfuR4vBziGyCBvPL1fHRIzZ4bJLSZO6SR4H2LkZ6INmGSZIJ3jTX0b13SrQ0jFEGJyMxrPcizZy6SOChcF3UcZ1B3/wBQo3qelJduHBRPCkKiekbhRuauyuXFAc5LFuFiPR6exUq7XTIiN5HpS2wAWmv5V3/p6Luxwq1G7zyafSq5S2mbbMNms7Kjaj8nOcGwxg84yDw5K3UbOKbGsZk1ggCOHrO9Wxxc+WS5WbauoPOh3X9kReO2LW0+y36QjLPst+8fcqFbLwFGn5Rwc4SAGtbicT04JFU2kYczStEnX6I+9PJmLDUqY3F7nYnOJJJ1JUTyB8BVw7V0JIwVp3jyRy9K5G1FLF5laOHknLGlNn72yJQVuqNYwvdkGiTCBqbW0WjzK3/bISq/tq7PUouY0vkjKWEI0NvQbNsk+pZKNqFRuGtTZUDSCC0PaHAE5zkUspbOvJILmen3L0G4f/ZbHl/utD+U1VppIk9fUVuYyxjvdqccJww79+qgtoa0FzjAAzKCZf8AQG6of/zcgb82hs76TmAuDiNC0hY03syJENO4gEHkucQgmRABPguYimz8DT4tCW2m2YG8cWRHLlzWusLtUNst85AZmInQ8O5B16WckievmzvPPP8AZC+Xa2o0g5TGegB/qtXnXE9mcJzz+M/3KQNLssjahwkEkOMHlMd28q/XNslTcBiEmIneq7sPZJYHESZXrVyUchkuLn5bvUrv/wCfix1vKKxeGwlAUnEgmJjdE9F5Vb7I2i8tGcnwAy+OgX0+LGx7SDvC8G+US5PI1geJgDjwIT4Mst+6xzTGz/M1pXaYMAtPZPx8dFvHDoMTvHhqtUjhOEHicswJBHx0QtSS8yee45Rn6l2OM4c8FogZyfFCucZQ1e0hjsNMFxjr1H9VupacpPUxMBFOXSYvUTnhCm3M+0ozbGfaWerXYUXhcFyFNqb9pcm0N+0l1PsIk8VtC/OG8VifUdnvXyJ7E0adi+dVG4qloktJ+pSDiGAc3RingWjcrfbdlm6s9yU3HtI2iynRAGBjQxo4BoAHqR+2W1FOnY3mm76SoDTaN4LhDndzZPWFS7xiEnavI7+tpfXdhP0bey0AwDBzdlxPsQvz+p9pRwtkKPeujpA5nEXzmY9H9V0arjvIUpauEd6XSOa9d5BExKrl5XPkX4tOSsjkFfH9k7ojvT6R9AbMtH8Hsk/8pZ/5TCqea/bcM9HR4FXXZujN02Vv/SUPRRYqLaCG1D0d+kq+N9Oa/XnrLW7gEiv2xY8VSYPCE7DckHfGVJy5+9dPSG1RnYb/AHbP0hVu/smg4hpOGNSCrQ4xh/A39ASHaGxuc0Fv1GlztNAD710X4hPqt2moHRhB7/jkmda68dGnWa4RGEtgyMMyTOvakQJO+EsFtGGMAO+T8fEqz7M1HWilVpgAYKjK0AZdppoHL/G3NTt9Nybuhtx3naaABpta5vQ6cJXpuy+2dOqAKjPJk5BxIwlw1HKJHiOKoF17LWim8HDVImYYWYHt4HEnWy10vbbQO21rn5tmHQ2XRLCI3acQuTk6WO3DvPS43/t7RsznsFOpUcIjDGEyJGc6Lz7aK+hbHPrGiZ8kGslwGEgvc4tHHtDTgOCs239w1jie15JBOIxJiSZOn1SMuaoFS7a1SnDqocRkAWODonicufcnxzGRnPf4rtGm4FpycNCRoJMZ5KC0yamWRmQAIG6Iz5oy97O6zRQc6NCcM9oA5YgfAIGtekgYBhfPnakjTPn05rql25LNenVma4PxmQc+/d1RNntvaLSNBmeWc+mPFZTtBcAHugiS0kfEaoTyjBJGbidSUyTuYD9UKM0W/ZCJaJXD6an3V8cD+Sb9kLXkm/ZUpprWFPuPHEPkm8AsUuBYjuPHHpDbURGfwT+y5vm1l7g0mQ325n2IHysuaBy963UfJJ5rXLfTHFPe3C0uyVxO5QXaK4KmBXLu5BIkBfg+icmcpZtE76Eon07H0js5Au+zcBZqX8pq86vTtVSBwd+kr0e42/6jQH/T0/5bV57aqX0rvwv/AEldWPxx3686wpdfv9ke5Mwle0NX6KOa5J9dtPazcx+Bv6AtU2YmVhGZoVAOuHJS1hkD9wfpChsRzq/3bvVC7Pxxz680cwiOf9FZNg6uCvixln1SRvB1aRoQeB4BKr4sbmOLvquOXU5rLlqQ8ToSJ96jl7x9K4/5y9ve7RfTKFEONoJMZDAwnoIAlRfJxV8vajWfUDiAIyGWLODG/KJXje0tqe20ENc4sDW4c9RGZ/NPgubit9poONWk99PEASQ0kP4bo71CcPre3Tlz7utPpPaPy7WmpTYxzRk5rpl0b2EcpkRnA4Zq9n7HStDcQbZ8LhnDqhI4wCIleaXRtvUYS8tJfve8OJA5F2QzImOIQmz21LzbPoMmVSS5n1WnWRwWLxWe/wCNY8s11+HXyt7CMZ/rFmcSABjY4yIk5t7ycl5fZLHBzzHDf6V7jel6NfTqU3OxEtg8BMjNeI30X034ZG+CFXgytmqhz4ye43acjqI6ShrPRL3A7vchw8E75Op4qwUKAa0DRWzy1EsMe1cYAuC1Tlm9clq59unSAtXJapy1cFqexpHAWLuFiNjSx2V5xTwA9KIJQVk1PUeooqVXl+ocXxslclywlckqarrEVy4lYCuXoDkvKVbQ1Po0zgpPtI7sQtT6zfj6iux8WCif+np/y2qhuJNR0CZZUA72kBXy5ag+YWcu0Nnpemm1VK2PYC4jg71Lpx+OW/XkdRhGRBBGsiCEov2kSGgAkk5DivRKlcF2cetA2yu0HKMuSl4tfqvl3+BqxERH1BPUABBWU51f7t/qC0apOLofYo7I4/Tf3bvUFW/E59JbxoiozD4dUgNN1J2enHorHUSG9rTLsI0G/iVz4bX5NfR1mtYc9p+y3COe9XbZjaGjRYWuBEkHJzgMjiBgGNd8Z815ixxaQe9ObHebRGNo3dNYGXxqt3GUsOS417ab+slpYQ5xIghzXOc5pBwucCyA0+YNZ06rz/5zS+f1alENAcA1sCGtgAkD+nholDNoGNa7C0ZtImM4n+p70nqXpDiWwBBynPWPaViYX23lyz1pd7feZYx2gGWe+DIOXQ+hec3taMdUkjSB7farDdVlqViHVJDBoN7v25pW6zMdbXU6hIDnkDOBJOQPLNGEkumM7bNgaL6bBi1duy0PFNrJWLmSefrUd57P+RrOpl2INjPQ5gH2qQgAQEclnxriljslcOXJctKWlduiuXLa0QnoOViyFiAswo4GucZyknLcBKXm+KX2j+U+5SG0HFBMDtA9IVppbEMnH5epJA+qyI14LpyxlcuOViom96fE/ld7ln8Vp8T+V3uV0OxTYytFQf4We5bZsWJBFdxj7rc4Weka71Sf4xS+0fyn3Lk3rT+0fyu9yt3+gLBP0z9TuasOxTf+K78oKOkHeqh/FafE/ld7kovy3tqABpnuIXoNTY5o/wBqfyhUza64hQIcHl08QAjrIVztfTd30i677MAJ+go/y2qpW+gYe7QNa8uncA0yVbbstwpWSzSJ+gpfy2qpXxeHlvLNAwh1OoPFpVsfiP68kO2tEOkU6hHVqh/0roE5sqCTrll6VOdj2b3D8v7pDbrka2pgZUxcYGnEToFnda0sZkYuhQ77wbSD5BOJmHLcTGpUTq1U5kt6AbtNZQlSnMg+CLRC613k45CGz3nx3ILyMZcd61baOB3qKIHaErOtNW2uCwlg8OhQumqZWV3TgQTqrBdGzJr5tIaDplMrFvX63jj3+fVSoMe4hrASTw+OSuFxbJkkPqgTubrHVWW7dl6lmMua1zftCPSDBT+jSJ3Bo9PoUc+b+L4cH9K/4cKbchmqFtLdGCq+pJnsHoTI9QBXp9se1jS4mGtEuJXn1/2oVmHyfaJfLgBuAIEcYyCODdux/wBGpNFde8zUcX1ZxGJcM5gRmOgUVeqGiTMHeASP2PVCPaRqCOohM7lrw6NzhHeNF03CVzTOwB88bz8CtG2N5+BT21Xax2Y7J5AAeCT2qwPZvkcVnxxryVAbY3n4FaNrbz8CuHUzxWiSl1h9snfztvPwKxRQsR1g7ZLBXYRrvxH2exek7OWvylnpv1OGD1bkfUvMrQ/ON3a9atvye2/KpRJ+831GPQqpLyyopG6odrQpmPCQSVKYKHNHNE4go8QTAStSXnXylUoY0/G9ekV3lUL5SmTRHX2pU3rvlCbPZxv8hS/lhIn2YgvJ/wCHU/SURssalqDMPmspUgTuHYAjrkg9v7wNhpOaM61Vrms34QcnP9MDmeRW/wAT/XmO098EE06ZgDJ7hqT9hvIbz3JRdlhqF7TEA5SeemWvBS06Mvk5xkOR1J6n2BFXTae05h1YQW9DmFhszZc5jzhPRR1LmcdC0+g+pOGmHRxzXTDDiEiVS8bhJYDiGuepSbA6gTTIa4ec0kTkdYlXy2N7Dh8aqs3pYnVMGGOzMzlke5MEFYS7FvPAR4AJjdd4WugcVIdmfNIJB58u4hH2a7QzM9p3HcOgTe6xmRyRfcPejnZz5Qab3No2qm+i52QMFzTuG7EPAqyMtrXuADTBzzy1k92QOSplpcGidcJDtJiCCeeisezd70sOM0seQDQSADrGQzIzIjnwyUZwYb3pb/0cmtbI/lEdaBVpU2NHzd4kFvnFzfOFSfMIkQNDrqCBS71Feg5rm4cEeaBI7/evXdo7TUdS+k1c4FowxgDQRk3/AGYhwyMefzk0O8xL4OYgKkxmPqJZZ3K7pDRtDbS2PNcNRrHMIiy3VD29vePq8+qmpWJjXlzRBIg8OOiJpHtDqFpk1p3Vxf8A5f3XFoucEQHdxGRTCk/JdYkth55eVidTcWkaH+iXFXm/KIe4g8NfjoqXaKJa4g6hKqS7QysW8K0k0Y2W0lzWnKQC09ePhCOuq3mhWZVG45jiN48Eftts0677Y4R9BXl1N25pnzZ5E+BSR/DRURe0We0tcxr2ZtcJB5FTAToFRNgr5/3d5yObDwP2VdHOeDCRi5hbY8Qg3A6raDSVnhUn5QGzQng4esK2PfyVW237VmfySD0H5Ob1s9ku1z6zsBYHVKhMmRhGEtG/shoAG/qvIdptrPn9rdWkjMBjSMgwGcIz3Nk5jMk6SjflSt5psoWYHzqdOo8cQGgMHiHH/CF50HEQRkcynWVyqUocSNDBCAaYtLD9ppHeJKnu6246eJ+XPcY9R9yVXtaGl7MG4nPrwQF7rVIbTf8AhnoQp69QZGR4qoVXk0m5z2W6nkES18gHijQPLTa2YXdtuh3hJnWymPrt8QoLQOw/8J9SREpyA/feDD9dvil9nvZ2Iw+By39UrIUNCmQ48IPsS0azsvgiHB0xqJ18UJZrwNOmKtJ1TI9pkwCBvBzIz15JVT3tRd1P7GE7p+PjigHR2iq2qgGudNSicVMcpDi0xqOyDHJS2u9aTsL8UYmgxBy1yy4HLuVXpvNnrBw0mR03hFXjTAfLfMcMTOU6juKAZuvWn9493vK5bezJBh2o3D3pIStEphfqV404870Fdm8Gfa9B9yrtF2XcpMSWiT1LXjcSCCBlIzQN8UQW4h5wieY/ZI7NWwvxDcfHiE98rjbO5yLDnokhbRPzFyxY0p2gG9L0tFbs1q1SoAZGNznAcxKMsVTyrJ+s3J3MbnewpgynO9LLXQdReKrNN43HiDyKcyZuFguiS1wIyhZeVstEhzLRWgnMY3dk8s9PUtio17Q9pyOo3tPAqZuUFbYLhXr6fOa2X33+9StrV/8Ama3/AHHe9MhRDtNd49y06zqdy1fakw38LK1av/zFb87vel1qtFaC11So5vAudHgSn7qC1XsrS0znGaO8HSh9ubx+cWxzmnE1raVNnCKVNrDHIuDj3pJamFpAIjLQo2iyajRwRd/tkDlC2wkuWDRw65mQeqBvOzYC37JOR9h5prs5ZmuYcyF1tJY3NpAyDDxy3EIDThNJv4R6gurHUlua3ZbI8tZl9Ub+SlsFggEF2hI058UE5qn6N34T6ikRcra+724HZnQ8OHRKW3azmiUyiURYWy8dD6pTEXdT4HxKnu67WeUB7WQPqjeE9gpt9m+sBnv96BstWJ6mParvWuph0JnqPcq1bbrbmW5YXOkcQTl6EgJsdyVLaHNpAdhuIuJgN6xJM55AblaLm2GY9jW1bRiAOIYWxlvbJMwe5UujVrUsRouLQ5sPAiCJMSCjrisNoqB1R9ofTAMQ3Mu6ZwBzzUuTt+XS3F0/ZurRU+Tym9xFKs8ZmJDXActxKVXl8nlrphxYWVQNwlr+5py9KvFybO4G42WqqXZZuNN05aZNB9KdUG1G+fUDhyZB/UZXN5s5+7dfgwy/NPHnNLcnAgjIgiCDG8LmpUESrhtVRaaznEDMDUZ6KqXvZ2+SfAz0y0zyz4arsxy7Tbgzx65WKrROScXXUkYeHtShrSMjkQnFw2dzidwgZnRaZMY5rEX8z+8PD91iCJ6FYjejuy8Qd6VAouyPXNXXCq00X2d5Lc2HUbiOB96PoVmvbLTlvG9vI+9H1GhwIOaQWuxupOx0zl8ZFVwz/qWfHr3DRryCj6Fpa7J3ZPHcevBIrLb2uyPZdw3Hod3REOf3Klkqctnw1q0YOYy47j370JbqsMdzy8UNStL2aHLhqD3IW9bxxQMMEZmDkZ9Sn4/ank9N3Y2akqe+h2T09qCu22gTIPrU942lrmmHbtND6VRIZs1UIB7kdtTaALOBvc5sd2c+j0pTdOnNa2nqZ0m8p9KQPbsqy2mDphJ9LR7VqnVIcZk9r0FB3PVkNE6Nd+oKeq6HnLUcOaCMfLS0g8D7Usp1ckbQq5JVSdkgCw7kibvfL9Pqn1hAtKnsFQB+o0O/oUGc1MwkNexlz3kaiMj0lN/K80FTrtx1MxPY/SEErlssz51wu/ouLvtdXG2j5SGucATwE5lML0cMWLEIPPkEitUA4mu4hKzcaxuq9eu3ZxjB2bZae51OPAsKc2CiGyDWqVRxeWk/5WhU3ZVlA02kvrPdhE/SEAHeABGUp7Y7VTpuIGIc3PLj6Vw5S7eljlNB9o6YNQhpJhoHhOU96p96kik4Ebx6wrXVbLpmVDel2MqNwuEAjXP2K3Hn19IcvH29xQbA0EkkZnedU6uur2nDpHcoL1uplme1hf2zPYOcEajEAJzyzA0Q9nr4XYhkV1WONaPJhYlX8cbxHitpErPl1PZbRmlwW2OgqfVfsfMrhbfUCX06gK7xc1jTfYPbLC12bcjwQ9G2vp9lwxDgdR0KYHquKlMOGeapjknljttluY4ZGDwOXp0Siu/E4niprRZQ0SD3IUqm9p2aEUBkubQF3TzC5qDXkEyTXfVc05GF1fNYuqNJ1DR6ytWBvNR3me33D2rINrBbSGNIgHtbvvfst2q3POc+gIGwea3qR7URVHxuTCejaXGe2eiVYzJzOp3lE0EE7U9T60B1KIsDoe3v9SEARNiHbb8bigHJIyyUFmyc/wDEB6Apd4UFMdp+6HA+gH1j0BAc2qjIGfP48UntI9asJaN6U3rZogjef3QANC0vYZY4tI4FPbrv+CPKyXTm+ZB6jcq6VNS8x45NPgY/8li4y/Wsc7j8ei0L4pwAHAlNmV3uaXxk1pjmY/ZeQUiQctU8o7S1QzDic7LTID9/Qp+L+LznmvYjbGq6pWFTfLhlpOMvHXzvQpLVs1jMsqETuOY7kLYHVHvxPOXDWeB5KzUqui1yZ+/TPHxyz3Fd/wBE6v3fEratHzg8Vin5Kp4sXniwFaKwOVkBdDRS4UNZ6iJDlmtRhC5BhY4Lh6IGq0FY6ztgS3NR8kdRqhx0VIlfrijY2EZEgqO0WBwYXZGfYjjUaMpU155NY3XLNMim7qZG4oK2ul5Vju6AwngFWKj5cTxJPiUgMu92XR3/AIplVEjJZddMQYgeb8ehNaVYAOBEZbkAgo03ESATnnkVALO8k9k6ngntGoQTkfDx1QheQ49/BMAW2J53R3oiy2Fwe3MTPP43qc1D8FdUanaBPEI2B7LATMu9C5oXeMbwXHRu7qEwaVDTP0p/A39T0icvu8Zdr0dUDelgAaDiOR9hTl6AvPzR19hQFatVmAGvq4rVGzjFE5OyOUc+PJE16Q1k/BWPs4hzs5AbH+J2H2pmEvC7XUzxbuPsQbHQVb/mYcIccQPFVa30Q17gNJMeJSBnY7Zllqj6d4cVWqFXCUwFUOClli6Mczr+ILEi71tZ6NdwflBxWjUCObc1f7I8Quv4FX4N8Qr6c+wVKq0arv5wOKbWHZa0P0NMdXfsmbdka/ksOKnixkzJ83DETHFLQ3VWNoHErXlQePgrG/Y6vp5Rn+b3LY2NrQT5Vmhyz8Eag3Vdp1BIz+IRFieMRM/ugrPZp1MespjSsjPs+n902R9lohz2+o8s11eMl2RgjvB5EIey0MLpY47+zr6FDbK1ZpzeJH1cIg+KAmNQijUkAGCDGnBV1N7xtwNPCGhpd50aED90pQFiufQ93tTEFJ7prtAIJG72oz560aceCAnZ5x5oC0+cV263jgUvtlu7WQ9KALlbalnz13L0+9Z87fx9ATC3DkuWvio5x0DG+tyVMtjo847lA95c9wcTm1up5uSCwtq4gCN6EvOcI/F7CgW1CMpI7yhbyrOwjtHzuJ4FAZaND8blNTP0bzy9WaTuqHifEomzvPk3CTv3/dCYWSyOloPIKtXmyXT19f7o+jaHBogn+iAsj8ZIdnlPq96QkAELbXQnFWxtI0QVS73DQz1We0b62BvKLFN8yfwHitp+h/pdmLR1WLEA5uTUpvxWLEBA9b3LaxIPK7B5o6exTuWli0mMsv8AaN6FCbU6s6O9YWLEAkfu6e0rgrFiDGXdqe72ok6lYsTDl2/vQlr87u960sSCMLa2sTBqzTuXQ8//AAj1lYsQEzvahbz80dfYVixALSirJ5h6n1LFiAIZ5vj7UJd3n9x9ixYlfh4/TUrgrFiiu2sWLEB//9k=" alt="Ravi Gupta">
-                    </div>
-                    <div class="comedian-info">
-                        <h3>Ravi Gupta</h3>
-                        <p>Delhi's favorite with hilarious family humor</p>
-                        <div class="rating">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <span>5.0</span>
-                        </div>
-                        <a href="#" class="btn btn-primary book-btn" data-comedian="Ravi Gupta">Book Show</a>
-                    </div>
-                </div>
-                
-                <!-- Comedian 4 - Nayab Midha -->
-                <div class="comedian-card">
-                    <div class="comedian-img">
-                        <img src="data:image/webp;base64,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" alt="Nayab Midha">
-                    </div>
-                    <div class="comedian-info">
-                        <h3>Nayab Midha</h3>
-                        <p>Fresh perspective with millennial humor</p>
-                        <div class="rating">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star-half-alt"></i>
-                            <span>4.5</span>
-                        </div>
-                        <a href="#" class="btn btn-primary book-btn" data-comedian="Nayab Midha">Book Show</a>
-                    </div>
-                </div>
-
-                <!-- Comedian 5 - Zakir Khan -->
-                <div class="comedian-card">
-                    <div class="comedian-img">
-                        <img src="data:image/jpeg;base64,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" alt="Zakir Khan">
-                    </div>
-                    <div class="comedian-info">
-                        <h3>Zakir Khan</h3>
-                        <p>The original "Sakht Launda"</p>
-                        <div class="rating">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <span>5.0</span>
-                        </div>
-                        <a href="#" class="btn btn-primary book-btn" data-comedian="Zakir Khan">Book Show</a>
-                    </div>
-                </div>
-
-                <!-- Comedian 6 - Kaneez Surka -->
-                <div class="comedian-card">
-                    <div class="comedian-img">
-                        <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBxAQEBUPEBAPFRUPFRUQEBAQFRAVFRUWFRUWFhUVFRUYHSggGBolHRcVITEhJSkrLi4uFx8zODMtNygtLisBCgoKDg0OGxAQGy0lHyUtLS0tLS0tLS0tLSstLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLf/AABEIAOAA4QMBEQACEQEDEQH/xAAcAAACAgMBAQAAAAAAAAAAAAAAAQYHAgQFAwj/xAA+EAABBAADBQUECAUEAwEAAAABAAIDEQQFIQYSMUFRImFxgZETMqGxByNCUnLB0fAUYoKSsqLC4fEzQ3MX/8QAGwEBAAMBAQEBAAAAAAAAAAAAAAEDBAUCBgf/xAAyEQACAgEEAQMDAgQGAwAAAAAAAQIDEQQSITFBBSJREzJhcZGBobHwBiMkQlLRFMHx/9oADAMBAAIRAxEAPwDtLmn0okAKQCAxKgCQ9IRUHoSAKQAgBACEiUAEJCkAIAQkEJBQAQAgCkCCkPYqQgVIBIQwQgRCAVIDcXszhSAFIFSARCAxUEgoPSYqQkEAigBAauMzCGH/AMkjG3wBIs+SKLfR5c1Htnjhc4hlNMeCehsH4phomMlLpm6HKD2O0A0A0JBACEhSAFABACHrIigEgEUPIkAIApAbasM40IEgBAYlCTGlBIkJQKGSCEnlPM1jS95DWtFlx0AQEEz3bd7nGLCeHtK1PhavjT5Zgu1eOIENxeLc5xt7nOPvPdqSeYHctCikc6djk+WYR5lKz3XGxwPNHBMR1E4+Tdw20+MYd4TvPc7UehXl0wfgtjq7U+ya7PbaxTVHOBG86B32HHx+yfFZ50uPR0aNZGfEuGS9rlSbDMISCAaAEJBQBUgBAJD0BQZMUPIUgEQgEgNxWGYEAIAQGBQkSgkxKBAoZ6PHFYlkTHSSODWsFuceQRJvhBtJZZUu1G0smMk3QS2Fp7DOv8zup+S2V1qPL7OPfqHY8Lo5kFhpI95+gJ5Be2zP2dfKtmfa0XE68m6LNPU7ejXVpN3LJrl2wkBbqzXrzWN6qb6Na0ta7Rp5x9GmhdAXA8aPBWw1kl9yKp6OD+1lfY/ASYeQxytLXDkeBW+E1NZRz5wcHhk02H2l4YWY8dInk/6Sfks9tflHS0moz7JE+aqDomSAEAISCgAgEgBD0IoQxIQCASAxQG6rDMOlIFSEAhJiQoJRiQoJMSgQiUZ6Kn232jOJkMMZ+pjNCvtuHFx7ui1VV7VlnJ1eo3PauiMwMsq1mSCOs5g3w0aAVp5f9quT4LILksjZSNu6NFybfuOxFYiTzBsAA0XlESZ0Y2iuCswUtkF+kfZZmJjMjRT26gqyqz6cvwRZBWwx5KYwTS2X2TyQQaB6ELp4Ulk5cW4vDLe2cxxlip/vx9l/f0d5rFZHazu6a36kDrLwaAQAoJBACEoEJBAIoGJDyJACASA3VaZgQgKQCKAxKg9CKAwcoJRF9vs2/h8LuNNPxBMba4htds+lDzVlUcsp1VuyH5ZUrh8dFsOKz2g0IvqofJ7XCN/DSe0loNc7X3W8Sqprgsg+cIsDJsxliaAcJIK5k2fksFkIvnJ0YWS6wTrJ82bKGgt3T0Kq46Pbi+zfzcTNJDJGsbXHmreImeMXM0osNDI36ycuPC71v1Xt4wNkkymfpFyQ4TF7zTbXgPa8CufzHD0WrT2KUcGPU1uMtx0dkc6AlZZ94BrvA8PQ/NTbHKLdJbsn+GWIFkO0MISOkAUoAqQlCQ9AgBCBIeQQGJQAgNxWmUaASACgMFBIihJiUJRUu3+Ye2xbmA9nDj2Y8eLz66eS0VRxE52qnunj4Iw/QDwtXIxSWEmYh3G+5T0eM5OnluYOgBDPedz/AOVTOvf2aq7PpcLsnWyeczlkjpAOxVNfvU/Q3XZI6CrHiqJVVryao3Wy8HNkzyRuM9o0FjQ4fV3dXxCqlVHa8F0bZOWGWnnWFkxmGAY/dc4A2LGnMWqYSw+Scbc4I3gdjnxxFr55mv3i5sjXai93TdLt0gbp+zfaPdWh3LHSKlS8/czV+kHZ+Q5cJC5z3QAAvdVlpIsmgOdFRp5f5mV5POpW6tryVVgJHRyC9KIB9V0Hyc2GUXPkmL9tC1961R8QsE1h4PoKZ74KR0AvJaNCQUEoKQkSARQCQhghAKQKkAkBuKwyggBAJAYqCRFCTxxEm61zj9kFx8haE5wUPLKZHPeeLy5x8zf5rbg4uc5NZx0XpGeT4MQpZC7JZszgWTECSMO4anl5rDfY49M7Ol06sW5oseDZyOOEyNpoaCSeJGnK1k3SlyaGoxeCufaxF4mdYBcd1lEnQ6F3etLUsYQpdSlvn+xeeSYpkmGjcxrj2Re6QCNB1WZJYKb01N/BrvzB0M4jxLew81FMBob4Nd0d81GGnyWRipQ9nZ1doMEyfCyxDUSxvZ/c0hXvCw4mKGW2pHy+5hMrSdS6ifEaH5Lovo5/ksrYLFEsdGT7ptZblzk7GglmLRL1QbxoAUEghORIMggyYoQJSAQAhAUgNtWGYEAkAIDAqCRISc/PnbuGmPSJ/wDiVK7IfTKOOhIWw4z4eDX7l7MzE06oxHsnmzTt0N76JXKu5bPq6HsoUfksDOccWYUDk4C/O6+Szxy+Cl4zkguXvhMwO4X62WtFn4LS4yxg8LZnLLbyN8vs6jwkrRpTS0t9LAUQqeOii6VWeZIMyzJjXNwmMw8g/iQRH2d4GqB93hW8NeSnY4/cjwnFvNcuTo5Gw+x3S4u9kXxEnidxxaCe8gArwo8Hm2T3Hz/tRkzsJmBicWkFz5Y93kyQuLR46FdGqe+BiuhtmdzYA/Wv8PzVV5u0D5ZPVnOmNQBoesAgwJA0CECQCUgxQgEAIDbVhmBAJACAwKEiUEmlnMW/h5WfejeP9JQFE4gU/wACt0ejh2cTPOQL0iqZ580Z4RO8gkBaPwgLlWr3M+sg1KmL/BOM4DZ8Cw+DHdxoj81VGTi8meS9zTI5kjcVhiY8O/da528S0NLtRR1I6Ur3cuzxDTR89FiZXBiZaM2Km4DTfd49V4jbKXkWRph9sUduPBAOD3ve8tFMLyTug8aUTbZn3eIrB75fGI43A/ae9/8Ac4lSnhHiz3SPnfaraI4/HGUNa1rCYot03vNZv08nqbtdCqv6ccGGy3fL9DubEMqY/wDztVXvg36Be5k+as51DJANQTkSE5BBkEIEgEpAiEBihAIDcVhmBAJACAxKEmNKAYSCwR1FISijtosJ7LEOZ9018TXwr0WyuWYnH1UNsznxAb26ftaL2Z32eDhRpSis7GSZn7Omk8OBWW+nc8o62h1aUfpyJnFnjfZOjJ7MlH8LhwKxfTaZuymz3yzNG7ze0NNPFVygaMxxwWXlMjS0HeHqogY7EzqTYiFosvHmV7k4lCU2+itvpO2/bHG7A4U3JI3dlkF1Gxw4A/eIPla1aerd7n0ZtRZs9q7KlwTKeO4H/ErczGkWJsbH9Y4/dYxvrf6LJezraBdsmsaoOiZKANCQQAgEgBAJSBIQJAKkBtlWGYEAIAKAwIUEggPN/BQySutucuHtt83T63j+IUD5Fg/uVtMu0Z9VWnhv9CBzineGh9StSOTYsMwnZ2jXPX1Xora5FHF1OncobJUfk24S8e7ZCrkk+zTCckuDdw0pvmCqZJF8bGTPJMVIQGmWSugNfFYrcI3V8rkm2XZc0gPeDXQkm/G1Rk9SfwUznrzicwxEnL2rtejWHdHwAXaqW2tL8HDs91rZrYdty2OAoDzcAvXggsfZFltkd/MG+g/5WS7s7GhWINkqZwVRtM0AKCQQAgBAJACkgSASAEBsqwzAgGgEUBiVBIkBqQ4gPe5vNhoj0/VeT3g4m2GE34b/AKSel6tPk4BTB4ZFkd0cFQ4kdqvIreujg2L3YMnuBsjoB+vwRCePBhIeyNOX5koeX0bWVYkMeL0Hf8l5sjlFlU9r5LLyvZmHGRbzKurFcly3ZKMsHT2wayd3Isnjw9MnaC4HR1UfNVTll8ly69pJMW5oYd3RrWk35LzwV9dlBSnda4it6VzjfUk3Z7gu4vByHweGCA3qHIjXrWqMhE++j3Eh0MrebZXX56hZLlydjQvNePyS9iqNpmgBCQQAoAKQCEAgEUAkAkBtKwzAgBAIoDFQSecr6IH3jXwJ/JQSkcTO8JPFKMZhW75A3Z4Lr2jRwc0/eHxXpJPhniTkuY/sczH7V4WWFwDw1xFOimBa4dRw4p9KWR/5NeO8P4Ksxb96RxFWSTpqPJbYrg4tsk5Myw2HkeabG88uyCUcortiNdkukzLE4WWLSWN7L4b7SPQnikZKX2vIlGUPuWDWKk8Nkz2A2uOCkDZLcw9KseN8vkst9O73I10Xf7WXPNmeGxDGmve1AeADfcVzbEbK1KPk4+0eYBuFlDdN1pH6JUsySPVnCyyjpH776bwAoeA/ZK7aOQ2Z4CQchxLv8TSMhM6+zmPfgZfabhfFiOw4WB2rNEE6dePf0VNiUljyjdp5upp44ZZMGPe8DdgnF69sBvxJr0KytYOupZ8HvJN7ON0kpa0NBJ14DxUJZJzg9MA5xiYXCiWgkHlY4IM5PdACAEAIAQCKASASA2lYZgQAgEUBiVBJr42NxbbPeYQ5oPOuI8wSEZKZ5R5tDwe9rDwLJSGEHprx8kBGdrDl80bnNijnkA3Q+Lgxx0G/K3vI7OpPTmrIbo89Iz3RrmsYzIiOByRsbrcLNDwBXi3UOXC6NWm9LjX7pcslWTYRthYLJGySUeiZw5fHNGYpWNexwotcLCrrm4vKMd0VJe4qbb3Yt+Xu9rHbsPIaa46mMn7Du7of2e1RerOH2cO+j6byuiIgq8oRPthMQ/E1C+R+6DutAcBRIJHH8Neax3pR5SN9EnJcs6eaRSsMmEe55ZLW45xuq4i+mo9FRXKP3+UaLItraQN8XsWSXxH1Y+Rr1+C6MXlZOXNbTDLRoD/N+R/VejyicbINgxEUuEl3d5ri9m8LFOqwQeIuu/mK4rHa3F7kdbRuM63CR2YMqxcHYgxHY+yyQCYN7mkua4DuJPivDsi+0ao1TjxGXH55NyLJ3yOa/FTGXdIc2JrQyPeGoc5tkuI7zXco3Lwj3sbfuef5HYXksBACAFIBQAQAgEQgEgNlWGYEAIBFAIqCRIDylhY73mtd+IA/NAR3aZ43mRNADYxv7oAA3nWBw6AO/uXiybS/U26OlTnu+P6kdldRVB07I4jk7eRDUKmw5tjLAypgoKILkw2vg3M4yqPEwPglaCyVpa7uvmO8cfJa1mL3IxZUuGfMGZ4F2Hnkw8nvQvdGe/dNA+BFHzXUi1JZRzXHa3FnT2NzD+HxcbyezvsD9a0D2m/mvFsd0S6mW2RZufZlhp9Y3AkPLgQDVObwJ7iAfBc6EJLKOlvWEVxtDGCZKGhIkb8N7436LdS+EYNRHlnNy8/VmuLXX5fu1ezMjo4LH+wxDZmnQ0SOo5hedkZe2XTLYWOD3IuzIo2YiISN1Dhei5M6nCTi/B143JxUvk2psu+7yXlSlEtjan2aEjC00Rqr4vKLU8mK9EggGhAkJBACARQgSA2V7M4IAQCKARQkRUA85nhrS43TQXGuOgvRSSQGTNP4m5wCBI47oOtBvYHD8N+apvWJYOp6bLdRuXls0cQ7VVo12yzHB3cgfZCqsRzJlh5S7QLzDsxW9EgZq1a10c98MoX6aso9ljW4lo0xLad+NlD/AB3fRbdK8wa+DNqo4kn8kAw9bwtXtGeJJcu2nc0bkjWODLDQTQHeWgW4+JWaVCzlG2GoeMM2MwkbKN9gBNcNNRVagc++1MY4EpqXZHoiYX62A7Qjp/0r08maSwzDFPo6VXT9O5Sec4Jp9HO3QwJMM5cYnag0SWHnXcs19Tk9yNVNscbWWPBtk3EytjwUEk7iCXGjGxosUS5w4eSyutrs07l4OpiculcBJNIGkAkxxAbvm5ws/BeOmX0284OarDYFKQCASAEAIBFACA2F7M4IAQCKASgkSA18fJuxPd91jnejSVK7Ik8RbK0yltYaIfyX66/mqtQ82M63p0caSH6DnVSNMjo5DNTgvNi4OfYuSy8lksBVR7MViJNBwWuPRzp9kD+lzKRPgi4e9C9r2nxsFa9F90o/j+nJn1b9sX+cfuUR7BwNEEVr/wArQmmUuDRlh8K8m2i/CrrwKNoJMlmRYapmAtldvaNbQDd6rsgkClmtmkuGbKoNy5R2tq9jTNhxjcO0h25vyQ8LLffoddOSpp1GJbZdFt9CnHMe0Vlvjna6BzMnrG2/dvv4X5KGelz0WF9HObmGT2LZGsfJVe01ZKBwF8WuCw6mL+5HR00k1skWfjMVKYXySCPdjBL2sJJ0FniPgsqyy9bYS4OVhpxIxr28HgOHmr0bE8rJ6qSRIBIAQAgEUAIDYXszggBAJCRIAUA0c9aThZg33jFIGjvLTS9R+5HmazB4+CARx7jGsPFrWtPiAAVlteZtnf08NlMI/hHhiFEUTNnplklPCmXRgs7LL2cmulQlyZLETPD8Fqj0cuxckV+kbEbmDe3W5SIwBx1u/QWfJb/Tot38fD/6Mevx9Dn5X/ZxsHsnhMZDHIyjQouHEGhx9D6qjU0W6exxkatNqqr61Jf/AAz/APzaNjg9t6cCPkRwKyynZ5NMXVnODsYXZ2OKiG6gVr06Dos7z5Lt6awjbxM1MDWbgoUN4Gh5BMkKDKN21yRsGJLyWhkpLvq2kBpOpFErqaa7fHBg1dG2W4jsGL9meyPMrU0Y1LB08mljl3o5X7h9+OXhThda8lTYpR5XJqplGSxJ4fgl2U7QYvFwSYGNrnzYotjkmAO5HEGhr5HHqR++CzuuMHufRerHNY8lhSYFsDWRsvdYxrATz3RVqiMstnQqftMFYWmKAEAIAQAUAkBsL2ZwQAgBCRFAJQDVzRtwSiibjeKGpPZOgUrtENZTK/k40sj7Po10jTxBXqJTYZ4IdpGYp9lgbNScFR5M1iJ9hXaLTE5di5Iv9ILbgafuyAjzBC63or/1OPwcv1df6XP5REslx8mGkEkTum80+64HqvptRpq747ZnzFGpsolugyzcoz+DEjdB3X843H/E818tq/TbaOcZXyfR6T1Cu7jp/BvywLmOB1I2EF21llgLTGwkSWN7U7pA6DU6fIqj6azyb67Mx47IFm2Uz41rY4mTPe4++5m40d55ADzWqmcYPxgovg5rHOSKbVbOSYJ9PaQD7pN07va7gfBbabd6MF9Ozo0MnyqXEyiKIC3WRvGhpqdVZOSjHc+iqqDnLai7/o72eMWHAcHMe1xElOtrz1046UuXZPfLPg6iX047SUZxh+xf3V5XDLdPPnBw1cbBIAQAgBAJACA2F7M4IAQCQkRQAgNTNnEQSkGiI30enZKmK5R5l9rKxwuIcYmuI7UdMkb3t0vzGvmq7q9tjXybtLqnOiMvK4ZnMNVSjoWntghqjMMib7PHULP5KZk+wTtFqgc21cnD24ZeGdXFpa4eTgt/pcturj+eDnepx3aOf4w/5kAjPToa9N4L7U+KZttfz6En4WnZBIMv2qxMQDS4SAUKk1PL7XFc270yi3lLD/Bvq9Svq47X5NvG7Rx4hm6+GiCHAh1ix008R5rmW+gOX2zOpR/iDZ90H/A9sLtBh4217J3lSpXoFq/3Itn/AIgrl/tf8jVzrPIsRGYThwWu0t9OrvAritNXoaTTnL9jLZ67LDUI/ucLKMjhiO9G0A67p+6CKNLp36audTrS8HO02utjdGcpeSw8ogDIw0G+ZJ5k6kr4na4vDPt5y3c/J6Ziy2kdyiR6oeGRYq7wdIxQAgBACASAEBsL2ZwQkEIEhIkAIDB7QRR56FAU9n0D4HujDiN0lunQHRdBRU0m0cq2Uq20ng3WO3mtd95rSfGtVyZrbNo+rrmrKIT+UjdwY1XhlEuyX5HxCzvsomTzL3aLRA59po7UR70Egq+y4jxAsfEBaNNPZqIS/KM91f1KLI/hlaQfI15A18nBfen5/L+/7/gbTDp/T/sr8l6Z4zybBHH+qvWgvIyZgch1oISZVXj3KAYgISdDBv5dVWyVwS/Jp7ZX3dP0XyPqdP09Q2unyfZem3fV06z2uDexAsLnSOjDhkWxLacR3r3DlHTi+DxXskFABACASAEBsL2UCQAgEgBACAxKgFZ7fxViT/M1rvhX5Lo6Z+w5etXvOflT96EDnGS3y4j5/BYNZHbZn5O56Tbv023/AIvH/R0cI7VZWaJkuyR/BZ32Z5k8yx+gWiswWoM4bbD4L03iSZ5qSaa/BUcZoVzAIPiGkfNi/QYPKT/T+h+eTXu/j/7N5j+P9XzkCsM/X9/hG013zv8A1gpgjJ6t5eZ+a8jIDl38fJQz0mZ2P0UHrcj1hk1UNEZJHkE/aI7r9P8AtcH1qrNcZ/DPofQrXvlD5WSRO1C+cfR9GuyOZoyn31Sp84OjW8xNJXHsEZIFQBIAQAgNhezOJCRIAQCQAgBAV79JEP1rH/eZXo4/qFt0z9rRz9auURbI5qkMZ4SD4jUfmvGshuhn4LfR7tl2x9S/qdqJ1Fc07tywSfJZlRJcmZk+yaTsqytmO5HQzBtsXuzhZKaeJFO4lpZK9h4h7m1/U6v8wvvNLNTqjL5SPhNXXsunH8s9YJbo9aPrun/cVqyYZR8f35NuJ+n76D8wpKn2exl/X1TAPMTJgkyDiUwQesb6UNE5O9s7L9aPArj+sL/TP9Udv0LL1X8GTIGwvkWfXdM4ucM5rzB4kbaXwcpaC4CjJEoAIBIAQHuvZQCASAEAIAQCKAiP0hYQvhZIP/WSHeDqo+o+K06aWG0ZNZDMUytC4scHDi07w8RqtcllYOZCX05KS8ckmc8OAe3g4Bw81xHHa3E+wlNWQU15R18mn1Vc0ZWWJkU2gUQZntR35DbVbLlGVLDKj2xi9li3HX60B48ao/Fg9V9V6Ndv0yj/AMeD5r1qjbqd3/LBzo5u/wDfD5ELspnDceDcixGn7/fVeyiUOT3Y++Ck8NYPdjFBB6IQYlyA7uzR7e95L57161KEa15eT6X/AA7S3OdvhLBN4Tovmj6afZzs3b2Sq/JpoOGtJpEUYBQSCASAEB7L2UAgEgBACAEAigNbHYVs0bon8Hij3dCFMZbXkiUdywym83wfspXRkg7ji2xzrRdWMtyycG2twlg2skl3ojGeMR0/C7X536rm6yGJqS8nf9It30ut+Ov0Otl8tOWNmqSwywdn8VoFUuGUTRMIX21XZyjI1yQf6Q8tL4vbNHahJd/Sa3vSgfIroek6lU3bH1Ix+qab61G9dxK9jk/f79F9bFnyMoo2Y3lXLJU0jbjxJCnLK/ppns3GPPAKMsj6UF2z0Esh4helkqagujGbFhg3nmgOf5Dqq7r4Ux3SLaNNK+W2CJJspig+jwvgF8LrdRK+1zl/A++0eljp6VCP8Sf4Z2izpnua5NXMBYKrkXU9keK0xeUaxFSwJQSCAEAkB7r2UCJQCQAgGgEgEVBJwdsZ52Yfehsa/WFvENr4BX0KLlyUaiUoxzEqfFSuc7VbtuDjynlnpk827MByfbD58PjSp1MN1Zr9Nu+nqF8Pg7rTuuXLR9BcsMleQ4yqCqmuSh8k6y3GWFMWZpxNjGRB7TpdjgVDynlCPw+ip58jlbK9rIyWte4N4XV6cV9jpvU9O4R3yw8Hyup9L1G+ThHMfBh/COaae1zT0II9F1KrYWLMWmca+uyp4nFr9Tahw45+KtwZHNns6RjBxA6JlLs8qMpcBA4yOAAcAftUa9VzNb6nCiPt5Z19B6RO+XvWEem1+zAdhhPEXF8HaLOO837WnXmvlZauds/8x5z/ACPrIaSFMEq1jH8z02Ln7I18PBZLeJG6C9pZOXzWF4TK5xPXGNsJNCrsjswpxV1b9psPMqwAoJBAIoBIDY3T0K9lGUKj0PoUGUKj0KDKDdPQoModHoUGUIg9Cgyhbp6H0UDKBzL0IPopJyiotqMK1uIk9kwhu8d0AGu+u67XSrb2rJxdRGKm8HDgdJG8Pa11t6tOt8b9VM4qUWmVVWuqanHtEia4yMbKGOF8RR0I4rkzhsltPp43K+pWfv8AqdXKXuBGjvQquaKlJE6yeQkcCqkmeZ4JHhyRxBV0YmZsb8vY471aqHA9K1nlisqY8UWg9xCmLnB5i2v0PMnCaxJJo40+zMfJpHgSFuh6tq4LG79zDP0nRTedmP04FhdmomHe9nZ6us/Pgqr9ffd98mX0aHT0fZFHWZhAPs/BYmzZlCmwo5DQ6EAaei8vITK+w0H8NPNEAQGSEMFHg7tDyAK92ZlhnqDSjgnOQucRZB81XGLPM2jt4j3V6l0U19kdxAO8dCrKejdk8t09CrWMi3T0KDIbp6FQMgWnoUGRbp6FBk//2Q==" alt="Kaneez Surka">
-                    </div>
-                    <div class="comedian-info">
-                        <h3>Kaneez Surka</h3>
-                        <p>Queen of improv and musical comedy</p>
-                        <div class="rating">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star-half-alt"></i>
-                            <span>4.7</span>
-                        </div>
-                        <a href="#" class="btn btn-primary book-btn" data-comedian="Kaneez Surka">Book Show</a>
+        <!-- Hero Section -->
+        <section class="hero" id="home">
+            <div class="container">
+                <div class="hero-content">
+                    <h1>India's Finest Standup Comedy Shows</h1>
+                    <p>Book tickets for the hottest standup comedy shows featuring India's top comedians. Laugh your heart out with our curated selection of hilarious performances.</p>
+                    <div class="hero-btns">
+                        <a href="#shows" class="btn btn-primary">Book Tickets</a>
+                        <a href="#comedians" class="btn btn-secondary">View Comedians</a>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Shows Section -->
-    <section class="shows section-padding" id="shows">
-        <div class="container">
-            <h2 class="section-title text-center">Upcoming Shows</h2>
-            <p class="text-center">Book your tickets for these hilarious shows happening near you</p>
-            
-            <div class="shows-filter">
-                <button class="filter-btn active" data-filter="all">All Shows</button>
-                <button class="filter-btn" data-filter="delhi">Delhi</button>
-                <button class="filter-btn" data-filter="mumbai">Mumbai</button>
-                <button class="filter-btn" data-filter="bangalore">Bangalore</button>
-            </div>
-            
-            <div class="shows-grid">
-                <!-- Show 1 -->
-                <div class="show-card" data-location="delhi">
-                    <div class="show-img">
-                        <img src="https://images.unsplash.com/photo-1501281668745-f7f57925c3b4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Comedy Night">
-                    </div>
-                    <div class="show-details">
-                        <h3>Laugh Riot Delhi</h3>
-                        <div class="show-date">
-                            <i class="far fa-calendar-alt"></i>
-                            <span>June 15, 2023 | 8:00 PM</span>
-                        </div>
-                        <div class="show-location">
-                            <i class="fas fa-map-marker-alt"></i>
-                            <span>Kingdom of Dreams, Gurugram</span>
-                        </div>
-                        <p>An evening of non-stop laughter with Zakir Khan, Kaneez Surka and special guests.</p>
-                        <div class="show-price">
-                            <span class="price">₹799 onwards</span>
-                            <a href="#" class="btn btn-secondary book-btn" data-show="Laugh Riot Delhi">Book Now</a>
-                        </div>
-                    </div>
-                </div>
+        <!-- Featured Comedians Section -->
+        <section class="featured-comedians section-padding" id="comedians">
+            <div class="container">
+                <h2 class="section-title text-center">Featured Comedians</h2>
+                <p class="text-center">Discover India's most talented standup comedians who will leave you in splits</p>
                 
-                <!-- Show 2 -->
-                <div class="show-card" data-location="mumbai">
-                    <div class="show-img">
-                        <img src="https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6a3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Standup Special">
-                    </div>
-                    <div class="show-details">
-                        <h3>Anubhav Bassi: Mumbai Special</h3>
-                        <div class="show-date">
-                            <i class="far fa-calendar-alt"></i>
-                            <span>June 18, 2023 | 7:30 PM</span>
+                <div class="comedians-grid">
+                    <!-- Comedian 1 - Anubhav Singh Bassi -->
+                    <div class="comedian-card">
+                        <div class="comedian-img">
+                            <img src="./Images/anubhavbassi.jpg" alt="Anubhav Singh Bassi">
                         </div>
-                        <div class="show-location">
-                            <i class="fas fa-map-marker-alt"></i>
-                            <span>Jamshed Bhabha Theatre, Mumbai</span>
-                        </div>
-                        <p>Anubhav Singh Bassi brings his hilarious college stories to Mumbai.</p>
-                        <div class="show-price">
-                            <span class="price">₹1,299 onwards</span>
-                            <a href="#" class="btn btn-secondary book-btn" data-show="Anubhav Bassi: Mumbai Special">Book Now</a>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Show 3 -->
-                <div class="show-card" data-location="bangalore">
-                    <div class="show-img">
-                        <img src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Comedy Festival">
-                    </div>
-                    <div class="show-details">
-                        <h3>Bangalore Comedy Festival</h3>
-                        <div class="show-date">
-                            <i class="far fa-calendar-alt"></i>
-                            <span>June 22-25, 2023 | 6:00 PM</span>
-                        </div>
-                        <div class="show-location">
-                            <i class="fas fa-map-marker-alt"></i>
-                            <span>Palace Grounds, Bangalore</span>
-                        </div>
-                        <p>4 days of unlimited laughter with all the top Indian comedians at one place.</p>
-                        <div class="show-price">
-                            <span class="price">₹2,499 onwards</span>
-                            <a href="#" class="btn btn-secondary book-btn" data-show="Bangalore Comedy Festival">Book Now</a>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Show 4 -->
-                <div class="show-card" data-location="delhi">
-                    <div class="show-img">
-                        <img src="https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Comedy Club">
-                    </div>
-                    <div class="show-details">
-                        <h3>Weekend Comedy Club</h3>
-                        <div class="show-date">
-                            <i class="far fa-calendar-alt"></i>
-                            <span>Every Saturday | 9:00 PM</span>
-                        </div>
-                        <div class="show-location">
-                            <i class="fas fa-map-marker-alt"></i>
-                            <span>Hauz Khas Social, Delhi</span>
-                        </div>
-                        <p>Weekly standup comedy show featuring new and established comedians.</p>
-                        <div class="show-price">
-                            <span class="price">₹499 onwards</span>
-                            <a href="#" class="btn btn-secondary book-btn" data-show="Weekend Comedy Club">Book Now</a>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Show 5 -->
-                <div class="show-card" data-location="mumbai">
-                    <div class="show-img">
-                        <img src="https://images.unsplash.com/photo-1540039155733-5bb30b53aa14?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Comedy Night">
-                    </div>
-                    <div class="show-details">
-                        <h3>Ravi Gupta: Family Tales</h3>
-                        <div class="show-date">
-                            <i class="far fa-calendar-alt"></i>
-                            <span>June 28, 2023 | 8:30 PM</span>
-                        </div>
-                        <div class="show-location">
-                            <i class="fas fa-map-marker-alt"></i>
-                            <span>NCPA, Mumbai</span>
-                        </div>
-                        <p>Ravi Gupta presents his new solo special about hilarious family dynamics.</p>
-                        <div class="show-price">
-                            <span class="price">₹999 onwards</span>
-                            <a href="#" class="btn btn-secondary book-btn" data-show="Ravi Gupta: Family Tales">Book Now</a>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Show 6 -->
-                <div class="show-card" data-location="bangalore">
-                    <div class="show-img">
-                        <img src="https://images.unsplash.com/photo-1472653431158-6364773b2a56?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Open Mic">
-                    </div>
-                    <div class="show-details">
-                        <h3>New Talent Night</h3>
-                        <div class="show-date">
-                            <i class="far fa-calendar-alt"></i>
-                            <span>Every Thursday | 7:00 PM</span>
-                        </div>
-                        <div class="show-location">
-                            <i class="fas fa-map-marker-alt"></i>
-                            <span>The Humming Tree, Bangalore</span>
-                        </div>
-                        <p>Discover fresh comedy talent at our weekly open mic night featuring Nayab Midha and others.</p>
-                        <div class="show-price">
-                            <span class="price">₹299 onwards</span>
-                            <a href="#" class="btn btn-secondary book-btn" data-show="New Talent Night">Book Now</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Testimonials Section -->
-    <section class="testimonials section-padding" id="testimonials">
-        <div class="container">
-            <h2 class="section-title text-center">What People Say</h2>
-            <p class="text-center">Don't just take our word for it - hear from our happy customers</p>
-            
-            <div class="testimonials-container">
-                <!-- Testimonial 1 -->
-                <div class="testimonial-card">
-                    <div class="testimonial-header">
-                        <div class="testimonial-img">
-                            <img src="https://randomuser.me/api/portraits/women/32.jpg" alt="Priya Sharma">
-                        </div>
-                        <div>
-                            <h4>Priya Sharma</h4>
-                            <div class="testimonial-rating">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                            </div>
-                        </div>
-                    </div>
-                    <p>"I attended Zakir Khan's show in Delhi and it was absolutely hilarious! The booking process was so smooth and the seats were great. Will definitely book through LaughFactory again!"</p>
-                </div>
-                
-                <!-- Testimonial 2 -->
-                <div class="testimonial-card">
-                    <div class="testimonial-header">
-                        <div class="testimonial-img">
-                            <img src="https://randomuser.me/api/portraits/men/45.jpg" alt="Rahul Mehta">
-                        </div>
-                        <div>
-                            <h4>Rahul Mehta</h4>
-                            <div class="testimonial-rating">
+                        <div class="comedian-info">
+                            <h3>Anubhav Singh Bassi</h3>
+                            <p>Known for his relatable college and life stories</p>
+                            <div class="rating">
                                 <i class="fas fa-star"></i>
                                 <i class="fas fa-star"></i>
                                 <i class="fas fa-star"></i>
                                 <i class="fas fa-star"></i>
                                 <i class="fas fa-star-half-alt"></i>
+                                <span>4.7</span>
+                            </div>
+                            <a href="#" class="btn btn-primary book-btn" data-comedian="Anubhav Singh Bassi">Book Show</a>
+                        </div>
+                    </div>
+                    
+                    <!-- Comedian 2 - Vipul Goyal -->
+                    <div class="comedian-card">
+                        <div class="comedian-img">
+                            <img src="./Images/vipulgoyal.jpg" alt="Vipul Goyal">
+                        </div>
+                        <div class="comedian-info">
+                            <h3>Vipul Goyal</h3>
+                            <p>Engineer-turned-comedian with sharp observations</p>
+                            <div class="rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                                <span>4.2</span>
+                            </div>
+                            <a href="#" class="btn btn-primary book-btn" data-comedian="Vipul Goyal">Book Show</a>
+                        </div>
+                    </div>
+                    
+                    <!-- Comedian 3 - Ravi Gupta -->
+                    <div class="comedian-card">
+                        <div class="comedian-img">
+                            <img src="./Images/ravigupta.jpg" alt="Ravi Gupta">
+                        </div>
+                        <div class="comedian-info">
+                            <h3>Ravi Gupta</h3>
+                            <p>Delhi's favorite with hilarious family humor</p>
+                            <div class="rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <span>5.0</span>
+                            </div>
+                            <a href="#" class="btn btn-primary book-btn" data-comedian="Ravi Gupta">Book Show</a>
+                        </div>
+                    </div>
+                    
+                    <!-- Comedian 4 - Nayab Midha -->
+                    <div class="comedian-card">
+                        <div class="comedian-img">
+                            <img src="./Images/nayabmidha.jpg" alt="Nayab Midha">
+                        </div>
+                        <div class="comedian-info">
+                            <h3>Nayab Midha</h3>
+                            <p>Fresh perspective with millennial humor</p>
+                            <div class="rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                                <span>4.5</span>
+                            </div>
+                            <a href="#" class="btn btn-primary book-btn" data-comedian="Nayab Midha">Book Show</a>
+                        </div>
+                    </div>
+
+                    <!-- Comedian 5 - Zakir Khan -->
+                    <div class="comedian-card">
+                        <div class="comedian-img">
+                            <img src="./Images/zakirkhan.jpg" alt="Zakir Khan">
+                        </div>
+                        <div class="comedian-info">
+                            <h3>Zakir Khan</h3>
+                            <p>The original "Sakht Launda"</p>
+                            <div class="rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <span>5.0</span>
+                            </div>
+                            <a href="#" class="btn btn-primary book-btn" data-comedian="Zakir Khan">Book Show</a>
+                        </div>
+                    </div>
+
+                    <!-- Comedian 6 - Kaneez Surka -->
+                    <div class="comedian-card">
+                        <div class="comedian-img">
+                            <img src="./Images/kaneezsurka.jpg" alt="Kaneez Surka">
+                        </div>
+                        <div class="comedian-info">
+                            <h3>Kaneez Surka</h3>
+                            <p>Queen of improv and musical comedy</p>
+                            <div class="rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                                <span>4.7</span>
+                            </div>
+                            <a href="#" class="btn btn-primary book-btn" data-comedian="Kaneez Surka">Book Show</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Shows Section -->
+        <section class="shows section-padding" id="shows">
+            <div class="container">
+                <h2 class="section-title text-center">Upcoming Shows</h2>
+                <p class="text-center">Book your tickets for these hilarious shows happening near you</p>
+                
+                <div class="shows-filter">
+                    <button class="filter-btn active" data-filter="all">All Shows</button>
+                    <button class="filter-btn" data-filter="delhi">Delhi</button>
+                    <button class="filter-btn" data-filter="mumbai">Mumbai</button>
+                    <button class="filter-btn" data-filter="bangalore">Bangalore</button>
+                </div>
+                
+                <div class="shows-grid">
+                    <!-- Show 1 -->
+                    <div class="show-card" data-location="delhi">
+                        <div class="show-img">
+                            <img src="https://images.unsplash.com/photo-1501281668745-f7f57925c3b4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Comedy Night">
+                        </div>
+                        <div class="show-details">
+                            <h3>Laugh Riot Delhi</h3>
+                            <div class="show-date">
+                                <i class="far fa-calendar-alt"></i>
+                                <span>June 15, 2023 | 8:00 PM</span>
+                            </div>
+                            <div class="show-location">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>Kingdom of Dreams, Gurugram</span>
+                            </div>
+                            <p>An evening of non-stop laughter with Zakir Khan, Kaneez Surka and special guests.</p>
+                            <div class="show-price">
+                                <span class="price">₹799 onwards</span>
+                                <a href="#" class="btn btn-secondary book-btn" data-show="Laugh Riot Delhi">Book Now</a>
                             </div>
                         </div>
                     </div>
-                    <p>"The Bangalore Comedy Festival was worth every penny! So many great comedians in one place. The app notifications kept me updated about timing changes. Great service!"</p>
-                </div>
-                
-                <!-- Testimonial 3 -->
-                <div class="testimonial-card">
-                    <div class="testimonial-header">
-                        <div class="testimonial-img">
-                            <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Ananya Patel">
+                    
+                    <!-- Show 2 -->
+                    <div class="show-card" data-location="mumbai">
+                        <div class="show-img">
+                            <img src="./Images/anubhavbassi.jpg" alt="Standup Special">
                         </div>
-                        <div>
-                            <h4>Ananya Patel</h4>
-                            <div class="testimonial-rating">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
+                        <div class="show-details">
+                            <h3>Anubhav Bassi: Mumbai Special</h3>
+                            <div class="show-date">
+                                <i class="far fa-calendar-alt"></i>
+                                <span>June 18, 2023 | 7:30 PM</span>
+                            </div>
+                            <div class="show-location">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>Jamshed Bhabha Theatre, Mumbai</span>
+                            </div>
+                            <p>Anubhav Singh Bassi brings his hilarious college stories to Mumbai.</p>
+                            <div class="show-price">
+                                <span class="price">₹1,299 onwards</span>
+                                <a href="#" class="btn btn-secondary book-btn" data-show="Anubhav Bassi: Mumbai Special">Book Now</a>
                             </div>
                         </div>
                     </div>
-                    <p>"I've been to 3 shows booked through LaughFactory and each experience has been flawless. The customer support helped me quickly when I had a query about my tickets. Highly recommend!"</p>
+                    
+                    <!-- Show 3 -->
+                    <div class="show-card" data-location="bangalore">
+                        <div class="show-img">
+                            <img src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Comedy Festival">
+                        </div>
+                        <div class="show-details">
+                            <h3>Bangalore Comedy Festival</h3>
+                            <div class="show-date">
+                                <i class="far fa-calendar-alt"></i>
+                                <span>June 22-25, 2023 | 6:00 PM</span>
+                            </div>
+                            <div class="show-location">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>Palace Grounds, Bangalore</span>
+                            </div>
+                            <p>4 days of unlimited laughter with all the top Indian comedians at one place.</p>
+                            <div class="show-price">
+                                <span class="price">₹2,499 onwards</span>
+                                <a href="#" class="btn btn-secondary book-btn" data-show="Bangalore Comedy Festival">Book Now</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Show 4 -->
+                    <div class="show-card" data-location="delhi">
+                        <div class="show-img">
+                            <img src="https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Comedy Club">
+                        </div>
+                        <div class="show-details">
+                            <h3>Weekend Comedy Club</h3>
+                            <div class="show-date">
+                                <i class="far fa-calendar-alt"></i>
+                                <span>Every Saturday | 9:00 PM</span>
+                            </div>
+                            <div class="show-location">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>Hauz Khas Social, Delhi</span>
+                            </div>
+                            <p>Weekly standup comedy show featuring new and established comedians.</p>
+                            <div class="show-price">
+                                <span class="price">₹499 onwards</span>
+                                <a href="#" class="btn btn-secondary book-btn" data-show="Weekend Comedy Club">Book Now</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Show 5 -->
+                    <div class="show-card" data-location="mumbai">
+                        <div class="show-img">
+                            <img src="https://images.unsplash.com/photo-1540039155733-5bb30b53aa14?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Comedy Night">
+                        </div>
+                        <div class="show-details">
+                            <h3>Ravi Gupta: Family Tales</h3>
+                            <div class="show-date">
+                                <i class="far fa-calendar-alt"></i>
+                                <span>June 28, 2023 | 8:30 PM</span>
+                            </div>
+                            <div class="show-location">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>NCPA, Mumbai</span>
+                            </div>
+                            <p>Ravi Gupta presents his new solo special about hilarious family dynamics.</p>
+                            <div class="show-price">
+                                <span class="price">₹999 onwards</span>
+                                <a href="#" class="btn btn-secondary book-btn" data-show="Ravi Gupta: Family Tales">Book Now</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Show 6 -->
+                    <div class="show-card" data-location="bangalore">
+                        <div class="show-img">
+                            <img src="https://images.unsplash.com/photo-1472653431158-6364773b2a56?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Open Mic">
+                        </div>
+                        <div class="show-details">
+                            <h3>New Talent Night</h3>
+                            <div class="show-date">
+                                <i class="far fa-calendar-alt"></i>
+                                <span>Every Thursday | 7:00 PM</span>
+                            </div>
+                            <div class="show-location">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>The Humming Tree, Bangalore</span>
+                            </div>
+                            <p>Discover fresh comedy talent at our weekly open mic night featuring Nayab Midha and others.</p>
+                            <div class="show-price">
+                                <span class="price">₹299 onwards</span>
+                                <a href="#" class="btn btn-secondary book-btn" data-show="New Talent Night">Book Now</a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Newsletter Section -->
-    <section class="newsletter section-padding">
-        <div class="container">
-            <h2 class="text-center">Stay Updated</h2>
-            <p class="text-center">Subscribe to our newsletter for show announcements, early bird discounts and more!</p>
-            
-            <form class="newsletter-form">
-                <input type="email" placeholder="Enter your email address" required>
-                <button type="submit" class="btn btn-primary">Subscribe</button>
-            </form>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer id="contact">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-column">
-                    <h3>LaughFactory</h3>
-                    <p>India's premier platform for booking standup comedy shows featuring the best Indian comedians.</p>
-                    <div class="social-links">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-youtube"></i></a>
+        <!-- Gift Cards Section -->
+        <section class="gift-cards section-padding" id="gift-cards">
+            <div class="container">
+                <h2 class="section-title text-center">Give the Gift of Laughter</h2>
+                <p class="text-center">Perfect for birthdays, anniversaries, or just because! Our gift cards never expire.</p>
+                
+                <div class="gift-cards-grid">
+                    <!-- Gift Card Option 1 -->
+                    <div class="gift-card-option">
+                        <div class="gift-card-value">₹1,000</div>
+                        <div class="gift-card-price">₹1,000</div>
+                        <button class="btn btn-secondary add-to-cart" data-value="1000">Add to Cart</button>
+                    </div>
+                    
+                    <!-- Gift Card Option 2 -->
+                    <div class="gift-card-option">
+                        <div class="gift-card-value">₹2,500</div>
+                        <div class="gift-card-price">₹2,500</div>
+                        <button class="btn btn-secondary add-to-cart" data-value="2500">Add to Cart</button>
+                    </div>
+                    
+                    <!-- Gift Card Option 3 -->
+                    <div class="gift-card-option">
+                        <div class="gift-card-value">₹5,000</div>
+                        <div class="gift-card-price">₹5,000</div>
+                        <button class="btn btn-secondary add-to-cart" data-value="5000">Add to Cart</button>
+                    </div>
+                    
+                    <!-- Custom Amount Option -->
+                    <div class="gift-card-option custom-amount">
+                        <h4>Custom Amount</h4>
+                        <div class="form-group">
+                            <label for="custom-amount">Enter Amount (₹500 minimum)</label>
+                            <input type="number" id="custom-amount" min="500" step="100" placeholder="₹">
+                        </div>
+                        <button class="btn btn-primary add-to-cart" id="add-custom-amount">Add to Cart</button>
                     </div>
                 </div>
                 
-                <div class="footer-column">
-                    <h3>Quick Links</h3>
-                    <ul class="footer-links">
-                        <li><a href="#home">Home</a></li>
-                        <li><a href="#comedians">Comedians</a></li>
-                        <li><a href="#shows">Shows</a></li>
-                        <li><a href="#testimonials">Reviews</a></li>
-                        <li><a href="#">About Us</a></li>
-                    </ul>
-                </div>
-                
-                <div class="footer-column">
-                    <h3>Support</h3>
-                    <ul class="footer-links">
-                        <li><a href="#">FAQs</a></li>
-                        <li><a href="#">Privacy Policy</a></li>
-                        <li><a href="#">Terms & Conditions</a></li>
-                        <li><a href="#">Refund Policy</a></li>
-                        <li><a href="#">Contact Us</a></li>
-                    </ul>
-                </div>
-                
-                <div class="footer-column">
-                    <h3>Contact Info</h3>
-                    <ul class="footer-links">
-                        <li><i class="fas fa-map-marker-alt"></i> 123 Comedy Street, Mumbai, India</li>
-                        <li><i class="fas fa-phone"></i> +91 9876543210</li>
-                        <li><i class="fas fa-envelope"></i> info@laughfactory.in</li>
-                    </ul>
+                <!-- Checkout Button -->
+                <div class="text-center" style="margin-top: 3rem;">
+                    <button class="btn btn-primary" id="checkout-gift-card">Proceed to Checkout</button>
                 </div>
             </div>
-            
-            <div class="footer-bottom">
-                <p>&copy; 2023 LaughFactory India. All Rights Reserved.</p>
-            </div>
-        </div>
-    </footer>
+        </section>
 
-    <!-- Booking Modal -->
-    <div class="modal" id="bookingModal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3 id="modalTitle">Book Tickets</h3>
-                <span class="close-modal">&times;</span>
+        <!-- Testimonials Section -->
+        <section class="testimonials section-padding" id="testimonials">
+            <div class="container">
+                <h2 class="section-title text-center">What People Say</h2>
+                <p class="text-center">Don't just take our word for it - hear from our happy customers</p>
+                
+                <div class="testimonials-container">
+                    <!-- Testimonial 1 -->
+                    <div class="testimonial-card">
+                        <div class="testimonial-header">
+                            <div class="testimonial-img">
+                                <img src="https://randomuser.me/api/portraits/women/32.jpg" alt="Priya Sharma">
+                            </div>
+                            <div>
+                                <h4>Priya Sharma</h4>
+                                <div class="testimonial-rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <p>"I attended Zakir Khan's show in Delhi and it was absolutely hilarious! The booking process was so smooth and the seats were great. Will definitely book through LaughFactory again!"</p>
+                    </div>
+                    
+                    <!-- Testimonial 2 -->
+                    <div class="testimonial-card">
+                        <div class="testimonial-header">
+                            <div class="testimonial-img">
+                                <img src="https://randomuser.me/api/portraits/men/45.jpg" alt="Rahul Mehta">
+                            </div>
+                            <div>
+                                <h4>Rahul Mehta</h4>
+                                <div class="testimonial-rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star-half-alt"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <p>"The Bangalore Comedy Festival was worth every penny! So many great comedians in one place. The app notifications kept me updated about timing changes. Great service!"</p>
+                    </div>
+                    
+                    <!-- Testimonial 3 -->
+                    <div class="testimonial-card">
+                        <div class="testimonial-header">
+                            <div class="testimonial-img">
+                                <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Ananya Patel">
+                            </div>
+                            <div>
+                                <h4>Ananya Patel</h4>
+                                <div class="testimonial-rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <p>"I've been to 3 shows booked through LaughFactory and each experience has been flawless. The customer support helped me quickly when I had a query about my tickets. Highly recommend!"</p>
+                    </div>
+                </div>
             </div>
-            <div class="modal-body">
-                <form class="booking-form">
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="showName">Show Name</label>
-                            <input type="text" id="showName" readonly>
-                        </div>
-                        <div class="form-group">
-                            <label for="showDate">Show Date</label>
-                            <input type="text" id="showDate" readonly>
-                        </div>
-                    </div>
-                    
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="name">Full Name</label>
-                            <input type="text" id="name" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="email">Email</label>
-                            <input type="email" id="email" required>
-                        </div>
-                    </div>
-                    
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="phone">Phone Number</label>
-                            <input type="tel" id="phone" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="tickets">Number of Tickets</label>
-                            <select id="tickets" required>
-                                <option value="">Select</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
-                            </select>
-                        </div>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="seating">Seating Preference</label>
-                        <select id="seating" required>
-                            <option value="">Select</option>
-                            <option value="front">Front Row</option>
-                            <option value="middle">Middle Section</option>
-                            <option value="back">Back Section</option>
-                            <option value="none">No Preference</option>
-                        </select>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="special">Special Requirements</label>
-                        <textarea id="special" placeholder="Any special requirements or notes..."></textarea>
-                    </div>
+        </section>
+
+        <!-- Newsletter Section -->
+        <section class="newsletter section-padding">
+            <div class="container">
+                <h2 class="text-center">Stay Updated</h2>
+                <p class="text-center">Subscribe to our newsletter for show announcements, early bird discounts and more!</p>
+                
+                <form class="newsletter-form">
+                    <input type="email" placeholder="Enter your email address" required>
+                    <button type="submit" class="btn btn-primary">Subscribe</button>
                 </form>
             </div>
-            <div class="modal-footer">
-                <button class="btn btn-secondary close-modal-btn">Cancel</button>
-                <button class="btn btn-primary confirm-booking">Confirm Booking</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Confirmation Modal -->
-    <div class="modal" id="confirmationModal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3>Booking Confirmed!</h3>
-                <span class="close-modal">&times;</span>
-            </div>
-            <div class="modal-body">
-                <div class="text-center">
-                    <i class="fas fa-check-circle" style="font-size: 5rem; color: var(--success); margin-bottom: 1rem;"></i>
-                    <h4>Thank you for your booking!</h4>
-                    <p id="confirmationMessage">Your tickets have been booked successfully. A confirmation has been sent to your email.</p>
-                    <p>Your booking ID: <strong id="bookingId">LF2023XXXX</strong></p>
+        </section>
+        <!-- Membership Section -->
+        <section class="membership section-padding" id="membership">
+            <div class="container">
+                <h2 class="section-title text-center">Become a Member</h2>
+                <p class="text-center">Unlock exclusive benefits and discounts on all comedy shows!</p>
+                
+                <div class="membership-tiers">
+                    <!-- Basic Tier -->
+                    <div class="tier-card">
+                        <h3>Basic</h3>
+                        <div class="tier-price">Free</div>
+                        <ul class="tier-benefits">
+                            <li><i class="fas fa-check"></i> Early access to show announcements</li>
+                            <li><i class="fas fa-check"></i> Newsletter with comedy news</li>
+                            <li><i class="fas fa-check"></i> Basic seat selection</li>
+                            <li><i class="fas fa-times"></i> No priority booking</li>
+                        </ul>
+                        <button class="btn btn-secondary join-btn" data-tier="basic">Join Free</button>
+                    </div>
+                    
+                    <!-- Premium Tier -->
+                    <div class="tier-card featured">
+                        <div class="popular-badge">Most Popular</div>
+                        <h3>Premium</h3>
+                        <div class="tier-price">₹499<span>/month</span></div>
+                        <ul class="tier-benefits">
+                            <li><i class="fas fa-check"></i> 15% off all tickets</li>
+                            <li><i class="fas fa-check"></i> Priority booking (48hr early access)</li>
+                            <li><i class="fas fa-check"></i> Premium seat selection</li>
+                            <li><i class="fas fa-check"></i> Free drink at every show</li>
+                            <li><i class="fas fa-check"></i> Exclusive member-only events</li>
+                        </ul>
+                        <button class="btn btn-primary join-btn" data-tier="premium">Get Premium</button>
+                    </div>
+                    
+                    <!-- VIP Tier -->
+                    <div class="tier-card">
+                        <h3>VIP</h3>
+                        <div class="tier-price">₹1,999<span>/month</span></div>
+                        <ul class="tier-benefits">
+                            <li><i class="fas fa-check"></i> 25% off all tickets</li>
+                            <li><i class="fas fa-check"></i> VIP seating at all shows</li>
+                            <li><i class="fas fa-check"></i> Meet & greet with comedians</li>
+                            <li><i class="fas fa-check"></i> Free premium food/drinks</li>
+                            <li><i class="fas fa-check"></i> Personal booking assistant</li>
+                        </ul>
+                        <button class="btn btn-secondary join-btn" data-tier="vip">Go VIP</button>
+                    </div>
                 </div>
             </div>
-            <div class="modal-footer">
-                <button class="btn btn-primary close-modal-btn">Done</button>
+        </section>
+
+        <!-- Footer -->
+        <footer id="contact">
+            <div class="container">
+                <div class="footer-content">
+                    <div class="footer-column">
+                        <h3>LaughFactory</h3>
+                        <p>India's premier platform for booking standup comedy shows featuring the best Indian comedians.</p>
+                        <div class="social-links">
+                            <a href="#"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fab fa-instagram"></i></a>
+                            <a href="#"><i class="fab fa-youtube"></i></a>
+                        </div>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h3>Quick Links</h3>
+                        <ul class="footer-links">
+                            <li><a href="#home">Home</a></li>
+                            <li><a href="#comedians">Comedians</a></li>
+                            <li><a href="#shows">Shows</a></li>
+                            <li><a href="#testimonials">Reviews</a></li>
+                            <li><a href="#">About Us</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h3>Support</h3>
+                        <ul class="footer-links">
+                            <li><a href="#">FAQs</a></li>
+                            <li><a href="#">Privacy Policy</a></li>
+                            <li><a href="#">Terms & Conditions</a></li>
+                            <li><a href="#">Refund Policy</a></li>
+                            <li><a href="#">Contact Us</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h3>Contact Info</h3>
+                        <ul class="footer-links">
+                            <li><i class="fas fa-map-marker-alt"></i> 123 Comedy Street, Mumbai, India</li>
+                            <li><i class="fas fa-phone"></i> +91 9876543210</li>
+                            <li><i class="fas fa-envelope"></i> info@laughfactory.in</li>
+                            <li><i class="fas fa-user-tie"></i> Event Manager: Shivoy Budhiraja</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="footer-bottom">
+                    <p>&copy; 2025 LaughFactory India. All Rights Reserved.</p>
+                </div>
+            </div>
+        </footer>
+
+        <div class="modal" id="bookingModal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 id="modalTitle">Book Tickets</h3>
+                    <span class="close-modal">&times;</span>
+                </div>
+                <div class="modal-body">
+                    <form class="booking-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="showName">Show Name</label>
+                                <input type="text" id="showName" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label for="showDate">Show Date</label>
+                                <input type="text" id="showDate" readonly>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="name">Full Name</label>
+                                <input type="text" id="name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input type="email" id="email" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="phone">Phone Number</label>
+                                <input type="tel" id="phone" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="tickets">Number of Tickets</label>
+                                <select id="tickets" required>
+                                    <option value="">Select</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <!-- Seat Booking Section -->
+                        <div class="seat-booking-section">
+                            <h4>Select Your Seats</h4>
+                            <div class="stage-display">STAGE</div>
+                            
+                            <div class="seats-container">
+                                <!-- Row A -->
+                                <div class="seat-row">
+                                    <div class="seat" data-seat="A1">A1</div>
+                                    <div class="seat" data-seat="A2">A2</div>
+                                    <div class="seat" data-seat="A3">A3</div>
+                                    <div class="seat aisle"></div>
+                                    <div class="seat" data-seat="A4">A4</div>
+                                    <div class="seat" data-seat="A5">A5</div>
+                                    <div class="seat" data-seat="A6">A6</div>
+                                    <div class="seat aisle"></div>
+                                    <div class="seat" data-seat="A7">A7</div>
+                                    <div class="seat" data-seat="A8">A8</div>
+                                    <div class="seat" data-seat="A9">A9</div>
+                                </div>
+                                
+                                <!-- Row B -->
+                                <div class="seat-row">
+                                    <div class="seat" data-seat="B1">B1</div>
+                                    <div class="seat" data-seat="B2">B2</div>
+                                    <div class="seat" data-seat="B3">B3</div>
+                                    <div class="seat aisle"></div>
+                                    <div class="seat" data-seat="B4">B4</div>
+                                    <div class="seat" data-seat="B5">B5</div>
+                                    <div class="seat" data-seat="B6">B6</div>
+                                    <div class="seat aisle"></div>
+                                    <div class="seat" data-seat="B7">B7</div>
+                                    <div class="seat" data-seat="B8">B8</div>
+                                    <div class="seat" data-seat="B9">B9</div>
+                                </div>
+                                
+                                <!-- Row C -->
+                                <div class="seat-row">
+                                    <div class="seat" data-seat="C1">C1</div>
+                                    <div class="seat" data-seat="C2">C2</div>
+                                    <div class="seat" data-seat="C3">C3</div>
+                                    <div class="seat aisle"></div>
+                                    <div class="seat" data-seat="C4">C4</div>
+                                    <div class="seat" data-seat="C5">C5</div>
+                                    <div class="seat" data-seat="C6">C6</div>
+                                    <div class="seat aisle"></div>
+                                    <div class="seat" data-seat="C7">C7</div>
+                                    <div class="seat" data-seat="C8">C8</div>
+                                    <div class="seat" data-seat="C9">C9</div>
+                                </div>
+                                
+                                <!-- Row D -->
+                                <div class="seat-row">
+                                    <div class="seat" data-seat="D1">D1</div>
+                                    <div class="seat" data-seat="D2">D2</div>
+                                    <div class="seat" data-seat="D3">D3</div>
+                                    <div class="seat aisle"></div>
+                                    <div class="seat" data-seat="D4">D4</div>
+                                    <div class="seat" data-seat="D5">D5</div>
+                                    <div class="seat" data-seat="D6">D6</div>
+                                    <div class="seat aisle"></div>
+                                    <div class="seat" data-seat="D7">D7</div>
+                                    <div class="seat" data-seat="D8">D8</div>
+                                    <div class="seat" data-seat="D9">D9</div>
+                                </div>
+                                
+                                <!-- Row E -->
+                                <div class="seat-row">
+                                    <div class="seat" data-seat="E1">E1</div>
+                                    <div class="seat" data-seat="E2">E2</div>
+                                    <div class="seat" data-seat="E3">E3</div>
+                                    <div class="seat aisle"></div>
+                                    <div class="seat" data-seat="E4">E4</div>
+                                    <div class="seat" data-seat="E5">E5</div>
+                                    <div class="seat" data-seat="E6">E6</div>
+                                    <div class="seat aisle"></div>
+                                    <div class="seat" data-seat="E7">E7</div>
+                                    <div class="seat" data-seat="E8">E8</div>
+                                    <div class="seat" data-seat="E9">E9</div>
+                                </div>
+                                
+                                <!-- Row F -->
+                                <div class="seat-row">
+                                    <div class="seat" data-seat="F1">F1</div>
+                                    <div class="seat" data-seat="F2">F2</div>
+                                    <div class="seat" data-seat="F3">F3</div>
+                                    <div class="seat aisle"></div>
+                                    <div class="seat" data-seat="F4">F4</div>
+                                    <div class="seat" data-seat="F5">F5</div>
+                                    <div class="seat" data-seat="F6">F6</div>
+                                    <div class="seat aisle"></div>
+                                    <div class="seat" data-seat="F7">F7</div>
+                                    <div class="seat" data-seat="F8">F8</div>
+                                    <div class="seat" data-seat="F9">F9</div>
+                                </div>
+                            </div>
+                            
+                            <div class="seat-legend">
+                                <div class="legend-item">
+                                    <div class="legend-color" style="background: var(--gray-dark);"></div>
+                                    <span>Available</span>
+                                </div>
+                                <div class="legend-item">
+                                    <div class="legend-color" style="background: var(--accent);"></div>
+                                    <span>Selected</span>
+                                </div>
+                                <div class="legend-item">
+                                    <div class="legend-color" style="background: var(--primary);"></div>
+                                    <span>Booked</span>
+                                </div>
+                            </div>
+                            
+                            <div class="booking-summary">
+                                <div class="summary-row">
+                                    <span>Tickets:</span>
+                                    <span id="ticket-count">0</span>
+                                </div>
+                                <div class="summary-row">
+                                    <span>Price per ticket:</span>
+                                    <span>₹799</span>
+                                </div>
+                                <div class="summary-row total-row">
+                                    <span>Total:</span>
+                                    <span id="total-price">₹0</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <h4>Food & Beverage Options</h4>
+                            <p>Pre-order your snacks and drinks for the show (optional)</p>
+                            
+                            <div class="meal-options">
+                                <!-- Meal Option 1 -->
+                                <div class="meal-option">
+                                    <div class="meal-select">
+                                        <input type="checkbox" id="meal1" class="meal-checkbox" data-meal="popcorn-combo" data-price="250">
+                                        <label for="meal1">Popcorn Combo</label>
+                                    </div>
+                                    <div class="meal-details">
+                                        <p>Large popcorn + 1 soft drink</p>
+                                        <div class="meal-price">₹250</div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Meal Option 2 -->
+                                <div class="meal-option">
+                                    <div class="meal-select">
+                                        <input type="checkbox" id="meal2" class="meal-checkbox" data-meal="nachos-combo" data-price="350">
+                                        <label for="meal2">Nachos Combo</label>
+                                    </div>
+                                    <div class="meal-details">
+                                        <p>Loaded nachos + 1 beer/mocktail</p>
+                                        <div class="meal-price">₹350</div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Beverage Option 1 -->
+                                <div class="meal-option">
+                                    <div class="meal-select">
+                                        <input type="checkbox" id="drink1" class="meal-checkbox" data-meal="beer" data-price="200">
+                                        <label for="drink1">Beer (Pint)</label>
+                                    </div>
+                                    <div class="meal-details">
+                                        <p>Domestic beer (500ml)</p>
+                                        <div class="meal-price">₹200</div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Beverage Option 2 -->
+                                <div class="meal-option">
+                                    <div class="meal-select">
+                                        <input type="checkbox" id="drink2" class="meal-checkbox" data-meal="mocktail" data-price="180">
+                                        <label for="drink2">Mocktail</label>
+                                    </div>
+                                    <div class="meal-details">
+                                        <p>Fresh fruit mocktail</p>
+                                        <div class="meal-price">₹180</div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="meal-summary">
+                                <h5>Your Selections:</h5>
+                                <ul id="selectedMealsList"></ul>
+                                <div class="meal-total">
+                                    <span>Food & Beverage Total:</span>
+                                    <span id="mealTotalPrice">₹0</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="special">Special Requirements</label>
+                            <textarea id="special" placeholder="Any special requirements or notes..."></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary close-modal-btn">Cancel</button>
+                    <button class="btn btn-primary confirm-booking">Confirm Booking</button>
+                </div>
             </div>
         </div>
-    </div>
-
+    
     <script>
+        // Hide main content initially
+    document.getElementById('mainContent').style.display = 'none';
+        // Welcome Screen Functionality
+    document.addEventListener('DOMContentLoaded', function() {
+    const welcomeScreen = document.getElementById('welcomeScreen');
+    const continueBtn = document.getElementById('continueBtn');
+    const optionCards = document.querySelectorAll('.option-card');
+    const genreBtns = document.querySelectorAll('.genre-btn');
+    
+    let selectedComedians = [];
+    let selectedGenres = [];
+    
+    // Hide main content initially
+    document.getElementById('mainContent').style.display = 'none';
+    
+    // Comedian selection
+    optionCards.forEach(card => {
+        card.addEventListener('click', function() {
+        const comedian = this.dataset.comedian;
+        
+        if (this.classList.contains('selected')) {
+            this.classList.remove('selected');
+            selectedComedians = selectedComedians.filter(c => c !== comedian);
+        } else {
+            this.classList.add('selected');
+            selectedComedians.push(comedian);
+        }
+        });
+    });
+    
+    // Genre selection
+    genreBtns.forEach(btn => {
+        btn.addEventListener('click', function() {
+        const genre = this.dataset.genre;
+        
+        if (this.classList.contains('selected')) {
+            this.classList.remove('selected');
+            selectedGenres = selectedGenres.filter(g => g !== genre);
+        } else {
+            this.classList.add('selected');
+            selectedGenres.push(genre);
+        }
+        });
+    });
+    
+    // Continue to main site
+    continueBtn.addEventListener('click', function() {
+        // Save preferences (in a real app, you might send to server)
+        localStorage.setItem('comedyPreferences', JSON.stringify({
+        comedians: selectedComedians,
+        genres: selectedGenres
+        }));
+        
+        // Hide welcome screen
+        welcomeScreen.style.opacity = '0';
+        welcomeScreen.style.pointerEvents = 'none';
+        welcomeScreen.style.transition = 'opacity 0.5s ease';
+        
+        // Show main content
+        document.getElementById('mainContent').style.display = 'block';
+        
+        // In a real app, you could use these preferences to:
+        // - Highlight recommended shows
+        // - Filter comedians
+        // - Personalize the experience
+    });
+    
+    // Optional: Skip if they've done this before
+    if (localStorage.getItem('comedyPreferences')) {
+        welcomeScreen.style.display = 'none';
+        document.getElementById('mainContent').style.display = 'block';
+    }
+    });
         // Mobile Menu Toggle
         const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
         const navLinks = document.querySelector('.nav-links');
@@ -1285,6 +2146,121 @@
                         card.style.display = 'none';
                     }
                 });
+            });
+        });
+        document.addEventListener('DOMContentLoaded', function() {
+            // Randomly book some seats (10 seats in this case)
+            const allSeats = document.querySelectorAll('.seat:not(.aisle)');
+            const bookedSeats = [];
+            
+            // Book random seats
+            for (let i = 0; i < 10; i++) {
+                const randomIndex = Math.floor(Math.random() * allSeats.length);
+                if (!allSeats[randomIndex].classList.contains('booked')) {
+                    allSeats[randomIndex].classList.add('booked');
+                    bookedSeats.push(allSeats[randomIndex].dataset.seat);
+                } else {
+                    i--; // Try again if seat was already booked
+                }
+            }
+            
+            // Seat selection logic
+            let selectedSeats = [];
+            const ticketCountElement = document.getElementById('ticket-count');
+            const totalPriceElement = document.getElementById('total-price');
+            const ticketSelect = document.getElementById('tickets');
+            const pricePerTicket = 799;
+            
+            // Update max tickets based on seat selection
+            function updateMaxTickets() {
+                const maxTickets = 5 - selectedSeats.length;
+                Array.from(ticketSelect.options).forEach(option => {
+                    if (option.value !== '') {
+                        option.disabled = parseInt(option.value) > maxTickets;
+                    }
+                });
+                
+                if (parseInt(ticketSelect.value) > maxTickets) {
+                    ticketSelect.value = '';
+                }
+            }
+            
+            // Handle seat clicks
+            allSeats.forEach(seat => {
+                seat.addEventListener('click', function() {
+                    if (this.classList.contains('booked')) return;
+                    
+                    if (this.classList.contains('selected')) {
+                        // Deselect seat
+                        this.classList.remove('selected');
+                        selectedSeats = selectedSeats.filter(s => s !== this.dataset.seat);
+                    } else {
+                        // Select seat if we haven't reached max
+                        if (selectedSeats.length < 5) {
+                            this.classList.add('selected');
+                            selectedSeats.push(this.dataset.seat);
+                        } else {
+                            alert('You can select a maximum of 5 seats');
+                        }
+                    }
+                    
+                    // Update ticket count and total
+                    ticketCountElement.textContent = selectedSeats.length;
+                    totalPriceElement.textContent = `₹${selectedSeats.length * pricePerTicket}`;
+                    
+                    // Update max tickets in dropdown
+                    updateMaxTickets();
+                });
+            });
+            
+            // Handle ticket dropdown changes
+            ticketSelect.addEventListener('change', function() {
+                const numTickets = parseInt(this.value) || 0;
+                
+                // Clear selections if number is reduced
+                while (selectedSeats.length > numTickets) {
+                    const seatToRemove = selectedSeats.pop();
+                    document.querySelector(`.seat[data-seat="${seatToRemove}"]`).classList.remove('selected');
+                }
+                
+                // Update display
+                ticketCountElement.textContent = selectedSeats.length;
+                totalPriceElement.textContent = `₹${selectedSeats.length * pricePerTicket}`;
+            });
+            
+            // Reset selections when modal is closed
+            document.querySelectorAll('.close-modal, .close-modal-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    // Clear selections
+                    selectedSeats.forEach(seat => {
+                        document.querySelector(`.seat[data-seat="${seat}"]`).classList.remove('selected');
+                    });
+                    selectedSeats = [];
+                    
+                    // Reset counters
+                    ticketCountElement.textContent = '0';
+                    totalPriceElement.textContent = '₹0';
+                    ticketSelect.value = '';
+                });
+            });
+            
+            // Include selected seats in booking confirmation
+            document.querySelector('.confirm-booking').addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                if (selectedSeats.length === 0) {
+                    alert('Please select at least one seat');
+                    return;
+                }
+                
+                // [Rest of your existing booking confirmation logic]
+                // Make sure to include the selectedSeats array in your confirmation message
+                const confirmationMessage = `Your tickets for ${showNameInput.value} have been booked successfully. 
+                    Seats: ${selectedSeats.join(', ')}. 
+                    A confirmation has been sent to your email.`;
+                document.getElementById('confirmationMessage').textContent = confirmationMessage;
+                
+                // [Rest of your existing confirmation logic]
             });
         });
         
@@ -1395,22 +2371,439 @@
             });
         });
         
-        // Generate random booking ID for demo purposes
-        function generateBookingId() {
-            const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-            const numbers = '0123456789';
-            let id = 'LF';
+        // Gift Card Purchase Functionality
+        const addToCartBtns = document.querySelectorAll('.add-to-cart');
+        const customAmountBtn = document.getElementById('add-custom-amount');
+        const customAmountInput = document.getElementById('custom-amount');
+        const checkoutBtn = document.getElementById('checkout-gift-card');
+        let selectedGiftCardAmount = 0;
+
+        // Standard gift card amounts
+        addToCartBtns.forEach(btn => {
+            if (btn.id !== 'add-custom-amount') {
+                btn.addEventListener('click', () => {
+                    selectedGiftCardAmount = parseInt(btn.dataset.value);
+                    alert(`₹${selectedGiftCardAmount} gift card added to cart!`);
+                });
+            }
+        });
+
+        // Custom amount
+        customAmountBtn.addEventListener('click', () => {
+            const amount = parseInt(customAmountInput.value);
+            if (amount >= 500) {
+                selectedGiftCardAmount = amount;
+                alert(`₹${selectedGiftCardAmount} gift card added to cart!`);
+            } else {
+                alert('Minimum amount is ₹500');
+            }
+        });
+
+        // Checkout
+        checkoutBtn.addEventListener('click', () => {
+            if (selectedGiftCardAmount > 0) {
+                alert(`Proceeding to checkout with ₹${selectedGiftCardAmount} gift card`);
+                // In a real implementation, this would redirect to payment page
+            } else {
+                alert('Please select a gift card amount first');
+            }
+        });
+
+        // Gift Card Redemption in Booking Modal
+        const applyGiftCardBtn = document.getElementById('applyGiftCard');
+        const giftCardCodeInput = document.getElementById('giftCardCode');
+        const giftCardMessage = document.getElementById('giftCardMessage');
+
+        applyGiftCardBtn.addEventListener('click', () => {
+            const code = giftCardCodeInput.value.trim();
             
-            for (let i = 0; i < 2; i++) {
-                id += letters.charAt(Math.floor(Math.random() * letters.length));
+            if (code === '') {
+                giftCardMessage.textContent = 'Please enter a gift card code';
+                giftCardMessage.style.color = 'var(--primary)';
+                return;
             }
             
-            for (let i = 0; i < 4; i++) {
-                id += numbers.charAt(Math.floor(Math.random() * numbers.length));
+            // In a real implementation, you would validate with your backend
+            // This is just a simulation
+            if (code.length === 16 && code.startsWith('LFGC')) {
+                giftCardMessage.textContent = 'Gift card applied successfully! ₹1000 credit added.';
+                giftCardMessage.style.color = 'var(--accent)';
+            } else {
+                giftCardMessage.textContent = 'Invalid gift card code. Please try again.';
+                giftCardMessage.style.color = 'var(--primary)';
             }
-            
-            return id;
+        });
+        // Meal Booking Functionality
+const mealCheckboxes = document.querySelectorAll('.meal-checkbox');
+const selectedMealsList = document.getElementById('selectedMealsList');
+const mealTotalPrice = document.getElementById('mealTotalPrice');
+let selectedMeals = [];
+
+// Handle meal selection
+mealCheckboxes.forEach(checkbox => {
+    checkbox.addEventListener('change', function() {
+        const mealName = this.dataset.meal;
+        const mealPrice = parseInt(this.dataset.price);
+        
+        if (this.checked) {
+            selectedMeals.push({
+                name: this.nextElementSibling.textContent,
+                price: mealPrice
+            });
+        } else {
+            selectedMeals = selectedMeals.filter(meal => 
+                meal.name !== this.nextElementSibling.textContent
+            );
         }
+        
+        updateMealSummary();
+    });
+});
+
+// Update meal summary display
+function updateMealSummary() {
+    selectedMealsList.innerHTML = '';
+    let total = 0;
+    
+    selectedMeals.forEach(meal => {
+        const li = document.createElement('li');
+        li.textContent = `${meal.name} - ₹${meal.price}`;
+        selectedMealsList.appendChild(li);
+        total += meal.price;
+    });
+    
+    mealTotalPrice.textContent = `₹${total}`;
+    
+    // Update the overall total in the booking summary
+    updateBookingTotal();
+}
+
+// Update the overall booking total (combines seats and meals)
+function updateBookingTotal() {
+    const seatPrice = parseInt(document.getElementById('ticket-count').textContent) * 799 || 0;
+    const mealPrice = selectedMeals.reduce((sum, meal) => sum + meal.price, 0);
+    const totalPrice = seatPrice + mealPrice;
+    
+    document.getElementById('total-price').textContent = `₹${totalPrice}`;
+}
+
+// Reset meal selections when modal is closed
+document.querySelectorAll('.close-modal, .close-modal-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+        // Clear meal selections
+        mealCheckboxes.forEach(checkbox => {
+            checkbox.checked = false;
+        });
+        selectedMeals = [];
+        selectedMealsList.innerHTML = '';
+        mealTotalPrice.textContent = '₹0';
+    });
+});
+
+// Include meals in booking confirmation
+document.querySelector('.confirm-booking').addEventListener('click', function(e) {
+    e.preventDefault();
+    
+    // [Your existing validation code...]
+    
+    if (isValid) {
+        // Generate random booking ID
+        const bookingId = 'LF' + new Date().getFullYear() + Math.floor(1000 + Math.random() * 9000);
+        document.getElementById('bookingId').textContent = bookingId;
+        
+        // Build meal summary text
+        let mealSummary = 'No food/drinks selected';
+        if (selectedMeals.length > 0) {
+            mealSummary = selectedMeals.map(meal => 
+                `${meal.name} (₹${meal.price})`
+            ).join(', ');
+        }
+        
+        // Set confirmation message with meal info
+        const confirmationMessage = `Your tickets for ${showNameInput.value} have been booked successfully. 
+            Seats: ${selectedSeats.join(', ')}. 
+            Food/Drinks: ${mealSummary}.
+            A confirmation has been sent to your email.`;
+        document.getElementById('confirmationMessage').textContent = confirmationMessage;
+        
+        // Show confirmation modal
+        bookingModal.style.display = 'none';
+        confirmationModal.style.display = 'block';
+        
+        // Reset form
+        bookingForm.reset();
+    }
+});
+// Membership System
+document.addEventListener('DOMContentLoaded', function() {
+    // Open membership modal when join buttons are clicked
+    document.querySelectorAll('.join-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const tier = this.dataset.tier;
+            document.getElementById('selectedTier').value = tier;
+            document.getElementById('membershipModalTitle').textContent = 
+                `Join LaughFactory ${tier.charAt(0).toUpperCase() + tier.slice(1)} Membership`;
+            
+            // Show payment section for paid tiers
+            if (tier !== 'basic') {
+                document.getElementById('paymentSection').style.display = 'block';
+            } else {
+                document.getElementById('paymentSection').style.display = 'none';
+            }
+            
+            document.getElementById('membershipModal').style.display = 'block';
+        });
+    });
+    
+    // Handle payment method selection
+    document.querySelectorAll('input[name="payment"]').forEach(radio => {
+        radio.addEventListener('change', function() {
+            // Hide all payment details first
+            document.querySelectorAll('.payment-details').forEach(detail => {
+                detail.style.display = 'none';
+            });
+            
+            // Show selected payment method details
+            if (this.value === 'card') {
+                document.getElementById('cardDetails').style.display = 'block';
+            }
+            // Add other payment methods here as needed
+        });
+    });
+    
+    // Complete membership signup
+    document.getElementById('confirmMembership').addEventListener('click', function() {
+        const tier = document.getElementById('selectedTier').value;
+        const name = document.getElementById('mName').value;
+        const email = document.getElementById('mEmail').value;
+        
+        // Simple validation
+        if (!name || !email || !document.getElementById('agreeTerms').checked) {
+            alert('Please fill all required fields');
+            return;
+        }
+        
+        // In a real app, you would send this to your backend
+        localStorage.setItem('currentUser', JSON.stringify({
+            name: name,
+            email: email,
+            tier: tier,
+            joined: new Date().toISOString()
+        }));
+        
+        // Close modal and update UI
+        document.getElementById('membershipModal').style.display = 'none';
+        updateUserStatus();
+        alert(`Welcome to LaughFactory ${tier} membership, ${name}!`);
+    });
+    
+    // Login functionality
+    document.getElementById('loginBtn').addEventListener('click', function() {
+        const email = document.getElementById('loginEmail').value;
+        const password = document.getElementById('loginPassword').value;
+        
+        // Simple validation
+        if (!email || !password) {
+            alert('Please enter both email and password');
+            return;
+        }
+        
+        // In a real app, you would verify credentials with your backend
+        // For demo, we'll just check if the user exists in localStorage
+        const user = JSON.parse(localStorage.getItem('currentUser'));
+        
+        if (user && user.email === email) {
+            document.getElementById('loginModal').style.display = 'none';
+            updateUserStatus();
+            alert(`Welcome back, ${user.name}!`);
+        } else {
+            alert('Invalid credentials. Please try again or sign up.');
+        }
+    });
+    
+    // Update UI based on login state
+    function updateUserStatus() {
+        const user = JSON.parse(localStorage.getItem('currentUser'));
+        const nav = document.querySelector('.nav-links');
+        
+        if (user) {
+            // Remove login/signup buttons if they exist
+            const existingProfile = document.querySelector('.user-profile');
+            if (existingProfile) existingProfile.remove();
+            
+            // Add user profile to navbar
+            const profileHtml = `
+                <li class="user-profile">
+                    <div class="user-avatar">${user.name.charAt(0).toUpperCase()}</div>
+                    <span>${user.name.split(' ')[0]}</span>
+                    <div class="user-menu">
+                        <a href="#"><i class="fas fa-user"></i> My Profile</a>
+                        <a href="#"><i class="fas fa-ticket-alt"></i> My Tickets</a>
+                        <a href="#"><i class="fas fa-crown"></i> Membership (${user.tier})</a>
+                        <a href="#" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                    </div>
+                </li>
+            `;
+            
+            nav.insertAdjacentHTML('beforeend', profileHtml);
+            
+            // Add logout functionality
+            document.getElementById('logoutBtn').addEventListener('click', function(e) {
+                e.preventDefault();
+                localStorage.removeItem('currentUser');
+                location.reload();
+            });
+            
+            // Toggle user menu
+            document.querySelector('.user-profile').addEventListener('click', function() {
+                document.querySelector('.user-menu').classList.toggle('active');
+            });
+            
+            // Apply membership discounts to shows
+            applyMembershipDiscounts(user.tier);
+        }
+    }
+    
+    // Apply membership discounts to show prices
+    function applyMembershipDiscounts(tier) {
+        const discount = {
+            'basic': 0,
+            'premium': 15,
+            'vip': 25
+        }[tier];
+        
+        if (discount > 0) {
+            document.querySelectorAll('.price').forEach(priceElement => {
+                const originalPrice = parseInt(priceElement.textContent.replace(/[^\d]/g, ''));
+                const discountedPrice = originalPrice * (1 - discount/100);
+                priceElement.textContent = `₹${Math.floor(discountedPrice)} (${discount}% off)`;
+                priceElement.style.color = 'var(--accent)';
+            });
+        }
+    }
+    
+    // Initialize user status on page load
+    updateUserStatus();
+    
+    // Add login button to nav if not logged in
+    if (!localStorage.getItem('currentUser')) {
+        const nav = document.querySelector('.nav-links');
+        const loginHtml = `<li><a href="#" id="navLogin">Login</a></li>`;
+        nav.insertAdjacentHTML('beforeend', loginHtml);
+        
+        document.getElementById('navLogin').addEventListener('click', function(e) {
+            e.preventDefault();
+            document.getElementById('loginModal').style.display = 'block';
+        });
+    }
+});
     </script>
+    <!-- Membership Signup Modal -->
+<div class="modal" id="membershipModal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3 id="membershipModalTitle">Join LaughFactory</h3>
+            <span class="close-modal">&times;</span>
+        </div>
+        <div class="modal-body">
+            <form id="membershipForm">
+                <input type="hidden" id="selectedTier" value="">
+                
+                <div class="form-group">
+                    <label for="mName">Full Name</label>
+                    <input type="text" id="mName" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="mEmail">Email</label>
+                    <input type="email" id="mEmail" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="mPassword">Password</label>
+                    <input type="password" id="mPassword" required minlength="6">
+                </div>
+                
+                <div class="form-group" id="paymentSection" style="display: none;">
+                    <label>Payment Method</label>
+                    <div class="payment-options">
+                        <label class="payment-method">
+                            <input type="radio" name="payment" value="card" checked>
+                            <i class="fab fa-cc-visa"></i> Credit/Debit Card
+                        </label>
+                        <label class="payment-method">
+                            <input type="radio" name="payment" value="upi">
+                            <i class="fas fa-mobile-alt"></i> UPI
+                        </label>
+                        <label class="payment-method">
+                            <input type="radio" name="payment" value="wallet">
+                            <i class="fas fa-wallet"></i> Wallet
+                        </label>
+                    </div>
+                    
+                    <div id="cardDetails" class="payment-details">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="cardNumber">Card Number</label>
+                                <input type="text" id="cardNumber" placeholder="1234 5678 9012 3456">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="cardExpiry">Expiry Date</label>
+                                <input type="text" id="cardExpiry" placeholder="MM/YY">
+                            </div>
+                            <div class="form-group">
+                                <label for="cardCvv">CVV</label>
+                                <input type="text" id="cardCvv" placeholder="123">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <input type="checkbox" id="agreeTerms" required>
+                    <label for="agreeTerms">I agree to the Terms of Service and Privacy Policy</label>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-secondary close-modal-btn">Cancel</button>
+            <button class="btn btn-primary" id="confirmMembership">Complete Signup</button>
+        </div>
+    </div>
+</div>
+
+<!-- Membership Login Modal -->
+<div class="modal" id="loginModal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3>Member Login</h3>
+            <span class="close-modal">&times;</span>
+        </div>
+        <div class="modal-body">
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="loginEmail">Email</label>
+                    <input type="email" id="loginEmail" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="loginPassword">Password</label>
+                    <input type="password" id="loginPassword" required>
+                </div>
+                
+                <div class="form-group">
+                    <a href="#" id="forgotPassword">Forgot Password?</a>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-secondary close-modal-btn">Cancel</button>
+            <button class="btn btn-primary" id="loginBtn">Login</button>
+        </div>
+    </div>
+</div>
+
 </body>
 </html>
