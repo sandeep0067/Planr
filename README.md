@@ -12,12 +12,12 @@ Secure Payments: Encrypted payment processes for safe transactions
 
 👥 Team Members
 
-Name	Role	GitHub
-Sandeep	Project Manager	@sandeep0067GH
-Sahil	Website Design Manager	@Sahil792006GH
-Tushar	Concert Page Development Lead	@Tushar-max-cmdGH
-Shivoy	Stand-Up Comedy Page Lead	@shivoybudhiraja886GH
-Saurav	Movies Page Development Lead	@sauravchauhan-18GH
+Name | Role | GitHub
+Sandeep | Project Manager | @sandeep0067GH
+Sahil | Website Design Manager | @Sahil792006GH
+Tushar | Concert Page Development Lead | @Tushar-max-cmdGH
+Shivoy | Stand-Up Comedy Page Lead | @shivoybudhiraja886GH
+Saurav | Movies Page Development Lead | @sauravchauhan-18GH
 🛠️ Technologies and Tools
 Frontend: HTML, CSS, JavaScript (Frameworks 1, 2, 3)
 
