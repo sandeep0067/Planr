@@ -4,10 +4,10 @@ Overview:
 PLANR is a user-centric booking platform designed to simplify the process of searching and reserving tickets for movies, comedy shows, and concerts. The platform features real-time data updates, secure payment solutions, and a fully responsive interface adaptable to both desktop and mobile devices.
 Our objective is to deliver a seamless user experience, reduce booking time, and drive higher customer engagement. Upon launch, this system will be a crucial asset in enhancing customer satisfaction and improving operational productivity.
 
-✨ Core Features
-•	Online Booking: Quick and easy ticket reservations
-•	Flexible Login Options: Multiple authentication methods for user convenience
-•	Secure Payments: Encrypted payment processes for safe transactions
+✨ Core Features<br>
+•	Online Booking: Quick and easy ticket reservations<br>
+•	Flexible Login Options: Multiple authentication methods for user convenience<br>
+•	Secure Payments: Encrypted payment processes for safe transactions<br>
 
 👥 Team Members
 | Name | Role | GitHub |
