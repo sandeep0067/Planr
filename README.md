@@ -18,9 +18,9 @@ Our objective is to deliver a seamless user experience, reduce booking time, and
 | Shivoy | standupcomedy page manager | [@shivoybudhiraja886GH](https://github.com/shivoybudhiraja886) |
 | Saurav | movies page manager | [@sauravchauhan-18GH](https://github.com/sauravchauhan-18) |
 
-🛠️ Technologies and Tools
-•	Frontend: HTML, CSS, JavaScript (Frameworks 1, 2, 3)
-•	Version Control: Git
-•	API Testing: Postman
-•	UI/UX Design: Figma
+🛠️ Technologies and Tools<br>
+•	Frontend: HTML, CSS, JavaScript (Frameworks 1, 2, 3)<br>
+•	Version Control: Git<br>
+•	API Testing: Postman<br>
+•	UI/UX Design: Figma<br>
 
