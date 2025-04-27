@@ -498,6 +498,216 @@
             border-top: 1px solid #333;
             font-size: 14px;
         }
+
+        /* Payment Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.8);
+        }
+        
+        .modal-content {
+            background-color: #1e1e1e;
+            margin: 5% auto;
+            padding: 25px;
+            border-radius: 8px;
+            width: 90%;
+            max-width: 600px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+            animation: modalopen 0.4s;
+        }
+        
+        @keyframes modalopen {
+            from {opacity: 0; transform: translateY(-50px);}
+            to {opacity: 1; transform: translateY(0);}
+        }
+        
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #333;
+        }
+        
+        .modal-header h2 {
+            color: #bb86fc;
+            font-size: 24px;
+        }
+        
+        .close {
+            color: #a0a0a0;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+        
+        .close:hover {
+            color: #bb86fc;
+        }
+        
+        .modal-body {
+            margin-bottom: 20px;
+        }
+        
+        .booking-summary {
+            background: #2d2d2d;
+            padding: 15px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+        }
+        
+        .booking-summary h3 {
+            color: #bb86fc;
+            margin-bottom: 10px;
+        }
+        
+        .summary-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+        }
+        
+        .summary-item:last-child {
+            margin-bottom: 0;
+            padding-top: 8px;
+            border-top: 1px solid #333;
+            font-weight: bold;
+        }
+        
+        .payment-methods {
+            margin-bottom: 20px;
+        }
+        
+        .payment-methods h3 {
+            color: #bb86fc;
+            margin-bottom: 15px;
+        }
+        
+        .payment-option {
+            display: flex;
+            align-items: center;
+            padding: 12px;
+            margin-bottom: 10px;
+            background: #2d2d2d;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 1px solid transparent;
+        }
+        
+        .payment-option:hover {
+            border-color: #bb86fc;
+        }
+        
+        .payment-option.selected {
+            border-color: #bb86fc;
+            background: rgba(187, 134, 252, 0.1);
+        }
+        
+        .payment-icon {
+            width: 40px;
+            height: 40px;
+            background: #1e1e1e;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            font-size: 18px;
+        }
+        
+        .payment-details {
+            flex: 1;
+        }
+        
+        .payment-details h4 {
+            color: #ffffff;
+            margin-bottom: 5px;
+        }
+        
+        .payment-details p {
+            color: #a0a0a0;
+            font-size: 14px;
+        }
+        
+        .payment-form {
+            display: none;
+            margin-top: 15px;
+            padding: 15px;
+            background: #2d2d2d;
+            border-radius: 6px;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #e0e0e0;
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            background: #1e1e1e;
+            border: 1px solid #333;
+            border-radius: 4px;
+            color: #e0e0e0;
+            outline: none;
+        }
+        
+        .form-row {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .form-row .form-group {
+            flex: 1;
+        }
+        
+        .modal-footer {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+        }
+        
+        .btn-block {
+            display: block;
+            width: 100%;
+        }
+        
+        .success-message {
+            display: none;
+            text-align: center;
+            padding: 30px;
+        }
+        
+        .success-message i {
+            font-size: 60px;
+            color: #4caf50;
+            margin-bottom: 20px;
+        }
+        
+        .success-message h3 {
+            color: #ffffff;
+            margin-bottom: 10px;
+        }
+        
+        .success-message p {
+            color: #a0a0a0;
+            margin-bottom: 20px;
+        }
         
         @media (max-width: 1024px) {
             .footer-container {
@@ -543,6 +753,11 @@
                 flex-direction: column;
                 align-items: flex-start;
                 gap: 15px;
+            }
+            
+            .modal-content {
+                width: 95%;
+                margin: 10% auto;
             }
         }
     </style>
@@ -592,8 +807,6 @@
                     <input type="date" id="end-date" placeholder="End Date">
                 </div>
             </div>
-            
-         
             
             <div class="filter-section">
                 <h3>Price <i class="fas fa-indian-rupee-sign"></i></h3>
@@ -647,7 +860,7 @@
                         <div class="event-price">From ₹2,500</div>
                         <div class="event-category">Rock Concert • International Artist</div>
                         <div class="event-actions">
-                            <button class="btn btn-primary">Book Now</button>
+                            <button class="btn btn-primary book-now-btn" data-event="Guns N' Roses: Not In This Lifetime... Tour 2025" data-price="2500" data-date="Sat. 17 May 2025 | 7:00 PM" data-venue="Mahalaxmi Race Course, Mumbai">Book Now</button>
                             <button class="btn btn-secondary">More Info</button>
                         </div>
                     </div>
@@ -679,7 +892,7 @@
                         <div class="event-price">From ₹1,200</div>
                         <div class="event-category">Club Gig • Electronic Dance Music</div>
                         <div class="event-actions">
-                            <button class="btn btn-primary">Book Now</button>
+                            <button class="btn btn-primary book-now-btn" data-event="Saturday's Vibe with DJ OSHIN x SHEZZ" data-price="1200" data-date="Sun, 11 May | Sat, 19 Apr | 9:00 PM" data-venue="Pyramid Elante, Chandigarh">Book Now</button>
                             <button class="btn btn-secondary">More Info</button>
                         </div>
                     </div>
@@ -696,7 +909,7 @@
                         <div class="event-price">From ₹3,500</div>
                         <div class="event-category">EDM Festival • International DJ</div>
                         <div class="event-actions">
-                            <button class="btn btn-primary">Book Now</button>
+                            <button class="btn btn-primary book-now-btn" data-event="Sunburn Arena with Martin Garrix" data-price="3500" data-date="Fri, 24 May 2025 | 6:30 PM" data-venue="Sector 34 Grounds, Chandigarh">Book Now</button>
                             <button class="btn btn-secondary">More Info</button>
                         </div>
                     </div>
@@ -712,7 +925,7 @@
                         <div class="event-price">From ₹800</div>
                         <div class="event-category">Jazz Concert • Multiple Artists</div>
                         <div class="event-actions">
-                            <button class="btn btn-primary">Book Now</button>
+                            <button class="btn btn-primary book-now-btn" data-event="Chandigarh Jazz Festival 2025" data-price="800" data-date="Sat, 8 Jun 2025 | 7:30 PM" data-venue="Tagore Theatre, Chandigarh">Book Now</button>
                             <button class="btn btn-secondary">More Info</button>
                         </div>
                     </div>
@@ -729,16 +942,173 @@
                         <div class="event-price">From ₹1,800</div>
                         <div class="event-category">Bollywood Concert • Live Performance</div>
                         <div class="event-actions">
-                            <button class="btn btn-primary">Book Now</button>
+                            <button class="btn btn-primary book-now-btn" data-event="Bollywood Night with Arijit Singh" data-price="1800" data-date="Sat, 15 Jun 2025 | 8:00 PM" data-venue="Rock Garden, Chandigarh">Book Now</button>
                             <button class="btn btn-secondary">More Info</button>
                         </div>
                     </div>
                 </div>
             </div>
             
+            <div class="pagination">
+                <button><i class="fas fa-chevron-left"></i></button>
+                <button class="active">1</button>
+                <button>2</button>
+                <button>3</button>
                 <button><i class="fas fa-chevron-right"></i></button>
             </div>
         </main>
+    </div>
+    
+    <!-- Payment Modal -->
+    <div id="paymentModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Complete Your Booking</h2>
+                <span class="close">&times;</span>
+            </div>
+            
+            <div class="modal-body">
+                <div class="booking-summary">
+                    <h3>Booking Summary</h3>
+                    <div class="summary-item">
+                        <span>Event:</span>
+                        <span id="summary-event">Guns N' Roses: Not In This Lifetime... Tour 2025</span>
+                    </div>
+                    <div class="summary-item">
+                        <span>Date & Time:</span>
+                        <span id="summary-date">Sat. 17 May 2025 | 7:00 PM</span>
+                    </div>
+                    <div class="summary-item">
+                        <span>Venue:</span>
+                        <span id="summary-venue">Mahalaxmi Race Course, Mumbai</span>
+                    </div>
+                    <div class="summary-item">
+                        <span>Price:</span>
+                        <span id="summary-price">₹2,500</span>
+                    </div>
+                    <div class="summary-item">
+                        <span>Service Fee:</span>
+                        <span>₹150</span>
+                    </div>
+                    <div class="summary-item">
+                        <span>Total:</span>
+                        <span id="summary-total">₹2,650</span>
+                    </div>
+                </div>
+                
+                <div class="payment-methods">
+                    <h3>Select Payment Method</h3>
+                    
+                    <div class="payment-option selected" data-method="card">
+                        <div class="payment-icon">
+                            <i class="far fa-credit-card"></i>
+                        </div>
+                        <div class="payment-details">
+                            <h4>Credit/Debit Card</h4>
+                            <p>Pay with Visa, Mastercard, Rupay, or other cards</p>
+                        </div>
+                    </div>
+                    
+                    <div id="card-form" class="payment-form" style="display: block;">
+                        <div class="form-group">
+                            <label for="card-number">Card Number</label>
+                            <input type="text" id="card-number" placeholder="1234 5678 9012 3456">
+                        </div>
+                        <div class="form-group">
+                            <label for="card-name">Name on Card</label>
+                            <input type="text" id="card-name" placeholder="John Doe">
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="card-expiry">Expiry Date</label>
+                                <input type="text" id="card-expiry" placeholder="MM/YY">
+                            </div>
+                            <div class="form-group">
+                                <label for="card-cvv">CVV</label>
+                                <input type="text" id="card-cvv" placeholder="123">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="payment-option" data-method="upi">
+                        <div class="payment-icon">
+                            <i class="fas fa-mobile-alt"></i>
+                        </div>
+                        <div class="payment-details">
+                            <h4>UPI Payment</h4>
+                            <p>Pay using any UPI app like Google Pay, PhonePe, etc.</p>
+                        </div>
+                    </div>
+                    
+                    <div id="upi-form" class="payment-form">
+                        <div class="form-group">
+                            <label for="upi-id">UPI ID</label>
+                            <input type="text" id="upi-id" placeholder="yourname@upi">
+                        </div>
+                        <p style="color: #a0a0a0; font-size: 14px; margin-top: 10px;">You'll be redirected to your UPI app to complete the payment</p>
+                    </div>
+                    
+                    <div class="payment-option" data-method="netbanking">
+                        <div class="payment-icon">
+                            <i class="fas fa-university"></i>
+                        </div>
+                        <div class="payment-details">
+                            <h4>Net Banking</h4>
+                            <p>Pay directly from your bank account</p>
+                        </div>
+                    </div>
+                    
+                    <div id="netbanking-form" class="payment-form">
+                        <div class="form-group">
+                            <label for="bank-select">Select Bank</label>
+                            <select id="bank-select" style="width: 100%; padding: 10px; background: #1e1e1e; border: 1px solid #333; border-radius: 4px; color: #e0e0e0; outline: none;">
+                                <option value="">Select your bank</option>
+                                <option value="sbi">State Bank of India</option>
+                                <option value="hdfc">HDFC Bank</option>
+                                <option value="icici">ICICI Bank</option>
+                                <option value="axis">Axis Bank</option>
+                                <option value="pnb">Punjab National Bank</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="payment-option" data-method="wallet">
+                        <div class="payment-icon">
+                            <i class="fas fa-wallet"></i>
+                        </div>
+                        <div class="payment-details">
+                            <h4>Wallet</h4>
+                            <p>Pay using Paytm, Amazon Pay, or other wallets</p>
+                        </div>
+                    </div>
+                    
+                    <div id="wallet-form" class="payment-form">
+                        <div class="form-group">
+                            <label for="wallet-select">Select Wallet</label>
+                            <select id="wallet-select" style="width: 100%; padding: 10px; background: #1e1e1e; border: 1px solid #333; border-radius: 4px; color: #e0e0e0; outline: none;">
+                                <option value="">Select your wallet</option>
+                                <option value="paytm">Paytm</option>
+                                <option value="amazonpay">Amazon Pay</option>
+                                <option value="mobikwik">MobiKwik</option>
+                                <option value="freecharge">FreeCharge</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="success-message">
+                    <i class="fas fa-check-circle"></i>
+                    <h3>Payment Successful!</h3>
+                    <p>Your tickets have been booked successfully. A confirmation has been sent to your email.</p>
+                    <button class="btn btn-primary btn-block" id="close-success">Done</button>
+                </div>
+            </div>
+            
+            <div class="modal-footer">
+                <button class="btn btn-secondary" id="cancel-booking">Cancel</button>
+                <button class="btn btn-primary" id="confirm-payment">Confirm Payment</button>
+            </div>
+        </div>
     </div>
     
     <footer class="footer">
@@ -793,5 +1163,137 @@
         <div class="copyright">
             &copy; 2025 PLANR. All Rights Reserved.
         </div>
+    </footer>
+
+    <script>
+        // Payment Modal Functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            // Get the modal
+            const modal = document.getElementById('paymentModal');
+            const closeBtn = document.querySelector('.close');
+            const cancelBtn = document.getElementById('cancel-booking');
+            const confirmBtn = document.getElementById('confirm-payment');
+            const closeSuccessBtn = document.getElementById('close-success');
+            
+            // Get all book now buttons
+            const bookNowButtons = document.querySelectorAll('.book-now-btn');
+            
+            // Payment method selection
+            const paymentOptions = document.querySelectorAll('.payment-option');
+            const paymentForms = {
+                card: document.getElementById('card-form'),
+                upi: document.getElementById('upi-form'),
+                netbanking: document.getElementById('netbanking-form'),
+                wallet: document.getElementById('wallet-form')
+            };
+            
+            // When user clicks on book now button
+            bookNowButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const eventName = this.getAttribute('data-event');
+                    const eventPrice = this.getAttribute('data-price');
+                    const eventDate = this.getAttribute('data-date');
+                    const eventVenue = this.getAttribute('data-venue');
+                    
+                    // Update modal with event details
+                    document.getElementById('summary-event').textContent = eventName;
+                    document.getElementById('summary-date').textContent = eventDate;
+                    document.getElementById('summary-venue').textContent = eventVenue;
+                    document.getElementById('summary-price').textContent = `₹${parseInt(eventPrice).toLocaleString('en-IN')}`;
+                    
+                    // Calculate total with service fee
+                    const total = parseInt(eventPrice) + 150;
+                    document.getElementById('summary-total').textContent = `₹${total.toLocaleString('en-IN')}`;
+                    
+                    // Show modal
+                    modal.style.display = 'block';
+                    document.body.style.overflow = 'hidden';
+                });
+            });
+            
+            // When user clicks on close button
+            closeBtn.addEventListener('click', function() {
+                modal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            });
+            
+            // When user clicks on cancel button
+            cancelBtn.addEventListener('click', function() {
+                modal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            });
+            
+            // When user clicks outside the modal
+            window.addEventListener('click', function(event) {
+                if (event.target === modal) {
+                    modal.style.display = 'none';
+                    document.body.style.overflow = 'auto';
+                }
+            });
+            
+            // Payment method selection
+            paymentOptions.forEach(option => {
+                option.addEventListener('click', function() {
+                    // Remove selected class from all options
+                    paymentOptions.forEach(opt => {
+                        opt.classList.remove('selected');
+                    });
+                    
+                    // Hide all payment forms
+                    Object.values(paymentForms).forEach(form => {
+                        form.style.display = 'none';
+                    });
+                    
+                    // Add selected class to clicked option
+                    this.classList.add('selected');
+                    
+                    // Show corresponding payment form
+                    const method = this.getAttribute('data-method');
+                    if (paymentForms[method]) {
+                        paymentForms[method].style.display = 'block';
+                    }
+                });
+            });
+            
+            // Confirm payment button
+            confirmBtn.addEventListener('click', function() {
+                // Here you would normally process the payment
+                // For demo purposes, we'll just show the success message
+                
+                // Hide all payment forms and buttons
+                document.querySelector('.payment-methods').style.display = 'none';
+                document.querySelector('.modal-footer').style.display = 'none';
+                document.querySelector('.booking-summary').style.display = 'none';
+                
+                // Show success message
+                document.querySelector('.success-message').style.display = 'block';
+            });
+            
+            // Close success message
+            closeSuccessBtn.addEventListener('click', function() {
+                modal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+                
+                // Reset modal for next use
+                document.querySelector('.payment-methods').style.display = 'block';
+                document.querySelector('.modal-footer').style.display = 'flex';
+                document.querySelector('.booking-summary').style.display = 'block';
+                document.querySelector('.success-message').style.display = 'none';
+                
+                // Reset payment method to card
+                paymentOptions.forEach(opt => {
+                    opt.classList.remove('selected');
+                    if (opt.getAttribute('data-method') === 'card') {
+                        opt.classList.add('selected');
+                    }
+                });
+                
+                Object.values(paymentForms).forEach(form => {
+                    form.style.display = 'none';
+                });
+                paymentForms.card.style.display = 'block';
+            });
+        });
+    </script>
 </body>
 </html>
